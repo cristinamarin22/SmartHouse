@@ -31,5 +31,15 @@ namespace SmartHouse.Controllers
         {
             return View();
         }
+
+        public ActionResult MotionDetection()
+        {
+            return View();
+        }
+
+        public ActionResult SoundDetection()
+        {
+            return View();
+        }
     }
 }
