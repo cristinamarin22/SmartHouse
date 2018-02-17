@@ -27,7 +27,7 @@ namespace SmartHouse.Controllers
             return View();
         }
 
-        public ActionResult Template()
+        public ActionResult TemperatureHumidity()
         {
             return View();
         }
