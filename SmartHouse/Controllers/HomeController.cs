@@ -26,5 +26,10 @@ namespace SmartHouse.Controllers
 
             return View();
         }
+
+        public ActionResult Template()
+        {
+            return View();
+        }
     }
 }
