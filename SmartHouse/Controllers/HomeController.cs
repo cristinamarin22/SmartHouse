@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartHouse.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -29,7 +30,9 @@ namespace SmartHouse.Controllers
 
         public ActionResult TemperatureHumidity()
         {
-            return View();
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            var temperatureHumidityList = smartHouseEntities.TemperatureHumidityDatas.ToList();
+            return View(temperatureHumidityList);
         }
 
         public ActionResult MotionDetection()

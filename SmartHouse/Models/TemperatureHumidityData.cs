@@ -11,10 +11,13 @@ namespace SmartHouse.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class TemperatureHumidityData
     {
         public int Id { get; set; }
+
+        [Display(Name = "Date")]
         public System.DateTime InternalTime { get; set; }
         public float Temperature { get; set; }
         public float Humidity { get; set; }
