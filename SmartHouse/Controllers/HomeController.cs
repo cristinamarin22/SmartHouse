@@ -35,6 +35,13 @@ namespace SmartHouse.Controllers
             return View(temperatureHumidityList);
         }
 
+        public JsonResult GetAllTemperatureHumidity()
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            var temperatureHumidityList = smartHouseEntities.TemperatureHumidityDatas.ToList();
+            return Json(temperatureHumidityList, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult MotionDetection()
         {
             return View();
