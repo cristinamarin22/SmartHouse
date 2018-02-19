@@ -152,6 +152,9 @@
     <Compile Include="Models\MotionDetectionData.cs">
       <DependentUpon>SmartHouse.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Setting.cs">
+      <DependentUpon>SmartHouse.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SmartHouse.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -168,6 +171,9 @@
       <DependentUpon>SmartHouse.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\SoundDetectionData.cs">
+      <DependentUpon>SmartHouse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TemperatureHumidityCriticalData.cs">
       <DependentUpon>SmartHouse.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TemperatureHumidityData.cs">

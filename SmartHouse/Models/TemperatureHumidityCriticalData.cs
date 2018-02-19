@@ -12,11 +12,11 @@ namespace SmartHouse.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TemperatureHumidityData
+    public partial class TemperatureHumidityCriticalData
     {
         public int Id { get; set; }
         public System.DateTime InternalTime { get; set; }
-        public float Temperature { get; set; }
-        public float Humidity { get; set; }
+        public decimal Temperature { get; set; }
+        public decimal Humidity { get; set; }
     }
 }
