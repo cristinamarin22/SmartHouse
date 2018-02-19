@@ -32,7 +32,7 @@ namespace SmartHouse.Controllers
         public ActionResult TemperatureHumidity()
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
-            var temperatureHumidityList = smartHouseEntities.TemperatureHumidityDatas.ToList().Take(10);
+            var temperatureHumidityList = smartHouseEntities.TemperatureHumidityDatas.ToList().OrderByDescending(x => x.InternalTime).Take(10);
             return View(temperatureHumidityList);
         }
 
@@ -48,7 +48,7 @@ namespace SmartHouse.Controllers
         public ActionResult MotionDetection()
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
-            var motionDetectionList = smartHouseEntities.MotionDetectionDatas.ToList().Take(10);
+            var motionDetectionList = smartHouseEntities.MotionDetectionDatas.ToList().OrderByDescending(x => x.InternalTime).Take(10);
             return View(motionDetectionList);
         }
 
@@ -64,7 +64,7 @@ namespace SmartHouse.Controllers
         public ActionResult SoundDetection()
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
-            var soundDetectionList = smartHouseEntities.SoundDetectionDatas.ToList().Take(10);
+            var soundDetectionList = smartHouseEntities.SoundDetectionDatas.ToList().OrderByDescending(x => x.InternalTime).Take(10);
             return View(soundDetectionList);
         }
 
@@ -73,6 +73,15 @@ namespace SmartHouse.Controllers
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
             var soundDetectionList = smartHouseEntities.SoundDetectionDatas.ToList().OrderByDescending(x => x.InternalTime);
             return Json(soundDetectionList, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Settings
+        public ActionResult Settings()
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            var motionDetectionList = smartHouseEntities.MotionDetectionDatas.ToList().Take(10);
+            return View(motionDetectionList);
         }
         #endregion
     }
