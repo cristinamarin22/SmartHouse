@@ -1,8 +1,6 @@
-﻿@model IEnumerable<SmartHouse.Models.SoundDetectionData>
-
+﻿
 @{
-    ViewBag.Title = "SoundDetection";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <!DOCTYPE html>
@@ -20,73 +18,55 @@
     html, body, h1, h2, h3, h4, h5 {
         font-family: "Raleway", sans-serif;
     }
-
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    th, td {
-        text-align: left;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #f2f2f2
-    }
-
-    th {
-        background-color: #2c8e88;
-        color: white;
-    }
-
-    .button {
-        background-color: #4CAF50; /* Green */
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        -webkit-transition-duration: 0.4s; /* Safari */
-        transition-duration: 0.4s;
-        cursor: pointer;
-    }
-
-    .button3 {
-        background-color: white;
-        color: black;
-        border: 2px solid #2c8e88;
-    }
-
-        .button3:hover {
-            background-color: #2c8e88;
-            color: white;
-        }
 </style>
 <body>
-    <div class="w3-container">
-        <button type="button" class="button button3" id="refreshButton" onclick="getHistoryData()">History data</button>
-        <table class="table" id="tableSoundDetection">
-            <tr>
-                <th>
-                    Date
-                </th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.InternalTime)
-                    </td>
-                </tr>
-            }
-
-        </table><br>
-        <button class="w3-button w3-dark-grey">More Countries  <i class="fa fa-arrow-right"></i></button>
+    <div class="w3-panel">
+        <div class="w3-row-padding" style="margin:0 -16px">
+            <div class="w3-third">
+                <h5>Regions</h5>
+                <img src="/w3images/region.jpg" style="width:100%" alt="Google Regional Map">
+            </div>
+            <div class="w3-twothird">
+                <h5>Feeds</h5>
+                <table class="w3-table w3-striped w3-white">
+                    <tr>
+                        <td><i class="fa fa-user w3-text-blue w3-large"></i></td>
+                        <td>New record, over 90 views.</td>
+                        <td><i>10 mins</i></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-bell w3-text-red w3-large"></i></td>
+                        <td>Database error.</td>
+                        <td><i>15 mins</i></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-users w3-text-yellow w3-large"></i></td>
+                        <td>New record, over 40 users.</td>
+                        <td><i>17 mins</i></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-comment w3-text-red w3-large"></i></td>
+                        <td>New comments.</td>
+                        <td><i>25 mins</i></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-bookmark w3-text-blue w3-large"></i></td>
+                        <td>Check transactions.</td>
+                        <td><i>28 mins</i></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-laptop w3-text-red w3-large"></i></td>
+                        <td>CPU overload.</td>
+                        <td><i>35 mins</i></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-share-alt w3-text-green w3-large"></i></td>
+                        <td>New shares.</td>
+                        <td><i>39 mins</i></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
     <hr>
     <div class="w3-container">
@@ -204,31 +184,5 @@
             </div>
         </div>
     </div>
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="/js/jquery.dataTables.js"></script>
-
-    <script type="text/javascript">
-
-        function getHistoryData() {
-            $.ajax({
-                url: '@Url.Action("GetSoundDetectionHistoryData", "Home")',
-                method: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    $('#tableSoundDetection tr>td').remove();
-                    var html = '';
-                    for (var i = 0; i < data.length; i++) {
-                        html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td></tr>';
-                    }
-
-                    $("#tableSoundDetection").find('tbody').append($(html));
-              }
-           });
-        }
-
-        setInterval(getHistoryData, 10000);
-
-    </script>
 </body>
 </html>

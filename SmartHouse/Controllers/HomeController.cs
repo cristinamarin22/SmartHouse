@@ -60,9 +60,20 @@ namespace SmartHouse.Controllers
         }
         #endregion
 
+        #region Sound Detection
         public ActionResult SoundDetection()
         {
-            return View();
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            var soundDetectionList = smartHouseEntities.SoundDetectionDatas.ToList().Take(10);
+            return View(soundDetectionList);
         }
+
+        public JsonResult GetSoundDetectionHistoryData()
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            var soundDetectionList = smartHouseEntities.SoundDetectionDatas.ToList().OrderByDescending(x => x.InternalTime);
+            return Json(soundDetectionList, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }

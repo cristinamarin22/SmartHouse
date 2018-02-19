@@ -244,3 +244,4 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /SmartHouse/Scripts
+/SmartHouse/info_ajutatoare.txt

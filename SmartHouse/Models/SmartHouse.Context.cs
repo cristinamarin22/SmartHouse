@@ -19,12 +19,12 @@ namespace SmartHouse.Models
             : base("name=SmartHouseEntities")
         {
         }
-    
+
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{
         //    throw new UnintentionalCodeFirstException();
         //}
-    
+
         public DbSet<MotionDetectionData> MotionDetectionDatas { get; set; }
         public DbSet<SoundDetectionData> SoundDetectionDatas { get; set; }
         public DbSet<TemperatureHumidityData> TemperatureHumidityDatas { get; set; }
