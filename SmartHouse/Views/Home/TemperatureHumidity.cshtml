@@ -248,7 +248,7 @@
 
         function getHistoryData() {
             $.ajax({
-                url: '@Url.Action("GetHistoryData", "Home")',
+                url: '@Url.Action("GetTemperatureHumidityHistoryData", "Home")',
                 method: 'GET',
                 dataType: 'json',
                 success: function (data) {

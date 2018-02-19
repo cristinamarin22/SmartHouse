@@ -28,6 +28,7 @@ namespace SmartHouse.Controllers
             return View();
         }
 
+        #region Temperature & Humidity
         public ActionResult TemperatureHumidity()
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
@@ -35,17 +36,29 @@ namespace SmartHouse.Controllers
             return View(temperatureHumidityList);
         }
 
-        public JsonResult GetHistoryData()
+        public JsonResult GetTemperatureHumidityHistoryData()
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
-            var temperatureHumidityList = smartHouseEntities.TemperatureHumidityDatas.ToList();
+            var temperatureHumidityList = smartHouseEntities.TemperatureHumidityDatas.ToList().OrderByDescending(x => x.InternalTime);
             return Json(temperatureHumidityList, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Motion Detection
         public ActionResult MotionDetection()
         {
-            return View();
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            var motionDetectionList = smartHouseEntities.MotionDetectionDatas.ToList().Take(10);
+            return View(motionDetectionList);
         }
+
+        public JsonResult GetMotionDetectionHistoryData()
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            var motionDetectionList = smartHouseEntities.MotionDetectionDatas.ToList().OrderByDescending(x => x.InternalTime);
+            return Json(motionDetectionList, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
 
         public ActionResult SoundDetection()
         {
