@@ -31,11 +31,11 @@ namespace SmartHouse.Controllers
         public ActionResult TemperatureHumidity()
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
-            var temperatureHumidityList = smartHouseEntities.TemperatureHumidityDatas.ToList();
+            var temperatureHumidityList = smartHouseEntities.TemperatureHumidityDatas.ToList().Take(10);
             return View(temperatureHumidityList);
         }
 
-        public JsonResult GetAllTemperatureHumidity()
+        public JsonResult GetHistoryData()
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
             var temperatureHumidityList = smartHouseEntities.TemperatureHumidityDatas.ToList();

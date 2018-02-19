@@ -68,7 +68,7 @@
 </style>
 <body>
     <div class="w3-container">
-        <button type="button" class="button button3" id="refreshButton" onclick="RefreshDataTable()">Refresh Data</button>
+        <button type="button" class="button button3" id="refreshButton" onclick="getHistoryData()">History data</button>
         <table class="table" id="tableTemperatureHumidity">
             <tr>
                 <th>
@@ -95,11 +95,11 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Humidity)
                     </td>
-                    <td>
+                    @*<td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                         @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                         @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                    </td>
+                    </td>*@
                 </tr>
             }
 
@@ -241,25 +241,31 @@
         </div>
     </div>
 
-    <script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="/js/jquery.dataTables.js"></script>
 
-        function RefreshDataTable() {
+    <script type="text/javascript">
+
+        function getHistoryData() {
             $.ajax({
-              url: '@Url.Action("GetAllTemperatureHumidity", "Home")',
-              method: 'GET',
-              dataType: 'html',
-              success: function (response) {
-                  var trHTML = '';
-                  $.each(response, function (i, item) {
-                      $.each(item.Children, function (j, child) {
-                          trHTML += '<tr><td>' + child.Name + '</td>';
-                      });
+                url: '@Url.Action("GetHistoryData", "Home")',
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('#tableTemperatureHumidity tr>td').remove();
+                    var html = '';
+                    for (var i = 0; i < data.length; i++) {
+                        html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+                            '</td><td>' + data[i].Temperature +
+                            '</td><td>' + data[i].Humidity + '</td></tr>';
+                    }
 
-                  });
-                  $('#tableTemperatureHumidity').append(trHTML);
+                    $("#tableTemperatureHumidity").find('tbody').append($(html));
               }
            });
         }
+
+        setInterval(getHistoryData, 10000);
 
     </script>
 </body>
