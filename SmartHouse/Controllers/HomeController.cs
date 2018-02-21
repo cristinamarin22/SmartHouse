@@ -98,6 +98,12 @@ namespace SmartHouse.Controllers
             smartHouseEntities.Settings.FirstOrDefault().CriticalGasAlertYN = settings.CriticalGasAlertYN;
             smartHouseEntities.Settings.FirstOrDefault().InternalTime = DateTime.Now;
             smartHouseEntities.SaveChanges();
+
+            using (var context = new SmartHouseEntities())
+            {
+                var blogs = context.Database.SqlQuery<string>("SELECT Name FROM dbo.Blogs").ToList();
+            }
+
             return null;
         }
         #endregion
