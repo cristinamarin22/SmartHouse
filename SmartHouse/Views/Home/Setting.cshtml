@@ -5,7 +5,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
+
+<style>
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+    .button3 {
+        background-color: white;
+        color: black;
+        border: 2px solid #A1A1A1;
+    }
+
+        .button3:hover {
+            background-color: #A1A1A1;
+            color: white;
+        }
+
+</style>
+
+<div class="w3-row-padding w3-margin-bottom">
     <hr />
     <dl class="dl-horizontal">
 
@@ -18,7 +49,7 @@
 
                     <th>
                         <dd1>
-                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.CriticalTemperatureAlertYN)</h2>
+                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.CriticalTemperatureAlertYN, new { id = "temperatureAlertYNCheckBox" })</h2>
                         </dd1>
                     </th>
                 </tr>
@@ -30,7 +61,7 @@
 
                     <th>
                         <dd1>
-                            <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalTemperatureAlertValue)</h2>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalTemperatureAlertValue, new { id = "temperatureAlertValueTextBox" })</h2>
                         </dd1>
                     </th>
                 </tr>
@@ -42,7 +73,7 @@
 
                     <th>
                         <dd1>
-                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.CriticalHumidityAlertYN)</h2>
+                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.CriticalHumidityAlertYN, new { id = "humidityAlertYNCheckBox" })</h2>
                         </dd1>
                     </th>
                 </tr>
@@ -54,7 +85,7 @@
 
                     <th>
                         <dd1>
-                            <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalHumidityAlertValue)</h2>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalHumidityAlertValue, new { id = "humidityAlertValueTextBox" })</h2>
                         </dd1>
                     </th>
                 </tr>
@@ -70,7 +101,7 @@
 
                     <th>
                         <dd2>
-                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.MotionDetectionAlertYN)</h2>
+                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.MotionDetectionAlertYN, new { id = "motionDetectionAlertYNCheckBox" })</h2>
                         </dd2>
                     </th>
                 </tr>
@@ -86,7 +117,7 @@
 
                     <th>
                         <dd3>
-                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.SoundDetectionAlertYN)</h2>
+                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.SoundDetectionAlertYN, new { id = "soundDetectionAlertYNCheckBox" })</h2>
                         </dd3>
                     </th>
                 </tr>
@@ -102,7 +133,7 @@
 
                     <th>
                         <dd4>
-                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.CriticalGasAlertYN)</h2>
+                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.CriticalGasAlertYN, new { id = "gasDetectionAlertYNCheckBox" })</h2>
                         </dd4>
                     </th>
                 </tr>
@@ -125,9 +156,45 @@
             </table>
         </div> 
 
+        <button type="button" class="button button3" id="saveSettingsButton" onclick="saveSettings()">Save settings</button>
+
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="/js/jquery.dataTables.js"></script>
+
+<script type="text/javascript">
+
+    function saveSettings() {
+
+        var settings = {
+
+            "CriticalTemperatureAlertYN": $('#temperatureAlertYNCheckBox').is(':checked'),
+            "CriticalTemperatureAlertValue": $('#temperatureAlertValueTextBox').val(),
+            "CriticalHumidityAlertYN": $('#humidityAlertYNCheckBox').is(':checked'),
+            "CriticalHumidityAlertValue": $('#humidityAlertYNCheckBox').is(':checked'),
+            "MotionDetectionAlertYN": $('#motionDetectionAlertYNCheckBox').is(':checked'),
+            "SoundDetectionAlertYN": $('#soundDetectionAlertYNCheckBox').is(':checked'),
+            "CriticalGasAlertYN": $('#gasDetectionAlertYNCheckBox').is(':checked')
+        }
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("SaveSettings", "Home")',
+            data: settings,
+            dataType: "json",
+            success: function (data) {
+
+                alert("Saved");
+
+            }
+        });
+       }
+
+</script>

@@ -80,8 +80,25 @@ namespace SmartHouse.Controllers
         public ActionResult Setting()
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
-            //var settings = smartHouseEntities.Settings.ToList().Take(0).Cast<Setting>();
             return View(smartHouseEntities.Settings.FirstOrDefault());
+        }
+        #endregion
+
+        #region SaveSettings
+        [HttpPost]
+        public JsonResult SaveSettings(Setting settings)
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            smartHouseEntities.Settings.FirstOrDefault().CriticalTemperatureAlertYN = settings.CriticalTemperatureAlertYN;
+            smartHouseEntities.Settings.FirstOrDefault().CriticalTemperatureAlertValue = settings.CriticalTemperatureAlertValue;
+            smartHouseEntities.Settings.FirstOrDefault().CriticalHumidityAlertYN = settings.CriticalHumidityAlertYN;
+            smartHouseEntities.Settings.FirstOrDefault().CriticalHumidityAlertValue = settings.CriticalHumidityAlertValue;
+            smartHouseEntities.Settings.FirstOrDefault().MotionDetectionAlertYN = settings.MotionDetectionAlertYN;
+            smartHouseEntities.Settings.FirstOrDefault().SoundDetectionAlertYN = settings.SoundDetectionAlertYN;
+            smartHouseEntities.Settings.FirstOrDefault().CriticalGasAlertYN = settings.CriticalGasAlertYN;
+            smartHouseEntities.Settings.FirstOrDefault().InternalTime = DateTime.Now;
+            smartHouseEntities.SaveChanges();
+            return null;
         }
         #endregion
     }
