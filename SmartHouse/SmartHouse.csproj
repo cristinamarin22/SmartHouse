@@ -240,6 +240,7 @@
     <Content Include="Views\Home\MotionDetection.cshtml" />
     <Content Include="Views\Home\SoundDetection.cshtml" />
     <Content Include="Views\Home\TemperatureHumidity.cshtml" />
+    <Content Include="Views\Home\Settings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

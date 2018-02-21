@@ -80,8 +80,8 @@ namespace SmartHouse.Controllers
         public ActionResult Settings()
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
-            var motionDetectionList = smartHouseEntities.MotionDetectionDatas.ToList().Take(10);
-            return View(motionDetectionList);
+            var settingsList = smartHouseEntities.Settings.ToList().Take(10);
+            return View(settingsList);
         }
         #endregion
     }
