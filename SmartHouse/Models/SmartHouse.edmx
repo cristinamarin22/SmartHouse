@@ -24,7 +24,6 @@
           <Property Name="MotionDetectionAlertYN" Type="bool" Nullable="false" />
           <Property Name="SoundDetectionAlertYN" Type="bool" Nullable="false" />
           <Property Name="CriticalGasAlertYN" Type="bool" Nullable="false" />
-          <Property Name="CriticalGasAlertValue" Type="decimal" Precision="10" Scale="0" Nullable="false" />
           <Property Name="InternalTime" Type="datetime" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="SoundDetectionData">
@@ -105,7 +104,6 @@
           <Property Name="MotionDetectionAlertYN" Type="Boolean" Nullable="false" />
           <Property Name="SoundDetectionAlertYN" Type="Boolean" Nullable="false" />
           <Property Name="CriticalGasAlertYN" Type="Boolean" Nullable="false" />
-          <Property Name="CriticalGasAlertValue" Type="Decimal" Nullable="false" />
           <Property Name="InternalTime" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="TemperatureHumidityCriticalData">
@@ -153,7 +151,6 @@
             <EntityTypeMapping TypeName="SmartHouseModel.Setting">
               <MappingFragment StoreEntitySet="Settings">
                 <ScalarProperty Name="InternalTime" ColumnName="InternalTime" />
-                <ScalarProperty Name="CriticalGasAlertValue" ColumnName="CriticalGasAlertValue" />
                 <ScalarProperty Name="CriticalGasAlertYN" ColumnName="CriticalGasAlertYN" />
                 <ScalarProperty Name="SoundDetectionAlertYN" ColumnName="SoundDetectionAlertYN" />
                 <ScalarProperty Name="MotionDetectionAlertYN" ColumnName="MotionDetectionAlertYN" />
@@ -189,7 +186,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="true" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

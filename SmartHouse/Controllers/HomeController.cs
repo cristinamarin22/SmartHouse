@@ -76,12 +76,12 @@ namespace SmartHouse.Controllers
         }
         #endregion
 
-        #region Settings
-        public ActionResult Settings()
+        #region Setting
+        public ActionResult Setting()
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
-            var settingsList = smartHouseEntities.Settings.ToList().Take(10);
-            return View(settingsList);
+            //var settings = smartHouseEntities.Settings.ToList().Take(0).Cast<Setting>();
+            return View(smartHouseEntities.Settings.FirstOrDefault());
         }
         #endregion
     }

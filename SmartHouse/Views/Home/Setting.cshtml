@@ -1,0 +1,133 @@
+﻿@model SmartHouse.Models.Setting
+
+@{
+    ViewBag.Title = "Setting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <div class="w3-container w3-red">
+            <table>
+                <tr>
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalTemperatureAlertYN)</h1>
+                    </th>
+
+                    <th>
+                        <dd1>
+                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.CriticalTemperatureAlertYN)</h2>
+                        </dd1>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalTemperatureAlertValue)</h1>
+                    </th>
+
+                    <th>
+                        <dd1>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalTemperatureAlertValue)</h2>
+                        </dd1>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalHumidityAlertYN)</h1>
+                    </th>
+
+                    <th>
+                        <dd1>
+                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.CriticalHumidityAlertYN)</h2>
+                        </dd1>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalHumidityAlertValue)</h1>
+                    </th>
+
+                    <th>
+                        <dd1>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalHumidityAlertValue)</h2>
+                        </dd1>
+                    </th>
+                </tr>
+            </table>
+        </div> 
+
+        <div class="w3-container w3-blue">
+            <table>
+                <tr>
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.MotionDetectionAlertYN)</h1>
+                    </th>
+
+                    <th>
+                        <dd2>
+                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.MotionDetectionAlertYN)</h2>
+                        </dd2>
+                    </th>
+                </tr>
+            </table>
+        </div> 
+
+        <div class="w3-container w3-teal">
+            <table>
+                <tr>
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.SoundDetectionAlertYN)</h1>
+                    </th>
+
+                    <th>
+                        <dd3>
+                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.SoundDetectionAlertYN)</h2>
+                        </dd3>
+                    </th>
+                </tr>
+            </table>
+        </div> 
+
+        <div class="w3-container w3-orange">
+            <table>
+                <tr>
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalGasAlertYN)</h1>
+                    </th>
+
+                    <th>
+                        <dd4>
+                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.CriticalGasAlertYN)</h2>
+                        </dd4>
+                    </th>
+                </tr>
+            </table>
+        </div> 
+
+        <div class="w3-container">
+            <table>
+                <tr>
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.InternalTime)</h1>
+                    </th>
+
+                    <th>
+                        <dd5>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.InternalTime, new { style = "width:210px", @readonly = "readonly" })</h2>
+                        </dd5>
+                    </th>
+                </tr>
+            </table>
+        </div> 
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

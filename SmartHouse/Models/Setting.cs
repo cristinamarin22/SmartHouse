@@ -11,18 +11,34 @@ namespace SmartHouse.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Setting
     {
         public int Id { get; set; }
+
+        [Display(Name = "Alert critical temperature")]
         public bool CriticalTemperatureAlertYN { get; set; }
+
+        [Display(Name = "Critical temperature (Celsius degrees)")]
         public decimal CriticalTemperatureAlertValue { get; set; }
+
+        [Display(Name = "Alert critical humidity")]
         public bool CriticalHumidityAlertYN { get; set; }
+
+        [Display(Name = "Critical humidity (%)")]
         public decimal CriticalHumidityAlertValue { get; set; }
+
+        [Display(Name = "Alert motion detection")]
         public bool MotionDetectionAlertYN { get; set; }
+
+        [Display(Name = "Alert sound detection")]
         public bool SoundDetectionAlertYN { get; set; }
+
+        [Display(Name = "Alert gas detection")]
         public bool CriticalGasAlertYN { get; set; }
-        public decimal CriticalGasAlertValue { get; set; }
+
+        [Display(Name = "Last updated")]
         public System.DateTime InternalTime { get; set; }
     }
 }
