@@ -117,7 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="jobDeleteMotionDetectionHistoryData" xml:space="preserve">
+    <value>DROP EVENT `deleteMotionDetectionHistoryData`; CREATE DEFINER=`root`@`localhost` EVENT `deleteMotionDetectionHistoryData` ON SCHEDULE EVERY 1 MINUTE STARTS '2018-02-18 18:34:28' ON COMPLETION PRESERVE ENABLE DO delete from MotionDetectionData where TIMESTAMPDIFF({0}, InternalTime, now()) &gt; {1}</value>
+  </data>
+  <data name="jobDeleteSoundDetectionHistoryData" xml:space="preserve">
+    <value>DROP EVENT `deleteSoundDetectionHistoryData`; CREATE DEFINER=`root`@`localhost` EVENT `deleteSoundDetectionHistoryData` ON SCHEDULE EVERY 1 MINUTE STARTS '2018-02-18 18:34:28' ON COMPLETION PRESERVE ENABLE DO delete from SoundDetectionData where TIMESTAMPDIFF({0}, InternalTime, now()) &gt; {1}</value>
+  </data>
   <data name="jobDeleteTemperatureHumidityHistoryData" xml:space="preserve">
-    <value>ALTER EVENT deteleteTemperatureHumidityHistoryData on schedule every {0} {1} starts CURRENT_TIMESTAMP ON COMPLETION PRESERVE ENABLE do delete from TemperatureHumidityData where TIMESTAMPDIFF( {1}, InternalTime, now()) &gt; {2}</value>
+    <value>DROP EVENT `deleteTemperatureHumidityHistoryData`; CREATE DEFINER=`root`@`localhost` EVENT `deleteTemperatureHumidityHistoryData` ON SCHEDULE EVERY 1 MINUTE STARTS '2018-02-18 18:34:28' ON COMPLETION PRESERVE ENABLE DO delete from TemperatureHumidityData where TIMESTAMPDIFF({0}, InternalTime, now()) &gt; {1}</value>
   </data>
 </root>

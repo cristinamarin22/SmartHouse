@@ -104,7 +104,7 @@
                     <th>
                         <div class="w3-container">
                             <h2 class="w3-large">
-                                @Html.DropDownListFor(model => model.DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
+                                @Html.DropDownListFor(model => model.DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
                                     {
                                     new { value = 1 , text = "MINUTE"  },
                                     new { value = 2 , text = "HOUR" },
@@ -135,6 +135,35 @@
                         </dd2>
                     </th>
                 </tr>
+
+                <tr>
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.DeleteMotionDetectionHistoricalDataOlderThan)</h1>
+                    </th>
+
+                    <th>
+                        <dd2>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.DeleteMotionDetectionHistoricalDataOlderThan, new { id = "deleteMotionDetectionOlderThanTextBox" })</h2>
+                        </dd2>
+                    </th>
+
+                    <th>
+                        <div class="w3-container">
+                            <h2 class="w3-large">
+                                @Html.DropDownListFor(model => model.DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
+                                    {
+                                    new { value = 1 , text = "MINUTE"  },
+                                    new { value = 2 , text = "HOUR" },
+                                    new { value = 3 , text = "DAY"},
+                                    new { value = 4 , text = "MONTH"}
+                                    },
+                                    "value",
+                                    "text",
+                                    @Model.DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure), new { id = "deleteMotionDetectionOlderThanUnitMeasureDropDownList" })
+                            </h2>
+                        </div>
+                    </th>
+                </tr>
             </table>
         </div>
 
@@ -151,6 +180,35 @@
                         </dd3>
                     </th>
                 </tr>
+
+                <tr>
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.DeleteSoundDetectionHistoricalDataOlderThan)</h1>
+                    </th>
+
+                    <th>
+                        <dd3>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.DeleteSoundDetectionHistoricalDataOlderThan, new { id = "deleteSoundDetectionOlderThanTextBox" })</h2>
+                        </dd3>
+                    </th>
+
+                    <th>
+                        <div class="w3-container">
+                            <h2 class="w3-large">
+                                @Html.DropDownListFor(model => model.DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
+                                    {
+                                    new { value = 1 , text = "MINUTE"  },
+                                    new { value = 2 , text = "HOUR" },
+                                    new { value = 3 , text = "DAY"},
+                                    new { value = 4 , text = "MONTH"}
+                                    },
+                                    "value",
+                                    "text",
+                                    @Model.DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure), new { id = "deleteSoundDetectionOlderThanUnitMeasureDropDownList" })
+                            </h2>
+                        </div>
+                    </th>
+                </tr>
             </table>
         </div>
 
@@ -165,6 +223,35 @@
                         <dd4>
                             <h2 class="w3-large">@Html.CheckBoxFor(model => model.CriticalGasAlertYN, new { id = "gasDetectionAlertYNCheckBox" })</h2>
                         </dd4>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalGasHistoricalDataOlderThan)</h1>
+                    </th>
+
+                    <th>
+                        <dd4>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalGasHistoricalDataOlderThan, new { id = "deleteGasOlderThanTextBox" })</h2>
+                        </dd4>
+                    </th>
+
+                    <th>
+                        <div class="w3-container">
+                            <h2 class="w3-large">
+                                @Html.DropDownListFor(model => model.CriticalGasHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
+                                    {
+                                    new { value = 1 , text = "MINUTE"  },
+                                    new { value = 2 , text = "HOUR" },
+                                    new { value = 3 , text = "DAY"},
+                                    new { value = 4 , text = "MONTH"}
+                                    },
+                                    "value",
+                                    "text",
+                                    @Model.CriticalGasHistoricalDataOlderThanUnitMeasure), new { id = "deleteGasOlderThanUnitMeasureDropDownList" })
+                            </h2>
+                        </div>
                     </th>
                 </tr>
             </table>
@@ -194,9 +281,9 @@
                     </th>
 
                     <th>
-                        <dd5>
-                            <h2 class="w3-large">@Html.TextBoxFor(model => model.AlertsToEmail, new { style = "width:270px"})</h2>
-                        </dd5>
+                        <dd6>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.AlertsToEmail, new { id = "alertsToEmail", style = "width:270px"})</h2>
+                        </dd6>
                     </th>
                 </tr>
             </table>
@@ -227,7 +314,15 @@
             "DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure": $('#deleteTemperatureHumidityOlderThanUnitMeasureDropDownList').val(),
             "MotionDetectionAlertYN": $('#motionDetectionAlertYNCheckBox').is(':checked'),
             "SoundDetectionAlertYN": $('#soundDetectionAlertYNCheckBox').is(':checked'),
-            "CriticalGasAlertYN": $('#gasDetectionAlertYNCheckBox').is(':checked')
+            "CriticalGasAlertYN": $('#gasDetectionAlertYNCheckBox').is(':checked'),
+            "AlertsToEmail": $('#alertsToEmail').val(),
+            "DeleteMotionDetectionHistoricalDataOlderThan": $('#deleteMotionDetectionOlderThanTextBox').val(),
+            "DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure": $('#deleteMotionDetectionOlderThanUnitMeasureDropDownList').val(),
+            "DeleteSoundDetectionHistoricalDataOlderThan": $('#deleteSoundDetectionOlderThanTextBox').val(),
+            "DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure": $('#deleteSoundDetectionOlderThanUnitMeasureDropDownList').val(),
+            "CriticalGasHistoricalDataOlderThan": $('#deleteGasOlderThanTextBox').val(),
+            "CriticalGasHistoricalDataOlderThanUnitMeasure": $('#deleteGasOlderThanUnitMeasureDropDownList').val()
+
         }
 
         $.ajax({
