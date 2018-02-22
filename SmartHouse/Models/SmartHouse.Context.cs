@@ -28,7 +28,8 @@ namespace SmartHouse.Models
         public DbSet<MotionDetectionData> MotionDetectionDatas { get; set; }
         public DbSet<SoundDetectionData> SoundDetectionDatas { get; set; }
         public DbSet<TemperatureHumidityData> TemperatureHumidityDatas { get; set; }
-        public DbSet<Setting> Settings { get; set; }
         public DbSet<TemperatureHumidityCriticalData> TemperatureHumidityCriticalDatas { get; set; }
+        public DbSet<DictionaryTime> DictionaryTime { get; set; }
+        public DbSet<Settings> Settings { get; set; }
     }
 }

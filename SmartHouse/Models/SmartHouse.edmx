@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SmartHouseModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DictionaryTime">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Time" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="MotionDetectionData">
           <Key>
             <PropertyRef Name="Id" />
@@ -21,10 +28,19 @@
           <Property Name="CriticalTemperatureAlertValue" Type="decimal" Precision="10" Scale="0" Nullable="false" />
           <Property Name="CriticalHumidityAlertYN" Type="bool" Nullable="false" />
           <Property Name="CriticalHumidityAlertValue" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="DeleteTemperatureHumidityHistoricalDataOlderThan" Type="int" Nullable="false" />
+          <Property Name="DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure" Type="int" Nullable="false" />
           <Property Name="MotionDetectionAlertYN" Type="bool" Nullable="false" />
+          <Property Name="DeleteMotionDetectionHistoricalDataOlderThan" Type="int" Nullable="false" />
+          <Property Name="DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure" Type="int" Nullable="false" />
           <Property Name="SoundDetectionAlertYN" Type="bool" Nullable="false" />
+          <Property Name="DeleteSoundDetectionHistoricalDataOlderThan" Type="int" Nullable="false" />
+          <Property Name="DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure" Type="int" Nullable="false" />
           <Property Name="CriticalGasAlertYN" Type="bool" Nullable="false" />
+          <Property Name="CriticalGasHistoricalDataOlderThan" Type="int" Nullable="false" />
+          <Property Name="CriticalGasHistoricalDataOlderThanUnitMeasure" Type="int" Nullable="false" />
           <Property Name="InternalTime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="AlertsToEmail" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="SoundDetectionData">
           <Key>
@@ -52,6 +68,7 @@
           <Property Name="Humidity" Type="float" Nullable="false" />
         </EntityType>
         <EntityContainer Name="SmartHouseModelStoreContainer">
+          <EntitySet Name="DictionaryTime" EntityType="Self.DictionaryTime" Schema="SmartHouse" store:Type="Tables" />
           <EntitySet Name="MotionDetectionData" EntityType="Self.MotionDetectionData" Schema="SmartHouse" store:Type="Tables" />
           <EntitySet Name="Settings" EntityType="Self.Settings" Schema="SmartHouse" store:Type="Tables" />
           <EntitySet Name="SoundDetectionData" EntityType="Self.SoundDetectionData" Schema="SmartHouse" store:Type="Tables" />
@@ -89,23 +106,10 @@
           <EntitySet Name="MotionDetectionDatas" EntityType="Self.MotionDetectionData" />
           <EntitySet Name="SoundDetectionDatas" EntityType="Self.SoundDetectionData" />
           <EntitySet Name="TemperatureHumidityDatas" EntityType="Self.TemperatureHumidityData" />
-          <EntitySet Name="Settings" EntityType="SmartHouseModel.Setting" />
           <EntitySet Name="TemperatureHumidityCriticalDatas" EntityType="SmartHouseModel.TemperatureHumidityCriticalData" />
+          <EntitySet Name="DictionaryTime" EntityType="SmartHouseModel.DictionaryTime" />
+          <EntitySet Name="Settings" EntityType="SmartHouseModel.Settings" />
         </EntityContainer>
-        <EntityType Name="Setting">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CriticalTemperatureAlertYN" Type="Boolean" Nullable="false" />
-          <Property Name="CriticalTemperatureAlertValue" Type="Decimal" Nullable="false" />
-          <Property Name="CriticalHumidityAlertYN" Type="Boolean" Nullable="false" />
-          <Property Name="CriticalHumidityAlertValue" Type="Decimal" Nullable="false" />
-          <Property Name="MotionDetectionAlertYN" Type="Boolean" Nullable="false" />
-          <Property Name="SoundDetectionAlertYN" Type="Boolean" Nullable="false" />
-          <Property Name="CriticalGasAlertYN" Type="Boolean" Nullable="false" />
-          <Property Name="InternalTime" Type="DateTime" Nullable="false" />
-        </EntityType>
         <EntityType Name="TemperatureHumidityCriticalData">
           <Key>
             <PropertyRef Name="Id" />
@@ -114,6 +118,36 @@
           <Property Name="InternalTime" Type="DateTime" Nullable="false" />
           <Property Name="Temperature" Type="Decimal" Nullable="false" />
           <Property Name="Humidity" Type="Decimal" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DictionaryTime">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Time" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CriticalTemperatureAlertYN" Type="Boolean" Nullable="false" />
+          <Property Name="CriticalTemperatureAlertValue" Type="Decimal" Nullable="false" />
+          <Property Name="CriticalHumidityAlertYN" Type="Boolean" Nullable="false" />
+          <Property Name="CriticalHumidityAlertValue" Type="Decimal" Nullable="false" />
+          <Property Name="DeleteTemperatureHumidityHistoricalDataOlderThan" Type="Int32" Nullable="false" />
+          <Property Name="DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure" Type="Int32" Nullable="false" />
+          <Property Name="MotionDetectionAlertYN" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteMotionDetectionHistoricalDataOlderThan" Type="Int32" Nullable="false" />
+          <Property Name="DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure" Type="Int32" Nullable="false" />
+          <Property Name="SoundDetectionAlertYN" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteSoundDetectionHistoricalDataOlderThan" Type="Int32" Nullable="false" />
+          <Property Name="DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure" Type="Int32" Nullable="false" />
+          <Property Name="CriticalGasAlertYN" Type="Boolean" Nullable="false" />
+          <Property Name="CriticalGasHistoricalDataOlderThan" Type="Int32" Nullable="false" />
+          <Property Name="CriticalGasHistoricalDataOlderThanUnitMeasure" Type="Int32" Nullable="false" />
+          <Property Name="InternalTime" Type="DateTime" Nullable="false" />
+          <Property Name="AlertsToEmail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -147,27 +181,44 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Settings">
-            <EntityTypeMapping TypeName="SmartHouseModel.Setting">
-              <MappingFragment StoreEntitySet="Settings">
-                <ScalarProperty Name="InternalTime" ColumnName="InternalTime" />
-                <ScalarProperty Name="CriticalGasAlertYN" ColumnName="CriticalGasAlertYN" />
-                <ScalarProperty Name="SoundDetectionAlertYN" ColumnName="SoundDetectionAlertYN" />
-                <ScalarProperty Name="MotionDetectionAlertYN" ColumnName="MotionDetectionAlertYN" />
-                <ScalarProperty Name="CriticalHumidityAlertValue" ColumnName="CriticalHumidityAlertValue" />
-                <ScalarProperty Name="CriticalHumidityAlertYN" ColumnName="CriticalHumidityAlertYN" />
-                <ScalarProperty Name="CriticalTemperatureAlertValue" ColumnName="CriticalTemperatureAlertValue" />
-                <ScalarProperty Name="CriticalTemperatureAlertYN" ColumnName="CriticalTemperatureAlertYN" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TemperatureHumidityCriticalDatas">
             <EntityTypeMapping TypeName="SmartHouseModel.TemperatureHumidityCriticalData">
               <MappingFragment StoreEntitySet="TemperatureHumidityCriticalData">
                 <ScalarProperty Name="Humidity" ColumnName="Humidity" />
                 <ScalarProperty Name="Temperature" ColumnName="Temperature" />
                 <ScalarProperty Name="InternalTime" ColumnName="InternalTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DictionaryTime">
+            <EntityTypeMapping TypeName="SmartHouseModel.DictionaryTime">
+              <MappingFragment StoreEntitySet="DictionaryTime">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="SmartHouseModel.Settings">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="AlertsToEmail" ColumnName="AlertsToEmail" />
+                <ScalarProperty Name="InternalTime" ColumnName="InternalTime" />
+                <ScalarProperty Name="CriticalGasHistoricalDataOlderThanUnitMeasure" ColumnName="CriticalGasHistoricalDataOlderThanUnitMeasure" />
+                <ScalarProperty Name="CriticalGasHistoricalDataOlderThan" ColumnName="CriticalGasHistoricalDataOlderThan" />
+                <ScalarProperty Name="CriticalGasAlertYN" ColumnName="CriticalGasAlertYN" />
+                <ScalarProperty Name="DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure" ColumnName="DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure" />
+                <ScalarProperty Name="DeleteSoundDetectionHistoricalDataOlderThan" ColumnName="DeleteSoundDetectionHistoricalDataOlderThan" />
+                <ScalarProperty Name="SoundDetectionAlertYN" ColumnName="SoundDetectionAlertYN" />
+                <ScalarProperty Name="DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure" ColumnName="DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure" />
+                <ScalarProperty Name="DeleteMotionDetectionHistoricalDataOlderThan" ColumnName="DeleteMotionDetectionHistoricalDataOlderThan" />
+                <ScalarProperty Name="MotionDetectionAlertYN" ColumnName="MotionDetectionAlertYN" />
+                <ScalarProperty Name="DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure" ColumnName="DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure" />
+                <ScalarProperty Name="DeleteTemperatureHumidityHistoricalDataOlderThan" ColumnName="DeleteTemperatureHumidityHistoricalDataOlderThan" />
+                <ScalarProperty Name="CriticalHumidityAlertValue" ColumnName="CriticalHumidityAlertValue" />
+                <ScalarProperty Name="CriticalHumidityAlertYN" ColumnName="CriticalHumidityAlertYN" />
+                <ScalarProperty Name="CriticalTemperatureAlertValue" ColumnName="CriticalTemperatureAlertValue" />
+                <ScalarProperty Name="CriticalTemperatureAlertYN" ColumnName="CriticalTemperatureAlertYN" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

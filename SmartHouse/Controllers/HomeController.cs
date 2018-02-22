@@ -80,29 +80,53 @@ namespace SmartHouse.Controllers
         public ActionResult Setting()
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
-            return View(smartHouseEntities.Settings.FirstOrDefault());
+            Settings settings = smartHouseEntities.Settings.FirstOrDefault();
+
+            //var allTime = Dictionary.TimeDictionary;
+            //var items = new List<SelectListItem>();
+
+            //foreach (var time in allTime)
+            //{
+            //    items.Add(new SelectListItem()
+            //    {
+            //        Value = time.Id.ToString(),
+            //        Text = time.Name,
+                   
+            //        // Put all sorts of business logic in here
+            //        Selected = time.Id == smartHouseEntities.Settings.FirstOrDefault().DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure ? true : false
+            //    });
+            //}
+
+            //model.Countries = items;
+
+
+
+            return View(settings);
         }
         #endregion
 
         #region SaveSettings
         [HttpPost]
-        public JsonResult SaveSettings(Setting settings)
+        public JsonResult SaveSettings(Settings settings)
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
             smartHouseEntities.Settings.FirstOrDefault().CriticalTemperatureAlertYN = settings.CriticalTemperatureAlertYN;
             smartHouseEntities.Settings.FirstOrDefault().CriticalTemperatureAlertValue = settings.CriticalTemperatureAlertValue;
             smartHouseEntities.Settings.FirstOrDefault().CriticalHumidityAlertYN = settings.CriticalHumidityAlertYN;
             smartHouseEntities.Settings.FirstOrDefault().CriticalHumidityAlertValue = settings.CriticalHumidityAlertValue;
+            smartHouseEntities.Settings.FirstOrDefault().DeleteTemperatureHumidityHistoricalDataOlderThan = settings.DeleteTemperatureHumidityHistoricalDataOlderThan;
+            smartHouseEntities.Settings.FirstOrDefault().DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure = settings.DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure;
             smartHouseEntities.Settings.FirstOrDefault().MotionDetectionAlertYN = settings.MotionDetectionAlertYN;
             smartHouseEntities.Settings.FirstOrDefault().SoundDetectionAlertYN = settings.SoundDetectionAlertYN;
             smartHouseEntities.Settings.FirstOrDefault().CriticalGasAlertYN = settings.CriticalGasAlertYN;
+            smartHouseEntities.Settings.FirstOrDefault().AlertsToEmail = settings.AlertsToEmail;
             smartHouseEntities.Settings.FirstOrDefault().InternalTime = DateTime.Now;
             smartHouseEntities.SaveChanges();
 
-            using (var context = new SmartHouseEntities())
-            {
-                var blogs = context.Database.SqlQuery<string>("SELECT Name FROM dbo.Blogs").ToList();
-            }
+            //using (var context = new SmartHouseEntities())
+            //{
+            //    var blogs = context.Database.SqlQuery<string>("SELECT Name FROM dbo.Blogs").ToList();
+            //}
 
             return null;
         }

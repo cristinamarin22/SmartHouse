@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="jobDeleteTemperatureHistoryData" xml:space="preserve">
-    <value />
+  <data name="jobDeleteTemperatureHumidityHistoryData" xml:space="preserve">
+    <value>ALTER EVENT deteleteTemperatureHumidityHistoryData on schedule every {0} {1} starts CURRENT_TIMESTAMP ON COMPLETION PRESERVE ENABLE do delete from TemperatureHumidityData where TIMESTAMPDIFF( {1}, InternalTime, now()) &gt; {2}</value>
   </data>
 </root>

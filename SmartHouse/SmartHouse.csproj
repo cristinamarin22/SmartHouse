@@ -146,13 +146,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Dictionary.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DictionaryTime.cs">
+      <DependentUpon>SmartHouse.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MotionDetectionData.cs">
       <DependentUpon>SmartHouse.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Setting.cs">
+    <Compile Include="Models\Settings.cs">
       <DependentUpon>SmartHouse.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SmartHouse.Context.cs">

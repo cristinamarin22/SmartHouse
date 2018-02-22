@@ -1,4 +1,4 @@
-﻿@model SmartHouse.Models.Setting
+﻿@model SmartHouse.Models.Settings
 
 @{
     ViewBag.Title = "Setting";
@@ -49,7 +49,7 @@
 
                     <th>
                         <dd1>
-                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.CriticalTemperatureAlertYN, new { id = "temperatureAlertYNCheckBox" })</h2>
+                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.CriticalTemperatureAlertYN, new { id = "temperatureAlertYNCheckBox", @onclick = "enableDisableTemperatureAlert()" })</h2>
                         </dd1>
                     </th>
                 </tr>
@@ -73,7 +73,7 @@
 
                     <th>
                         <dd1>
-                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.CriticalHumidityAlertYN, new { id = "humidityAlertYNCheckBox" })</h2>
+                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.CriticalHumidityAlertYN, new { id = "humidityAlertYNCheckBox", @onclick = "enableDisableHumidityAlert()" })</h2>
                         </dd1>
                     </th>
                 </tr>
@@ -89,8 +89,38 @@
                         </dd1>
                     </th>
                 </tr>
+
+                <tr>
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.DeleteTemperatureHumidityHistoricalDataOlderThan)</h1>
+                    </th>
+
+                    <th>
+                        <dd1>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.DeleteTemperatureHumidityHistoricalDataOlderThan, new { id = "deleteTemperatureHumidityOlderThanTextBox" })</h2>
+                        </dd1>
+                    </th>
+
+                    <th>
+                        <div class="w3-container">
+                            <h2 class="w3-large">
+                                @Html.DropDownListFor(model => model.DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
+                                    {
+                                    new { value = 1 , text = "MINUTE"  },
+                                    new { value = 2 , text = "HOUR" },
+                                    new { value = 3 , text = "DAY"},
+                                    new { value = 4 , text = "MONTH"}
+                                    },
+                                    "value",
+                                    "text",
+                                    @Model.DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure), new { id = "deleteTemperatureHumidityOlderThanUnitMeasureDropDownList" })
+                            </h2>
+                        </div>
+                    </th>
+                </tr>
+
             </table>
-        </div> 
+        </div>
 
         <div class="w3-container w3-blue">
             <table>
@@ -106,7 +136,7 @@
                     </th>
                 </tr>
             </table>
-        </div> 
+        </div>
 
         <div class="w3-container w3-teal">
             <table>
@@ -122,7 +152,7 @@
                     </th>
                 </tr>
             </table>
-        </div> 
+        </div>
 
         <div class="w3-container w3-orange">
             <table>
@@ -138,7 +168,7 @@
                     </th>
                 </tr>
             </table>
-        </div> 
+        </div>
 
         <div class="w3-container">
             <table>
@@ -154,15 +184,29 @@
                     </th>
                 </tr>
             </table>
-        </div> 
+        </div>
+
+        <div class="w3-container">
+            <table>
+                <tr>
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.AlertsToEmail)</h1>
+                    </th>
+
+                    <th>
+                        <dd5>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.AlertsToEmail, new { style = "width:270px"})</h2>
+                        </dd5>
+                    </th>
+                </tr>
+            </table>
+        </div>
 
         <button type="button" class="button button3" id="saveSettingsButton" onclick="saveSettings()">Save settings</button>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+
 </p>
 
 
@@ -179,6 +223,8 @@
             "CriticalTemperatureAlertValue": $('#temperatureAlertValueTextBox').val(),
             "CriticalHumidityAlertYN": $('#humidityAlertYNCheckBox').is(':checked'),
             "CriticalHumidityAlertValue": $('#humidityAlertYNCheckBox').is(':checked'),
+            "DeleteTemperatureHumidityHistoricalDataOlderThan": $('#deleteTemperatureHumidityOlderThanTextBox').val(),
+            "DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure": $('#deleteTemperatureHumidityOlderThanUnitMeasureDropDownList').val(),
             "MotionDetectionAlertYN": $('#motionDetectionAlertYNCheckBox').is(':checked'),
             "SoundDetectionAlertYN": $('#soundDetectionAlertYNCheckBox').is(':checked'),
             "CriticalGasAlertYN": $('#gasDetectionAlertYNCheckBox').is(':checked')
@@ -195,6 +241,28 @@
 
             }
         });
-       }
+    }
+
+    function enableDisableTemperatureAlert() {
+
+        if ($('#temperatureAlertYNCheckBox').is(':checked')) {
+            $('#temperatureAlertValueTextBox').removeAttr("disabled");
+        }
+        else {
+            $('#temperatureAlertValueTextBox').attr("disabled", "disabled");
+            $('#temperatureAlertValueTextBox').val('');
+        }
+    }
+
+    function enableDisableHumidityAlert() {
+
+        if ($('#humidityAlertYNCheckBox').is(':checked')) {
+            $('#humidityAlertValueTextBox').removeAttr("disabled");
+        }
+        else {
+            $('#humidityAlertValueTextBox').attr("disabled", "disabled");
+            $('#humidityAlertValueTextBox').val('');
+        }
+    }
 
 </script>

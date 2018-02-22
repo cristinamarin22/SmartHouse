@@ -13,10 +13,9 @@ namespace SmartHouse.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Setting
+    public partial class Settings
     {
         public int Id { get; set; }
-
         [Display(Name = "Alert critical temperature")]
         public bool CriticalTemperatureAlertYN { get; set; }
 
@@ -40,5 +39,24 @@ namespace SmartHouse.Models
 
         [Display(Name = "Last updated")]
         public System.DateTime InternalTime { get; set; }
+
+        [Display(Name = "Delete temperature & humidity historical data older than ")]
+        public int DeleteTemperatureHumidityHistoricalDataOlderThan { get; set; }
+        public int DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure { get; set; }
+
+        [Display(Name = "Delete motion detection historical data older than ")]
+        public int DeleteMotionDetectionHistoricalDataOlderThan { get; set; }
+        public int DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure { get; set; }
+
+        [Display(Name = "Delete sound detection historical data older than ")]
+        public int DeleteSoundDetectionHistoricalDataOlderThan { get; set; }
+        public int DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure { get; set; }
+
+        [Display(Name = "Delete gas detection historical data older than ")]
+        public int CriticalGasHistoricalDataOlderThan { get; set; }
+        public int CriticalGasHistoricalDataOlderThanUnitMeasure { get; set; }
+
+        [Display(Name = "Email address for alerts")]
+        public string AlertsToEmail { get; set; }
     }
 }
