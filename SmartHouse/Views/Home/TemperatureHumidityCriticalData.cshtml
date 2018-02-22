@@ -1,7 +1,7 @@
-﻿@model IEnumerable<SmartHouse.Models.MotionDetectionData>
+﻿@model IEnumerable<SmartHouse.Models.TemperatureHumidityCriticalData>
 
 @{
-    ViewBag.Title = "MotionDetection";
+    ViewBag.Title = "TemperatureHumidityCriticalData";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -36,7 +36,7 @@
     }
 
     th {
-        background-color: #2b92f2;
+        background-color: #ed4334;
         color: white;
     }
 
@@ -58,75 +58,29 @@
     .button3 {
         background-color: white;
         color: black;
-        border: 2px solid #2b92f2;
+        border: 2px solid #f44336;
     }
 
         .button3:hover {
-            background-color: #2b92f2;
+            background-color: #f44336;
             color: white;
         }
 </style>
 <body>
     <div class="w3-container">
-
         <button type="button" class="button button3" id="refreshButton" onclick="getHistoryData()">History data</button>
-
-        <td>
-            <span style="margin-left: 35%;">
-                @Html.TextBox("TemperatureTextBoxMinValue", "", new { id = "TemperatureMinValueTextBox", style = "width:70px" })
-            </span>
-        </td>
-
-        <td>
-            <label><span> < Temperature < </span></label>
-        </td>
-
-        <td>
-            @Html.TextBox("TemperatureTextBoxMaxValue", "", new { id = "TemperatureMaxValueTextBox", style = "width:70px" })
-        </td>
-
-        <td>
-            <span style="margin-left: 2.5%;">
-                @Html.TextBox("HumidityTextBoxMinValue", "", new { id = "HumidityMinValueTextBox", style = "width:70px" })
-            </span>
-        </td>
-
-        <td>
-            <label><span> < Humidity < </span></label>
-        </td>
-
-        <td>
-            @Html.TextBox("HumidityTextBoxMaxValue", "", new { id = "HumidityMaxValueTextBox", style = "width:70px" })
-        </td>
-
-
-        <td>
-            <span style="margin-left: 2.5%;">
-                @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px", @type = "date" })
-            </span>
-        </td>
-
-        <td>
-            <label><span> < Date < </span></label>
-        </td>
-
-        <td>
-            @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px", @type = "date" })
-        </td>
-
-        <td>
-            <button style="float: right;" type="button" class="button button3" id="refreshButton" onclick="getHistoryData()">Filter</button>
-        </td>
-
-
-        <table class="table" id="tableMotionDetection">
+        <table class="table" id="tableTemperatureHumidity">
             <tr>
                 <th>
-                    Date
+                    @Html.DisplayNameFor(model => model.InternalTime)
                 </th>
                 <th>
-                    Action
+                    @Html.DisplayNameFor(model => model.Temperature)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Humidity)
+                </th>
+                <th></th>
             </tr>
 
             @foreach (var item in Model)
@@ -136,13 +90,70 @@
                         @Html.DisplayFor(modelItem => item.InternalTime)
                     </td>
                     <td>
-                        @Html.ActionLink("Delete", "DeleteMotionDetection", "Home", new { id = item.Id }, null)
+                        @Html.DisplayFor(modelItem => item.Temperature)
                     </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Humidity)
+                    </td>
+                    @*<td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>*@
                 </tr>
             }
 
         </table><br>
         <button class="w3-button w3-dark-grey">More Countries  <i class="fa fa-arrow-right"></i></button>
+    </div>
+
+    <div class="w3-panel">
+        <div class="w3-row-padding" style="margin:0 -16px">
+            <div class="w3-third">
+                <h5>Regions</h5>
+                <img src="/w3images/region.jpg" style="width:100%" alt="Google Regional Map">
+            </div>
+            <div class="w3-twothird">
+                <h5>Feeds</h5>
+                <table class="w3-table w3-striped w3-white">
+                    <tr>
+                        <td><i class="fa fa-user w3-text-blue w3-large"></i></td>
+                        <td>New record, over 90 views.</td>
+                        <td><i>10 mins</i></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-bell w3-text-red w3-large"></i></td>
+                        <td>Database error.</td>
+                        <td><i>15 mins</i></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-users w3-text-yellow w3-large"></i></td>
+                        <td>New record, over 40 users.</td>
+                        <td><i>17 mins</i></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-comment w3-text-red w3-large"></i></td>
+                        <td>New comments.</td>
+                        <td><i>25 mins</i></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-bookmark w3-text-blue w3-large"></i></td>
+                        <td>Check transactions.</td>
+                        <td><i>28 mins</i></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-laptop w3-text-red w3-large"></i></td>
+                        <td>CPU overload.</td>
+                        <td><i>35 mins</i></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-share-alt w3-text-green w3-large"></i></td>
+                        <td>New shares.</td>
+                        <td><i>39 mins</i></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
     <hr>
     <div class="w3-container">
@@ -163,37 +174,6 @@
         </div>
     </div>
     <hr>
-
-    <div class="w3-container">
-        <h5>Countries</h5>
-        <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
-            <tr>
-                <td>United States</td>
-                <td>65%</td>
-            </tr>
-            <tr>
-                <td>UK</td>
-                <td>15.7%</td>
-            </tr>
-            <tr>
-                <td>Russia</td>
-                <td>5.6%</td>
-            </tr>
-            <tr>
-                <td>Spain</td>
-                <td>2.1%</td>
-            </tr>
-            <tr>
-                <td>India</td>
-                <td>1.9%</td>
-            </tr>
-            <tr>
-                <td>France</td>
-                <td>1.5%</td>
-            </tr>
-        </table><br>
-        <button class="w3-button w3-dark-grey">More Countries  <i class="fa fa-arrow-right"></i></button>
-    </div>
     <hr>
     <div class="w3-container">
         <h5>Recent Users</h5>
@@ -268,17 +248,19 @@
 
         function getHistoryData() {
             $.ajax({
-                url: '@Url.Action("GetMotionDetectionHistoryData", "Home")',
+                url: '@Url.Action("GetTemperatureHumidityHistoryData", "Home")',
                 method: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    $('#tableMotionDetection tr>td').remove();
+                    $('#tableTemperatureHumidity tr>td').remove();
                     var html = '';
                     for (var i = 0; i < data.length; i++) {
-                        html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td></tr>';
+                        html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+                            '</td><td>' + data[i].Temperature +
+                            '</td><td>' + data[i].Humidity + '</td></tr>';
                     }
 
-                    $("#tableMotionDetection").find('tbody').append($(html));
+                    $("#tableTemperatureHumidity").find('tbody').append($(html));
               }
            });
         }

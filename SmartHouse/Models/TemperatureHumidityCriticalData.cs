@@ -11,12 +11,18 @@ namespace SmartHouse.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class TemperatureHumidityCriticalData
     {
         public int Id { get; set; }
+
         public System.DateTime InternalTime { get; set; }
+
+        [Display(Name = "Critical temperature")]
         public decimal Temperature { get; set; }
+
+        [Display(Name = "Critical humidity")]
         public decimal Humidity { get; set; }
     }
 }

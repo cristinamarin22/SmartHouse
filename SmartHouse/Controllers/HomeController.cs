@@ -47,6 +47,15 @@ namespace SmartHouse.Controllers
         }
         #endregion
 
+        #region Temperature & Humidity
+        public ActionResult TemperatureHumidityCriticalData()
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            var temperatureHumidityList = smartHouseEntities.TemperatureHumidityCriticalDatas.ToList().OrderByDescending(x => x.InternalTime);
+            return View(temperatureHumidityList);
+        }
+        #endregion
+
         #region Motion Detection
         public ActionResult MotionDetection()
         {
