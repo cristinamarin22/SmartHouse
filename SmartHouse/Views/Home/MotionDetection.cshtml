@@ -74,6 +74,9 @@
                 <th>
                     Date
                 </th>
+                <th>
+                    Action
+                </th>
             </tr>
 
             @foreach (var item in Model)
@@ -81,6 +84,9 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.InternalTime)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteMotionDetection", "Home", new { id = item.Id }, null)
                     </td>
                 </tr>
             }

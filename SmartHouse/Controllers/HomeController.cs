@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Resources;
 using System.Web;
 using System.Web.Mvc;
@@ -10,6 +11,26 @@ namespace SmartHouse.Controllers
 {
     public class HomeController : Controller
     {
+        #region Delete
+        public ActionResult DeleteMotionDetection(int? id)
+        {
+            if (id == null)
+            {
+                return null;
+            }
+
+            SmartHouseEntities smartHouse = new SmartHouseEntities();
+            MotionDetectionData motionDetection = smartHouse.MotionDetectionDatas.Find(id);
+            if (motionDetection == null)
+            {
+                return HttpNotFound();
+            }
+            smartHouse.MotionDetectionDatas.Remove(motionDetection);
+            smartHouse.SaveChanges();
+            return RedirectToAction("MotionDetection");
+        }
+        #endregion
+
         #region Temperature & Humidity
         public ActionResult TemperatureHumidity()
         {
@@ -127,6 +148,8 @@ namespace SmartHouse.Controllers
                 #endregion
             }
             #endregion
+
+            RedirectToAction("Setting");
 
             return null;
         }
