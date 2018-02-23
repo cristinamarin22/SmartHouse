@@ -16,13 +16,18 @@ namespace SmartHouse.Models
     public partial class TemperatureHumidityCriticalData
     {
         public int Id { get; set; }
-
         public System.DateTime InternalTime { get; set; }
-
-        [Display(Name = "Critical temperature")]
+        [Display(Name = "Temperature")]
         public decimal Temperature { get; set; }
 
-        [Display(Name = "Critical humidity")]
+        [Display(Name = "Humidity")]
         public decimal Humidity { get; set; }
+        public int TemperatureHumidityDataId { get; set; }
+
+        [Display(Name = "Critical temperature")]
+        public int CriticalTemperature { get; set; }
+
+        [Display(Name = "Critical humidity")]
+        public int CriticalHumidity { get; set; }
     }
 }

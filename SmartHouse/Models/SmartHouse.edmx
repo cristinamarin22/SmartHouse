@@ -54,9 +54,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TemperatureHumidityDataId" Type="int" Nullable="false" />
           <Property Name="InternalTime" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="Temperature" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="CriticalTemperature" Type="int" Nullable="false" />
           <Property Name="Humidity" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="CriticalHumidity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TemperatureHumidityData">
           <Key>
@@ -118,6 +121,9 @@
           <Property Name="InternalTime" Type="DateTime" Nullable="false" />
           <Property Name="Temperature" Type="Decimal" Nullable="false" />
           <Property Name="Humidity" Type="Decimal" Nullable="false" />
+          <Property Name="TemperatureHumidityDataId" Type="Int32" Nullable="false" />
+          <Property Name="CriticalTemperature" Type="Int32" Nullable="false" />
+          <Property Name="CriticalHumidity" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="DictionaryTime">
           <Key>
@@ -184,6 +190,9 @@
           <EntitySetMapping Name="TemperatureHumidityCriticalDatas">
             <EntityTypeMapping TypeName="SmartHouseModel.TemperatureHumidityCriticalData">
               <MappingFragment StoreEntitySet="TemperatureHumidityCriticalData">
+                <ScalarProperty Name="CriticalHumidity" ColumnName="CriticalHumidity" />
+                <ScalarProperty Name="CriticalTemperature" ColumnName="CriticalTemperature" />
+                <ScalarProperty Name="TemperatureHumidityDataId" ColumnName="TemperatureHumidityDataId" />
                 <ScalarProperty Name="Humidity" ColumnName="Humidity" />
                 <ScalarProperty Name="Temperature" ColumnName="Temperature" />
                 <ScalarProperty Name="InternalTime" ColumnName="InternalTime" />
