@@ -73,6 +73,74 @@ background-color: white;
     background-color: #bababa;
 }
 
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    -webkit-animation-name: fadeIn; /* Fade in the background */
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+}
+
+/* Modal Content */
+.modal-content {
+    position: fixed;
+    bottom: 0;
+    background-color: #fefefe;
+    width: 100%;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #646566;
+    color: white;
+}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: white;
+    color: white;
+}
+
+/* Add Animation */
+@@-webkit-keyframes slideIn {
+    from {bottom: -300px; opacity: 0}
+    to {bottom: 0; opacity: 1}
+}
+
+@@keyframes slideIn {
+    from {bottom: -300px; opacity: 0}
+    to {bottom: 0; opacity: 1}
+}
+
+@@-webkit-keyframes fadeIn {
+    from {opacity: 0}
+    to {opacity: 1}
+}
+
+@@keyframes fadeIn {
+    from {opacity: 0}
+    to {opacity: 1}
+}
+
+.modal-body {
+    padding: 2px 20px;
+    font-size: 16px;
+}
+
 </style>
 
 <div class="w3-row-padding w3-margin-bottom">
@@ -144,15 +212,15 @@ background-color: white;
                         <div class="w3-container">
                             <h2 class="w3-large">
                                 @Html.DropDownListFor(model => model.DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
-                                    {
-                                    new { value = 1 , text = "MINUTE"  },
-                                    new { value = 2 , text = "HOUR" },
-                                    new { value = 3 , text = "DAY"},
-                                    new { value = 4 , text = "MONTH"}
-                                    },
-                                    "value",
-                                    "text",
-                                    @Model.DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure), new { id = "deleteTemperatureHumidityOlderThanUnitMeasureDropDownList" })
+                                                                    {
+                                                                    new { value = 1 , text = "MINUTE"  },
+                                                                    new { value = 2 , text = "HOUR" },
+                                                                    new { value = 3 , text = "DAY"},
+                                                                    new { value = 4 , text = "MONTH"}
+                                                                    },
+                                      "value",
+                                      "text",
+                                      @Model.DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure), new { id = "deleteTemperatureHumidityOlderThanUnitMeasureDropDownList" })
                             </h2>
                         </div>
                     </th>
@@ -190,15 +258,15 @@ background-color: white;
                         <div class="w3-container">
                             <h2 class="w3-large">
                                 @Html.DropDownListFor(model => model.DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
-                                    {
-                                    new { value = 1 , text = "MINUTE"  },
-                                    new { value = 2 , text = "HOUR" },
-                                    new { value = 3 , text = "DAY"},
-                                    new { value = 4 , text = "MONTH"}
-                                    },
-                                    "value",
-                                    "text",
-                                    @Model.DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure), new { id = "deleteMotionDetectionOlderThanUnitMeasureDropDownList" })
+                                                                    {
+                                                                    new { value = 1 , text = "MINUTE"  },
+                                                                    new { value = 2 , text = "HOUR" },
+                                                                    new { value = 3 , text = "DAY"},
+                                                                    new { value = 4 , text = "MONTH"}
+                                                                    },
+                                      "value",
+                                      "text",
+                                      @Model.DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure), new { id = "deleteMotionDetectionOlderThanUnitMeasureDropDownList" })
                             </h2>
                         </div>
                     </th>
@@ -235,15 +303,15 @@ background-color: white;
                         <div class="w3-container">
                             <h2 class="w3-large">
                                 @Html.DropDownListFor(model => model.DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
-                                    {
-                                    new { value = 1 , text = "MINUTE"  },
-                                    new { value = 2 , text = "HOUR" },
-                                    new { value = 3 , text = "DAY"},
-                                    new { value = 4 , text = "MONTH"}
-                                    },
-                                    "value",
-                                    "text",
-                                    @Model.DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure), new { id = "deleteSoundDetectionOlderThanUnitMeasureDropDownList" })
+                                                                    {
+                                                                    new { value = 1 , text = "MINUTE"  },
+                                                                    new { value = 2 , text = "HOUR" },
+                                                                    new { value = 3 , text = "DAY"},
+                                                                    new { value = 4 , text = "MONTH"}
+                                                                    },
+                                      "value",
+                                      "text",
+                                      @Model.DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure), new { id = "deleteSoundDetectionOlderThanUnitMeasureDropDownList" })
                             </h2>
                         </div>
                     </th>
@@ -280,15 +348,15 @@ background-color: white;
                         <div class="w3-container">
                             <h2 class="w3-large">
                                 @Html.DropDownListFor(model => model.CriticalGasHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
-                                    {
-                                    new { value = 1 , text = "MINUTE"  },
-                                    new { value = 2 , text = "HOUR" },
-                                    new { value = 3 , text = "DAY"},
-                                    new { value = 4 , text = "MONTH"}
-                                    },
-                                    "value",
-                                    "text",
-                                    @Model.CriticalGasHistoricalDataOlderThanUnitMeasure), new { id = "deleteGasOlderThanUnitMeasureDropDownList" })
+                                                                    {
+                                                                    new { value = 1 , text = "MINUTE"  },
+                                                                    new { value = 2 , text = "HOUR" },
+                                                                    new { value = 3 , text = "DAY"},
+                                                                    new { value = 4 , text = "MONTH"}
+                                                                    },
+                                      "value",
+                                      "text",
+                                      @Model.CriticalGasHistoricalDataOlderThanUnitMeasure), new { id = "deleteGasOlderThanUnitMeasureDropDownList" })
                             </h2>
                         </div>
                     </th>
@@ -321,7 +389,7 @@ background-color: white;
 
                     <th>
                         <dd6>
-                            <h2 class="w3-large">@Html.TextBoxFor(model => model.AlertsToEmail, new { id = "alertsToEmail", style = "width:270px"})</h2>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.AlertsToEmail, new { id = "alertsToEmail", style = "width:270px" })</h2>
                         </dd6>
                     </th>
                 </tr>
@@ -329,6 +397,25 @@ background-color: white;
         </div>
 
         <button type="button" class="button button3" id="saveSettingsButton" onclick="saveSettings()">Save settings</button>
+
+        <!-- Popup for success -->
+        <div id="popup" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h2>Success!</h2>
+                </div>
+                <div class="modal-body">
+                    <p>Settings were successfully saved!</p>
+                </div>
+                <div class="modal-footer">
+                    <h3></h3>
+                </div>
+            </div>
+
+        </div>
     </dl>
 </div>
 <p>
@@ -337,7 +424,7 @@ background-color: white;
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" charset="utf8" src="/js/jquery.dataTables.js"></script>
+@*<script type="text/javascript" charset="utf8" src="/js/jquery.dataTables.js"></script>*@
 
 <script type="text/javascript">
 
@@ -361,20 +448,36 @@ background-color: white;
             "DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure": $('#deleteSoundDetectionOlderThanUnitMeasureDropDownList').val(),
             "CriticalGasHistoricalDataOlderThan": $('#deleteGasOlderThanTextBox').val(),
             "CriticalGasHistoricalDataOlderThanUnitMeasure": $('#deleteGasOlderThanUnitMeasureDropDownList').val()
-
-        }
+        };
 
         $.ajax({
             type: "POST",
             url: '@Url.Action("SaveSettings", "Home")',
             data: settings,
             dataType: "json",
-            success: function (data) {
-
-                alert("Saved");
-
+            success: function (response) {
+                var modal = document.getElementById('popup');
+                modal.style.display = "block";
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(textStatus + " " + errorThrown);
             }
         });
+    }
+
+    var span = document.getElementsByClassName("close")[0];
+    var modal = document.getElementById('popup');
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
     }
 
     //function enableDisableTemperatureAlert() {

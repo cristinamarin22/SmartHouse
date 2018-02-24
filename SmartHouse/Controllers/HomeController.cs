@@ -160,7 +160,7 @@ namespace SmartHouse.Controllers
 
             RedirectToAction("Setting");
 
-            return null;
+            return Json(new object[] { new object() }, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }
