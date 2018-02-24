@@ -69,6 +69,53 @@ th {
 <body>
     <div class="w3-container">
         <button type="button" class="button button3" id="refreshButton" onclick="getHistoryData()">History data</button>
+
+        <td>
+            <span style="margin-left: 35%;">
+                @Html.TextBox("TemperatureTextBoxMinValue", "", new { id = "TemperatureMinValueTextBox", style = "width:70px; background:#ff9191" })
+            </span>
+        </td>
+
+        <td>
+            <label><span> < Temperature < </span></label>
+        </td>
+
+        <td>
+            @Html.TextBox("TemperatureTextBoxMaxValue", "", new { id = "TemperatureMaxValueTextBox", style = "width:70px; background:#ff9191" })
+        </td>
+
+        <td>
+            <span style="margin-left: 2.5%;">
+                @Html.TextBox("HumidityTextBoxMinValue", "", new { id = "HumidityMinValueTextBox", style = "width:70px; background:#ff9191" })
+            </span>
+        </td>
+
+        <td>
+            <label><span> < Humidity < </span></label>
+        </td>
+
+        <td>
+            @Html.TextBox("HumidityTextBoxMaxValue", "", new { id = "HumidityMaxValueTextBox", style = "width:70px; background:#ff9191" })
+        </td>
+
+        <td>
+            <span style="margin-left: 2.5%;">
+                @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
+            </span>
+        </td>
+
+        <td>
+            <label><span> < Date < </span></label>
+        </td>
+
+        <td>
+            @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
+        </td>
+
+        <td>
+            <button style="float: right;" type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
+        </td>
+
         <table class="table" id="tableTemperatureHumidity">
             <tr>
                 <th>
@@ -84,24 +131,24 @@ th {
             </tr>
 
             @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.InternalTime)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Temperature)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Humidity)
-                    </td>
-                    @*<td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                    </td>*@
-                </tr>
-            }
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InternalTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Temperature)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Humidity)
+                </td>
+                @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>*@
+            </tr>
+    }
 
         </table><br>
         <button class="w3-button w3-dark-grey">More Countries  <i class="fa fa-arrow-right"></i></button>
@@ -266,6 +313,26 @@ th {
         }
 
         setInterval(getHistoryData, 10000);
+
+        function filterData() {
+
+        var data = {
+
+            "TemperatureMinValue": $('#TemperatureMinValueTextBox').val(),
+            "TemperatureMaxValue": $('#TemperatureMaxValueTextBox').val(),
+            "HumidityMinValue": $('#HumidityMinValueTextBox').val(),
+            "HumidityMaxValue": $('#HumidityMaxValueTextBox').val(),
+            "DateMinValue": $('#DateMinValueTextBox').val(),
+            "DateMaxValue": $('#DateMaxValueTextBox').val()
+        };
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("FilterTemperatureHumidityData", "Home")',
+            data: data,
+            dataType: "json"
+        });
+    }
 
     </script>
 </body>

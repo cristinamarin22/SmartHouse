@@ -245,3 +245,5 @@ ModelManifest.xml
 .fake/
 /SmartHouse/Scripts
 /SmartHouse/info_ajutatoare.txt
+/SmartHouse/Resources/Models
+/SmartHouse/Models/FilterTemperatureHumidityClass.cs

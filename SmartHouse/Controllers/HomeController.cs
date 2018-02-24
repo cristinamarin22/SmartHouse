@@ -56,6 +56,18 @@ namespace SmartHouse.Controllers
         }
         #endregion
 
+        #region FilterTemperatureHumidityData
+        public ActionResult FilterTemperatureHumidityData(FilterTemperatureHumidityClass filter)
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+
+            //if (filter.te)
+            var temperatureHumidityList = smartHouseEntities.TemperatureHumidityDatas.ToList().OrderByDescending(x => x.InternalTime);
+            return View(temperatureHumidityList);
+
+        }
+        #endregion
+
         #region Motion Detection
         public ActionResult MotionDetection()
         {

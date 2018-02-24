@@ -71,54 +71,6 @@
 
         <button type="button" class="button button3" id="refreshButton" onclick="getHistoryData()">History data</button>
 
-        <td>
-            <span style="margin-left: 35%;">
-                @Html.TextBox("TemperatureTextBoxMinValue", "", new { id = "TemperatureMinValueTextBox", style = "width:70px" })
-            </span>
-        </td>
-
-        <td>
-            <label><span> < Temperature < </span></label>
-        </td>
-
-        <td>
-            @Html.TextBox("TemperatureTextBoxMaxValue", "", new { id = "TemperatureMaxValueTextBox", style = "width:70px" })
-        </td>
-
-        <td>
-            <span style="margin-left: 2.5%;">
-                @Html.TextBox("HumidityTextBoxMinValue", "", new { id = "HumidityMinValueTextBox", style = "width:70px" })
-            </span>
-        </td>
-
-        <td>
-            <label><span> < Humidity < </span></label>
-        </td>
-
-        <td>
-            @Html.TextBox("HumidityTextBoxMaxValue", "", new { id = "HumidityMaxValueTextBox", style = "width:70px" })
-        </td>
-
-
-        <td>
-            <span style="margin-left: 2.5%;">
-                @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px", @type = "date" })
-            </span>
-        </td>
-
-        <td>
-            <label><span> < Date < </span></label>
-        </td>
-
-        <td>
-            @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px", @type = "date" })
-        </td>
-
-        <td>
-            <button style="float: right;" type="button" class="button button3" id="refreshButton" onclick="getHistoryData()">Filter</button>
-        </td>
-
-
         <table class="table" id="tableMotionDetection">
             <tr>
                 <th>

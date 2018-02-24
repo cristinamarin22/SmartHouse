@@ -153,6 +153,7 @@
     <Compile Include="Models\DictionaryTime.cs">
       <DependentUpon>SmartHouse.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FilterTemperatureHumidityClass.cs" />
     <Compile Include="Models\MotionDetectionData.cs">
       <DependentUpon>SmartHouse.tt</DependentUpon>
     </Compile>
