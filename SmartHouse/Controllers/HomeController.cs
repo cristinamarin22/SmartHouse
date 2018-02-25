@@ -66,6 +66,53 @@ namespace SmartHouse.Controllers
             smartHouse.SaveChanges();
             return RedirectToAction("TemperatureHumidityCriticalData");
         }
+
+        public ActionResult DeleteAllRecordsTemperatureHumidityData()
+        {
+            using (var context = new SmartHouseEntities())
+            {
+                var deleted = context.Database.ExecuteSqlCommand("delete from TemperatureHumidityData");
+            }
+
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            var temperatureHumidityList = smartHouseEntities.TemperatureHumidityDatas.ToList().OrderByDescending(x => x.InternalTime);
+            return Json(temperatureHumidityList, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DeleteFilteredTemperatureHumidityData(FilterTemperatureHumidityClass filter)
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+
+            var temperatureHumidityList = smartHouseEntities.TemperatureHumidityDatas.ToList();
+
+            if (filter.TemperatureMinValue != null)
+                temperatureHumidityList = temperatureHumidityList.Where(x => x.Temperature >= filter.TemperatureMinValue).ToList();
+
+            if (filter.TemperatureMaxValue != null)
+                temperatureHumidityList = temperatureHumidityList.Where(x => x.Temperature <= filter.TemperatureMaxValue).ToList();
+
+            if (filter.HumidityMinValue != null)
+                temperatureHumidityList = temperatureHumidityList.Where(x => x.Humidity >= filter.HumidityMinValue).ToList();
+
+            if (filter.HumidityMaxValue != null)
+                temperatureHumidityList = temperatureHumidityList.Where(x => x.Humidity <= filter.HumidityMaxValue).ToList();
+
+            if (filter.DateMinValue != null)
+                temperatureHumidityList = temperatureHumidityList.Where(x => x.InternalTime >= filter.DateMinValue).ToList();
+
+            if (filter.DateMaxValue != null)
+                temperatureHumidityList = temperatureHumidityList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
+
+            foreach (var filteredItem in temperatureHumidityList)
+            {
+                TemperatureHumidityData temperatureHumidityData = smartHouseEntities.TemperatureHumidityDatas.Find(filteredItem.Id);
+                smartHouseEntities.TemperatureHumidityDatas.Remove(temperatureHumidityData);
+            }
+
+            smartHouseEntities.SaveChanges();
+
+            return Json(new List<TemperatureHumidityData>() , JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Temperature & Humidity
@@ -111,7 +158,7 @@ namespace SmartHouse.Controllers
                 temperatureHumidityList = temperatureHumidityList.Where(x => x.Humidity >= filter.HumidityMinValue).ToList();
 
             if (filter.HumidityMaxValue != null)
-                temperatureHumidityList = temperatureHumidityList.Where(x => x.Temperature <= filter.HumidityMaxValue).ToList();
+                temperatureHumidityList = temperatureHumidityList.Where(x => x.Humidity <= filter.HumidityMaxValue).ToList();
 
             if (filter.DateMinValue != null)
                 temperatureHumidityList = temperatureHumidityList.Where(x => x.InternalTime >= filter.DateMinValue).ToList();

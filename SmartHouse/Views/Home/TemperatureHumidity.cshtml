@@ -65,13 +65,109 @@ th {
     background-color: #f44336;
     color: white;
 }
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    -webkit-animation-name: fadeIn; /* Fade in the background */
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+}
+
+/* Modal Content */
+.modal-content {
+    position: fixed;
+    bottom: 0;
+    background-color: #fefefe;
+    width: 100%;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #f44336;
+    color: white;
+}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: white;
+    color: white;
+}
+
+/* Add Animation */
+@@-webkit-keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0;
+        opacity: 1
+    }
+}
+
+@@keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0;
+        opacity: 1
+    }
+}
+
+@@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+.modal-body {
+    padding: 2px 20px;
+    font-size: 16px;
+}
 </style>
 <body>
     <div class="w3-container">
         <button type="button" class="button button3" id="refreshButton" onclick="getAllRows()">Refresh</button>
 
+        <button type="button" class="button button3" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
+
+        <button type="button" class="button button3" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
+
         <td>
-            <span style="margin-left: 35%;">
+            <span style="margin-left: 12%;">
                 @Html.TextBox("TemperatureTextBoxMinValue", "", new { id = "TemperatureMinValueTextBox", style = "width:70px; background:#ff9191" })
             </span>
         </td>
@@ -133,24 +229,57 @@ th {
             </tr>
 
             @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InternalTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Temperature)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Humidity)
-                </td>
-                <td>
-                    @Html.ActionLink("Delete", "DeleteTemperatureHumidityData", "Home", new { id = item.Id }, null)
-                </td>
-            </tr>
-    }
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InternalTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Temperature)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Humidity)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteTemperatureHumidityData", "Home", new { id = item.Id }, null)
+                    </td>
+                </tr>
+            }
 
         </table><br>
+    </div>
+
+    <!-- Popup for Delete All-->
+    <div id="deleteAllPopup" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Delete</h2>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to delete all records? <button type="button" style="float: right;" class="button button3" id="deleteAllRecordsNoButton">No</button><button type="button" style="float: right;" class="button button3" id="deleteAllRecordsYesButton">Yes</button></p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Popup for Delete Filtered Data-->
+    <div id="deleteFilteredData" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Delete</h2>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to delete all filtered records? <button type="button" style="float: right;" class="button button3" id="deleteAllRecordsNoButton">No</button><button type="button" style="float: right;" class="button button3" id="deleteAllRecordsYesButton">Yes</button></p>
+            </div>
+        </div>
+
     </div>
 
 
@@ -167,7 +296,7 @@ th {
                 url: '@Url.Action("GetTemperatureHumidityHistoryData", "Home")',
                 method: 'GET',
                 dataType: 'json',
-                success: function (data) {                 
+                success: function (data) {
                     var html = '';
                     for (var i = 0; i < data.length; i++) {
                         html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
@@ -192,55 +321,158 @@ th {
                         $('#DateMaxValueTextBox').val("");
 
                         dataIsFiltered = false;
+                        $('#deleteFilteredData').css("visibility", "hidden");
                     }
               }
            });
         }
 
 
-
         $(window).bind("load", function () {
             intervalReadings = setTimeout("getAllRows()", 10000);
+            $('#deleteFilteredData').css("visibility", "hidden");
         });
-        
+
 
         function filterData() {
 
-        var filter = {
+            var filter = {
 
-            "TemperatureMinValue": $('#TemperatureMinValueTextBox').val(),
-            "TemperatureMaxValue": $('#TemperatureMaxValueTextBox').val(),
-            "HumidityMinValue": $('#HumidityMinValueTextBox').val(),
-            "HumidityMaxValue": $('#HumidityMaxValueTextBox').val(),
-            "DateMinValue": $('#DateMinValueTextBox').val(),
-            "DateMaxValue": $('#DateMaxValueTextBox').val()
-        };
+                "TemperatureMinValue": $('#TemperatureMinValueTextBox').val(),
+                "TemperatureMaxValue": $('#TemperatureMaxValueTextBox').val(),
+                "HumidityMinValue": $('#HumidityMinValueTextBox').val(),
+                "HumidityMaxValue": $('#HumidityMaxValueTextBox').val(),
+                "DateMinValue": $('#DateMinValueTextBox').val(),
+                "DateMaxValue": $('#DateMaxValueTextBox').val()
+            };
 
-        $.ajax({
-            url: '@Url.Action("FilterTemperatureHumidityData", "Home")',
-            method: 'GET',
-            data: filter,
-            dataType: "json",
-            success: function (response) {
-                $('#tableTemperatureHumidity tr>td').remove();
-                var html = '';
-                for (var i = 0; i < response.length; i++) {
-                    html += '<tr><td>' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
-                        '</td><td>' + response[i].Temperature +
-                        '</td><td>' + response[i].Humidity +
-                        '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
+            $.ajax({
+                url: '@Url.Action("FilterTemperatureHumidityData", "Home")',
+                method: 'GET',
+                data: filter,
+                dataType: "json",
+                success: function (response) {
+                    $('#tableTemperatureHumidity tr>td').remove();
+                    var html = '';
+                    for (var i = 0; i < response.length; i++) {
+                        html += '<tr><td>' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+                            '</td><td>' + response[i].Temperature +
+                            '</td><td>' + response[i].Humidity +
+                            '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
+                    }
+
+                    $("#tableTemperatureHumidity").find('tbody').append($(html));
+
+                    intervalReadings = clearTimeout(intervalReadings);
+
+                    $('#refreshButton').text('Get all');
+
+                    dataIsFiltered = true;
+                    $('#deleteFilteredData').css("visibility", "visible");
+                }
+            });
+        }
+
+        function deleteAllRecords() {
+
+            var modal = document.getElementById('deleteAllPopup');
+            modal.style.display = "block";
+
+            confirmDeleteAllRows(function (confirmed) {
+                if (confirmed) {
+                    // Whatever you need to do if they clicked confirm
+                    $.ajax({
+                        url: '@Url.Action("DeleteAllRecordsTemperatureHumidityData", "Home")',
+                        method: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            var html = '';
+                            for (var i = 0; i < data.length; i++) {
+                                html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+                                    '</td><td>' + data[i].Temperature +
+                                    '</td><td>' + data[i].Humidity +
+                                    '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                            }
+
+                            $('#tableTemperatureHumidity tr>td').remove();
+                            $("#tableTemperatureHumidity").find('tbody').append($(html));
+
+                            intervalReadings = setTimeout("getAllRows()", 10000);
+
+                            $('#deleteFilteredData').css("visibility", "hidden");
+                        }
+                    });
                 }
 
-                $("#tableTemperatureHumidity").find('tbody').append($(html));
+                modal.style.display = "none";
+            });
+        }
 
-                intervalReadings = clearTimeout(intervalReadings);
+        function deleteFilteredData() {
 
-                $('#refreshButton').text('Get all records');
+            var modal = document.getElementById('deleteAllPopup');
+            modal.style.display = "block";
 
-                dataIsFiltered = true;
+            confirmDeleteRows(function (confirmed) {
+                if (confirmed) {
+
+                    var filter = {
+
+                        "TemperatureMinValue": $('#TemperatureMinValueTextBox').val(),
+                        "TemperatureMaxValue": $('#TemperatureMaxValueTextBox').val(),
+                        "HumidityMinValue": $('#HumidityMinValueTextBox').val(),
+                        "HumidityMaxValue": $('#HumidityMaxValueTextBox').val(),
+                        "DateMinValue": $('#DateMinValueTextBox').val(),
+                        "DateMaxValue": $('#DateMaxValueTextBox').val()
+                    };
+
+                    // Whatever you need to do if they clicked confirm
+                    $.ajax({
+                        url: '@Url.Action("DeleteFilteredTemperatureHumidityData", "Home")',
+                        method: 'GET',
+                        data: filter,
+                        dataType: 'json',
+                        success: function (response) {
+                            var html = '';
+                            for (var i = 0; i < response.length; i++) {
+                                html += '<tr><td>' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+                                    '</td><td>' + response[i].Temperature +
+                                    '</td><td>' + response[i].Humidity +
+                                    '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
+                            }
+
+                            $('#tableTemperatureHumidity tr>td').remove();
+                            $("#tableTemperatureHumidity").find('tbody').append($(html));
+
+                            intervalReadings = clearTimeout(intervalReadings);
+                        }
+                    });
+                }
+
+                modal.style.display = "none";
+            });
+        }
+
+        var span = document.getElementsByClassName("close")[0];
+        var modal = document.getElementById('deleteAllPopup');
+
+        function confirmDeleteRows(callback) {
+
+            $('#deleteAllRecordsYesButton').click(function () { callback(true) });;
+            $('#deleteAllRecordsNoButton').click(function () { callback(false) });;
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
             }
-        });
-    }
+        }
 
     </script>
 </body>

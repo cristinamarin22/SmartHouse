@@ -8,40 +8,44 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-html, body, h1, h2, h3, h4, h5 {
-    font-family: "Raleway", sans-serif;
-}
+    html, body, h1, h2, h3, h4, h5 {
+        font-family: "Raleway", sans-serif;
+    }
 
-dd1 {
-    display: block;
-    margin-left: 175px;
-}
-dd2 {
-    display: block;
-    margin-left: 230px;
-}
-dd3 {
-    display: block;
-    margin-left: 236px;
-}
-dd4 {
-    display: block;
-    margin-left: 260px;
-}
-dd5 {
-    display: block;
-    margin-left: 532px;
-}
-dd6 {
-    display: block;
-    margin-left: 447px;
-}
+    dd1 {
+        display: block;
+        margin-left: 175px;
+    }
 
+    dd2 {
+        display: block;
+        margin-left: 230px;
+    }
+
+    dd3 {
+        display: block;
+        margin-left: 236px;
+    }
+
+    dd4 {
+        display: block;
+        margin-left: 260px;
+    }
+
+    dd5 {
+        display: block;
+        margin-left: 532px;
+    }
+
+    dd6 {
+        display: block;
+        margin-left: 447px;
+    }
 </style>
 <body>
     <div>
@@ -88,33 +92,33 @@ dd6 {
                     <div class="w3-clear"></div>
                     <h4>Sound Detection</h4>
                 </div>
-                </a>
+            </a>
         </div>
-   </div>
-   <div>
-       <div class="w3-row-padding w3-margin-bottom">
-           <a href="/Home/Setting">
-               <div class="w3-quarter">
-                   <div class="w3-container w3-gray w3-padding-16">
-                       <div class="w3-left"><i class="fa fa-list-alt w3-xxxlarge"></i></div>
-                       <div class="w3-right">
-                       </div>
-                       <div class="w3-clear"></div>
-                       <h4>Settings</h4>
-                   </div>
-           </a>
-       </div>
-       <div class="w3-quarter">
-           <div class="w3-container w3-orange w3-text-white w3-padding-16">
-               <div class="w3-left"><i class="fa fa-exclamation-triangle w3-xxxlarge"></i></div>
-               <div class="w3-right">
-               </div>
-               <div class="w3-clear"></div>
-               <h4>Gas Detection</h4>
-           </div>
-       </div>
     </div>
-        @RenderBody()
+    <div>
+        <div class="w3-row-padding w3-margin-bottom">
+            <a href="/Home/Setting">
+                <div class="w3-quarter">
+                    <div class="w3-container w3-gray w3-padding-16">
+                        <div class="w3-left"><i class="fa fa-list-alt w3-xxxlarge"></i></div>
+                        <div class="w3-right">
+                        </div>
+                        <div class="w3-clear"></div>
+                        <h4>Settings</h4>
+                    </div>
+            </a>
+        </div>
+        <div class="w3-quarter">
+            <div class="w3-container w3-orange w3-text-white w3-padding-16">
+                <div class="w3-left"><i class="fa fa-exclamation-triangle w3-xxxlarge"></i></div>
+                <div class="w3-right">
+                </div>
+                <div class="w3-clear"></div>
+                <h4>Gas Detection</h4>
+            </div>
+        </div>
+    </div>
+    @RenderBody()
 
     <script>
 
