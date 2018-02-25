@@ -18,10 +18,10 @@ namespace SmartHouse.Models
         public int Id { get; set; }
         public System.DateTime InternalTime { get; set; }
         [Display(Name = "Temperature")]
-        public decimal Temperature { get; set; }
+        public float Temperature { get; set; }
 
         [Display(Name = "Humidity")]
-        public decimal Humidity { get; set; }
+        public float Humidity { get; set; }
         public int TemperatureHumidityDataId { get; set; }
 
         [Display(Name = "Critical temperature")]

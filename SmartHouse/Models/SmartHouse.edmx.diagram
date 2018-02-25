@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="SmartHouseModel.MotionDetectionData" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SmartHouseModel.SoundDetectionData" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SmartHouseModel.TemperatureHumidityData" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmartHouseModel.TemperatureHumidityCriticalData" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SmartHouseModel.TemperatureHumidityCriticalData" Width="2.75" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="SmartHouseModel.DictionaryTime" Width="1.5" PointX="5.375" PointY="3.75" />
         <EntityTypeShape EntityType="SmartHouseModel.Settings" Width="2.75" PointX="0.75" PointY="6.75" />
       </Diagram>

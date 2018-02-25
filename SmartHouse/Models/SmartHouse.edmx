@@ -53,12 +53,12 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TemperatureHumidityDataId" Type="int" Nullable="false" />
           <Property Name="InternalTime" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="Temperature" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Temperature" Type="float" Nullable="false" />
           <Property Name="CriticalTemperature" Type="int" Nullable="false" />
-          <Property Name="Humidity" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Humidity" Type="float" Nullable="false" />
           <Property Name="CriticalHumidity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TemperatureHumidityData">
@@ -119,8 +119,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="InternalTime" Type="DateTime" Nullable="false" />
-          <Property Name="Temperature" Type="Decimal" Nullable="false" />
-          <Property Name="Humidity" Type="Decimal" Nullable="false" />
+          <Property Name="Temperature" Type="Single" Nullable="false" />
+          <Property Name="Humidity" Type="Single" Nullable="false" />
           <Property Name="TemperatureHumidityDataId" Type="Int32" Nullable="false" />
           <Property Name="CriticalTemperature" Type="Int32" Nullable="false" />
           <Property Name="CriticalHumidity" Type="Int32" Nullable="false" />
