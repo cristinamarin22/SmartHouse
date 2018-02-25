@@ -48,13 +48,32 @@ namespace SmartHouse.Controllers
             smartHouse.SaveChanges();
             return RedirectToAction("TemperatureHumidity");
         }
+
+        public ActionResult DeleteTemperatureHumidityCriticalData(int? id)
+        {
+            if (id == null)
+            {
+                return null;
+            }
+
+            SmartHouseEntities smartHouse = new SmartHouseEntities();
+            TemperatureHumidityCriticalData temperatureHumidityCriticalData = smartHouse.TemperatureHumidityCriticalDatas.Find(id);
+            if (temperatureHumidityCriticalData == null)
+            {
+                return HttpNotFound();
+            }
+            smartHouse.TemperatureHumidityCriticalDatas.Remove(temperatureHumidityCriticalData);
+            smartHouse.SaveChanges();
+            return RedirectToAction("TemperatureHumidityCriticalData");
+        }
         #endregion
 
         #region Temperature & Humidity
         public ActionResult TemperatureHumidity()
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
-            var temperatureHumidityList = smartHouseEntities.TemperatureHumidityDatas.ToList().OrderByDescending(x => x.InternalTime).Take(10);
+            //var temperatureHumidityList = smartHouseEntities.TemperatureHumidityDatas.ToList().OrderByDescending(x => x.InternalTime).Take(10);
+            var temperatureHumidityList = smartHouseEntities.TemperatureHumidityDatas.ToList().OrderByDescending(x => x.InternalTime);
             return View(temperatureHumidityList);
         }
 
