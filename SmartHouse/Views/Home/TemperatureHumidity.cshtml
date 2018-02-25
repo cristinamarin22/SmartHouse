@@ -68,7 +68,7 @@ th {
 </style>
 <body>
     <div class="w3-container">
-        <button type="button" class="button button3" id="refreshButton" onclick="getHistoryData()">History data</button>
+        <button type="button" class="button button3" id="refreshButton" onclick="getAllRows()">Refresh</button>
 
         <td>
             <span style="margin-left: 35%;">
@@ -127,7 +127,9 @@ th {
                 <th>
                     @Html.DisplayNameFor(model => model.Humidity)
                 </th>
-                <th></th>
+                <th>
+                    Action
+                </th>
             </tr>
 
             @foreach (var item in Model)
@@ -142,11 +144,9 @@ th {
                 <td>
                     @Html.DisplayFor(modelItem => item.Humidity)
                 </td>
-                @*<td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>*@
+                <td>
+                    @Html.ActionLink("Delete", "DeleteTemperatureHumidityData", "Home", new { id = item.Id }, null)
+                </td>
             </tr>
     }
 
@@ -293,13 +293,14 @@ th {
 
     <script type="text/javascript">
 
-        function getHistoryData() {
+        var intervalReadings = 0;
+
+        function getAllRows() {
             $.ajax({
                 url: '@Url.Action("GetTemperatureHumidityHistoryData", "Home")',
                 method: 'GET',
                 dataType: 'json',
-                success: function (data) {
-                    $('#tableTemperatureHumidity tr>td').remove();
+                success: function (data) {                 
                     var html = '';
                     for (var i = 0; i < data.length; i++) {
                         html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
@@ -307,16 +308,26 @@ th {
                             '</td><td>' + data[i].Humidity + '</td></tr>';
                     }
 
+                    $('#tableTemperatureHumidity tr>td').remove();
                     $("#tableTemperatureHumidity").find('tbody').append($(html));
+
+                    intervalReadings = setTimeout("getAllRows()", 10000);
+
+                    $('#refreshButton').text('Refresh');
               }
            });
         }
 
-        setInterval(getHistoryData, 10000);
+
+
+        $(window).bind("load", function () {
+            intervalReadings = setTimeout("getAllRows()", 10000);
+        });
+        
 
         function filterData() {
 
-        var data = {
+        var filter = {
 
             "TemperatureMinValue": $('#TemperatureMinValueTextBox').val(),
             "TemperatureMaxValue": $('#TemperatureMaxValueTextBox').val(),
@@ -327,10 +338,25 @@ th {
         };
 
         $.ajax({
-            type: "POST",
             url: '@Url.Action("FilterTemperatureHumidityData", "Home")',
-            data: data,
-            dataType: "json"
+            method: 'GET',
+            data: filter,
+            dataType: "json",
+            success: function (response) {
+                $('#tableTemperatureHumidity tr>td').remove();
+                var html = '';
+                for (var i = 0; i < response.length; i++) {
+                    html += '<tr><td>' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+                        '</td><td>' + response[i].Temperature +
+                        '</td><td>' + response[i].Humidity + '</td></tr>';
+                }
+
+                $("#tableTemperatureHumidity").find('tbody').append($(html));
+
+                intervalReadings = clearTimeout(intervalReadings);
+
+                $('#refreshButton').text('Get all records');
+            }
         });
     }
 
