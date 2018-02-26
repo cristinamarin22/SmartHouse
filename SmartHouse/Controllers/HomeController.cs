@@ -79,6 +79,18 @@ namespace SmartHouse.Controllers
             return Json(temperatureHumidityList, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult DeleteAllRecordsTemperatureHumidityCriticalData()
+        {
+            using (var context = new SmartHouseEntities())
+            {
+                var deleted = context.Database.ExecuteSqlCommand("delete from TemperatureHumidityCriticalData");
+            }
+
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            var temperatureHumidityCriticalList = smartHouseEntities.TemperatureHumidityCriticalDatas.ToList().OrderByDescending(x => x.InternalTime);
+            return Json(temperatureHumidityCriticalList, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult DeleteFilteredTemperatureHumidityData(FilterTemperatureHumidityClass filter)
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
@@ -113,6 +125,41 @@ namespace SmartHouse.Controllers
 
             return Json(new List<TemperatureHumidityData>() , JsonRequestBehavior.AllowGet);
         }
+        
+        public JsonResult DeleteFilteredTemperatureHumidityCriticalData(FilterTemperatureHumidityClass filter)
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+
+            var temperatureHumidityCriticalDataList = smartHouseEntities.TemperatureHumidityCriticalDatas.ToList();
+
+            if (filter.TemperatureMinValue != null)
+                temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.Temperature >= filter.TemperatureMinValue).ToList();
+
+            if (filter.TemperatureMaxValue != null)
+                temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.Temperature <= filter.TemperatureMaxValue).ToList();
+
+            if (filter.HumidityMinValue != null)
+                temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.Humidity >= filter.HumidityMinValue).ToList();
+
+            if (filter.HumidityMaxValue != null)
+                temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.Humidity <= filter.HumidityMaxValue).ToList();
+
+            if (filter.DateMinValue != null)
+                temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.InternalTime >= filter.DateMinValue).ToList();
+
+            if (filter.DateMaxValue != null)
+                temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
+
+            foreach (var filteredItem in temperatureHumidityCriticalDataList)
+            {
+                TemperatureHumidityCriticalData temperatureHumidityCriticalData = smartHouseEntities.TemperatureHumidityCriticalDatas.Find(filteredItem.Id);
+                smartHouseEntities.TemperatureHumidityCriticalDatas.Remove(temperatureHumidityCriticalData);
+            }
+
+            smartHouseEntities.SaveChanges();
+
+            return Json(new List<TemperatureHumidityCriticalData>(), JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Temperature & Humidity
@@ -129,6 +176,13 @@ namespace SmartHouse.Controllers
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
             var temperatureHumidityList = smartHouseEntities.TemperatureHumidityDatas.ToList().OrderByDescending(x => x.InternalTime);
             return Json(temperatureHumidityList, JsonRequestBehavior.AllowGet);
+        }
+        
+        public JsonResult GetTemperatureHumidityCriticalHistoryData()
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            var temperatureHumidityCriticalDataList = smartHouseEntities.TemperatureHumidityCriticalDatas.ToList().OrderByDescending(x => x.InternalTime);
+            return Json(temperatureHumidityCriticalDataList, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
@@ -169,6 +223,36 @@ namespace SmartHouse.Controllers
             temperatureHumidityList = temperatureHumidityList.OrderByDescending(x => x.InternalTime).ToList();
 
             return Json(temperatureHumidityList, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public JsonResult FilterTemperatureHumidityCriticalData(FilterTemperatureHumidityClass filter)
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+
+            var temperatureHumidityCriticalDataList = smartHouseEntities.TemperatureHumidityCriticalDatas.ToList();
+
+            if (filter.TemperatureMinValue != null)
+                temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.Temperature >= filter.TemperatureMinValue).ToList();
+
+            if (filter.TemperatureMaxValue != null)
+                temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.Temperature <= filter.TemperatureMaxValue).ToList();
+
+            if (filter.HumidityMinValue != null)
+                temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.Humidity >= filter.HumidityMinValue).ToList();
+
+            if (filter.HumidityMaxValue != null)
+                temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.Humidity <= filter.HumidityMaxValue).ToList();
+
+            if (filter.DateMinValue != null)
+                temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.InternalTime >= filter.DateMinValue).ToList();
+
+            if (filter.DateMaxValue != null)
+                temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
+
+            temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.OrderByDescending(x => x.InternalTime).ToList();
+
+            return Json(temperatureHumidityCriticalDataList, JsonRequestBehavior.AllowGet);
 
         }
         #endregion
