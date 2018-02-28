@@ -166,6 +166,8 @@ th {
 
         <button type="button" class="button button3" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
 
+        @*<button type="button" class="button button3" id="sendEmailButton" onclick="sendEmail()">Send email</button>*@
+
         <td>
             <span style="margin-left: 12%;">
                 @Html.TextBox("TemperatureTextBoxMinValue", "", new { id = "TemperatureMinValueTextBox", style = "width:70px; background:#ff9191" })
@@ -229,22 +231,22 @@ th {
             </tr>
 
             @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.InternalTime)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Temperature)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Humidity)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Delete", "DeleteTemperatureHumidityData", "Home", new { id = item.Id }, null)
-                    </td>
-                </tr>
-            }
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InternalTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Temperature)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Humidity)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteTemperatureHumidityData", "Home", new { id = item.Id }, null)
+                </td>
+            </tr>
+    }
 
         </table><br>
     </div>
@@ -411,6 +413,18 @@ th {
             });
         }
 
+        function sendEmail() {
+            $.ajax({
+                url: '@Url.Action("SendEmail", "Home")',
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var html = '';
+                    
+                    }
+            });
+        }
+
         function deleteFilteredData() {
 
             modalFiltered.style.display = "block";
@@ -459,7 +473,7 @@ th {
 
             $('#deleteAllRecordsYesButton').click(function () { callback(true) });
             $('#deleteAllRecordsNoButton').click(function () { callback(false) });
-        } 
+        }
 
 
         function confirmDeleteFilteredRows(callback) {

@@ -27,5 +27,7 @@ namespace SmartHouse
                 return _DictionaryTime;
             }
         }
+
+        public static string psswd = "b294crm!";
     }
 }

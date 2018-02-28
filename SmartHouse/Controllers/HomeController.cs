@@ -1,9 +1,12 @@
 ﻿using SmartHouse.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Resources;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -477,5 +480,29 @@ namespace SmartHouse.Controllers
 
         }
         #endregion
+
+        public void SendEmail()
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+                mail.From = new MailAddress("cristinamarin2201@gmail.com");
+                mail.To.Add("cristinamarin2201@gmail.com");
+                mail.Subject = "Smart House Alert";
+                mail.Body = "This is a temperature alert";
+
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("cristinamarin2201", Constants.psswd);
+                SmtpServer.EnableSsl = true;
+
+                SmtpServer.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
     }
 }
