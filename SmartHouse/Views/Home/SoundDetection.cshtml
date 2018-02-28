@@ -17,62 +17,180 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-    html, body, h1, h2, h3, h4, h5 {
-        font-family: "Raleway", sans-serif;
+html, body, h1, h2, h3, h4, h5 {
+    font-family: "Raleway", sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+th {
+    background-color: #2c8e88;
+    color: white;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button3 {
+    background-color: white;
+    color: black;
+    border: 2px solid #2c8e88;
+}
+
+.button3:hover {
+    background-color: #2c8e88;
+    color: white;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    -webkit-animation-name: fadeIn; /* Fade in the background */
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+}
+
+/* Modal Content */
+.modal-content {
+    position: fixed;
+    bottom: 0;
+    background-color: #fefefe;
+    width: 100%;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #2c8e88;
+    color: white;
+}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: white;
+    color: white;
+}
+
+/* Add Animation */
+@@-webkit-keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0
     }
 
-    table {
-        border-collapse: collapse;
-        width: 100%;
+    to {
+        bottom: 0;
+        opacity: 1
+    }
+}
+
+@@keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0
     }
 
-    th, td {
-        text-align: left;
-        padding: 8px;
+    to {
+        bottom: 0;
+        opacity: 1
+    }
+}
+
+@@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0
     }
 
-    tr:nth-child(even) {
-        background-color: #f2f2f2
+    to {
+        opacity: 1
+    }
+}
+
+@@keyframes fadeIn {
+    from {
+        opacity: 0
     }
 
-    th {
-        background-color: #2c8e88;
-        color: white;
+    to {
+        opacity: 1
     }
+}
 
-    .button {
-        background-color: #4CAF50; /* Green */
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        -webkit-transition-duration: 0.4s; /* Safari */
-        transition-duration: 0.4s;
-        cursor: pointer;
-    }
-
-    .button3 {
-        background-color: white;
-        color: black;
-        border: 2px solid #2c8e88;
-    }
-
-        .button3:hover {
-            background-color: #2c8e88;
-            color: white;
-        }
+.modal-body {
+    padding: 2px 20px;
+    font-size: 16px;
+}
 </style>
 <body>
     <div class="w3-container">
-        <button type="button" class="button button3" id="refreshButton" onclick="getHistoryData()">History data</button>
+        <button type="button" class="button button3" id="refreshButton" onclick="getAllRows()">History data</button>
+
+        <button type="button" class="button button3" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
+
+        <button type="button" class="button button3" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
+
+        <td>
+            <span style="margin-left: 45%;">
+                @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#64b1f4", @type = "date" })
+            </span>
+        </td>
+
+        <td>
+            <label><span> < Date < </span></label>
+        </td>
+
+        <td>
+            @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#64b1f4", @type = "date" })
+        </td>
+
+        <td>
+            <button style="float: right;" type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
+        </td>
+
         <table class="table" id="tableSoundDetection">
             <tr>
                 <th>
                     Date
+                </th>
+                <th>
+                    Action
                 </th>
             </tr>
 
@@ -82,127 +200,46 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.InternalTime)
                     </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteMotionDetection", "Home", new { id = item.Id }, null)
+                    </td>
                 </tr>
             }
 
         </table><br>
-        <button class="w3-button w3-dark-grey">More Countries  <i class="fa fa-arrow-right"></i></button>
     </div>
-    <hr>
-    <div class="w3-container">
-        <h5>General Stats</h5>
-        <p>New Visitors</p>
-        <div class="w3-grey">
-            <div class="w3-container w3-center w3-padding w3-green" style="width:25%">+25%</div>
-        </div>
 
-        <p>New Users</p>
-        <div class="w3-grey">
-            <div class="w3-container w3-center w3-padding w3-orange" style="width:50%">50%</div>
-        </div>
+    <!-- Popup for Delete All-->
+    <div id="deleteAllPopup" class="modal">
 
-        <p>Bounce Rate</p>
-        <div class="w3-grey">
-            <div class="w3-container w3-center w3-padding w3-red" style="width:75%">75%</div>
-        </div>
-    </div>
-    <hr>
-
-    <div class="w3-container">
-        <h5>Countries</h5>
-        <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
-            <tr>
-                <td>United States</td>
-                <td>65%</td>
-            </tr>
-            <tr>
-                <td>UK</td>
-                <td>15.7%</td>
-            </tr>
-            <tr>
-                <td>Russia</td>
-                <td>5.6%</td>
-            </tr>
-            <tr>
-                <td>Spain</td>
-                <td>2.1%</td>
-            </tr>
-            <tr>
-                <td>India</td>
-                <td>1.9%</td>
-            </tr>
-            <tr>
-                <td>France</td>
-                <td>1.5%</td>
-            </tr>
-        </table><br>
-        <button class="w3-button w3-dark-grey">More Countries  <i class="fa fa-arrow-right"></i></button>
-    </div>
-    <hr>
-    <div class="w3-container">
-        <h5>Recent Users</h5>
-        <ul class="w3-ul w3-card-4 w3-white">
-            <li class="w3-padding-16">
-                <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-                <span class="w3-xlarge">Mike</span><br>
-            </li>
-            <li class="w3-padding-16">
-                <img src="/w3images/avatar5.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-                <span class="w3-xlarge">Jill</span><br>
-            </li>
-            <li class="w3-padding-16">
-                <img src="/w3images/avatar6.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-                <span class="w3-xlarge">Jane</span><br>
-            </li>
-        </ul>
-    </div>
-    <hr>
-
-    <div class="w3-container">
-        <h5>Recent Comments</h5>
-        <div class="w3-row">
-            <div class="w3-col m2 text-center">
-                <img class="w3-circle" src="/w3images/avatar3.png" style="width:96px;height:96px">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Delete</h2>
             </div>
-            <div class="w3-col m10 w3-container">
-                <h4>John <span class="w3-opacity w3-medium">Sep 29, 2014, 9:12 PM</span></h4>
-                <p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
+            <div class="modal-body">
+                <p>Do you want to delete all records? <button type="button" style="float: right;" class="button button3" id="deleteAllRecordsNoButton">No</button><button type="button" style="float: right;" class="button button3" id="deleteAllRecordsYesButton">Yes</button></p>
             </div>
         </div>
 
-        <div class="w3-row">
-            <div class="w3-col m2 text-center">
-                <img class="w3-circle" src="/w3images/avatar1.png" style="width:96px;height:96px">
-            </div>
-            <div class="w3-col m10 w3-container">
-                <h4>Bo <span class="w3-opacity w3-medium">Sep 28, 2014, 10:15 PM</span></h4>
-                <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
-            </div>
-        </div>
     </div>
-    <br>
-    <div class="w3-container w3-dark-grey w3-padding-32">
-        <div class="w3-row">
-            <div class="w3-container w3-third">
-                <h5 class="w3-bottombar w3-border-green">Demographic</h5>
-                <p>Language</p>
-                <p>Country</p>
-                <p>City</p>
+
+
+    <!-- Popup for Delete Filtered Data-->
+    <div id="deleteFilteredDataPopup" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Delete</h2>
             </div>
-            <div class="w3-container w3-third">
-                <h5 class="w3-bottombar w3-border-red">System</h5>
-                <p>Browser</p>
-                <p>OS</p>
-                <p>More</p>
-            </div>
-            <div class="w3-container w3-third">
-                <h5 class="w3-bottombar w3-border-orange">Target</h5>
-                <p>Users</p>
-                <p>Active</p>
-                <p>Geo</p>
-                <p>Interests</p>
+            <div class="modal-body">
+                <p>Do you want to delete all filtered records? <button type="button" style="float: right;" class="button button3" id="deleteFilteredRecordsNoButton">No</button><button type="button" style="float: right;" class="button button3" id="deleteFilteredRecordsYesButton">Yes</button></p>
             </div>
         </div>
+
     </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -210,24 +247,178 @@
 
     <script type="text/javascript">
 
-        function getHistoryData() {
+        var intervalReadings = 0;
+        var dataIsFiltered = false;
+
+        var span = document.getElementsByClassName("close")[0];
+        var modal = document.getElementById('deleteAllPopup');
+        var modalFiltered = document.getElementById('deleteFilteredDataPopup');
+
+        function getAllRows() {
             $.ajax({
                 url: '@Url.Action("GetSoundDetectionHistoryData", "Home")',
                 method: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    $('#tableSoundDetection tr>td').remove();
                     var html = '';
                     for (var i = 0; i < data.length; i++) {
-                        html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td></tr>';
+                        html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+                            '</td><td>' + '<a href="/Home/DeleteSoundDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
                     }
 
+                    $('#tableSoundDetection tr>td').remove();
                     $("#tableSoundDetection").find('tbody').append($(html));
+
+                    intervalReadings = setTimeout("getAllRows()", 10000);
+
+                    $('#refreshButton').text('Refresh');
+
+                    if (dataIsFiltered) {
+                        $('#DateMinValueTextBox').val("");
+                        $('#DateMaxValueTextBox').val("");
+
+                        dataIsFiltered = false;
+                        $('#deleteFilteredData').css("visibility", "hidden");
+                    }
               }
            });
         }
 
-        setInterval(getHistoryData, 10000);
+        $(window).bind("load", function () {
+            intervalReadings = setTimeout("getAllRows()", 10000);
+            $('#deleteFilteredData').css("visibility", "hidden");
+        });
+
+        function filterData() {
+
+            var filter = {
+                "DateMinValue": $('#DateMinValueTextBox').val(),
+                "DateMaxValue": $('#DateMaxValueTextBox').val()
+            };
+
+            $.ajax({
+                url: '@Url.Action("FilterSoundDetectionData", "Home")',
+                method: 'GET',
+                data: filter,
+                dataType: "json",
+                success: function (response) {
+                    $('#deleteFilteredData').css("visibility", "visible");
+                    $('#tableTemperatureHumidity tr>td').remove();
+                    var html = '';
+                    for (var i = 0; i < response.length; i++) {
+                        html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+                            '</td><td>' + '<a href="/Home/DeleteSoundDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                    }
+
+                    $("#tableSoundDetection").find('tbody').append($(html));
+
+                    intervalReadings = clearTimeout(intervalReadings);
+
+                    $('#refreshButton').text('Get all');
+
+                    dataIsFiltered = true;
+                }
+            });
+        }
+
+        function deleteAllRecords() {
+
+            modal.style.display = "block";
+
+            confirmDeleteRows(function (confirmed) {
+                if (confirmed) {
+                    // Whatever you need to do if they clicked confirm
+                    $.ajax({
+                        url: '@Url.Action("DeleteAllRecordsSoundDetectionData", "Home")',
+                        method: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            var html = '';
+                            for (var i = 0; i < data.length; i++) {
+                                html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+                                    '</td><td>' + '<a href="/Home/DeleteSoundDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                            }
+
+                            $('#tableSoundDetection tr>td').remove();
+                            $("#tableSoundDetection").find('tbody').append($(html));
+
+                            intervalReadings = setTimeout("getAllRows()", 10000);
+
+                            $('#deleteFilteredData').css("visibility", "hidden");
+                        }
+                    });
+                }
+
+                modal.style.display = "none";
+            });
+        }
+
+        function deleteFilteredData() {
+
+            modalFiltered.style.display = "block";
+
+            confirmDeleteFilteredRows(function (confirmed) {
+                if (confirmed) {
+
+                    var filter = {
+                        "DateMinValue": $('#DateMinValueTextBox').val(),
+                        "DateMaxValue": $('#DateMaxValueTextBox').val()
+                    };
+
+                    // Whatever you need to do if they clicked confirm
+                    $.ajax({
+                        url: '@Url.Action("DeleteFilteredSoundDetectionData", "Home")',
+                        method: 'GET',
+                        data: filter,
+                        dataType: 'json',
+                        success: function (response) {
+                            var html = '';
+                            for (var i = 0; i < response.length; i++) {
+                                html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+                                    '</td><td>' + '<a href="/Home/DeleteSoundDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                            }
+
+                            $('#tableSoundDetection tr>td').remove();
+                            $("#tableSoundDetection").find('tbody').append($(html));
+
+                            intervalReadings = clearTimeout(intervalReadings);
+                        }
+                    });
+                }
+
+                modalFiltered.style.display = "none";
+            });
+        }
+
+        function confirmDeleteRows(callback) {
+
+            $('#deleteAllRecordsYesButton').click(function () { callback(true) });
+            $('#deleteAllRecordsNoButton').click(function () { callback(false) });
+        }
+
+
+        function confirmDeleteFilteredRows(callback) {
+
+            $('#deleteFilteredRecordsYesButton').click(function () { callback(true) });
+            $('#deleteFilteredRecordsNoButton').click(function () { callback(false) });
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+            modalFiltered.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+
+            if (event.target == modalFiltered) {
+                modalFiltered.style.display = "none";
+            }
+        }
 
     </script>
 </body>
