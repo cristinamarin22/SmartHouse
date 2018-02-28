@@ -12,7 +12,7 @@ namespace SmartHouse.Controllers
     public class HomeController : Controller
     {
         #region Delete
-        public ActionResult DeleteMotionDetection(int? id)
+        public ActionResult DeleteMotionDetectionData(int? id)
         {
             if (id == null)
             {
@@ -30,6 +30,17 @@ namespace SmartHouse.Controllers
             return RedirectToAction("MotionDetection");
         }
 
+        public ActionResult DeleteAllRecordsMotionDetectionData()
+        {
+            using (var context = new SmartHouseEntities())
+            {
+                var deleted = context.Database.ExecuteSqlCommand("delete from MotionDetectionData");
+            }
+
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            var motionDetectionList = smartHouseEntities.MotionDetectionDatas.ToList().OrderByDescending(x => x.InternalTime);
+            return Json(motionDetectionList, JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult DeleteTemperatureHumidityData(int? id)
         { 
@@ -159,6 +170,29 @@ namespace SmartHouse.Controllers
             smartHouseEntities.SaveChanges();
 
             return Json(new List<TemperatureHumidityCriticalData>(), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DeleteFilteredMotionDetectionData(FilterTemperatureHumidityClass filter)
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+
+            var motionDetectionList = smartHouseEntities.TemperatureHumidityDatas.ToList();
+
+            if (filter.DateMinValue != null)
+                motionDetectionList = motionDetectionList.Where(x => x.InternalTime >= filter.DateMinValue).ToList();
+
+            if (filter.DateMaxValue != null)
+                motionDetectionList = motionDetectionList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
+
+            foreach (var filteredItem in motionDetectionList)
+            {
+                MotionDetectionData motionDetectionData = smartHouseEntities.MotionDetectionDatas.Find(filteredItem.Id);
+                smartHouseEntities.MotionDetectionDatas.Remove(motionDetectionData);
+            }
+
+            smartHouseEntities.SaveChanges();
+
+            return Json(new List<MotionDetectionData>(), JsonRequestBehavior.AllowGet);
         }
         #endregion
 
@@ -362,6 +396,26 @@ namespace SmartHouse.Controllers
             RedirectToAction("Setting");
 
             return Json(new object[] { new object() }, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region FilterMotionDetectionData
+        public JsonResult FilterMotionDetectionData(FilterTemperatureHumidityClass filter)
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+
+            var motionDetectionList = smartHouseEntities.MotionDetectionDatas.ToList();
+
+            if (filter.DateMinValue != null)
+                motionDetectionList = motionDetectionList.Where(x => x.InternalTime >= filter.DateMinValue).ToList();
+
+            if (filter.DateMaxValue != null)
+                motionDetectionList = motionDetectionList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
+
+            motionDetectionList = motionDetectionList.OrderByDescending(x => x.InternalTime).ToList();
+
+            return Json(motionDetectionList, JsonRequestBehavior.AllowGet);
+
         }
         #endregion
     }

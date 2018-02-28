@@ -17,59 +17,173 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-    html, body, h1, h2, h3, h4, h5 {
-        font-family: "Raleway", sans-serif;
+html, body, h1, h2, h3, h4, h5 {
+    font-family: "Raleway", sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+th {
+    background-color: #2b92f2;
+    color: white;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button3 {
+    background-color: white;
+    color: black;
+    border: 2px solid #2b92f2;
+}
+
+.button3:hover {
+    background-color: #2b92f2;
+    color: white;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    -webkit-animation-name: fadeIn; /* Fade in the background */
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+}
+
+/* Modal Content */
+.modal-content {
+    position: fixed;
+    bottom: 0;
+    background-color: #fefefe;
+    width: 100%;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #2b92f2;
+    color: white;
+}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: white;
+    color: white;
+}
+
+/* Add Animation */
+@@-webkit-keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0
     }
 
-    table {
-        border-collapse: collapse;
-        width: 100%;
+    to {
+        bottom: 0;
+        opacity: 1
+    }
+}
+
+@@keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0
     }
 
-    th, td {
-        text-align: left;
-        padding: 8px;
+    to {
+        bottom: 0;
+        opacity: 1
+    }
+}
+
+@@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0
     }
 
-    tr:nth-child(even) {
-        background-color: #f2f2f2
+    to {
+        opacity: 1
+    }
+}
+
+@@keyframes fadeIn {
+    from {
+        opacity: 0
     }
 
-    th {
-        background-color: #2b92f2;
-        color: white;
+    to {
+        opacity: 1
     }
+}
 
-    .button {
-        background-color: #4CAF50; /* Green */
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        -webkit-transition-duration: 0.4s; /* Safari */
-        transition-duration: 0.4s;
-        cursor: pointer;
-    }
-
-    .button3 {
-        background-color: white;
-        color: black;
-        border: 2px solid #2b92f2;
-    }
-
-        .button3:hover {
-            background-color: #2b92f2;
-            color: white;
-        }
+.modal-body {
+    padding: 2px 20px;
+    font-size: 16px;
+}
 </style>
 <body>
     <div class="w3-container">
 
-        <button type="button" class="button button3" id="refreshButton" onclick="getHistoryData()">History data</button>
+        <button type="button" class="button button3" id="refreshButton" onclick="getAllRows()">History data</button>
+
+        <button type="button" class="button button3" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
+
+        <button type="button" class="button button3" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>  
+
+        <td>
+            <span style="margin-left: 45%;">
+                @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#64b1f4", @type = "date" })
+            </span>
+        </td>
+
+        <td>
+            <label><span> < Date < </span></label>
+        </td>
+
+        <td>
+            @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#64b1f4", @type = "date" })
+        </td>
+
+        <td>
+            <button style="float: right;" type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
+        </td>
 
         <table class="table" id="tableMotionDetection">
             <tr>
@@ -82,18 +196,51 @@
             </tr>
 
             @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.InternalTime)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Delete", "DeleteMotionDetection", "Home", new { id = item.Id }, null)
-                    </td>
-                </tr>
-            }
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InternalTime)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteMotionDetection", "Home", new { id = item.Id }, null)
+                </td>
+            </tr>
+    }
 
         </table><br>
+    </div>
+
+    <!-- Popup for Delete All-->
+    <div id="deleteAllPopup" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Delete</h2>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to delete all records? <button type="button" style="float: right;" class="button button3" id="deleteAllRecordsNoButton">No</button><button type="button" style="float: right;" class="button button3" id="deleteAllRecordsYesButton">Yes</button></p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Popup for Delete Filtered Data-->
+    <div id="deleteFilteredDataPopup" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Delete</h2>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to delete all filtered records? <button type="button" style="float: right;" class="button button3" id="deleteFilteredRecordsNoButton">No</button><button type="button" style="float: right;" class="button button3" id="deleteFilteredRecordsYesButton">Yes</button></p>
+            </div>
+        </div>
+
     </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -101,24 +248,178 @@
 
     <script type="text/javascript">
 
-        function getHistoryData() {
+        var intervalReadings = 0;
+        var dataIsFiltered = false;
+
+        var span = document.getElementsByClassName("close")[0];
+        var modal = document.getElementById('deleteAllPopup');
+        var modalFiltered = document.getElementById('deleteFilteredDataPopup');
+
+        function getAllRows() {
             $.ajax({
                 url: '@Url.Action("GetMotionDetectionHistoryData", "Home")',
                 method: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    $('#tableMotionDetection tr>td').remove();
                     var html = '';
                     for (var i = 0; i < data.length; i++) {
-                        html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td></tr>';
+                        html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+                            '</td><td>' + '<a href="/Home/DeleteMotionDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
                     }
 
+                    $('#tableMotionDetection tr>td').remove();
                     $("#tableMotionDetection").find('tbody').append($(html));
+
+                    intervalReadings = setTimeout("getAllRows()", 10000);
+
+                    $('#refreshButton').text('Refresh');
+
+                    if (dataIsFiltered) {
+                        $('#DateMinValueTextBox').val("");
+                        $('#DateMaxValueTextBox').val("");
+
+                        dataIsFiltered = false;
+                        $('#deleteFilteredData').css("visibility", "hidden");
+                    }
               }
            });
         }
 
-        setInterval(getHistoryData, 10000);
+        $(window).bind("load", function () {
+            intervalReadings = setTimeout("getAllRows()", 10000);
+            $('#deleteFilteredData').css("visibility", "hidden");
+        });
+
+        function filterData() {
+
+            var filter = {
+                "DateMinValue": $('#DateMinValueTextBox').val(),
+                "DateMaxValue": $('#DateMaxValueTextBox').val()
+            };
+
+            $.ajax({
+                url: '@Url.Action("FilterMotionDetectionData", "Home")',
+                method: 'GET',
+                data: filter,
+                dataType: "json",
+                success: function (response) {
+                    $('#deleteFilteredData').css("visibility", "visible");
+                    $('#tableTemperatureHumidity tr>td').remove();
+                    var html = '';
+                    for (var i = 0; i < response.length; i++) {
+                        html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+                            '</td><td>' + '<a href="/Home/DeleteMotionDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                    }
+
+                    $("#tableMotionDetection").find('tbody').append($(html));
+
+                    intervalReadings = clearTimeout(intervalReadings);
+
+                    $('#refreshButton').text('Get all');
+
+                    dataIsFiltered = true;
+                }
+            });
+        }
+
+        function deleteAllRecords() {
+
+            modal.style.display = "block";
+
+            confirmDeleteRows(function (confirmed) {
+                if (confirmed) {
+                    // Whatever you need to do if they clicked confirm
+                    $.ajax({
+                        url: '@Url.Action("DeleteAllRecordsMotionDetectionData", "Home")',
+                        method: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            var html = '';
+                            for (var i = 0; i < data.length; i++) {
+                                html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+                                    '</td><td>' + '<a href="/Home/DeleteMotionDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                            }
+
+                            $('#tableMotionDetection tr>td').remove();
+                            $("#tableMotionDetection").find('tbody').append($(html));
+
+                            intervalReadings = setTimeout("getAllRows()", 10000);
+
+                            $('#deleteFilteredData').css("visibility", "hidden");
+                        }
+                    });
+                }
+
+                modal.style.display = "none";
+            });
+        }
+
+        function deleteFilteredData() {
+
+            modalFiltered.style.display = "block";
+
+            confirmDeleteFilteredRows(function (confirmed) {
+                if (confirmed) {
+
+                    var filter = {
+                        "DateMinValue": $('#DateMinValueTextBox').val(),
+                        "DateMaxValue": $('#DateMaxValueTextBox').val()
+                    };
+
+                    // Whatever you need to do if they clicked confirm
+                    $.ajax({
+                        url: '@Url.Action("DeleteFilteredMotionDetectionData", "Home")',
+                        method: 'GET',
+                        data: filter,
+                        dataType: 'json',
+                        success: function (response) {
+                            var html = '';
+                            for (var i = 0; i < response.length; i++) {
+                                html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+                                    '</td><td>' + '<a href="/Home/DeleteMotionDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                            }
+
+                            $('#tableMotionDetection tr>td').remove();
+                            $("#tableMotionDetection").find('tbody').append($(html));
+
+                            intervalReadings = clearTimeout(intervalReadings);
+                        }
+                    });
+                }
+
+                modalFiltered.style.display = "none";
+            });
+        }
+
+        function confirmDeleteRows(callback) {
+
+            $('#deleteAllRecordsYesButton').click(function () { callback(true) });
+            $('#deleteAllRecordsNoButton').click(function () { callback(false) });
+        }
+
+
+        function confirmDeleteFilteredRows(callback) {
+
+            $('#deleteFilteredRecordsYesButton').click(function () { callback(true) });
+            $('#deleteFilteredRecordsNoButton').click(function () { callback(false) });
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+            modalFiltered.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+
+            if (event.target == modalFiltered) {
+                modalFiltered.style.display = "none";
+            }
+        }
 
     </script>
 </body>
