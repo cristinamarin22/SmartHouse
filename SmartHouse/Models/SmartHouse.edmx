@@ -18,7 +18,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="InternalTime" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="SentEmailAlert" Type="bool" Nullable="false" />
+          <Property Name="EmailAlertSent" Type="bool" Nullable="false" />
         </EntityType>
         <EntityType Name="Settings">
           <Key>
@@ -93,7 +93,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InternalTime" Type="DateTime" Nullable="false" />
-          <Property Name="SentEmailAlert" Type="Boolean" Nullable="false" />
+          <Property Name="EmailAlertSent" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="SoundDetectionData">
           <Key>
@@ -174,7 +174,7 @@
           <EntitySetMapping Name="MotionDetectionDatas">
             <EntityTypeMapping TypeName="SmartHouseModel.MotionDetectionData">
               <MappingFragment StoreEntitySet="MotionDetectionData">
-                <ScalarProperty Name="SentEmailAlert" ColumnName="SentEmailAlert" />
+                <ScalarProperty Name="EmailAlertSent" ColumnName="EmailAlertSent" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="InternalTime" ColumnName="InternalTime" />
               </MappingFragment>

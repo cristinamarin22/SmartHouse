@@ -205,7 +205,7 @@ th {
                     @Html.DisplayFor(modelItem => item.InternalTime)
                 </td>
                 <td>
-                    @Html.CheckBoxFor(modelItem => item.SentEmailAlert, new { @checked = "checked", @readonly = "readonly" })
+                    @Html.CheckBoxFor(modelItem => item.EmailAlertSent, new { @checked = "checked", @readonly = "readonly" })
                 </td>
                 <td>
                     @Html.ActionLink("Delete", "DeleteMotionDetection", "Home", new { id = item.Id }, null)
@@ -270,7 +270,7 @@ th {
                     var html = '';
                     for (var i = 0; i < data.length; i++) {
                         html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
-                            '</td><td>' + '<input id="item_SentEmailAlert" name="item.SentEmailAlert" type="checkbox" value="' + data[i].SentEmailAlert + '" /> <input name="item.SentEmailAlert" type="hidden" value="' + data[i].SentEmailAlert + '" />' +
+                            '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
                             '</td><td>' + '<a href="/Home/DeleteMotionDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
                     }
 
@@ -315,7 +315,7 @@ th {
                     var html = '';
                     for (var i = 0; i < response.length; i++) {
                         html += '<tr><td>' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
-                            '</td><td>' + '<input id="item_SentEmailAlert" name="item.SentEmailAlert" type="checkbox" value="' + response[i].SentEmailAlert + '" /> <input name="item.SentEmailAlert" type="hidden" value="' + response[i].SentEmailAlert + '" />' +
+                            '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + response[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + response[i].EmailAlertSent + '" />' +
                             '</td><td>' + '<a href="/Home/DeleteMotionDetectionData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
                     }
 
@@ -345,7 +345,7 @@ th {
                             var html = '';
                             for (var i = 0; i < data.length; i++) {
                                 html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
-                                    '</td><td>' + '<input id="item_SentEmailAlert" name="item.SentEmailAlert" type="checkbox" value="' + data[i].SentEmailAlert + '" /> <input name="item.SentEmailAlert" type="hidden" value="' + data[i].SentEmailAlert + '" />' +
+                                    '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
                                     '</td><td>' + '<a href="/Home/DeleteMotionDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
                             }
 
@@ -385,7 +385,7 @@ th {
                             var html = '';
                             for (var i = 0; i < response.length; i++) {
                                 html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
-                                    '</td><td>' + '<input id="item_SentEmailAlert" name="item.SentEmailAlert" type="checkbox" value="' + response[i].SentEmailAlert + '" /> <input name="item.SentEmailAlert" type="hidden" value="' + response[i].SentEmailAlert + '" />' +
+                                    '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + response[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + response[i].EmailAlertSent + '" />' +
                                     '</td><td>' + '<a href="/Home/DeleteMotionDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
                             }
 
