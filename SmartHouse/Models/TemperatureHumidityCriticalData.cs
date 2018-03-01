@@ -29,5 +29,8 @@ namespace SmartHouse.Models
 
         [Display(Name = "Critical humidity")]
         public int CriticalHumidity { get; set; }
+
+        [Display(Name = "Email alert sent")]
+        public bool EmailAlertSent { get; set; }
     }
 }

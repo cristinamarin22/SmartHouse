@@ -231,32 +231,38 @@ th {
                     @Html.DisplayNameFor(model => model.CriticalHumidity)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.EmailAlertSent)
+                </th>
+                <th>
                     Action
                 </th>
             </tr>
 
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.InternalTime)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Temperature)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CriticalTemperature)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Humidity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CriticalHumidity)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Delete", "DeleteTemperatureHumidityCriticalData", "Home", new { id = item.Id }, null)
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InternalTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Temperature)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CriticalTemperature)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Humidity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CriticalHumidity)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => item.EmailAlertSent, new { @checked = "checked", @readonly = "readonly" })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteTemperatureHumidityCriticalData", "Home", new { id = item.Id }, null)
+                </td>
+            </tr>
             }
 
         </table><br>
@@ -320,6 +326,7 @@ th {
                             '</td><td>' + data[i].CriticalTemperature + 
                             '</td><td>' + data[i].Humidity +
                             '</td><td>' + data[i].CriticalHumidity +
+                            '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].SentEmailAlert + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
                             '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + data[i].Id + '">Delete</a>'   + '</td></tr>';
                     }
 
@@ -378,6 +385,7 @@ th {
                             '</td><td>' + response[i].CriticalTemperature +
                             '</td><td>' + response[i].Humidity +
                             '</td><td>' + response[i].CriticalHumidity +
+                            '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + response[i].SentEmailAlert + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + response[i].EmailAlertSent + '" />' +
                             '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
                     }
 
@@ -412,6 +420,7 @@ th {
                                     '</td><td>' + data[i].CriticalTemperature +
                                     '</td><td>' + data[i].Humidity +
                                     '</td><td>' + data[i].CriticalHumidity +
+                                    '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].SentEmailAlert + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
                                     '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
                             }
 
@@ -460,6 +469,7 @@ th {
                                     '</td><td>' + response[i].CriticalTemperature +
                                     '</td><td>' + response[i].Humidity +
                                     '</td><td>' + response[i].CriticalHumidity +
+                                    '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + response[i].SentEmailAlert + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + response[i].EmailAlertSent + '" />' +
                                     '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
                             }
 

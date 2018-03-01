@@ -51,6 +51,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="InternalTime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="EmailAlertSent" Type="bool" Nullable="false" />
         </EntityType>
         <EntityType Name="TemperatureHumidityCriticalData">
           <Key>
@@ -63,6 +64,7 @@
           <Property Name="CriticalTemperature" Type="int" Nullable="false" />
           <Property Name="Humidity" Type="float" Nullable="false" />
           <Property Name="CriticalHumidity" Type="int" Nullable="false" />
+          <Property Name="EmailAlertSent" Type="bool" Nullable="false" />
         </EntityType>
         <EntityType Name="TemperatureHumidityData">
           <Key>
@@ -99,6 +101,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InternalTime" Type="DateTime" Nullable="false" />
+          <Property Name="EmailAlertSent" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="TemperatureHumidityData">
           <Key>
@@ -128,6 +131,7 @@
           <Property Name="TemperatureHumidityDataId" Type="Int32" Nullable="false" />
           <Property Name="CriticalTemperature" Type="Int32" Nullable="false" />
           <Property Name="CriticalHumidity" Type="Int32" Nullable="false" />
+          <Property Name="EmailAlertSent" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="DictionaryTime">
           <Key>
@@ -179,6 +183,7 @@
           <EntitySetMapping Name="SoundDetectionDatas">
             <EntityTypeMapping TypeName="SmartHouseModel.SoundDetectionData">
               <MappingFragment StoreEntitySet="SoundDetectionData">
+                <ScalarProperty Name="EmailAlertSent" ColumnName="EmailAlertSent" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="InternalTime" ColumnName="InternalTime" />
               </MappingFragment>
@@ -197,6 +202,7 @@
           <EntitySetMapping Name="TemperatureHumidityCriticalDatas">
             <EntityTypeMapping TypeName="SmartHouseModel.TemperatureHumidityCriticalData">
               <MappingFragment StoreEntitySet="TemperatureHumidityCriticalData">
+                <ScalarProperty Name="EmailAlertSent" ColumnName="EmailAlertSent" />
                 <ScalarProperty Name="CriticalHumidity" ColumnName="CriticalHumidity" />
                 <ScalarProperty Name="CriticalTemperature" ColumnName="CriticalTemperature" />
                 <ScalarProperty Name="TemperatureHumidityDataId" ColumnName="TemperatureHumidityDataId" />
