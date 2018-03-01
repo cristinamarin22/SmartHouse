@@ -298,7 +298,7 @@ namespace SmartHouse.Controllers
         public ActionResult MotionDetection()
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
-            var motionDetectionList = smartHouseEntities.MotionDetectionDatas.ToList().OrderByDescending(x => x.InternalTime).Take(10);
+            var motionDetectionList = smartHouseEntities.MotionDetectionDatas.ToList().OrderByDescending(x => x.InternalTime);
             return View(motionDetectionList);
         }
 
