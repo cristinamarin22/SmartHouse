@@ -18,6 +18,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="InternalTime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="SentEmailAlert" Type="bool" Nullable="false" />
         </EntityType>
         <EntityType Name="Settings">
           <Key>
@@ -33,6 +34,8 @@
           <Property Name="MotionDetectionAlertYN" Type="bool" Nullable="false" />
           <Property Name="DeleteMotionDetectionHistoricalDataOlderThan" Type="int" Nullable="false" />
           <Property Name="DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure" Type="int" Nullable="false" />
+          <Property Name="SendMotionDetectionEmailAlertInterval" Type="int" Nullable="false" />
+          <Property Name="SendMotionDetectionEmailAlertIntervalUnitMeasure" Type="int" Nullable="false" />
           <Property Name="SoundDetectionAlertYN" Type="bool" Nullable="false" />
           <Property Name="DeleteSoundDetectionHistoricalDataOlderThan" Type="int" Nullable="false" />
           <Property Name="DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure" Type="int" Nullable="false" />
@@ -88,6 +91,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InternalTime" Type="DateTime" Nullable="false" />
+          <Property Name="SentEmailAlert" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="SoundDetectionData">
           <Key>
@@ -154,6 +158,8 @@
           <Property Name="CriticalGasHistoricalDataOlderThanUnitMeasure" Type="Int32" Nullable="false" />
           <Property Name="InternalTime" Type="DateTime" Nullable="false" />
           <Property Name="AlertsToEmail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SendMotionDetectionEmailAlertInterval" Type="Int32" Nullable="false" />
+          <Property Name="SendMotionDetectionEmailAlertIntervalUnitMeasure" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -164,6 +170,7 @@
           <EntitySetMapping Name="MotionDetectionDatas">
             <EntityTypeMapping TypeName="SmartHouseModel.MotionDetectionData">
               <MappingFragment StoreEntitySet="MotionDetectionData">
+                <ScalarProperty Name="SentEmailAlert" ColumnName="SentEmailAlert" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="InternalTime" ColumnName="InternalTime" />
               </MappingFragment>
@@ -211,6 +218,8 @@
           <EntitySetMapping Name="Settings">
             <EntityTypeMapping TypeName="SmartHouseModel.Settings">
               <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="SendMotionDetectionEmailAlertIntervalUnitMeasure" ColumnName="SendMotionDetectionEmailAlertIntervalUnitMeasure" />
+                <ScalarProperty Name="SendMotionDetectionEmailAlertInterval" ColumnName="SendMotionDetectionEmailAlertInterval" />
                 <ScalarProperty Name="AlertsToEmail" ColumnName="AlertsToEmail" />
                 <ScalarProperty Name="InternalTime" ColumnName="InternalTime" />
                 <ScalarProperty Name="CriticalGasHistoricalDataOlderThanUnitMeasure" ColumnName="CriticalGasHistoricalDataOlderThanUnitMeasure" />

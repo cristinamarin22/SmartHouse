@@ -338,6 +338,7 @@ namespace SmartHouse.Controllers
         [HttpPost]
         public JsonResult SaveSettings(Settings settings)
         {
+            #region Temperature & Humidity
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
             smartHouseEntities.Settings.FirstOrDefault().CriticalTemperatureAlertYN = settings.CriticalTemperatureAlertYN;
             smartHouseEntities.Settings.FirstOrDefault().CriticalTemperatureAlertValue = settings.CriticalTemperatureAlertValue;
@@ -345,17 +346,33 @@ namespace SmartHouse.Controllers
             smartHouseEntities.Settings.FirstOrDefault().CriticalHumidityAlertValue = settings.CriticalHumidityAlertValue;
             smartHouseEntities.Settings.FirstOrDefault().DeleteTemperatureHumidityHistoricalDataOlderThan = settings.DeleteTemperatureHumidityHistoricalDataOlderThan;
             smartHouseEntities.Settings.FirstOrDefault().DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure = settings.DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure;
+            #endregion
+
+            #region Motion Detection
             smartHouseEntities.Settings.FirstOrDefault().MotionDetectionAlertYN = settings.MotionDetectionAlertYN;
+            smartHouseEntities.Settings.FirstOrDefault().SendMotionDetectionEmailAlertInterval = settings.SendMotionDetectionEmailAlertInterval;
+            smartHouseEntities.Settings.FirstOrDefault().SendMotionDetectionEmailAlertIntervalUnitMeasure = settings.SendMotionDetectionEmailAlertIntervalUnitMeasure;
             smartHouseEntities.Settings.FirstOrDefault().DeleteMotionDetectionHistoricalDataOlderThan = settings.DeleteMotionDetectionHistoricalDataOlderThan;
             smartHouseEntities.Settings.FirstOrDefault().DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure = settings.DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure;
+            #endregion
+
+            #region Sound Detection
             smartHouseEntities.Settings.FirstOrDefault().SoundDetectionAlertYN = settings.SoundDetectionAlertYN;
             smartHouseEntities.Settings.FirstOrDefault().DeleteSoundDetectionHistoricalDataOlderThan = settings.DeleteSoundDetectionHistoricalDataOlderThan;
             smartHouseEntities.Settings.FirstOrDefault().DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure = settings.DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure;
+            #endregion
+
+            #region Gas Detection
             smartHouseEntities.Settings.FirstOrDefault().CriticalGasAlertYN = settings.CriticalGasAlertYN;
             smartHouseEntities.Settings.FirstOrDefault().CriticalGasHistoricalDataOlderThan = settings.CriticalGasHistoricalDataOlderThan;
             smartHouseEntities.Settings.FirstOrDefault().CriticalGasHistoricalDataOlderThanUnitMeasure = settings.CriticalGasHistoricalDataOlderThanUnitMeasure;
+            #endregion
+
+            #region General
             smartHouseEntities.Settings.FirstOrDefault().AlertsToEmail = settings.AlertsToEmail;
             smartHouseEntities.Settings.FirstOrDefault().InternalTime = DateTime.Now;
+            #endregion
+
             smartHouseEntities.SaveChanges();
 
             #region DeleteHistoryData

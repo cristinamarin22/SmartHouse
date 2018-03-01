@@ -16,5 +16,6 @@ namespace SmartHouse.Models
     {
         public int Id { get; set; }
         public System.DateTime InternalTime { get; set; }
+        public bool SentEmailAlert { get; set; }
     }
 }

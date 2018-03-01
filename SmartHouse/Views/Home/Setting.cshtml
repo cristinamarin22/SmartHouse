@@ -238,8 +238,37 @@ background-color: white;
 
                     <th>
                         <dd2>
-                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.MotionDetectionAlertYN, new { id = "motionDetectionAlertYNCheckBox" })</h2>
+                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.MotionDetectionAlertYN, new { id = "motionDetectionAlertYNCheckBox", @onclick = "enableDisableEmailAlertInterval()" })</h2>
                         </dd2>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.SendMotionDetectionEmailAlertInterval)</h1>
+                    </th>
+
+                    <th>
+                        <dd2>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.SendMotionDetectionEmailAlertInterval, new { id = "sendMotionDetectionEmailAlertIntervalTextBox" })</h2>
+                        </dd2>
+                    </th>
+
+                    <th>
+                        <div class="w3-container">
+                            <h2 class="w3-large">
+                                @Html.DropDownListFor(model => model.SendMotionDetectionEmailAlertIntervalUnitMeasure, new SelectList(new List<Object>
+                                                                            {
+                                                                            new { value = 1 , text = "MINUTE"  },
+                                                                            new { value = 2 , text = "HOUR" },
+                                                                            new { value = 3 , text = "DAY"},
+                                                                            new { value = 4 , text = "MONTH"}
+                                                                            },
+                               "value",
+                               "text",
+                               @Model.SendMotionDetectionEmailAlertIntervalUnitMeasure), new { id = "sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList" })
+                            </h2>
+                        </div>
                     </th>
                 </tr>
 
@@ -258,15 +287,15 @@ background-color: white;
                         <div class="w3-container">
                             <h2 class="w3-large">
                                 @Html.DropDownListFor(model => model.DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
-                                                                    {
-                                                                    new { value = 1 , text = "MINUTE"  },
-                                                                    new { value = 2 , text = "HOUR" },
-                                                                    new { value = 3 , text = "DAY"},
-                                                                    new { value = 4 , text = "MONTH"}
-                                                                    },
-                                      "value",
-                                      "text",
-                                      @Model.DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure), new { id = "deleteMotionDetectionOlderThanUnitMeasureDropDownList" })
+                                                                            {
+                                                                            new { value = 1 , text = "MINUTE"  },
+                                                                            new { value = 2 , text = "HOUR" },
+                                                                            new { value = 3 , text = "DAY"},
+                                                                            new { value = 4 , text = "MONTH"}
+                                                                            },
+                               "value",
+                               "text",
+                               @Model.DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure), new { id = "deleteMotionDetectionOlderThanUnitMeasureDropDownList" })
                             </h2>
                         </div>
                     </th>
@@ -430,6 +459,9 @@ background-color: white;
 
     function saveSettings() {
 
+        var modal = document.getElementById('popup');
+        modal.style.display = "block";
+
         var settings = {
 
             "CriticalTemperatureAlertYN": $('#temperatureAlertYNCheckBox').is(':checked'),
@@ -438,7 +470,9 @@ background-color: white;
             "CriticalHumidityAlertValue": $('#humidityAlertYNCheckBox').is(':checked'),
             "DeleteTemperatureHumidityHistoricalDataOlderThan": $('#deleteTemperatureHumidityOlderThanTextBox').val(),
             "DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure": $('#deleteTemperatureHumidityOlderThanUnitMeasureDropDownList').val(),
-            "MotionDetectionAlertYN": $('#motionDetectionAlertYNCheckBox').is(':checked'),
+            "MotionDetectionAlertYN": $('#motionDetectionAlertYNCheckBox').is(':checked'), 
+            "SendMotionDetectionEmailAlertInterval": $('#sendMotionDetectionEmailAlertIntervalTextBox').val(),
+            "SendMotionDetectionEmailAlertIntervalUnitMeasure": $('#sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList').val(),
             "SoundDetectionAlertYN": $('#soundDetectionAlertYNCheckBox').is(':checked'),
             "CriticalGasAlertYN": $('#gasDetectionAlertYNCheckBox').is(':checked'),
             "AlertsToEmail": $('#alertsToEmail').val(),
@@ -456,8 +490,7 @@ background-color: white;
             data: settings,
             dataType: "json",
             success: function (response) {
-                var modal = document.getElementById('popup');
-                modal.style.display = "block";
+
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(textStatus + " " + errorThrown);
@@ -480,16 +513,29 @@ background-color: white;
         }
     }
 
-    //function enableDisableTemperatureAlert() {
+    $(window).bind("load", function () {
+        if ($('#motionDetectionAlertYNCheckBox').is(':checked')) {
+            $('#sendMotionDetectionEmailAlertIntervalTextBox').removeAttr("disabled");
+            $('#sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList').removeAttr("disabled");
+        }
+        else {
+            $('#sendMotionDetectionEmailAlertIntervalTextBox').attr("disabled", "disabled");
+            $('#sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList').val('');
+        }
+    });
 
-    //    if ($('#temperatureAlertYNCheckBox').is(':checked')) {
-    //        $('#temperatureAlertValueTextBox').removeAttr("disabled");
-    //    }
-    //    else {
-    //        $('#temperatureAlertValueTextBox').attr("disabled", "disabled");
-    //        $('#temperatureAlertValueTextBox').val('');
-    //    }
-    //}
+    function enableDisableEmailAlertInterval() {
+
+        if ($('#motionDetectionAlertYNCheckBox').is(':checked')) {
+            $('#sendMotionDetectionEmailAlertIntervalTextBox').removeAttr("disabled"); 
+            $('#sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList').removeAttr("disabled");
+        }
+        else {
+            $('#sendMotionDetectionEmailAlertIntervalTextBox').attr("disabled", "disabled");
+            $('#sendMotionDetectionEmailAlertIntervalTextBox').val('');
+            $('#sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList').attr("disabled", "disabled");
+        }
+    }
 
     //function enableDisableHumidityAlert() {
 
