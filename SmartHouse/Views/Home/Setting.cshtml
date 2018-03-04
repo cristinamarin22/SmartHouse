@@ -156,7 +156,7 @@ background-color: white;
 
                     <th>
                         <dd1>
-                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.CriticalTemperatureAlertYN, new { id = "temperatureAlertYNCheckBox", @onclick = "enableDisableTemperatureAlert()" })</h2>
+                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.CriticalTemperatureAlertYN, new { id = "temperatureAlertYNCheckBox", @onclick = "enableDisableTemperatureEmailAlert()" })</h2>
                         </dd1>
                     </th>
                 </tr>
@@ -180,7 +180,7 @@ background-color: white;
 
                     <th>
                         <dd1>
-                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.CriticalHumidityAlertYN, new { id = "humidityAlertYNCheckBox", @onclick = "enableDisableHumidityAlert()" })</h2>
+                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.CriticalHumidityAlertYN, new { id = "humidityAlertYNCheckBox", @onclick = "enableDisableHumidityEmailAlert()" })</h2>
                         </dd1>
                     </th>
                 </tr>
@@ -212,15 +212,15 @@ background-color: white;
                         <div class="w3-container">
                             <h2 class="w3-large">
                                 @Html.DropDownListFor(model => model.DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
-                                                                    {
-                                                                    new { value = 1 , text = "MINUTE"  },
-                                                                    new { value = 2 , text = "HOUR" },
-                                                                    new { value = 3 , text = "DAY"},
-                                                                    new { value = 4 , text = "MONTH"}
-                                                                    },
-                                      "value",
-                                      "text",
-                                      @Model.DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure), new { id = "deleteTemperatureHumidityOlderThanUnitMeasureDropDownList" })
+                                                                                    {
+                                                                                    new { value = 1 , text = "MINUTE"  },
+                                                                                    new { value = 2 , text = "HOUR" },
+                                                                                    new { value = 3 , text = "DAY"},
+                                                                                    new { value = 4 , text = "MONTH"}
+                                                                                    },
+                                       "value",
+                                       "text",
+                                       @Model.DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure), new { id = "deleteTemperatureHumidityOlderThanUnitMeasureDropDownList" })
                             </h2>
                         </div>
                     </th>
@@ -238,7 +238,7 @@ background-color: white;
 
                     <th>
                         <dd2>
-                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.MotionDetectionAlertYN, new { id = "motionDetectionAlertYNCheckBox", @onclick = "enableDisableEmailAlertInterval()" })</h2>
+                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.MotionDetectionAlertYN, new { id = "motionDetectionAlertYNCheckBox", @onclick = "enableDisableMotionDetectionEmailAlertInterval()" })</h2>
                         </dd2>
                     </th>
                 </tr>
@@ -258,15 +258,14 @@ background-color: white;
                         <div class="w3-container">
                             <h2 class="w3-large">
                                 @Html.DropDownListFor(model => model.SendMotionDetectionEmailAlertIntervalUnitMeasure, new SelectList(new List<Object>
-                                                                            {
-                                                                            new { value = 1 , text = "MINUTE"  },
-                                                                            new { value = 2 , text = "HOUR" },
-                                                                            new { value = 3 , text = "DAY"},
-                                                                            new { value = 4 , text = "MONTH"}
-                                                                            },
-                               "value",
-                               "text",
-                               @Model.SendMotionDetectionEmailAlertIntervalUnitMeasure), new { id = "sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList" })
+                                                                                            {
+                                                                                            new { value = 1 , text = "MINUTE"  },
+                                                                                            new { value = 2 , text = "HOUR" },
+                                                                                            new { value = 3 , text = "DAY"}
+                                                                                            },
+                                "value",
+                                "text",
+                                @Model.SendMotionDetectionEmailAlertIntervalUnitMeasure), new { id = "sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList" })
                             </h2>
                         </div>
                     </th>
@@ -287,15 +286,15 @@ background-color: white;
                         <div class="w3-container">
                             <h2 class="w3-large">
                                 @Html.DropDownListFor(model => model.DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
-                                                                            {
-                                                                            new { value = 1 , text = "MINUTE"  },
-                                                                            new { value = 2 , text = "HOUR" },
-                                                                            new { value = 3 , text = "DAY"},
-                                                                            new { value = 4 , text = "MONTH"}
-                                                                            },
-                               "value",
-                               "text",
-                               @Model.DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure), new { id = "deleteMotionDetectionOlderThanUnitMeasureDropDownList" })
+                                                                                            {
+                                                                                            new { value = 1 , text = "MINUTE"  },
+                                                                                            new { value = 2 , text = "HOUR" },
+                                                                                            new { value = 3 , text = "DAY"},
+                                                                                            new { value = 4 , text = "MONTH"}
+                                                                                            },
+                                "value",
+                                "text",
+                                @Model.DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure), new { id = "deleteMotionDetectionOlderThanUnitMeasureDropDownList" })
                             </h2>
                         </div>
                     </th>
@@ -332,15 +331,15 @@ background-color: white;
                         <div class="w3-container">
                             <h2 class="w3-large">
                                 @Html.DropDownListFor(model => model.DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
-                                                                    {
-                                                                    new { value = 1 , text = "MINUTE"  },
-                                                                    new { value = 2 , text = "HOUR" },
-                                                                    new { value = 3 , text = "DAY"},
-                                                                    new { value = 4 , text = "MONTH"}
-                                                                    },
-                                      "value",
-                                      "text",
-                                      @Model.DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure), new { id = "deleteSoundDetectionOlderThanUnitMeasureDropDownList" })
+                                                                                    {
+                                                                                    new { value = 1 , text = "MINUTE"  },
+                                                                                    new { value = 2 , text = "HOUR" },
+                                                                                    new { value = 3 , text = "DAY"},
+                                                                                    new { value = 4 , text = "MONTH"}
+                                                                                    },
+                                       "value",
+                                       "text",
+                                       @Model.DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure), new { id = "deleteSoundDetectionOlderThanUnitMeasureDropDownList" })
                             </h2>
                         </div>
                     </th>
@@ -377,15 +376,15 @@ background-color: white;
                         <div class="w3-container">
                             <h2 class="w3-large">
                                 @Html.DropDownListFor(model => model.CriticalGasHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
-                                                                    {
-                                                                    new { value = 1 , text = "MINUTE"  },
-                                                                    new { value = 2 , text = "HOUR" },
-                                                                    new { value = 3 , text = "DAY"},
-                                                                    new { value = 4 , text = "MONTH"}
-                                                                    },
-                                      "value",
-                                      "text",
-                                      @Model.CriticalGasHistoricalDataOlderThanUnitMeasure), new { id = "deleteGasOlderThanUnitMeasureDropDownList" })
+                                                                                    {
+                                                                                    new { value = 1 , text = "MINUTE"  },
+                                                                                    new { value = 2 , text = "HOUR" },
+                                                                                    new { value = 3 , text = "DAY"},
+                                                                                    new { value = 4 , text = "MONTH"}
+                                                                                    },
+                                       "value",
+                                       "text",
+                                       @Model.CriticalGasHistoricalDataOlderThanUnitMeasure), new { id = "deleteGasOlderThanUnitMeasureDropDownList" })
                             </h2>
                         </div>
                     </th>
@@ -445,6 +444,24 @@ background-color: white;
             </div>
 
         </div>
+
+        <!-- Popup for validation -->
+        <div id="popupValidation" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h2>Error!</h2>
+                </div>
+                <div id="validationBody" class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <h3></h3>
+                </div>
+            </div>
+
+        </div>
     </dl>
 </div>
 <p>
@@ -457,10 +474,42 @@ background-color: white;
 
 <script type="text/javascript">
 
+    var span = document.getElementsByClassName("close")[0];
+    var modal = document.getElementById('popup');
+    var modalValidation = document.getElementById('popupValidation');
+
     function saveSettings() {
 
-        var modal = document.getElementById('popup');
-        modal.style.display = "block";
+        var validationMessage = '<p>';
+        var validationError = false;
+
+        if ($('#temperatureAlertYNCheckBox').is(':checked') && $('#temperatureAlertValueTextBox').val() == '') {
+            validationMessage += '<p>Critical temperature is mandatory</p>';
+            validationError = true;
+        }
+
+        if ($('#humidityAlertYNCheckBox').is(':checked') && $('#humidityAlertValueTextBox').val() == '') {
+            validationMessage += '<p>Critical humidity is mandatory</p>';
+            validationError = true;
+        }
+
+        if ($('#motionDetectionAlertYNCheckBox').is(':checked') && $('#sendMotionDetectionEmailAlertIntervalTextBox').val() == '') {
+            validationMessage += '<p>Email alert interval is mandatory</p>';
+            validationError = true;
+        }
+
+        validationMessage += '</p>';
+
+        if (validationError) {
+            $("#validationBody").empty();
+            $("#validationBody").append(validationMessage);
+            modalValidation.style.display = "block";
+            return;
+        }
+        else {
+            modal.style.display = "block";
+        }
+
 
         var settings = {
 
@@ -498,9 +547,6 @@ background-color: white;
         });
     }
 
-    var span = document.getElementsByClassName("close")[0];
-    var modal = document.getElementById('popup');
-
     // When the user clicks on <span> (x), close the modal
     span.onclick = function () {
         modal.style.display = "none";
@@ -508,8 +554,13 @@ background-color: white;
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
+        if (event.target == modalValidation) {
+            modalValidation.style.display = "none";
+        }
+
         if (event.target == modal) {
             modal.style.display = "none";
+            modalValidation.style.display = "none";
         }
     }
 
@@ -521,13 +572,30 @@ background-color: white;
         else {
             $('#sendMotionDetectionEmailAlertIntervalTextBox').attr("disabled", "disabled");
             $('#sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList').val('');
+            $('#sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList').attr("disabled", "disabled");
+        }
+
+        if ($('#temperatureAlertYNCheckBox').is(':checked')) {
+            $('#temperatureAlertValueTextBox').removeAttr("disabled");
+        }
+        else {
+            $('#temperatureAlertValueTextBox').attr("disabled", "disabled");
+            $('#temperatureAlertValueTextBox').val('');
+        }
+
+        if ($('#humidityAlertYNCheckBox').is(':checked')) {
+            $('#humidityAlertValueTextBox').removeAttr("disabled");
+        }
+        else {
+            $('#humidityAlertValueTextBox').attr("disabled", "disabled");
+            $('#humidityAlertValueTextBox').val('');
         }
     });
 
-    function enableDisableEmailAlertInterval() {
+    function enableDisableMotionDetectionEmailAlertInterval() {
 
         if ($('#motionDetectionAlertYNCheckBox').is(':checked')) {
-            $('#sendMotionDetectionEmailAlertIntervalTextBox').removeAttr("disabled"); 
+            $('#sendMotionDetectionEmailAlertIntervalTextBox').removeAttr("disabled");
             $('#sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList').removeAttr("disabled");
         }
         else {
@@ -537,15 +605,26 @@ background-color: white;
         }
     }
 
-    //function enableDisableHumidityAlert() {
+    function enableDisableTemperatureEmailAlert() {
+        
+        if ($('#temperatureAlertYNCheckBox').is(':checked')) { 
+            $('#temperatureAlertValueTextBox').removeAttr("disabled");
+        }
+        else {
+            $('#temperatureAlertValueTextBox').attr("disabled", "disabled");
+            $('#temperatureAlertValueTextBox').val('');
+        }
+    }
 
-    //    if ($('#humidityAlertYNCheckBox').is(':checked')) {
-    //        $('#humidityAlertValueTextBox').removeAttr("disabled");
-    //    }
-    //    else {
-    //        $('#humidityAlertValueTextBox').attr("disabled", "disabled");
-    //        $('#humidityAlertValueTextBox').val('');
-    //    }
-    //}
+    function enableDisableHumidityEmailAlert() {
+
+        if ($('#humidityAlertYNCheckBox').is(':checked')) {
+            $('#humidityAlertValueTextBox').removeAttr("disabled");
+        }
+        else {
+            $('#humidityAlertValueTextBox').attr("disabled", "disabled");
+            $('#humidityAlertValueTextBox').val('');
+        }
+    }
 
 </script>

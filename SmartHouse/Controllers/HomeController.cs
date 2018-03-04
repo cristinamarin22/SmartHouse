@@ -369,7 +369,7 @@ namespace SmartHouse.Controllers
             if (smartHouseEntities.Database.Exists())
                 return View(smartHouseEntities.Settings.FirstOrDefault());
             else
-                return View(new List<Settings>());
+                return View(new List<Settings>().FirstOrDefault());
         }
 
         [HttpPost]
