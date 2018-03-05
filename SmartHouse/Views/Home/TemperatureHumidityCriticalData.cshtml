@@ -167,13 +167,13 @@ th {
         <button type="button" class="button button3" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
 
         <td>
-            <span style="margin-left: 12%;">
+            <span style="margin-left: 10%;">
                 @Html.TextBox("TemperatureTextBoxMinValue", "", new { id = "TemperatureMinValueTextBox", style = "width:70px; background:#ff9191" })
             </span>
         </td>
 
         <td>
-            <label><span> < Temperature < </span></label>
+            <label><span> <= Temperature <= </span></label>
         </td>
 
         <td>
@@ -187,7 +187,7 @@ th {
         </td>
 
         <td>
-            <label><span> < Humidity < </span></label>
+            <label><span> <= Humidity <= </span></label>
         </td>
 
         <td>
@@ -201,7 +201,7 @@ th {
         </td>
 
         <td>
-            <label><span> < Date < </span></label>
+            <label><span> <= Date <= </span></label>
         </td>
 
         <td>
@@ -219,16 +219,22 @@ th {
                     @Html.DisplayNameFor(model => model.InternalTime)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.MinCriticalTemperature)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Temperature)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CriticalTemperature)
+                    @Html.DisplayNameFor(model => model.MaxCriticalTemperature)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MinCriticalHumidity)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Humidity)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CriticalHumidity)
+                    @Html.DisplayNameFor(model => model.MaxCriticalHumidity)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.EmailAlertSent)
@@ -245,16 +251,22 @@ th {
                     @Html.DisplayFor(modelItem => item.InternalTime)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.MinCriticalTemperature)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Temperature)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CriticalTemperature)
+                    @Html.DisplayFor(modelItem => item.MaxCriticalTemperature)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MinCriticalHumidity)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Humidity)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CriticalHumidity)
+                    @Html.DisplayFor(modelItem => item.MaxCriticalHumidity)
                 </td>
                 <td>
                     @Html.CheckBoxFor(modelItem => item.EmailAlertSent, new { @checked = "checked", @readonly = "readonly" })
@@ -322,10 +334,12 @@ th {
                     var html = '';
                     for (var i = 0; i < data.length; i++) {
                         html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+                            '</td><td>' + data[i].MinCriticalTemperature +
                             '</td><td>' + data[i].Temperature + 
-                            '</td><td>' + data[i].CriticalTemperature + 
+                            '</td><td>' + data[i].MaxCriticalTemperature + 
+                            '</td><td>' + data[i].MinCriticalHumidity +
                             '</td><td>' + data[i].Humidity +
-                            '</td><td>' + data[i].CriticalHumidity +
+                            '</td><td>' + data[i].MaxCriticalHumidity +
                             '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].SentEmailAlert + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
                             '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + data[i].Id + '">Delete</a>'   + '</td></tr>';
                     }
@@ -381,10 +395,12 @@ th {
                     var html = '';
                     for (var i = 0; i < response.length; i++) {
                         html += '<tr><td>' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+                            '</td><td>' + response[i].MinCriticalTemperature +
                             '</td><td>' + response[i].Temperature +
-                            '</td><td>' + response[i].CriticalTemperature +
+                            '</td><td>' + response[i].MaxCriticalTemperature +
+                            '</td><td>' + response[i].MinCriticalHumidity +
                             '</td><td>' + response[i].Humidity +
-                            '</td><td>' + response[i].CriticalHumidity +
+                            '</td><td>' + response[i].MaxCriticalHumidity +
                             '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + response[i].SentEmailAlert + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + response[i].EmailAlertSent + '" />' +
                             '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
                     }
@@ -416,10 +432,12 @@ th {
                             var html = '';
                             for (var i = 0; i < data.length; i++) {
                                 html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+                                    '</td><td>' + data[i].MinCriticalTemperature +
                                     '</td><td>' + data[i].Temperature +
-                                    '</td><td>' + data[i].CriticalTemperature +
+                                    '</td><td>' + data[i].MaxCriticalTemperature +
+                                    '</td><td>' + data[i].MinCriticalHumidity +
                                     '</td><td>' + data[i].Humidity +
-                                    '</td><td>' + data[i].CriticalHumidity +
+                                    '</td><td>' + data[i].MaxCriticalHumidity +
                                     '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].SentEmailAlert + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
                                     '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
                             }
@@ -465,10 +483,12 @@ th {
                             var html = '';
                             for (var i = 0; i < response.length; i++) {
                                 html += '<tr><td>' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+                                    '</td><td>' + response[i].MinCriticalTemperature +
                                     '</td><td>' + response[i].Temperature +
-                                    '</td><td>' + response[i].CriticalTemperature +
+                                    '</td><td>' + response[i].MaxCriticalTemperature +
+                                    '</td><td>' + response[i].MinCriticalHumidity +
                                     '</td><td>' + response[i].Humidity +
-                                    '</td><td>' + response[i].CriticalHumidity +
+                                    '</td><td>' + response[i].MaxCriticalHumidity +
                                     '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + response[i].SentEmailAlert + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + response[i].EmailAlertSent + '" />' +
                                     '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
                             }
