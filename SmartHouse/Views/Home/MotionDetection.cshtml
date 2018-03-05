@@ -269,8 +269,11 @@ th {
                 success: function (data) {
                     var html = '';
                     for (var i = 0; i < data.length; i++) {
-                        html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
-                            '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
+                        html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td><input ';
+                        if (data[i].EmailAlertSent)
+                            html += ' checked="checked" data-val="' + data[i].EmailAlertSent + '"';
+                        
+                        html += ' id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
                             '</td><td>' + '<a href="/Home/DeleteMotionDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
                     }
 
@@ -314,9 +317,12 @@ th {
                     $('#tableTemperatureHumidity tr>td').remove();
                     var html = '';
                     for (var i = 0; i < response.length; i++) {
-                        html += '<tr><td>' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
-                            '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + response[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + response[i].EmailAlertSent + '" />' +
-                            '</td><td>' + '<a href="/Home/DeleteMotionDetectionData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
+                        html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td><input ';
+                        if (data[i].EmailAlertSent)
+                            html += ' checked="checked" data-val="' + data[i].EmailAlertSent + '"';
+
+                        html += ' id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
+                            '</td><td>' + '<a href="/Home/DeleteMotionDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
                     }
 
                     $("#tableMotionDetection").find('tbody').append($(html));
@@ -344,8 +350,11 @@ th {
                         success: function (data) {
                             var html = '';
                             for (var i = 0; i < data.length; i++) {
-                                html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
-                                    '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
+                                html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td><input ';
+                                if (data[i].EmailAlertSent)
+                                    html += ' checked="checked" data-val="' + data[i].EmailAlertSent + '"';
+
+                                html += ' id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
                                     '</td><td>' + '<a href="/Home/DeleteMotionDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
                             }
 
@@ -384,8 +393,11 @@ th {
                         success: function (response) {
                             var html = '';
                             for (var i = 0; i < response.length; i++) {
-                                html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
-                                    '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + response[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + response[i].EmailAlertSent + '" />' +
+                                html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td><input ';
+                                if (data[i].EmailAlertSent)
+                                    html += ' checked="checked" data-val="' + data[i].EmailAlertSent + '"';
+
+                                html += ' id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
                                     '</td><td>' + '<a href="/Home/DeleteMotionDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
                             }
 
