@@ -20,13 +20,13 @@ namespace SmartHouse.Models
         public bool CriticalTemperatureAlertYN { get; set; }
 
         [Display(Name = "Critical temperature (Celsius degrees)")]
-        public decimal CriticalTemperatureAlertValue { get; set; }
+        public float CriticalTemperatureAlertValue { get; set; }
 
         [Display(Name = "Alert critical humidity")]
         public bool CriticalHumidityAlertYN { get; set; }
 
         [Display(Name = "Critical humidity (%)")]
-        public decimal CriticalHumidityAlertValue { get; set; }
+        public float CriticalHumidityAlertValue { get; set; }
 
         [Display(Name = "Alert motion detection")]
         public bool MotionDetectionAlertYN { get; set; }
@@ -64,11 +64,11 @@ namespace SmartHouse.Models
         public int SendMotionDetectionEmailAlertIntervalUnitMeasure { get; set; }
 
         [Display(Name = "Critical temperature interval")]
-        public decimal CriticalTemperatureAlertMinValue { get; set; }
-        public decimal CriticalTemperatureAlertMaxValue { get; set; }
+        public float CriticalTemperatureAlertMinValue { get; set; }
+        public float CriticalTemperatureAlertMaxValue { get; set; }
 
         [Display(Name = "Critical humidity interval")]
-        public decimal CriticalHumidityAlertMinValue { get; set; }
-        public decimal CriticalHumidityAlertMaxValue { get; set; }
+        public float CriticalHumidityAlertMinValue { get; set; }
+        public float CriticalHumidityAlertMaxValue { get; set; }
     }
 }

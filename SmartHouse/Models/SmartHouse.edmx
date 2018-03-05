@@ -26,11 +26,11 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CriticalTemperatureAlertYN" Type="bool" Nullable="false" />
-          <Property Name="CriticalTemperatureAlertMinValue" Type="decimal" Precision="10" Scale="0" Nullable="false" />
-          <Property Name="CriticalTemperatureAlertMaxValue" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="CriticalTemperatureAlertMinValue" Type="float" Nullable="false" />
+          <Property Name="CriticalTemperatureAlertMaxValue" Type="float" Nullable="false" />
           <Property Name="CriticalHumidityAlertYN" Type="bool" Nullable="false" />
-          <Property Name="CriticalHumidityAlertMinValue" Type="decimal" Precision="10" Scale="0" Nullable="false" />
-          <Property Name="CriticalHumidityAlertMaxValue" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="CriticalHumidityAlertMinValue" Type="float" Nullable="false" />
+          <Property Name="CriticalHumidityAlertMaxValue" Type="float" Nullable="false" />
           <Property Name="DeleteTemperatureHumidityHistoricalDataOlderThan" Type="int" Nullable="false" />
           <Property Name="DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure" Type="int" Nullable="false" />
           <Property Name="MotionDetectionAlertYN" Type="bool" Nullable="false" />
@@ -62,12 +62,12 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TemperatureHumidityDataId" Type="int" Nullable="false" />
           <Property Name="InternalTime" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="MinCriticalTemperature" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="MinCriticalTemperature" Type="float" Nullable="false" />
           <Property Name="Temperature" Type="float" Nullable="false" />
-          <Property Name="MaxCriticalTemperature" Type="decimal" Precision="10" Scale="0" Nullable="false" />
-          <Property Name="MinCriticalHumidity" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="MaxCriticalTemperature" Type="float" Nullable="false" />
+          <Property Name="MinCriticalHumidity" Type="float" Nullable="false" />
           <Property Name="Humidity" Type="float" Nullable="false" />
-          <Property Name="MaxCriticalHumidity" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="MaxCriticalHumidity" Type="float" Nullable="false" />
           <Property Name="EmailAlertSent" Type="bool" Nullable="false" />
         </EntityType>
         <EntityType Name="TemperatureHumidityData">
@@ -134,10 +134,10 @@
           <Property Name="Humidity" Type="Single" Nullable="false" />
           <Property Name="TemperatureHumidityDataId" Type="Int32" Nullable="false" />
           <Property Name="EmailAlertSent" Type="Boolean" Nullable="false" />
-          <Property Name="MinCriticalTemperature" Type="Decimal" Nullable="false" />
-          <Property Name="MaxCriticalTemperature" Type="Decimal" Nullable="false" />
-          <Property Name="MinCriticalHumidity" Type="Decimal" Nullable="false" />
-          <Property Name="MaxCriticalHumidity" Type="Decimal" Nullable="false" />
+          <Property Name="MinCriticalTemperature" Type="Single" Nullable="false" />
+          <Property Name="MaxCriticalTemperature" Type="Single" Nullable="false" />
+          <Property Name="MinCriticalHumidity" Type="Single" Nullable="false" />
+          <Property Name="MaxCriticalHumidity" Type="Single" Nullable="false" />
         </EntityType>
         <EntityType Name="DictionaryTime">
           <Key>
@@ -168,10 +168,10 @@
           <Property Name="AlertsToEmail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="SendMotionDetectionEmailAlertInterval" Type="Int32" Nullable="false" />
           <Property Name="SendMotionDetectionEmailAlertIntervalUnitMeasure" Type="Int32" Nullable="false" />
-          <Property Name="CriticalTemperatureAlertMinValue" Type="Decimal" Nullable="false" />
-          <Property Name="CriticalTemperatureAlertMaxValue" Type="Decimal" Nullable="false" />
-          <Property Name="CriticalHumidityAlertMinValue" Type="Decimal" Nullable="false" />
-          <Property Name="CriticalHumidityAlertMaxValue" Type="Decimal" Nullable="false" />
+          <Property Name="CriticalTemperatureAlertMinValue" Type="Single" Nullable="false" />
+          <Property Name="CriticalTemperatureAlertMaxValue" Type="Single" Nullable="false" />
+          <Property Name="CriticalHumidityAlertMinValue" Type="Single" Nullable="false" />
+          <Property Name="CriticalHumidityAlertMaxValue" Type="Single" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>

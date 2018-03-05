@@ -34,15 +34,15 @@ namespace SmartHouse.Models
         public bool EmailAlertSent { get; set; }
 
         [Display(Name = "Min critical temperature")]
-        public decimal MinCriticalTemperature { get; set; }
+        public float MinCriticalTemperature { get; set; }
 
         [Display(Name = "Max critical temperature")]
-        public decimal MaxCriticalTemperature { get; set; }
+        public float MaxCriticalTemperature { get; set; }
 
         [Display(Name = "Min critical humidity")]
-        public decimal MinCriticalHumidity { get; set; }
+        public float MinCriticalHumidity { get; set; }
 
         [Display(Name = "Max critical humidity")]
-        public decimal MaxCriticalHumidity { get; set; }
+        public float MaxCriticalHumidity { get; set; }
     }
 }
