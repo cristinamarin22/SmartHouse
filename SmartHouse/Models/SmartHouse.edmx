@@ -26,9 +26,11 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CriticalTemperatureAlertYN" Type="bool" Nullable="false" />
-          <Property Name="CriticalTemperatureAlertValue" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="CriticalTemperatureAlertMinValue" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="CriticalTemperatureAlertMaxValue" Type="decimal" Precision="10" Scale="0" Nullable="false" />
           <Property Name="CriticalHumidityAlertYN" Type="bool" Nullable="false" />
-          <Property Name="CriticalHumidityAlertValue" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="CriticalHumidityAlertMinValue" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="CriticalHumidityAlertMaxValue" Type="decimal" Precision="10" Scale="0" Nullable="false" />
           <Property Name="DeleteTemperatureHumidityHistoricalDataOlderThan" Type="int" Nullable="false" />
           <Property Name="DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure" Type="int" Nullable="false" />
           <Property Name="MotionDetectionAlertYN" Type="bool" Nullable="false" />
@@ -146,9 +148,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CriticalTemperatureAlertYN" Type="Boolean" Nullable="false" />
-          <Property Name="CriticalTemperatureAlertValue" Type="Decimal" Nullable="false" />
           <Property Name="CriticalHumidityAlertYN" Type="Boolean" Nullable="false" />
-          <Property Name="CriticalHumidityAlertValue" Type="Decimal" Nullable="false" />
           <Property Name="DeleteTemperatureHumidityHistoricalDataOlderThan" Type="Int32" Nullable="false" />
           <Property Name="DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure" Type="Int32" Nullable="false" />
           <Property Name="MotionDetectionAlertYN" Type="Boolean" Nullable="false" />
@@ -164,6 +164,10 @@
           <Property Name="AlertsToEmail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="SendMotionDetectionEmailAlertInterval" Type="Int32" Nullable="false" />
           <Property Name="SendMotionDetectionEmailAlertIntervalUnitMeasure" Type="Int32" Nullable="false" />
+          <Property Name="CriticalTemperatureAlertMinValue" Type="Decimal" Nullable="false" />
+          <Property Name="CriticalTemperatureAlertMaxValue" Type="Decimal" Nullable="false" />
+          <Property Name="CriticalHumidityAlertMinValue" Type="Decimal" Nullable="false" />
+          <Property Name="CriticalHumidityAlertMaxValue" Type="Decimal" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -224,6 +228,10 @@
           <EntitySetMapping Name="Settings">
             <EntityTypeMapping TypeName="SmartHouseModel.Settings">
               <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="CriticalHumidityAlertMaxValue" ColumnName="CriticalHumidityAlertMaxValue" />
+                <ScalarProperty Name="CriticalHumidityAlertMinValue" ColumnName="CriticalHumidityAlertMinValue" />
+                <ScalarProperty Name="CriticalTemperatureAlertMaxValue" ColumnName="CriticalTemperatureAlertMaxValue" />
+                <ScalarProperty Name="CriticalTemperatureAlertMinValue" ColumnName="CriticalTemperatureAlertMinValue" />
                 <ScalarProperty Name="SendMotionDetectionEmailAlertIntervalUnitMeasure" ColumnName="SendMotionDetectionEmailAlertIntervalUnitMeasure" />
                 <ScalarProperty Name="SendMotionDetectionEmailAlertInterval" ColumnName="SendMotionDetectionEmailAlertInterval" />
                 <ScalarProperty Name="AlertsToEmail" ColumnName="AlertsToEmail" />
@@ -239,9 +247,7 @@
                 <ScalarProperty Name="MotionDetectionAlertYN" ColumnName="MotionDetectionAlertYN" />
                 <ScalarProperty Name="DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure" ColumnName="DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure" />
                 <ScalarProperty Name="DeleteTemperatureHumidityHistoricalDataOlderThan" ColumnName="DeleteTemperatureHumidityHistoricalDataOlderThan" />
-                <ScalarProperty Name="CriticalHumidityAlertValue" ColumnName="CriticalHumidityAlertValue" />
                 <ScalarProperty Name="CriticalHumidityAlertYN" ColumnName="CriticalHumidityAlertYN" />
-                <ScalarProperty Name="CriticalTemperatureAlertValue" ColumnName="CriticalTemperatureAlertValue" />
                 <ScalarProperty Name="CriticalTemperatureAlertYN" ColumnName="CriticalTemperatureAlertYN" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

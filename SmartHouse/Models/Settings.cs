@@ -62,5 +62,13 @@ namespace SmartHouse.Models
         [Display(Name = "Motion detection email alert interval")]
         public int SendMotionDetectionEmailAlertInterval { get; set; }
         public int SendMotionDetectionEmailAlertIntervalUnitMeasure { get; set; }
+
+        [Display(Name = "Critical temperature interval")]
+        public decimal CriticalTemperatureAlertMinValue { get; set; }
+        public decimal CriticalTemperatureAlertMaxValue { get; set; }
+
+        [Display(Name = "Critical humidity interval")]
+        public decimal CriticalHumidityAlertMinValue { get; set; }
+        public decimal CriticalHumidityAlertMaxValue { get; set; }
     }
 }

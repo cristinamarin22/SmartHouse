@@ -163,13 +163,19 @@ background-color: white;
 
                 <tr>
                     <th>
-                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalTemperatureAlertValue)</h1>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalTemperatureAlertMinValue)</h1>
                     </th>
 
                     <th>
                         <dd1>
-                            <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalTemperatureAlertValue, new { id = "temperatureAlertValueTextBox" })</h2>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalTemperatureAlertMinValue, new { id = "temperatureAlertMinValueTextBox" })</h2>
                         </dd1>
+                    </th>
+                    <th>
+                        <label><span> < Temperature < </span></label>
+                    </th>
+                    <th>
+                        <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalTemperatureAlertMaxValue, new { id = "temperatureAlertMaxValueTextBox" })</h2>
                     </th>
                 </tr>
 
@@ -187,13 +193,18 @@ background-color: white;
 
                 <tr>
                     <th>
-                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalHumidityAlertValue)</h1>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalHumidityAlertMinValue)</h1>
                     </th>
-
                     <th>
                         <dd1>
-                            <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalHumidityAlertValue, new { id = "humidityAlertValueTextBox" })</h2>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalHumidityAlertMinValue, new { id = "humidityAlertMinValueTextBox" })</h2>
                         </dd1>
+                    </th>
+                    <th>
+                        <label><span> < Humidity < </span></label>
+                    </th>
+                    <th>
+                        <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalHumidityAlertMaxValue, new { id = "humidityAlertMaxValueTextBox" })</h2>
                     </th>
                 </tr>
 
@@ -483,12 +494,12 @@ background-color: white;
         var validationMessage = '<p>';
         var validationError = false;
 
-        if ($('#temperatureAlertYNCheckBox').is(':checked') && $('#temperatureAlertValueTextBox').val() == '') {
+        if ($('#temperatureAlertYNCheckBox').is(':checked') && $('#temperatureAlertMaxValueTextBox').val() == '' && $('#temperatureAlertMinValueTextBox').val() == '') {
             validationMessage += '<p>Critical temperature is mandatory</p>';
             validationError = true;
         }
 
-        if ($('#humidityAlertYNCheckBox').is(':checked') && $('#humidityAlertValueTextBox').val() == '') {
+        if ($('#humidityAlertYNCheckBox').is(':checked') && $('#humidityAlertMaxValueTextBox').val() == '' && $('#humidityAlertMinValueTextBox').val() == '') {
             validationMessage += '<p>Critical humidity is mandatory</p>';
             validationError = true;
         }
@@ -514,9 +525,11 @@ background-color: white;
         var settings = {
 
             "CriticalTemperatureAlertYN": $('#temperatureAlertYNCheckBox').is(':checked'),
-            "CriticalTemperatureAlertValue": $('#temperatureAlertValueTextBox').val(),
+            "CriticalTemperatureAlertMinValue": $('#temperatureAlertMinValueTextBox').val(),
+            "CriticalTemperatureAlertMaxValue": $('#temperatureAlertMaxValueTextBox').val(),
             "CriticalHumidityAlertYN": $('#humidityAlertYNCheckBox').is(':checked'),
-            "CriticalHumidityAlertValue": $('#humidityAlertYNCheckBox').is(':checked'),
+            "CriticalHumidityAlertMinValue": $('#humidityAlertMinValueTextBox').val(),
+            "CriticalHumidityAlertMaxValue": $('#humidityAlertMaxValueTextBox').val(),
             "DeleteTemperatureHumidityHistoricalDataOlderThan": $('#deleteTemperatureHumidityOlderThanTextBox').val(),
             "DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure": $('#deleteTemperatureHumidityOlderThanUnitMeasureDropDownList').val(),
             "MotionDetectionAlertYN": $('#motionDetectionAlertYNCheckBox').is(':checked'), 
@@ -576,19 +589,19 @@ background-color: white;
         }
 
         if ($('#temperatureAlertYNCheckBox').is(':checked')) {
-            $('#temperatureAlertValueTextBox').removeAttr("disabled");
+            $('#temperatureAlertMaxValueTextBox').removeAttr("disabled");
         }
         else {
-            $('#temperatureAlertValueTextBox').attr("disabled", "disabled");
-            $('#temperatureAlertValueTextBox').val('');
+            $('#temperatureAlertMaxValueTextBox').attr("disabled", "disabled");
+            $('#temperatureAlertMaxValueTextBox').val('');
         }
 
         if ($('#humidityAlertYNCheckBox').is(':checked')) {
-            $('#humidityAlertValueTextBox').removeAttr("disabled");
+            $('#humidityAlertMaxValueTextBox').removeAttr("disabled");
         }
         else {
-            $('#humidityAlertValueTextBox').attr("disabled", "disabled");
-            $('#humidityAlertValueTextBox').val('');
+            $('#humidityAlertMaxValueTextBox').attr("disabled", "disabled");
+            $('#humidityAlertMaxValueTextBox').val('');
         }
     });
 
@@ -608,22 +621,22 @@ background-color: white;
     function enableDisableTemperatureEmailAlert() {
         
         if ($('#temperatureAlertYNCheckBox').is(':checked')) { 
-            $('#temperatureAlertValueTextBox').removeAttr("disabled");
+            $('#temperatureAlertMaxValueTextBox').removeAttr("disabled");
         }
         else {
-            $('#temperatureAlertValueTextBox').attr("disabled", "disabled");
-            $('#temperatureAlertValueTextBox').val('');
+            $('#temperatureAlertMaxValueTextBox').attr("disabled", "disabled");
+            $('#temperatureAlertMaxValueTextBox').val('');
         }
     }
 
     function enableDisableHumidityEmailAlert() {
 
         if ($('#humidityAlertYNCheckBox').is(':checked')) {
-            $('#humidityAlertValueTextBox').removeAttr("disabled");
+            $('#humidityAlertMaxValueTextBox').removeAttr("disabled");
         }
         else {
-            $('#humidityAlertValueTextBox').attr("disabled", "disabled");
-            $('#humidityAlertValueTextBox').val('');
+            $('#humidityAlertMaxValueTextBox').attr("disabled", "disabled");
+            $('#humidityAlertMaxValueTextBox').val('');
         }
     }
 
