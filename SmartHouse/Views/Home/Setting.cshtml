@@ -521,6 +521,18 @@ background-color: white;
             modal.style.display = "block";
         }
 
+        if ($('#temperatureAlertMinValueTextBox').val() == '')
+            $('#temperatureAlertMinValueTextBox').val(-123456);
+
+        if ($('#temperatureAlertMaxValueTextBox').val() == '')
+            $('#temperatureAlertMaxValueTextBox').val(123456);
+
+        if ($('#humidityAlertMinValueTextBox').val() == '')
+            $('#humidityAlertMinValueTextBox').val(-123456);
+
+        if ($('#humidityAlertMaxValueTextBox').val() == '')
+            $('#humidityAlertMaxValueTextBox').val(123456);
+
 
         var settings = {
 
@@ -545,6 +557,18 @@ background-color: white;
             "CriticalGasHistoricalDataOlderThan": $('#deleteGasOlderThanTextBox').val(),
             "CriticalGasHistoricalDataOlderThanUnitMeasure": $('#deleteGasOlderThanUnitMeasureDropDownList').val()
         };
+
+        if ($('#temperatureAlertMinValueTextBox').val() == -123456)
+            $('#temperatureAlertMinValueTextBox').val('');
+
+        if ($('#temperatureAlertMaxValueTextBox').val() == 123456)
+            $('#temperatureAlertMaxValueTextBox').val('');
+
+        if ($('#humidityAlertMinValueTextBox').val() == -123456)
+            $('#humidityAlertMinValueTextBox').val('');
+
+        if ($('#humidityAlertMaxValueTextBox').val() == 123456)
+            $('#humidityAlertMaxValueTextBox').val('');
 
         $.ajax({
             type: "POST",
@@ -578,6 +602,19 @@ background-color: white;
     }
 
     $(window).bind("load", function () {
+
+        if ($('#temperatureAlertMinValueTextBox').val() == -123456)
+            $('#temperatureAlertMinValueTextBox').val('');
+
+        if ($('#temperatureAlertMaxValueTextBox').val() == 123456)
+            $('#temperatureAlertMaxValueTextBox').val('');
+
+        if ($('#humidityAlertMinValueTextBox').val() == -123456)
+            $('#humidityAlertMinValueTextBox').val('');
+
+        if ($('#humidityAlertMaxValueTextBox').val() == 123456)
+            $('#humidityAlertMaxValueTextBox').val('');
+
         if ($('#motionDetectionAlertYNCheckBox').is(':checked')) {
             $('#sendMotionDetectionEmailAlertIntervalTextBox').removeAttr("disabled");
             $('#sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList').removeAttr("disabled");
@@ -590,18 +627,24 @@ background-color: white;
 
         if ($('#temperatureAlertYNCheckBox').is(':checked')) {
             $('#temperatureAlertMaxValueTextBox').removeAttr("disabled");
+            $('#temperatureAlertMinValueTextBox').removeAttr("disabled");
         }
         else {
             $('#temperatureAlertMaxValueTextBox').attr("disabled", "disabled");
             $('#temperatureAlertMaxValueTextBox').val('');
+            $('#temperatureAlertMinValueTextBox').attr("disabled", "disabled");
+            $('#temperatureAlertMinValueTextBox').val('');
         }
 
         if ($('#humidityAlertYNCheckBox').is(':checked')) {
             $('#humidityAlertMaxValueTextBox').removeAttr("disabled");
+            $('#humidityAlertMinValueTextBox').removeAttr("disabled");
         }
         else {
             $('#humidityAlertMaxValueTextBox').attr("disabled", "disabled");
             $('#humidityAlertMaxValueTextBox').val('');
+            $('#humidityAlertMinValueTextBox').attr("disabled", "disabled");
+            $('#humidityAlertMinValueTextBox').val('');
         }
     });
 
@@ -622,10 +665,14 @@ background-color: white;
         
         if ($('#temperatureAlertYNCheckBox').is(':checked')) { 
             $('#temperatureAlertMaxValueTextBox').removeAttr("disabled");
+            $('#temperatureAlertMinValueTextBox').removeAttr("disabled");
         }
         else {
             $('#temperatureAlertMaxValueTextBox').attr("disabled", "disabled");
             $('#temperatureAlertMaxValueTextBox').val('');
+
+            $('#temperatureAlertMinValueTextBox').attr("disabled", "disabled");
+            $('#temperatureAlertMinValueTextBox').val('');
         }
     }
 
@@ -633,10 +680,14 @@ background-color: white;
 
         if ($('#humidityAlertYNCheckBox').is(':checked')) {
             $('#humidityAlertMaxValueTextBox').removeAttr("disabled");
+            $('#humidityAlertMinValueTextBox').removeAttr("disabled");
         }
         else {
             $('#humidityAlertMaxValueTextBox').attr("disabled", "disabled");
             $('#humidityAlertMaxValueTextBox').val('');
+
+            $('#humidityAlertMinValueTextBox').attr("disabled", "disabled");
+            $('#humidityAlertMinValueTextBox').val('');
         }
     }
 

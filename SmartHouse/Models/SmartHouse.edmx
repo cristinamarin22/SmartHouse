@@ -62,12 +62,12 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TemperatureHumidityDataId" Type="int" Nullable="false" />
           <Property Name="InternalTime" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="MinCriticalTemperature" Type="float" Nullable="false" />
+          <Property Name="MinCriticalTemperature" Type="decimal" Precision="10" Scale="0" />
           <Property Name="Temperature" Type="float" Nullable="false" />
-          <Property Name="MaxCriticalTemperature" Type="float" Nullable="false" />
-          <Property Name="MinCriticalHumidity" Type="float" Nullable="false" />
+          <Property Name="MaxCriticalTemperature" Type="decimal" Precision="10" Scale="0" />
+          <Property Name="MinCriticalHumidity" Type="decimal" Precision="10" Scale="0" />
           <Property Name="Humidity" Type="float" Nullable="false" />
-          <Property Name="MaxCriticalHumidity" Type="float" Nullable="false" />
+          <Property Name="MaxCriticalHumidity" Type="decimal" Precision="10" Scale="0" />
           <Property Name="EmailAlertSent" Type="bool" Nullable="false" />
         </EntityType>
         <EntityType Name="TemperatureHumidityData">
@@ -134,10 +134,10 @@
           <Property Name="Humidity" Type="Single" Nullable="false" />
           <Property Name="TemperatureHumidityDataId" Type="Int32" Nullable="false" />
           <Property Name="EmailAlertSent" Type="Boolean" Nullable="false" />
-          <Property Name="MinCriticalTemperature" Type="Single" Nullable="false" />
-          <Property Name="MaxCriticalTemperature" Type="Single" Nullable="false" />
-          <Property Name="MinCriticalHumidity" Type="Single" Nullable="false" />
-          <Property Name="MaxCriticalHumidity" Type="Single" Nullable="false" />
+          <Property Name="MinCriticalTemperature" Type="Decimal" Nullable="false" />
+          <Property Name="MaxCriticalTemperature" Type="Decimal" />
+          <Property Name="MinCriticalHumidity" Type="Decimal" Nullable="false" />
+          <Property Name="MaxCriticalHumidity" Type="Decimal" Nullable="false" a:SetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
         </EntityType>
         <EntityType Name="DictionaryTime">
           <Key>
