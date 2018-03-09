@@ -61,7 +61,7 @@ namespace SmartHouse.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DROP EVENT `deleteMotionDetectionHistoryData`; CREATE DEFINER=`root`@`localhost` EVENT `deleteMotionDetectionHistoryData` ON SCHEDULE EVERY 1 MINUTE STARTS &apos;2018-02-18 18:34:28&apos; ON COMPLETION PRESERVE ENABLE DO delete from MotionDetectionData where TIMESTAMPDIFF({0}, InternalTime, now()) &gt; {1}.
+        ///   Looks up a localized string similar to DROP EVENT `deleteMotionDetectionHistoryData`; CREATE DEFINER=`root`@`localhost` EVENT `deleteMotionDetectionHistoryData` ON SCHEDULE EVERY 1 MINUTE STARTS &apos;2018-02-18 18:34:28&apos; ON COMPLETION PRESERVE ENABLE DO delete from MotionDetectionData where TIMESTAMPDIFF({0}, InternalTime, now()) &gt;= {1}.
         /// </summary>
         public static string jobDeleteMotionDetectionHistoryData {
             get {
@@ -70,7 +70,7 @@ namespace SmartHouse.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DROP EVENT `deleteSoundDetectionHistoryData`; CREATE DEFINER=`root`@`localhost` EVENT `deleteSoundDetectionHistoryData` ON SCHEDULE EVERY 1 MINUTE STARTS &apos;2018-02-18 18:34:28&apos; ON COMPLETION PRESERVE ENABLE DO delete from SoundDetectionData where TIMESTAMPDIFF({0}, InternalTime, now()) &gt; {1}.
+        ///   Looks up a localized string similar to DROP EVENT `deleteSoundDetectionHistoryData`; CREATE DEFINER=`root`@`localhost` EVENT `deleteSoundDetectionHistoryData` ON SCHEDULE EVERY 1 MINUTE STARTS &apos;2018-02-18 18:34:28&apos; ON COMPLETION PRESERVE ENABLE DO delete from SoundDetectionData where TIMESTAMPDIFF({0}, InternalTime, now()) &gt;= {1}.
         /// </summary>
         public static string jobDeleteSoundDetectionHistoryData {
             get {
@@ -79,7 +79,7 @@ namespace SmartHouse.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DROP EVENT `deleteTemperatureHumidityHistoryData`; CREATE DEFINER=`root`@`localhost` EVENT `deleteTemperatureHumidityHistoryData` ON SCHEDULE EVERY 1 MINUTE STARTS &apos;2018-02-18 18:34:28&apos; ON COMPLETION PRESERVE ENABLE DO delete from TemperatureHumidityData where TIMESTAMPDIFF({0}, InternalTime, now()) &gt; {1}.
+        ///   Looks up a localized string similar to DROP EVENT `deleteTemperatureHumidityHistoryData`; CREATE DEFINER=`root`@`localhost` EVENT `deleteTemperatureHumidityHistoryData` ON SCHEDULE EVERY 1 MINUTE STARTS &apos;2018-02-18 18:34:28&apos; ON COMPLETION PRESERVE ENABLE DO delete from TemperatureHumidityData where TIMESTAMPDIFF({0}, InternalTime, now()) &gt;= {1}.
         /// </summary>
         public static string jobDeleteTemperatureHumidityHistoryData {
             get {
