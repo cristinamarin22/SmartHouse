@@ -460,9 +460,9 @@ th {
                     $('#tableTemperatureHumidity tr>td').remove();
                     var html = '';
                     for (var i = 0; i < response.length; i++) {
-                        html += '<tr><td>' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                        html += '<tr><td style="display:none;">' + response[i].Id + '</td><td>' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
 
-                        if (data[i].MinCriticalTemperature == null)
+                        if (response[i].MinCriticalTemperature == null)
                             html += '</td><td> - ';
                         else
                             html += '</td><td>' + response[i].MinCriticalTemperature;
