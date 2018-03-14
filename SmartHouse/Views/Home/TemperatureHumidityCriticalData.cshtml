@@ -157,6 +157,9 @@ th {
     padding: 2px 20px;
     font-size: 16px;
 }
+.highlight {
+    background-color: #ff9191;
+}
 </style>
 <body>
     <div class="w3-container">
@@ -215,6 +218,9 @@ th {
 
         <table class="table" id="tableTemperatureHumidity">
             <tr>
+                <th style="display:none;">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.InternalTime)
                 </th>
@@ -247,6 +253,9 @@ th {
             @foreach (var item in Model)
             {
             <tr>
+                <td style="display:none;">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.InternalTime)
                 </td>
@@ -325,46 +334,84 @@ th {
     var modal = document.getElementById('deleteAllPopup');
     var modalFiltered = document.getElementById('deleteFilteredDataPopup');
 
+    var selectedRow = null;
+    var selectedRowYN = null;
+    var selectedRowIndex = null;
+
     function getAllRows() {
             $.ajax({
                 url: '@Url.Action("GetTemperatureHumidityCriticalHistoryData", "Home")',
                 method: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    var html = '';
+
+                    //keep scroll position
+                    if (sessionStorage.scrollTop != "undefined")
+                        $(window).scrollTop(sessionStorage.scrollTop);
+
+                    //if (selectedRow != null) {
+                    //    $("#tableTemperatureHumidity tr").children().each(function (index, td) {
+                    //        $(this).removeClass('highlight');
+                    //    });
+                    //    //selectedRow.addClass('highlight');
+                    //    //selectedRow.children().each(function (index, td) {
+                    //    //    $(this).addClass('highlight');
+                    //    //});
+                    //} 
+
+                    var tdEndTdStart = '</td><td>';
+                    var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> InternalTime </th> <th> Min critical temperature </th> <th> Temperature </th> <th> Max critical temperature </th> <th> Min critical humidity </th> <th> Humidity </th> <th> Max critical humidity </th> <th> Email alert sent </th> <th> Action </th> </tr> ';
                     for (var i = 0; i < data.length; i++) {
-                        html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
 
+                        tdEndTdStart = '</td><td>';
+
+                        if (selectedRow != null && data[i].Id == selectedRowIndex) {
+                            html += '<tr class = "highlight"><td style="display:none;" class = "highlight">' + data[i].Id + '</td><td class = "highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                            tdEndTdStart = '</td><td class = "highlight">'
+                        }
+                        else {
+                            html += '<tr><td style="display:none;">' + data[i].Id + '</td><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                        }
+                        
                         if (data[i].MinCriticalTemperature == null)
-                            html += '</td><td> - ';
+                            html += tdEndTdStart + '- ';
                         else
-                            html += '</td><td>' + data[i].MinCriticalTemperature;
+                            html += tdEndTdStart + data[i].MinCriticalTemperature;
 
-                        html += '</td><td>' + data[i].Temperature;
+                        html += tdEndTdStart + data[i].Temperature;
 
                         if (data[i].MaxCriticalTemperature == null)
-                            html += '</td><td> - ';
+                            html += tdEndTdStart + ' - ';
                         else
-                            html += '</td><td>' + data[i].MaxCriticalTemperature;
+                            html += tdEndTdStart + data[i].MaxCriticalTemperature;
 
                         if (data[i].MinCriticalHumidity == null)
-                            html += '</td><td> - ';
+                            html += tdEndTdStart + ' - ';
                         else
-                            html += '</td><td>' + data[i].MinCriticalHumidity;
+                            html += tdEndTdStart + data[i].MinCriticalHumidity;
 
-                        html += '</td><td>' + data[i].Humidity;
+                        html += tdEndTdStart + data[i].Humidity;
 
                         if (data[i].MaxCriticalHumidity == null)
-                            html += '</td><td> - ';
+                            html += tdEndTdStart + ' - ';
                         else
-                            html += '</td><td>' + data[i].MaxCriticalHumidity;
+                            html += tdEndTdStart + data[i].MaxCriticalHumidity;
 
-                        html += '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].SentEmailAlert + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
-                            '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + data[i].Id + '">Delete</a>'   + '</td></tr>';
+
+                        if (selectedRow != null && data[i].Id == selectedRowIndex) {
+                            html += '</td><td class = "highlight" >' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].SentEmailAlert + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
+                                '</td><td class = "highlight" >' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                        }
+                        else {
+                            html += '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].SentEmailAlert + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
+                                '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                        }
                     }
 
-                    $('#tableTemperatureHumidity tr>td').remove();
-                    $("#tableTemperatureHumidity").find('tbody').append($(html));
+                    html += ' </tbody>';
+
+                    $('#tableTemperatureHumidity').empty();
+                    $("#tableTemperatureHumidity").append($(html));
 
                     intervalReadings = setTimeout("getAllRows()", 10000);
 
@@ -610,6 +657,33 @@ th {
                 modalFiltered.style.display = "none";
             }
         }
+
+        //scroll position should be the same even if table reloads
+        $(window).scroll(function () {
+            sessionStorage.scrollTop = $(this).scrollTop();
+        });
+
+        //color with red selected line 
+        $("#tableTemperatureHumidity").on("click", "tr", function () {
+            selectedRow = $(this);
+            selectedRowIndex = parseInt($(this)[0].cells[0].innerHTML);
+            selectedRowYN = $(this).hasClass("highlight");
+            $("#tableTemperatureHumidity tr").children().each(function (index, td) {
+                $(this).removeClass('highlight');
+            });
+            $("#tableTemperatureHumidity tr>td").children().each(function (index, td) {
+                $(this).removeClass('highlight');
+            });
+            if (!selectedRowYN)
+                selectedRow.children().each(function (index, td) {
+                    $(this).addClass('highlight');
+                });
+            else {
+                selectedRow = null;
+                selectedRowIndex = null;
+            }
+
+        });
 
     </script>
 </body>

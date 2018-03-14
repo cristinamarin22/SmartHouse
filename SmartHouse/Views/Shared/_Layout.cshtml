@@ -13,42 +13,59 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-    html, body, h1, h2, h3, h4, h5 {
-        font-family: "Raleway", sans-serif;
-    }
+html, body, h1, h2, h3, h4, h5 {
+    font-family: "Raleway", sans-serif;
+}
 
-    dd1 {
-        display: block;
-        margin-left: 175px;
-    }
+dd1 {
+    display: block;
+    margin-left: 175px;
+}
 
-    dd2 {
-        display: block;
-        margin-left: 230px;
-    }
+dd2 {
+    display: block;
+    margin-left: 230px;
+}
 
-    dd3 {
-        display: block;
-        margin-left: 236px;
-    }
+dd3 {
+    display: block;
+    margin-left: 236px;
+}
 
-    dd4 {
-        display: block;
-        margin-left: 260px;
-    }
+dd4 {
+    display: block;
+    margin-left: 260px;
+}
 
-    dd5 {
-        display: block;
-        margin-left: 532px;
-    }
+dd5 {
+    display: block;
+    margin-left: 532px;
+}
 
-    dd6 {
-        display: block;
-        margin-left: 447px;
+dd6 {
+    display: block;
+    margin-left: 447px;
+}
+​.header {
+    height: 50px;
+}
+.content {
+    position: absolute;
+    top: 320px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    overflow-y: scroll;
+}
+@@media (max-width: 780px) {
+    .content {
+        position: relative;
+        top: 0px;
     }
+}
 </style>
 <body>
-    <div>
+    <div class="header">
         <div class="w3-row-padding w3-margin-bottom">
             <a href="/Home/TemperatureHumidity">
                 <div class="w3-quarter">
@@ -95,7 +112,7 @@
             </a>
         </div>
     </div>
-    <div>
+    <div class="header">
         <div class="w3-row-padding w3-margin-bottom">
             <a href="/Home/Setting">
                 <div class="w3-quarter">
@@ -118,9 +135,16 @@
             </div>
         </div>
     </div>
-    @RenderBody()
+    <div class="content">
+        @RenderBody()
+    </div>
 
-    <script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="/js/jquery.dataTables.js"></script>
+
+    <script type="text/javascript">
+
+
 
     </script>
 

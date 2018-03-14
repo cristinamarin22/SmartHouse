@@ -61,10 +61,10 @@ th {
     border: 2px solid #f44336;
 }
 
-.button3:hover {
-    background-color: #f44336;
-    color: white;
-}
+    .button3:hover {
+        background-color: #f44336;
+        color: white;
+    }
 
 /* The Modal (background) */
 .modal {
@@ -157,65 +157,73 @@ th {
     padding: 2px 20px;
     font-size: 16px;
 }
+
+.highlight {
+    background-color: #ff9191;
+}
 </style>
 <body>
     <div class="w3-container">
-        <button type="button" class="button button3" id="refreshButton" onclick="getAllRows()">Refresh</button>
+        <div>
+            <button type="button" class="button button3 header" id="refreshButton" onclick="getAllRows()">Refresh</button>
 
-        <button type="button" class="button button3" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
+            <button type="button" class="button button3 header" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
 
-        <button type="button" class="button button3" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
+            <button type="button" class="button button3 header" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
 
-        @*<button type="button" class="button button3" id="sendEmailButton" onclick="sendEmail()">Send email</button>*@
+            @*<button type="button" class="button button3" id="sendEmailButton" onclick="sendEmail()">Send email</button>*@
+            <td>
+                <span style="margin-left: 12%;">
+                    @Html.TextBox("TemperatureTextBoxMinValue", "", new { id = "TemperatureMinValueTextBox", style = "width:70px; background:#ff9191" })
+                </span>
+            </td>
 
-        <td>
-            <span style="margin-left: 12%;">
-                @Html.TextBox("TemperatureTextBoxMinValue", "", new { id = "TemperatureMinValueTextBox", style = "width:70px; background:#ff9191" })
-            </span>
-        </td>
+            <td>
+                <label><span> < Temperature < </span></label>
+            </td>
 
-        <td>
-            <label><span> < Temperature < </span></label>
-        </td>
+            <td>
+                @Html.TextBox("TemperatureTextBoxMaxValue", "", new { id = "TemperatureMaxValueTextBox", style = "width:70px; background:#ff9191" })
+            </td>
 
-        <td>
-            @Html.TextBox("TemperatureTextBoxMaxValue", "", new { id = "TemperatureMaxValueTextBox", style = "width:70px; background:#ff9191" })
-        </td>
+            <td>
+                <span style="margin-left: 2.5%;">
+                    @Html.TextBox("HumidityTextBoxMinValue", "", new { id = "HumidityMinValueTextBox", style = "width:70px; background:#ff9191" })
+                </span>
+            </td>
 
-        <td>
-            <span style="margin-left: 2.5%;">
-                @Html.TextBox("HumidityTextBoxMinValue", "", new { id = "HumidityMinValueTextBox", style = "width:70px; background:#ff9191" })
-            </span>
-        </td>
+            <td>
+                <label><span> < Humidity < </span></label>
+            </td>
 
-        <td>
-            <label><span> < Humidity < </span></label>
-        </td>
+            <td>
+                @Html.TextBox("HumidityTextBoxMaxValue", "", new { id = "HumidityMaxValueTextBox", style = "width:70px; background:#ff9191" })
+            </td>
 
-        <td>
-            @Html.TextBox("HumidityTextBoxMaxValue", "", new { id = "HumidityMaxValueTextBox", style = "width:70px; background:#ff9191" })
-        </td>
+            <td>
+                <span style="margin-left: 2.5%;">
+                    @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
+                </span>
+            </td>
 
-        <td>
-            <span style="margin-left: 2.5%;">
-                @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
-            </span>
-        </td>
+            <td>
+                <label><span> < Date < </span></label>
+            </td>
 
-        <td>
-            <label><span> < Date < </span></label>
-        </td>
+            <td>
+                @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
+            </td>
 
-        <td>
-            @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
-        </td>
-
-        <td>
-            <button style="float: right;" type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
-        </td>
+            <td>
+                <button style="float: right;" type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
+            </td>
+        </div>
 
         <table class="table" id="tableTemperatureHumidity">
             <tr>
+                <th style="display:none;">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.InternalTime)
                 </th>
@@ -231,8 +239,11 @@ th {
             </tr>
 
             @foreach (var item in Model)
-        {
+             {
             <tr>
+                <td style="display:none;">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.InternalTime)
                 </td>
@@ -246,7 +257,7 @@ th {
                     @Html.ActionLink("Delete", "DeleteTemperatureHumidityData", "Home", new { id = item.Id }, null)
                 </td>
             </tr>
-    }
+             }
 
         </table><br>
     </div>
@@ -297,25 +308,54 @@ th {
         var modal = document.getElementById('deleteAllPopup');
         var modalFiltered = document.getElementById('deleteFilteredDataPopup');
 
+        var selectedRow = null;
+        var selectedRowYN = null;
+        var selectedRowIndex = null;
+
         function getAllRows() {
             $.ajax({
                 url: '@Url.Action("GetTemperatureHumidityHistoryData", "Home")',
                 method: 'GET',
                 dataType: 'json',
                 success: function (data) {
+
                     $('#deleteFilteredData').css("visibility", "hidden");
-                    var html = '';
+
+                    var tdEndTdStart = '</td><td>';
+                    var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> InternalTime </th> <th> Temperature </th> <th> Humidity </th> <th> Action </th> </tr> ';
                     for (var i = 0; i < data.length; i++) {
-                        html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
+
+                        tdEndTdStart = '</td><td>';
+
+                        if (selectedRow != null && data[i].Id == selectedRowIndex) {
+                            html += '<tr class="highlight"><td style="display:none;" class="highlight">' + data[i].Id + '</td><td class="highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                            tdEndTdStart = '</td><td class="highlight">'
+                        }
+                        else {
+                            html += '<tr><td style="display:none;">' + data[i].Id + '</td><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                        }
+
+                        html += tdEndTdStart + data[i].Temperature + tdEndTdStart + data[i].Humidity + tdEndTdStart;
+
+                        html += '<a href="/Home/DeleteTemperatureHumidityData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+
+                        /*html += '<tr style="display:none;"><td>' + data[i].Id +
+                            '</td><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
                             '</td><td>' + data[i].Temperature +
                             '</td><td>' + data[i].Humidity +
-                            '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityData/' + data[i].Id + '">Delete</a>'   + '</td></tr>';
+                            '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityData/' + data[i].Id + '">Delete</a>'   + '</td></tr>';*/
                     }
 
-                    $('#tableTemperatureHumidity tr>td').remove();
-                    $("#tableTemperatureHumidity").find('tbody').append($(html));
+                    html += ' </tbody>';
 
-                    intervalReadings = setTimeout("getAllRows()", 10000);
+                    $('#tableTemperatureHumidity').empty();
+                    $("#tableTemperatureHumidity").append($(html));
+
+                    intervalReadings = setTimeout("getAllRows()", 10000);                
+
+                    //keep scroll position
+                    if (sessionStorage.scrollTop != "undefined") 
+                        $(window).scrollTop(sessionStorage.scrollTop);
 
                     $('#refreshButton').text('Refresh');
 
@@ -498,6 +538,28 @@ th {
                 modalFiltered.style.display = "none";
             }
         }
+
+        //color with red selected line 
+        $("#tableTemperatureHumidity").on("click", "tr", function () {
+            selectedRow = $(this);
+            selectedRowIndex = parseInt($(this)[0].cells[0].innerHTML);
+            selectedRowYN = $(this).hasClass("highlight");
+            $("#tableTemperatureHumidity tr").children().each(function (index, td) {
+                $(this).removeClass('highlight');
+            });
+            $("#tableTemperatureHumidity tr>td").children().each(function (index, td) {
+                $(this).removeClass('highlight');
+            });
+            if (!selectedRowYN)
+                selectedRow.children().each(function (index, td) {
+                    $(this).addClass('highlight');
+                });
+            else {
+                selectedRow = null;
+                selectedRowIndex = null;
+            }
+
+        });
 
     </script>
 </body>
