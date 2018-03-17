@@ -157,6 +157,9 @@ th {
     padding: 2px 20px;
     font-size: 16px;
 }
+.highlight {
+    background-color: #64b1f4;
+}
 </style>
 <body>
     <div class="w3-container">
@@ -187,6 +190,9 @@ th {
 
         <table class="table" id="tableMotionDetection">
             <tr>
+                <th style="display:none;">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
                 <th>
                     Date
                 </th>
@@ -201,6 +207,9 @@ th {
             @foreach (var item in Model)
             {
             <tr>
+                <td style="display:none;">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.InternalTime)
                 </td>
@@ -261,24 +270,49 @@ th {
         var modal = document.getElementById('deleteAllPopup');
         var modalFiltered = document.getElementById('deleteFilteredDataPopup');
 
+        var selectedRow = null;
+        var selectedRowYN = null;
+        var selectedRowIndex = null;
+
         function getAllRows() {
             $.ajax({
                 url: '@Url.Action("GetMotionDetectionHistoryData", "Home")',
                 method: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    var html = '';
+
+                    var tdEndTdStart = '</td><td>';
+                    var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> Date </th> <th> Email alert sent </th> <th> Action </th>  </tr> ';
+
                     for (var i = 0; i < data.length; i++) {
-                        html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td><input ';
+
+                        tdEndTdStart = '</td><td>';
+
+                        if (selectedRow != null && data[i].Id == selectedRowIndex) {
+                            html += '<tr class="highlight"><td style="display:none;" class="highlight">' + data[i].Id + '</td><td class="highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td class="highlight"><input ';
+                            tdEndTdStart = '</td><td class="highlight">'
+                        }
+                        else {
+                            html += '<tr><td style="display:none;">' + data[i].Id + '</td><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td><input ';
+                        }
+
                         if (data[i].EmailAlertSent)
                             html += ' checked="checked" data-val="' + data[i].EmailAlertSent + '"';
                         
-                        html += ' id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
-                            '</td><td>' + '<a href="/Home/DeleteMotionDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                        html += ' id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" /></td>';
+
+                        if (selectedRow != null && data[i].Id == selectedRowIndex) {
+                            html += '<td class="highlight"><a href="/Home/DeleteMotionDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                        }
+                        else {
+                            html += '<td><a href="/Home/DeleteMotionDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                        }  
                     }
 
-                    $('#tableMotionDetection tr>td').remove();
-                    $("#tableMotionDetection").find('tbody').append($(html));
+                    html += ' </tbody>';
+
+                    $('#tableMotionDetection').empty();
+                    $("#tableMotionDetection").append($(html));
 
                     intervalReadings = setTimeout("getAllRows()", 10000);
 
@@ -314,7 +348,7 @@ th {
                 dataType: "json",
                 success: function (response) {
                     $('#deleteFilteredData').css("visibility", "visible");
-                    $('#tableTemperatureHumidity tr>td').remove();
+                    $('#tableMotionDetection tr>td').remove();
                     var html = '';
                     for (var i = 0; i < response.length; i++) {
                         html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td><input ';
@@ -442,6 +476,28 @@ th {
                 modalFiltered.style.display = "none";
             }
         }
+
+        //color with red selected line 
+        $("#tableMotionDetection").on("click", "tr", function () {
+            selectedRow = $(this);
+            selectedRowIndex = parseInt($(this)[0].cells[0].innerHTML);
+            selectedRowYN = $(this).hasClass("highlight");
+            $("#tableMotionDetection tr").children().each(function (index, td) {
+                $(this).removeClass('highlight');
+            });
+            $("#tableMotionDetection tr>td").children().each(function (index, td) {
+                $(this).removeClass('highlight');
+            });
+            if (!selectedRowYN)
+                selectedRow.children().each(function (index, td) {
+                    $(this).addClass('highlight');
+                });
+            else {
+                selectedRow = null;
+                selectedRowIndex = null;
+            }
+
+        });
 
     </script>
 </body>
