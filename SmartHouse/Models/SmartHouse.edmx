@@ -19,6 +19,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="InternalTime" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="EmailAlertSent" Type="bool" Nullable="false" />
+          <Property Name="test" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Settings">
           <Key>
@@ -28,9 +29,13 @@
           <Property Name="CriticalTemperatureAlertYN" Type="bool" Nullable="false" />
           <Property Name="CriticalTemperatureAlertMinValue" Type="float" Nullable="false" />
           <Property Name="CriticalTemperatureAlertMaxValue" Type="float" Nullable="false" />
+          <Property Name="SendTemperatureEmailAlertInterval" Type="int" Nullable="false" />
+          <Property Name="SendTemperatureEmailAlertIntervalUnitMeasure" Type="int" Nullable="false" />
           <Property Name="CriticalHumidityAlertYN" Type="bool" Nullable="false" />
           <Property Name="CriticalHumidityAlertMinValue" Type="float" Nullable="false" />
           <Property Name="CriticalHumidityAlertMaxValue" Type="float" Nullable="false" />
+          <Property Name="SendHumidityEmailAlertInterval" Type="int" Nullable="false" />
+          <Property Name="SendHumidityEmailAlertIntervalUnitMeasure" Type="int" Nullable="false" />
           <Property Name="DeleteTemperatureHumidityHistoricalDataOlderThan" Type="int" Nullable="false" />
           <Property Name="DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure" Type="int" Nullable="false" />
           <Property Name="MotionDetectionAlertYN" Type="bool" Nullable="false" />
@@ -62,13 +67,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TemperatureHumidityDataId" Type="int" Nullable="false" />
           <Property Name="InternalTime" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="MinCriticalTemperature" Type="decimal" Precision="10" Scale="0" />
+          <Property Name="MinCriticalTemperature" Type="decimal" Precision="10" Scale="1" />
           <Property Name="Temperature" Type="float" Nullable="false" />
-          <Property Name="MaxCriticalTemperature" Type="decimal" Precision="10" Scale="0" />
-          <Property Name="MinCriticalHumidity" Type="decimal" Precision="10" Scale="0" />
+          <Property Name="MaxCriticalTemperature" Type="decimal" Precision="10" Scale="1" />
+          <Property Name="TemperatureEmailAlertSent" Type="bool" Nullable="false" />
+          <Property Name="MinCriticalHumidity" Type="decimal" Precision="10" Scale="1" />
           <Property Name="Humidity" Type="float" Nullable="false" />
-          <Property Name="MaxCriticalHumidity" Type="decimal" Precision="10" Scale="0" />
-          <Property Name="EmailAlertSent" Type="bool" Nullable="false" />
+          <Property Name="MaxCriticalHumidity" Type="decimal" Precision="10" Scale="1" />
+          <Property Name="HumidityEmailAlertSent" Type="bool" Nullable="false" />
         </EntityType>
         <EntityType Name="TemperatureHumidityData">
           <Key>
@@ -98,6 +104,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InternalTime" Type="DateTime" Nullable="false" />
           <Property Name="EmailAlertSent" Type="Boolean" Nullable="false" />
+          <Property Name="test" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="SoundDetectionData">
           <Key>
@@ -133,11 +140,12 @@
           <Property Name="Temperature" Type="Single" Nullable="false" />
           <Property Name="Humidity" Type="Single" Nullable="false" />
           <Property Name="TemperatureHumidityDataId" Type="Int32" Nullable="false" />
-          <Property Name="EmailAlertSent" Type="Boolean" Nullable="false" />
           <Property Name="MinCriticalTemperature" Type="Decimal" Nullable="false" />
           <Property Name="MaxCriticalTemperature" Type="Decimal" />
           <Property Name="MinCriticalHumidity" Type="Decimal" Nullable="false" />
           <Property Name="MaxCriticalHumidity" Type="Decimal" Nullable="false" a:SetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <Property Name="TemperatureEmailAlertSent" Type="Boolean" Nullable="false" />
+          <Property Name="HumidityEmailAlertSent" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="DictionaryTime">
           <Key>
@@ -172,6 +180,10 @@
           <Property Name="CriticalTemperatureAlertMaxValue" Type="Single" Nullable="false" />
           <Property Name="CriticalHumidityAlertMinValue" Type="Single" Nullable="false" />
           <Property Name="CriticalHumidityAlertMaxValue" Type="Single" Nullable="false" />
+          <Property Name="SendTemperatureEmailAlertInterval" Type="Int32" Nullable="false" />
+          <Property Name="SendTemperatureEmailAlertIntervalUnitMeasure" Type="Int32" Nullable="false" />
+          <Property Name="SendHumidityEmailAlertInterval" Type="Int32" Nullable="false" />
+          <Property Name="SendHumidityEmailAlertIntervalUnitMeasure" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -182,6 +194,7 @@
           <EntitySetMapping Name="MotionDetectionDatas">
             <EntityTypeMapping TypeName="SmartHouseModel.MotionDetectionData">
               <MappingFragment StoreEntitySet="MotionDetectionData">
+                <ScalarProperty Name="test" ColumnName="test" />
                 <ScalarProperty Name="EmailAlertSent" ColumnName="EmailAlertSent" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="InternalTime" ColumnName="InternalTime" />
@@ -210,11 +223,12 @@
           <EntitySetMapping Name="TemperatureHumidityCriticalDatas">
             <EntityTypeMapping TypeName="SmartHouseModel.TemperatureHumidityCriticalData">
               <MappingFragment StoreEntitySet="TemperatureHumidityCriticalData">
+                <ScalarProperty Name="HumidityEmailAlertSent" ColumnName="HumidityEmailAlertSent" />
+                <ScalarProperty Name="TemperatureEmailAlertSent" ColumnName="TemperatureEmailAlertSent" />
                 <ScalarProperty Name="MaxCriticalHumidity" ColumnName="MaxCriticalHumidity" />
                 <ScalarProperty Name="MinCriticalHumidity" ColumnName="MinCriticalHumidity" />
                 <ScalarProperty Name="MaxCriticalTemperature" ColumnName="MaxCriticalTemperature" />
                 <ScalarProperty Name="MinCriticalTemperature" ColumnName="MinCriticalTemperature" />
-                <ScalarProperty Name="EmailAlertSent" ColumnName="EmailAlertSent" />
                 <ScalarProperty Name="TemperatureHumidityDataId" ColumnName="TemperatureHumidityDataId" />
                 <ScalarProperty Name="Humidity" ColumnName="Humidity" />
                 <ScalarProperty Name="Temperature" ColumnName="Temperature" />
@@ -234,6 +248,10 @@
           <EntitySetMapping Name="Settings">
             <EntityTypeMapping TypeName="SmartHouseModel.Settings">
               <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="SendHumidityEmailAlertIntervalUnitMeasure" ColumnName="SendHumidityEmailAlertIntervalUnitMeasure" />
+                <ScalarProperty Name="SendHumidityEmailAlertInterval" ColumnName="SendHumidityEmailAlertInterval" />
+                <ScalarProperty Name="SendTemperatureEmailAlertIntervalUnitMeasure" ColumnName="SendTemperatureEmailAlertIntervalUnitMeasure" />
+                <ScalarProperty Name="SendTemperatureEmailAlertInterval" ColumnName="SendTemperatureEmailAlertInterval" />
                 <ScalarProperty Name="CriticalHumidityAlertMaxValue" ColumnName="CriticalHumidityAlertMaxValue" />
                 <ScalarProperty Name="CriticalHumidityAlertMinValue" ColumnName="CriticalHumidityAlertMinValue" />
                 <ScalarProperty Name="CriticalTemperatureAlertMaxValue" ColumnName="CriticalTemperatureAlertMaxValue" />

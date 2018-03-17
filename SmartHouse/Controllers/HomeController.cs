@@ -384,9 +384,13 @@ namespace SmartHouse.Controllers
                 smartHouseEntities.Settings.FirstOrDefault().CriticalTemperatureAlertYN = settings.CriticalTemperatureAlertYN;
                 smartHouseEntities.Settings.FirstOrDefault().CriticalTemperatureAlertMinValue = settings.CriticalTemperatureAlertMinValue;
                 smartHouseEntities.Settings.FirstOrDefault().CriticalTemperatureAlertMaxValue = settings.CriticalTemperatureAlertMaxValue;
+                smartHouseEntities.Settings.FirstOrDefault().SendTemperatureEmailAlertInterval = settings.SendTemperatureEmailAlertInterval;
+                smartHouseEntities.Settings.FirstOrDefault().SendTemperatureEmailAlertIntervalUnitMeasure = settings.SendTemperatureEmailAlertIntervalUnitMeasure;
                 smartHouseEntities.Settings.FirstOrDefault().CriticalHumidityAlertYN = settings.CriticalHumidityAlertYN;
                 smartHouseEntities.Settings.FirstOrDefault().CriticalHumidityAlertMinValue = settings.CriticalHumidityAlertMinValue;
                 smartHouseEntities.Settings.FirstOrDefault().CriticalHumidityAlertMaxValue = settings.CriticalHumidityAlertMaxValue;
+                smartHouseEntities.Settings.FirstOrDefault().SendHumidityEmailAlertInterval = settings.SendHumidityEmailAlertInterval;
+                smartHouseEntities.Settings.FirstOrDefault().SendHumidityEmailAlertIntervalUnitMeasure = settings.SendHumidityEmailAlertIntervalUnitMeasure;
                 smartHouseEntities.Settings.FirstOrDefault().DeleteTemperatureHumidityHistoricalDataOlderThan = settings.DeleteTemperatureHumidityHistoricalDataOlderThan;
                 smartHouseEntities.Settings.FirstOrDefault().DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure = settings.DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure;
                 #endregion

@@ -70,5 +70,13 @@ namespace SmartHouse.Models
         [Display(Name = "Critical humidity interval")]
         public float CriticalHumidityAlertMinValue { get; set; }
         public float CriticalHumidityAlertMaxValue { get; set; }
+
+        [Display(Name = "Temperature email alert interval")]
+        public int SendTemperatureEmailAlertInterval { get; set; }
+        public int SendTemperatureEmailAlertIntervalUnitMeasure { get; set; }
+
+        [Display(Name = "Humidity email alert interval")]
+        public int SendHumidityEmailAlertInterval { get; set; }
+        public int SendHumidityEmailAlertIntervalUnitMeasure { get; set; }
     }
 }
