@@ -13,6 +13,7 @@ namespace SmartHouse.Models
         public float? HumidityMaxValue { get; set; }
         public DateTime? DateMinValue { get; set; }
         public DateTime? DateMaxValue { get; set; }
-        public bool EmailAlertSent { get; set; }
+        public bool TemperatureEmailAlertSent { get; set; }
+        public bool HumidityEmailAlertSent { get; set; }
     }
 }

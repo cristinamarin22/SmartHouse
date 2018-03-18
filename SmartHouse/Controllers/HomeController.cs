@@ -222,6 +222,12 @@ namespace SmartHouse.Controllers
             if (filter.DateMaxValue != null)
                 temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
 
+            if (filter.TemperatureEmailAlertSent)
+                temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.TemperatureEmailAlertSent).ToList();
+
+            if (filter.HumidityEmailAlertSent)
+                temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.HumidityEmailAlertSent).ToList();
+
             foreach (var filteredItem in temperatureHumidityCriticalDataList)
             {
                 TemperatureHumidityCriticalData temperatureHumidityCriticalData = smartHouseEntities.TemperatureHumidityCriticalDatas.Find(filteredItem.Id);
@@ -244,6 +250,9 @@ namespace SmartHouse.Controllers
 
             if (filter.DateMaxValue != null)
                 motionDetectionList = motionDetectionList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
+
+            if (filter.TemperatureEmailAlertSent)
+                motionDetectionList = motionDetectionList.Where(x => x.EmailAlertSent).ToList();
 
             foreach (var filteredItem in motionDetectionList)
             {
@@ -510,6 +519,12 @@ namespace SmartHouse.Controllers
                 if (filter.DateMaxValue != null)
                     temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
 
+                if (filter.TemperatureEmailAlertSent)
+                    temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.TemperatureEmailAlertSent).ToList();
+
+                if (filter.HumidityEmailAlertSent)
+                    temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.HumidityEmailAlertSent).ToList();
+
                 temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.OrderByDescending(x => x.InternalTime).ToList();
 
                 return Json(temperatureHumidityCriticalDataList, JsonRequestBehavior.AllowGet);
@@ -531,6 +546,9 @@ namespace SmartHouse.Controllers
 
                 if (filter.DateMaxValue != null)
                     motionDetectionList = motionDetectionList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
+
+                if (filter.TemperatureEmailAlertSent)
+                    motionDetectionList = motionDetectionList.Where(x => x.EmailAlertSent).ToList();
 
                 motionDetectionList = motionDetectionList.OrderByDescending(x => x.InternalTime).ToList();
 
