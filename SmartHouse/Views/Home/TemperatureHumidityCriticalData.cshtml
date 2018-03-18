@@ -378,7 +378,7 @@ th {
                         else {
                             html += '<tr><td style="display:none;">' + data[i].Id + '</td><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
                         }
-                        
+
                         if (data[i].MinCriticalTemperature == null)
                             html += tdEndTdStart + '- ';
                         else
@@ -392,11 +392,16 @@ th {
                             html += tdEndTdStart + data[i].MaxCriticalTemperature;
 
                         if (selectedRow != null && data[i].Id == selectedRowIndex) {
-                            html += '</td><td class = "highlight" >' + '<input id="item_TemperatureEmailAlertSent" name="item.TemperatureEmailAlertSent" type="checkbox" value="' + data[i].TemperatureEmailAlertSent + '" /> <input name="item.TemperatureEmailAlertSent" type="hidden" value="' + data[i].TemperatureEmailAlertSent + '" />';
+                            html += '</td><td class = "highlight" ><input';
                         }
                         else {
-                            html += '</td><td>' + '<input id="item_TemperatureEmailAlertSent" name="item.TemperatureEmailAlertSent" type="checkbox" value="' + data[i].TemperatureEmailAlertSent + '" /> <input name="item.TemperatureEmailAlertSent" type="hidden" value="' + data[i].TemperatureEmailAlertSent + '" />';
+                            html += '</td><td><input';
                         }
+
+                        if (data[i].TemperatureEmailAlertSent)
+                            html += ' checked="checked" ';
+
+                        html += ' id="item_TemperatureEmailAlertSent" name="item.TemperatureEmailAlertSent" type="checkbox" value="' + data[i].TemperatureEmailAlertSent + '" /> <input name="item.TemperatureEmailAlertSent" type="hidden" value="' + data[i].TemperatureEmailAlertSent + '" />';
 
                         if (data[i].MinCriticalHumidity == null)
                             html += tdEndTdStart + ' - ';
@@ -411,11 +416,21 @@ th {
                             html += tdEndTdStart + data[i].MaxCriticalHumidity;
 
                         if (selectedRow != null && data[i].Id == selectedRowIndex) {
-                            html += '</td><td class = "highlight" >' + '<input id="item_HumidityEmailAlertSent" name="item.HumidityEmailAlertSent" type="checkbox" value="' + data[i].HumidityEmailAlertSent + '" /> <input name="item.HumidityEmailAlertSent" type="hidden" value="' + data[i].HumidityEmailAlertSent + '" />' +
+                            html += '</td><td class = "highlight" ><input ';
+                        }
+                        else {
+                            html += '</td><td><input ';
+                        }
+
+                        if (data[i].HumidityEmailAlertSent)
+                            html += ' checked="checked" ';
+
+                        if (selectedRow != null && data[i].Id == selectedRowIndex) {
+                            html += 'id="item_HumidityEmailAlertSent" name="item.HumidityEmailAlertSent" type="checkbox" value="' + data[i].HumidityEmailAlertSent + '" /> <input name="item.HumidityEmailAlertSent" type="hidden" value="' + data[i].HumidityEmailAlertSent + '" />' +
                                 '</td><td class = "highlight" >' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
                         }
                         else {
-                            html += '</td><td>' + '<input id="item_HumidityEmailAlertSent" name="item.HumidityEmailAlertSent" type="checkbox" value="' + data[i].HumidityEmailAlertSent + '" /> <input name="item.HumidityEmailAlertSent" type="hidden" value="' + data[i].HumidityEmailAlertSent + '" />' +
+                            html += 'id="item_HumidityEmailAlertSent" name="item.HumidityEmailAlertSent" type="checkbox" value="' + data[i].HumidityEmailAlertSent + '" /> <input name="item.HumidityEmailAlertSent" type="hidden" value="' + data[i].HumidityEmailAlertSent + '" />' +
                                 '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
                         }
                     }
@@ -475,7 +490,7 @@ th {
 
                         tdEndTdStart = '</td><td>';
 
-                        if (selectedRow != null && response[i].Id == selectedRowIndex) {
+                        if (selectedRow != null && data[i].Id == selectedRowIndex) {
                             html += '<tr class = "highlight"><td style="display:none;" class = "highlight">' + response[i].Id + '</td><td class = "highlight">' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
                             tdEndTdStart = '</td><td class = "highlight">'
                         }
@@ -496,11 +511,16 @@ th {
                             html += tdEndTdStart + response[i].MaxCriticalTemperature;
 
                         if (selectedRow != null && response[i].Id == selectedRowIndex) {
-                            html += '</td><td class = "highlight" >' + '<input id="item_TemperatureEmailAlertSent" name="item.TemperatureEmailAlertSent" type="checkbox" value="' + response[i].TemperatureEmailAlertSent + '" /> <input name="item.TemperatureEmailAlertSent" type="hidden" value="' + response[i].TemperatureEmailAlertSent + '" />';
+                            html += '</td><td class = "highlight" ><input';
                         }
                         else {
-                            html += '</td><td>' + '<input id="item_TemperatureEmailAlertSent" name="item.TemperatureEmailAlertSent" type="checkbox" value="' + response[i].TemperatureEmailAlertSent + '" /> <input name="item.TemperatureEmailAlertSent" type="hidden" value="' + response[i].TemperatureEmailAlertSent + '" />';
+                            html += '</td><td><input';
                         }
+
+                        if (response[i].TemperatureEmailAlertSent)
+                            html += ' checked="checked" ';
+
+                        html += ' id="item_TemperatureEmailAlertSent" name="item.TemperatureEmailAlertSent" type="checkbox" value="' + response[i].TemperatureEmailAlertSent + '" /> <input name="item.TemperatureEmailAlertSent" type="hidden" value="' + response[i].TemperatureEmailAlertSent + '" />';
 
                         if (response[i].MinCriticalHumidity == null)
                             html += tdEndTdStart + ' - ';
@@ -515,11 +535,21 @@ th {
                             html += tdEndTdStart + response[i].MaxCriticalHumidity;
 
                         if (selectedRow != null && response[i].Id == selectedRowIndex) {
-                            html += '</td><td class = "highlight" >' + '<input id="item_HumidityEmailAlertSent" name="item.HumidityEmailAlertSent" type="checkbox" value="' + response[i].HumidityEmailAlertSent + '" /> <input name="item.HumidityEmailAlertSent" type="hidden" value="' + response[i].HumidityEmailAlertSent + '" />' +
+                            html += '</td><td class = "highlight" ><input ';
+                        }
+                        else {
+                            html += '</td><td><input ';
+                        }
+
+                        if (response[i].HumidityEmailAlertSent)
+                            html += ' checked="checked" ';
+
+                        if (selectedRow != null && response[i].Id == selectedRowIndex) {
+                            html += 'id="item_HumidityEmailAlertSent" name="item.HumidityEmailAlertSent" type="checkbox" value="' + response[i].HumidityEmailAlertSent + '" /> <input name="item.HumidityEmailAlertSent" type="hidden" value="' + response[i].HumidityEmailAlertSent + '" />' +
                                 '</td><td class = "highlight" >' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
                         }
                         else {
-                            html += '</td><td>' + '<input id="item_HumidityEmailAlertSent" name="item.HumidityEmailAlertSent" type="checkbox" value="' + response[i].HumidityEmailAlertSent + '" /> <input name="item.HumidityEmailAlertSent" type="hidden" value="' + response[i].HumidityEmailAlertSent + '" />' +
+                            html += 'id="item_HumidityEmailAlertSent" name="item.HumidityEmailAlertSent" type="checkbox" value="' + response[i].HumidityEmailAlertSent + '" /> <input name="item.HumidityEmailAlertSent" type="hidden" value="' + response[i].HumidityEmailAlertSent + '" />' +
                                 '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
                         }
                     }
@@ -578,11 +608,16 @@ th {
                                     html += tdEndTdStart + data[i].MaxCriticalTemperature;
 
                                 if (selectedRow != null && data[i].Id == selectedRowIndex) {
-                                    html += '</td><td class = "highlight" >' + '<input id="item_TemperatureEmailAlertSent" name="item.TemperatureEmailAlertSent" type="checkbox" value="' + data[i].TemperatureEmailAlertSent + '" /> <input name="item.TemperatureEmailAlertSent" type="hidden" value="' + data[i].TemperatureEmailAlertSent + '" />';
+                                    html += '</td><td class = "highlight" ><input';
                                 }
                                 else {
-                                    html += '</td><td>' + '<input id="item_TemperatureEmailAlertSent" name="item.TemperatureEmailAlertSent" type="checkbox" value="' + data[i].TemperatureEmailAlertSent + '" /> <input name="item.TemperatureEmailAlertSent" type="hidden" value="' + data[i].TemperatureEmailAlertSent + '" />';
+                                    html += '</td><td><input'; 
                                 }
+
+                                if (data[i].TemperatureEmailAlertSent)
+                                    html += ' checked="checked" ';
+
+                                html += ' id="item_TemperatureEmailAlertSent" name="item.TemperatureEmailAlertSent" type="checkbox" value="' + data[i].TemperatureEmailAlertSent + '" /> <input name="item.TemperatureEmailAlertSent" type="hidden" value="' + data[i].TemperatureEmailAlertSent + '" />';
 
                                 if (data[i].MinCriticalHumidity == null)
                                     html += tdEndTdStart + ' - ';
@@ -597,11 +632,21 @@ th {
                                     html += tdEndTdStart + data[i].MaxCriticalHumidity;
 
                                 if (selectedRow != null && data[i].Id == selectedRowIndex) {
-                                    html += '</td><td class = "highlight" >' + '<input id="item_HumidityEmailAlertSent" name="item.HumidityEmailAlertSent" type="checkbox" value="' + data[i].HumidityEmailAlertSent + '" /> <input name="item.HumidityEmailAlertSent" type="hidden" value="' + data[i].HumidityEmailAlertSent + '" />' +
+                                    html += '</td><td class = "highlight" ><input '; 
+                                }
+                                else {
+                                    html += '</td><td><input ';
+                                }
+
+                                if (data[i].HumidityEmailAlertSent)
+                                    html += ' checked="checked" ';
+
+                                if (selectedRow != null && data[i].Id == selectedRowIndex) {
+                                    html += 'id="item_HumidityEmailAlertSent" name="item.HumidityEmailAlertSent" type="checkbox" value="' + data[i].HumidityEmailAlertSent + '" /> <input name="item.HumidityEmailAlertSent" type="hidden" value="' + data[i].HumidityEmailAlertSent + '" />' +
                                         '</td><td class = "highlight" >' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
                                 }
                                 else {
-                                    html += '</td><td>' + '<input id="item_HumidityEmailAlertSent" name="item.HumidityEmailAlertSent" type="checkbox" value="' + data[i].HumidityEmailAlertSent + '" /> <input name="item.HumidityEmailAlertSent" type="hidden" value="' + data[i].HumidityEmailAlertSent + '" />' +
+                                    html += 'id="item_HumidityEmailAlertSent" name="item.HumidityEmailAlertSent" type="checkbox" value="' + data[i].HumidityEmailAlertSent + '" /> <input name="item.HumidityEmailAlertSent" type="hidden" value="' + data[i].HumidityEmailAlertSent + '" />' +
                                         '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
                                 }
                             }
@@ -652,7 +697,7 @@ th {
 
                                 tdEndTdStart = '</td><td>';
 
-                                if (selectedRow != null && response[i].Id == selectedRowIndex) {
+                                if (selectedRow != null && data[i].Id == selectedRowIndex) {
                                     html += '<tr class = "highlight"><td style="display:none;" class = "highlight">' + response[i].Id + '</td><td class = "highlight">' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
                                     tdEndTdStart = '</td><td class = "highlight">'
                                 }
@@ -673,11 +718,16 @@ th {
                                     html += tdEndTdStart + response[i].MaxCriticalTemperature;
 
                                 if (selectedRow != null && response[i].Id == selectedRowIndex) {
-                                    html += '</td><td class = "highlight" >' + '<input id="item_TemperatureEmailAlertSent" name="item.TemperatureEmailAlertSent" type="checkbox" value="' + response[i].TemperatureEmailAlertSent + '" /> <input name="item.TemperatureEmailAlertSent" type="hidden" value="' + response[i].TemperatureEmailAlertSent + '" />';
+                                    html += '</td><td class = "highlight" ><input';
                                 }
                                 else {
-                                    html += '</td><td>' + '<input id="item_TemperatureEmailAlertSent" name="item.TemperatureEmailAlertSent" type="checkbox" value="' + response[i].TemperatureEmailAlertSent + '" /> <input name="item.TemperatureEmailAlertSent" type="hidden" value="' + response[i].TemperatureEmailAlertSent + '" />';
+                                    html += '</td><td><input';
                                 }
+
+                                if (response[i].TemperatureEmailAlertSent)
+                                    html += ' checked="checked" ';
+
+                                html += ' id="item_TemperatureEmailAlertSent" name="item.TemperatureEmailAlertSent" type="checkbox" value="' + response[i].TemperatureEmailAlertSent + '" /> <input name="item.TemperatureEmailAlertSent" type="hidden" value="' + response[i].TemperatureEmailAlertSent + '" />';
 
                                 if (response[i].MinCriticalHumidity == null)
                                     html += tdEndTdStart + ' - ';
@@ -692,11 +742,21 @@ th {
                                     html += tdEndTdStart + response[i].MaxCriticalHumidity;
 
                                 if (selectedRow != null && response[i].Id == selectedRowIndex) {
-                                    html += '</td><td class = "highlight" >' + '<input id="item_HumidityEmailAlertSent" name="item.HumidityEmailAlertSent" type="checkbox" value="' + response[i].HumidityEmailAlertSent + '" /> <input name="item.HumidityEmailAlertSent" type="hidden" value="' + response[i].HumidityEmailAlertSent + '" />' +
+                                    html += '</td><td class = "highlight" ><input ';
+                                }
+                                else {
+                                    html += '</td><td><input ';
+                                }
+
+                                if (response[i].HumidityEmailAlertSent)
+                                    html += ' checked="checked" ';
+
+                                if (selectedRow != null && response[i].Id == selectedRowIndex) {
+                                    html += 'id="item_HumidityEmailAlertSent" name="item.HumidityEmailAlertSent" type="checkbox" value="' + response[i].HumidityEmailAlertSent + '" /> <input name="item.HumidityEmailAlertSent" type="hidden" value="' + response[i].HumidityEmailAlertSent + '" />' +
                                         '</td><td class = "highlight" >' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
                                 }
                                 else {
-                                    html += '</td><td>' + '<input id="item_HumidityEmailAlertSent" name="item.HumidityEmailAlertSent" type="checkbox" value="' + response[i].HumidityEmailAlertSent + '" /> <input name="item.HumidityEmailAlertSent" type="hidden" value="' + response[i].HumidityEmailAlertSent + '" />' +
+                                    html += 'id="item_HumidityEmailAlertSent" name="item.HumidityEmailAlertSent" type="checkbox" value="' + response[i].HumidityEmailAlertSent + '" /> <input name="item.HumidityEmailAlertSent" type="hidden" value="' + response[i].HumidityEmailAlertSent + '" />' +
                                         '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityCriticalData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
                                 }
                             }
