@@ -381,7 +381,7 @@ th {
                         tdEndTdStart = '</td><td>';
 
                         if (selectedRow != null && data[i].Id == selectedRowIndex) {
-                            html += '<tr class = "highlight"><td style="display:none;" class = "highlight">' + data[i].Id + '</td><td class = "highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                            html += '<tr><td style="display:none;" class = "highlight">' + data[i].Id + '</td><td class = "highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
                             tdEndTdStart = '</td><td class = "highlight">'
                         }
                         else {
@@ -502,7 +502,7 @@ th {
                         tdEndTdStart = '</td><td>';
 
                         if (selectedRow != null && data[i].Id == selectedRowIndex) {
-                            html += '<tr class = "highlight"><td style="display:none;" class = "highlight">' + response[i].Id + '</td><td class = "highlight">' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                            html += '<tr><td style="display:none;" class = "highlight">' + response[i].Id + '</td><td class = "highlight">' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
                             tdEndTdStart = '</td><td class = "highlight">'
                         }
                         else {
@@ -599,7 +599,7 @@ th {
                                 tdEndTdStart = '</td><td>';
 
                                 if (selectedRow != null && data[i].Id == selectedRowIndex) {
-                                    html += '<tr class = "highlight"><td style="display:none;" class = "highlight">' + data[i].Id + '</td><td class = "highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                                    html += '<tr><td style="display:none;" class = "highlight">' + data[i].Id + '</td><td class = "highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
                                     tdEndTdStart = '</td><td class = "highlight">'
                                 }
                                 else {
@@ -711,7 +711,7 @@ th {
                                 tdEndTdStart = '</td><td>';
 
                                 if (selectedRow != null && data[i].Id == selectedRowIndex) {
-                                    html += '<tr class = "highlight"><td style="display:none;" class = "highlight">' + response[i].Id + '</td><td class = "highlight">' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                                    html += '<tr><td style="display:none;" class = "highlight">' + response[i].Id + '</td><td class = "highlight">' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
                                     tdEndTdStart = '</td><td class = "highlight">'
                                 }
                                 else {

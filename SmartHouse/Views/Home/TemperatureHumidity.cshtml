@@ -328,7 +328,7 @@ th {
                         tdEndTdStart = '</td><td>';
 
                         if (selectedRow != null && data[i].Id == selectedRowIndex) {
-                            html += '<tr class="highlight"><td style="display:none;" class="highlight">' + data[i].Id + '</td><td class="highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                            html += '<tr><td style="display:none;" class="highlight">' + data[i].Id + '</td><td class="highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
                             tdEndTdStart = '</td><td class="highlight">'
                         }
                         else {
@@ -338,12 +338,6 @@ th {
                         html += tdEndTdStart + data[i].Temperature + tdEndTdStart + data[i].Humidity + tdEndTdStart;
 
                         html += '<a href="/Home/DeleteTemperatureHumidityData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
-
-                        /*html += '<tr style="display:none;"><td>' + data[i].Id +
-                            '</td><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
-                            '</td><td>' + data[i].Temperature +
-                            '</td><td>' + data[i].Humidity +
-                            '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityData/' + data[i].Id + '">Delete</a>'   + '</td></tr>';*/
                     }
 
                     html += ' </tbody>';
@@ -398,16 +392,29 @@ th {
                 data: filter,
                 dataType: "json",
                 success: function (response) {
-                    $('#tableTemperatureHumidity tr>td').remove();
-                    var html = '';
+                    var tdEndTdStart = '</td><td>';
+                    var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> InternalTime </th> <th> Temperature </th> <th> Humidity </th> <th> Action </th> </tr> ';
                     for (var i = 0; i < response.length; i++) {
-                        html += '<tr><td>' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
-                            '</td><td>' + response[i].Temperature +
-                            '</td><td>' + response[i].Humidity +
-                            '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
+
+                        tdEndTdStart = '</td><td>';
+
+                        if (selectedRow != null && response[i].Id == selectedRowIndex) {
+                            html += '<tr><td style="display:none;" class="highlight">' + response[i].Id + '</td><td class="highlight">' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                            tdEndTdStart = '</td><td class="highlight">'
+                        }
+                        else {
+                            html += '<tr><td style="display:none;">' + response[i].Id + '</td><td>' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                        }
+
+                        html += tdEndTdStart + response[i].Temperature + tdEndTdStart + response[i].Humidity + tdEndTdStart;
+
+                        html += '<a href="/Home/DeleteTemperatureHumidityData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
                     }
 
-                    $("#tableTemperatureHumidity").find('tbody').append($(html));
+                    html += ' </tbody>';
+
+                    $('#tableTemperatureHumidity').empty();
+                    $("#tableTemperatureHumidity").append($(html));
 
                     intervalReadings = clearTimeout(intervalReadings);
 
@@ -431,16 +438,30 @@ th {
                         method: 'GET',
                         dataType: 'json',
                         success: function (data) {
-                            var html = '';
+
+                            var tdEndTdStart = '</td><td>';
+                            var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> InternalTime </th> <th> Temperature </th> <th> Humidity </th> <th> Action </th> </tr> ';
                             for (var i = 0; i < data.length; i++) {
-                                html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
-                                    '</td><td>' + data[i].Temperature +
-                                    '</td><td>' + data[i].Humidity +
-                                    '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+
+                                tdEndTdStart = '</td><td>';
+
+                                if (selectedRow != null && data[i].Id == selectedRowIndex) {
+                                    html += '<tr><td style="display:none;" class="highlight">' + data[i].Id + '</td><td class="highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                                    tdEndTdStart = '</td><td class="highlight">'
+                                }
+                                else {
+                                    html += '<tr><td style="display:none;">' + data[i].Id + '</td><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                                }
+
+                                html += tdEndTdStart + data[i].Temperature + tdEndTdStart + data[i].Humidity + tdEndTdStart;
+
+                                html += '<a href="/Home/DeleteTemperatureHumidityData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
                             }
 
-                            $('#tableTemperatureHumidity tr>td').remove();
-                            $("#tableTemperatureHumidity").find('tbody').append($(html));
+                            html += ' </tbody>';
+
+                            $('#tableTemperatureHumidity').empty();
+                            $("#tableTemperatureHumidity").append($(html));
 
                             intervalReadings = setTimeout("getAllRows()", 10000);
 
@@ -489,16 +510,29 @@ th {
                         data: filter,
                         dataType: 'json',
                         success: function (response) {
-                            var html = '';
+                            var tdEndTdStart = '</td><td>';
+                            var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> InternalTime </th> <th> Temperature </th> <th> Humidity </th> <th> Action </th> </tr> ';
                             for (var i = 0; i < response.length; i++) {
-                                html += '<tr><td>' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
-                                    '</td><td>' + response[i].Temperature +
-                                    '</td><td>' + response[i].Humidity +
-                                    '</td><td>' + '<a href="/Home/DeleteTemperatureHumidityData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
+
+                                tdEndTdStart = '</td><td>';
+
+                                if (selectedRow != null && response[i].Id == selectedRowIndex) {
+                                    html += '<tr><td style="display:none;" class="highlight">' + response[i].Id + '</td><td class="highlight">' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                                    tdEndTdStart = '</td><td class="highlight">'
+                                }
+                                else {
+                                    html += '<tr><td style="display:none;">' + response[i].Id + '</td><td>' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                                }
+
+                                html += tdEndTdStart + response[i].Temperature + tdEndTdStart + response[i].Humidity + tdEndTdStart;
+
+                                html += '<a href="/Home/DeleteTemperatureHumidityData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
                             }
 
-                            $('#tableTemperatureHumidity tr>td').remove();
-                            $("#tableTemperatureHumidity").find('tbody').append($(html));
+                            html += ' </tbody>';
+
+                            $('#tableTemperatureHumidity').empty();
+                            $("#tableTemperatureHumidity").append($(html));
 
                             intervalReadings = clearTimeout(intervalReadings);
                         }
