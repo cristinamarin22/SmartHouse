@@ -293,7 +293,7 @@ th {
                         tdEndTdStart = '</td><td>';
 
                         if (selectedRow != null && data[i].Id == selectedRowIndex) {
-                            html += '<tr class="highlight"><td style="display:none;" class="highlight">' + data[i].Id + '</td><td class="highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td class="highlight"><input ';
+                            html += '<tr><td style="display:none;" class="highlight">' + data[i].Id + '</td><td class="highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td class="highlight"><input ';
                             tdEndTdStart = '</td><td class="highlight">'
                         }
                         else {
@@ -483,7 +483,7 @@ th {
             }
         }
 
-        //color with red selected line 
+        //color with blue selected line 
         $("#tableMotionDetection").on("click", "tr", function () {
             selectedRow = $(this);
             selectedRowIndex = parseInt($(this)[0].cells[0].innerHTML);

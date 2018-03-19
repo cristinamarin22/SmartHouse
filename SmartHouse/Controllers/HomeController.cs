@@ -277,6 +277,9 @@ namespace SmartHouse.Controllers
             if (filter.DateMaxValue != null)
                 soundDetectionList = soundDetectionList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
 
+            if (filter.TemperatureEmailAlertSent)
+                soundDetectionList = soundDetectionList.Where(x => x.EmailAlertSent).ToList();
+
             foreach (var filteredItem in soundDetectionList)
             {
                 SoundDetectionData soundDetectionData = smartHouseEntities.SoundDetectionDatas.Find(filteredItem.Id);
@@ -358,7 +361,7 @@ namespace SmartHouse.Controllers
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
             if (smartHouseEntities.Database.Exists())
-                return View(smartHouseEntities.SoundDetectionDatas.ToList().OrderByDescending(x => x.InternalTime).Take(10));
+                return View(smartHouseEntities.SoundDetectionDatas.ToList().OrderByDescending(x => x.InternalTime));
             else
                 return View(new List<SoundDetectionData>());
         }
@@ -367,7 +370,7 @@ namespace SmartHouse.Controllers
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
             if (smartHouseEntities.Database.Exists())
-                return Json(smartHouseEntities.SoundDetectionDatas.ToList().OrderByDescending(x => x.InternalTime));
+                return Json(smartHouseEntities.SoundDetectionDatas.ToList().OrderByDescending(x => x.InternalTime), JsonRequestBehavior.AllowGet);
             else
                 return Json(new List<SoundDetectionData>(), JsonRequestBehavior.AllowGet);
         }
@@ -571,6 +574,9 @@ namespace SmartHouse.Controllers
 
                 if (filter.DateMaxValue != null)
                     soundDetectionList = soundDetectionList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
+
+                if (filter.TemperatureEmailAlertSent)
+                    soundDetectionList = soundDetectionList.Where(x => x.EmailAlertSent).ToList();
 
                 soundDetectionList = soundDetectionList.OrderByDescending(x => x.InternalTime).ToList();
 

@@ -17,146 +17,150 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-html, body, h1, h2, h3, h4, h5 {
-    font-family: "Raleway", sans-serif;
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th, td {
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2
-}
-
-th {
-    background-color: #2c8e88;
-    color: white;
-}
-
-.button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    cursor: pointer;
-}
-
-.button3 {
-    background-color: white;
-    color: black;
-    border: 2px solid #2c8e88;
-}
-
-.button3:hover {
-    background-color: #2c8e88;
-    color: white;
-}
-
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    -webkit-animation-name: fadeIn; /* Fade in the background */
-    -webkit-animation-duration: 0.4s;
-    animation-name: fadeIn;
-    animation-duration: 0.4s
-}
-
-/* Modal Content */
-.modal-content {
-    position: fixed;
-    bottom: 0;
-    background-color: #fefefe;
-    width: 100%;
-    -webkit-animation-name: slideIn;
-    -webkit-animation-duration: 0.4s;
-    animation-name: slideIn;
-    animation-duration: 0.4s
-}
-
-.modal-header {
-    padding: 2px 16px;
-    background-color: #2c8e88;
-    color: white;
-}
-
-.modal-footer {
-    padding: 2px 16px;
-    background-color: white;
-    color: white;
-}
-
-/* Add Animation */
-@@-webkit-keyframes slideIn {
-    from {
-        bottom: -300px;
-        opacity: 0
+    html, body, h1, h2, h3, h4, h5 {
+        font-family: "Raleway", sans-serif;
     }
 
-    to {
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+
+    th {
+        background-color: #2c8e88;
+        color: white;
+    }
+
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+
+    .button3 {
+        background-color: white;
+        color: black;
+        border: 2px solid #2c8e88;
+    }
+
+        .button3:hover {
+            background-color: #2c8e88;
+            color: white;
+        }
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        -webkit-animation-name: fadeIn; /* Fade in the background */
+        -webkit-animation-duration: 0.4s;
+        animation-name: fadeIn;
+        animation-duration: 0.4s
+    }
+
+    /* Modal Content */
+    .modal-content {
+        position: fixed;
         bottom: 0;
-        opacity: 1
-    }
-}
-
-@@keyframes slideIn {
-    from {
-        bottom: -300px;
-        opacity: 0
+        background-color: #fefefe;
+        width: 100%;
+        -webkit-animation-name: slideIn;
+        -webkit-animation-duration: 0.4s;
+        animation-name: slideIn;
+        animation-duration: 0.4s
     }
 
-    to {
-        bottom: 0;
-        opacity: 1
-    }
-}
-
-@@-webkit-keyframes fadeIn {
-    from {
-        opacity: 0
+    .modal-header {
+        padding: 2px 16px;
+        background-color: #2c8e88;
+        color: white;
     }
 
-    to {
-        opacity: 1
-    }
-}
-
-@@keyframes fadeIn {
-    from {
-        opacity: 0
+    .modal-footer {
+        padding: 2px 16px;
+        background-color: white;
+        color: white;
     }
 
-    to {
-        opacity: 1
-    }
-}
+    /* Add Animation */
+    @@-webkit-keyframes slideIn {
+        from {
+            bottom: -300px;
+            opacity: 0
+        }
 
-.modal-body {
-    padding: 2px 20px;
-    font-size: 16px;
-}
+        to {
+            bottom: 0;
+            opacity: 1
+        }
+    }
+
+    @@keyframes slideIn {
+        from {
+            bottom: -300px;
+            opacity: 0
+        }
+
+        to {
+            bottom: 0;
+            opacity: 1
+        }
+    }
+
+    @@-webkit-keyframes fadeIn {
+        from {
+            opacity: 0
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    .modal-body {
+        padding: 2px 20px;
+        font-size: 16px;
+    }
+
+    .highlight {
+        background-color: #4ba394;
+    }
 </style>
 <body>
     <div class="w3-container">
@@ -181,11 +185,18 @@ th {
         </td>
 
         <td>
+            <input type="checkbox" id="ChkSoundDetectionEmailSent">Email sent<br>
+        </td>
+
+        <td>
             <button style="float: right;" type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
         </td>
 
         <table class="table" id="tableSoundDetection">
             <tr>
+                <th style="display:none;">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
                 <th>
                     Date
                 </th>
@@ -199,17 +210,20 @@ th {
 
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InternalTime)
-                </td>
-                <td>
-                    @Html.CheckBoxFor(modelItem => item.EmailAlertSent, new { @checked = "checked", @readonly = "readonly" })
-                </td>
-                <td>
-                    @Html.ActionLink("Delete", "DeleteMotionDetection", "Home", new { id = item.Id }, null)
-                </td>
-            </tr>
+                <tr>
+                    <td style="display:none;">
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InternalTime)
+                    </td>
+                    <td>
+                        @Html.CheckBoxFor(modelItem => item.EmailAlertSent, new { @checked = "checked", @readonly = "readonly" })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteSoundDetection", "Home", new { id = item.Id }, null)
+                    </td>
+                </tr>
             }
 
         </table><br>
@@ -260,21 +274,49 @@ th {
         var modal = document.getElementById('deleteAllPopup');
         var modalFiltered = document.getElementById('deleteFilteredDataPopup');
 
+        var selectedRow = null;
+        var selectedRowYN = null;
+        var selectedRowIndex = null;
+
         function getAllRows() {
             $.ajax({
                 url: '@Url.Action("GetSoundDetectionHistoryData", "Home")',
                 method: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    var html = '';
+
+                    var tdEndTdStart = '</td><td>';
+                    var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> Date </th> <th> Email alert sent </th> <th> Action </th>  </tr> ';
+
                     for (var i = 0; i < data.length; i++) {
-                        html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
-                            '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].SentEmailAlert + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
-                            '</td><td>' + '<a href="/Home/DeleteSoundDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+
+                        tdEndTdStart = '</td><td>';
+
+                        if (selectedRow != null && data[i].Id == selectedRowIndex) {
+                            html += '<tr><td style="display:none;" class="highlight">' + data[i].Id + '</td><td class="highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td class="highlight"><input ';
+                            tdEndTdStart = '</td><td class="highlight">'
+                        }
+                        else {
+                            html += '<tr><td style="display:none;">' + data[i].Id + '</td><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td><input ';
+                        }
+
+                        if (data[i].EmailAlertSent)
+                            html += ' checked="checked" data-val="' + data[i].EmailAlertSent + '"';
+
+                        html += ' id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" /></td>';
+
+                        if (selectedRow != null && data[i].Id == selectedRowIndex) {
+                            html += '<td class="highlight"><a href="/Home/DeleteSoundDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                        }
+                        else {
+                            html += '<td><a href="/Home/DeleteSoundDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                        }
                     }
 
-                    $('#tableSoundDetection tr>td').remove();
-                    $("#tableSoundDetection").find('tbody').append($(html));
+                    html += ' </tbody>';
+
+                    $('#tableSoundDetection').empty();
+                    $("#tableSoundDetection").append($(html));
 
                     intervalReadings = setTimeout("getAllRows()", 10000);
 
@@ -300,7 +342,8 @@ th {
 
             var filter = {
                 "DateMinValue": $('#DateMinValueTextBox').val(),
-                "DateMaxValue": $('#DateMaxValueTextBox').val()
+                "DateMaxValue": $('#DateMaxValueTextBox').val(),
+                "TemperatureEmailAlertSent": $('#ChkSoundDetectionEmailSent').is(':checked')
             };
 
             $.ajax({
@@ -309,16 +352,39 @@ th {
                 data: filter,
                 dataType: "json",
                 success: function (response) {
-                    $('#deleteFilteredData').css("visibility", "visible");
-                    $('#tableTemperatureHumidity tr>td').remove();
-                    var html = '';
+
+                    var tdEndTdStart = '</td><td>';
+                    var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> Date </th> <th> Email alert sent </th> <th> Action </th>  </tr> ';
+
                     for (var i = 0; i < response.length; i++) {
-                        html += '<tr><td>' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
-                            '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + response[i].SentEmailAlert + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + response[i].EmailAlertSent + '" />' +
-                            '</td><td>' + '<a href="/Home/DeleteSoundDetectionData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
+
+                        tdEndTdStart = '</td><td>';
+
+                        if (selectedRow != null && response[i].Id == selectedRowIndex) {
+                            html += '<tr><td style="display:none;" class="highlight">' + response[i].Id + '</td><td class="highlight">' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td class="highlight"><input ';
+                            tdEndTdStart = '</td><td class="highlight">'
+                        }
+                        else {
+                            html += '<tr><td style="display:none;">' + response[i].Id + '</td><td>' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td><input ';
+                        }
+
+                        if (response[i].EmailAlertSent)
+                            html += ' checked="checked" data-val="' + response[i].EmailAlertSent + '"';
+
+                        html += ' id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + response[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + response[i].EmailAlertSent + '" /></td>';
+
+                        if (selectedRow != null && response[i].Id == selectedRowIndex) {
+                            html += '<td class="highlight"><a href="/Home/DeleteSoundDetectionData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
+                        }
+                        else {
+                            html += '<td><a href="/Home/DeleteSoundDetectionData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
+                        }
                     }
 
-                    $("#tableSoundDetection").find('tbody').append($(html));
+                    html += ' </tbody>';
+
+                    $('#tableSoundDetection').empty();
+                    $("#tableSoundDetection").append($(html));
 
                     intervalReadings = clearTimeout(intervalReadings);
 
@@ -341,15 +407,39 @@ th {
                         method: 'GET',
                         dataType: 'json',
                         success: function (data) {
-                            var html = '';
+
+                            var tdEndTdStart = '</td><td>';
+                            var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> Date </th> <th> Email alert sent </th> <th> Action </th>  </tr> ';
+
                             for (var i = 0; i < data.length; i++) {
-                                html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
-                                    '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].SentEmailAlert + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
-                                    '</td><td>' + '<a href="/Home/DeleteSoundDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+
+                                tdEndTdStart = '</td><td>';
+
+                                if (selectedRow != null && data[i].Id == selectedRowIndex) {
+                                    html += '<tr><td style="display:none;" class="highlight">' + data[i].Id + '</td><td class="highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td class="highlight"><input ';
+                                    tdEndTdStart = '</td><td class="highlight">'
+                                }
+                                else {
+                                    html += '<tr><td style="display:none;">' + data[i].Id + '</td><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td><input ';
+                                }
+
+                                if (data[i].EmailAlertSent)
+                                    html += ' checked="checked" data-val="' + data[i].EmailAlertSent + '"';
+
+                                html += ' id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" /></td>';
+
+                                if (selectedRow != null && data[i].Id == selectedRowIndex) {
+                                    html += '<td class="highlight"><a href="/Home/DeleteSoundDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                                }
+                                else {
+                                    html += '<td><a href="/Home/DeleteSoundDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                                }
                             }
 
-                            $('#tableSoundDetection tr>td').remove();
-                            $("#tableSoundDetection").find('tbody').append($(html));
+                            html += ' </tbody>';
+
+                            $('#tableSoundDetection').empty();
+                            $("#tableSoundDetection").append($(html));
 
                             intervalReadings = setTimeout("getAllRows()", 10000);
 
@@ -371,7 +461,8 @@ th {
 
                     var filter = {
                         "DateMinValue": $('#DateMinValueTextBox').val(),
-                        "DateMaxValue": $('#DateMaxValueTextBox').val()
+                        "DateMaxValue": $('#DateMaxValueTextBox').val(),
+                        "TemperatureEmailAlertSent": $('#ChkSoundDetectionEmailSent').is(':checked')
                     };
 
                     // Whatever you need to do if they clicked confirm
@@ -381,15 +472,39 @@ th {
                         data: filter,
                         dataType: 'json',
                         success: function (response) {
-                            var html = '';
+
+                            var tdEndTdStart = '</td><td>';
+                            var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> Date </th> <th> Email alert sent </th> <th> Action </th>  </tr> ';
+
                             for (var i = 0; i < response.length; i++) {
-                                html += '<tr><td>' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() +
-                                    '</td><td>' + '<input id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + response[i].SentEmailAlert + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + response[i].EmailAlertSent + '" />' +
-                                    '</td><td>' + '<a href="/Home/DeleteSoundDetectionData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
+
+                                tdEndTdStart = '</td><td>';
+
+                                if (selectedRow != null && response[i].Id == selectedRowIndex) {
+                                    html += '<tr><td style="display:none;" class="highlight">' + response[i].Id + '</td><td class="highlight">' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td class="highlight"><input ';
+                                    tdEndTdStart = '</td><td class="highlight">'
+                                }
+                                else {
+                                    html += '<tr><td style="display:none;">' + response[i].Id + '</td><td>' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td><input ';
+                                }
+
+                                if (response[i].EmailAlertSent)
+                                    html += ' checked="checked" data-val="' + response[i].EmailAlertSent + '"';
+
+                                html += ' id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + response[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + response[i].EmailAlertSent + '" /></td>';
+
+                                if (selectedRow != null && response[i].Id == selectedRowIndex) {
+                                    html += '<td class="highlight"><a href="/Home/DeleteSoundDetectionData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
+                                }
+                                else {
+                                    html += '<td><a href="/Home/DeleteSoundDetectionData/' + response[i].Id + '">Delete</a>' + '</td></tr>';
+                                }
                             }
 
-                            $('#tableSoundDetection tr>td').remove();
-                            $("#tableSoundDetection").find('tbody').append($(html));
+                            html += ' </tbody>';
+
+                            $('#tableSoundDetection').empty();
+                            $("#tableSoundDetection").append($(html));
 
                             intervalReadings = clearTimeout(intervalReadings);
                         }
@@ -429,6 +544,28 @@ th {
                 modalFiltered.style.display = "none";
             }
         }
+
+        //color with green selected line
+        $("#tableSoundDetection").on("click", "tr", function () {
+            selectedRow = $(this);
+            selectedRowIndex = parseInt($(this)[0].cells[0].innerHTML);
+            selectedRowYN = $(this).hasClass("highlight");
+            $("#tableSoundDetection tr").children().each(function (index, td) {
+                $(this).removeClass('highlight');
+            });
+            $("#tableSoundDetection tr>td").children().each(function (index, td) {
+                $(this).removeClass('highlight');
+            });
+            if (!selectedRowYN)
+                selectedRow.children().each(function (index, td) {
+                    $(this).addClass('highlight');
+                });
+            else {
+                selectedRow = null;
+                selectedRowIndex = null;
+            }
+
+        });
 
     </script>
 </body>
