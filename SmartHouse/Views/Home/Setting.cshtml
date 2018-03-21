@@ -577,34 +577,65 @@ background-color: white;
         var validationMessage = '<p>';
         var validationError = false;
 
-        if ($('#temperatureAlertYNCheckBox').is(':checked') && $('#temperatureAlertMaxValueTextBox').val() == '' && $('#temperatureAlertMinValueTextBox').val() == '') {
-            validationMessage += '<p>Critical temperature is mandatory</p>';
-            validationError = true;
+        if ($('#temperatureAlertYNCheckBox').is(':checked')) {
+            if ($('#temperatureAlertMaxValueTextBox').val() == '' && $('#temperatureAlertMinValueTextBox').val() == '') {
+                validationMessage += '<p>Critical temperature is mandatory</p>';
+                validationError = true;
+            }
+
+            if ($('#sendTemperatureEmailAlertIntervalTextBox').val() == '') {
+                validationMessage += '<p>Temperature email alert interval is mandatory</p>';
+                validationError = true;
+            }
+
+            if ($('#sendTemperatureEmailAlertIntervalTextBox').val() == '0') {
+                validationMessage += '<p>Critical temperature email alert interval should be greater than 0</p>';
+                validationError = true;
+            }
+
         }
 
-        if ($('#temperatureAlertYNCheckBox').is(':checked') && $('#sendTemperatureEmailAlertIntervalTextBox').val() == '') {
-            validationMessage += '<p>Temperature email alert interval is mandatory</p>';
-            validationError = true;
+        if ($('#humidityAlertYNCheckBox').is(':checked')) {
+            if ($('#humidityAlertMaxValueTextBox').val() == '' && $('#humidityAlertMinValueTextBox').val() == '') {
+                validationMessage += '<p>Critical humidity is mandatory</p>';
+                validationError = true;
+            }
+
+            if ($('#sendHumidityEmailAlertIntervalTextBox').val() == '') {
+                validationMessage += '<p>Humidity email alert interval is mandatory</p>';
+                validationError = true;
+            }
+
+            if ($('#sendHumidityEmailAlertIntervalTextBox').val() == '0') {
+                validationMessage += '<p>Critical humidity email alert interval should be greater than 0</p>';
+                validationError = true;
+            }
         }
 
-        if ($('#humidityAlertYNCheckBox').is(':checked') && $('#humidityAlertMaxValueTextBox').val() == '' && $('#humidityAlertMinValueTextBox').val() == '') {
-            validationMessage += '<p>Critical humidity is mandatory</p>';
-            validationError = true;
+
+        if ($('#motionDetectionAlertYNCheckBox').is(':checked')) {
+            if ($('#sendMotionDetectionEmailAlertIntervalTextBox').val() == '') {
+                validationMessage += '<p>Motion detection email alert interval is mandatory</p>';
+                validationError = true;
+            }
+
+            if ($('#sendMotionDetectionEmailAlertIntervalTextBox').val() == '0') {
+                validationMessage += '<p>Motion detection email alert interval should be greater than 0</p>';
+                validationError = true;
+            }
         }
 
-        if ($('#humidityAlertYNCheckBox').is(':checked') && $('#sendHumidityEmailAlertIntervalTextBox').val() == '') {
-            validationMessage += '<p>Humidity email alert interval is mandatory</p>';
-            validationError = true;
-        }
 
-        if ($('#motionDetectionAlertYNCheckBox').is(':checked') && $('#sendMotionDetectionEmailAlertIntervalTextBox').val() == '') {
-            validationMessage += '<p>Motion detection email alert interval is mandatory</p>';
-            validationError = true;
-        } 
+        if ($('#soundDetectionAlertYNCheckBox').is(':checked')) {
+            if ($('#sendSoundDetectionEmailAlertIntervalTextBox').val() == '') {
+                validationMessage += '<p>Sound detection email alert interval is mandatory</p>';
+                validationError = true;
+            }
 
-        if ($('#soundDetectionAlertYNCheckBox').is(':checked') && $('#sendSoundDetectionEmailAlertIntervalTextBox').val() == '') {
-            validationMessage += '<p>Sound detection email alert interval is mandatory</p>';
-            validationError = true;
+            if ($('#sendSoundDetectionEmailAlertIntervalTextBox').val() == '0') {
+                validationMessage += '<p>Sound detection email alert interval should be greater than 0</p>';
+                validationError = true;
+            }
         } 
 
         validationMessage += '</p>';
@@ -619,37 +650,43 @@ background-color: white;
             modal.style.display = "block";
         }
 
-        if ($('#temperatureAlertMinValueTextBox').val() == '')
+        if ($('#temperatureAlertYNCheckBox').is(':checked')) {
+            if ($('#temperatureAlertMinValueTextBox').val() == ''){
+                $('#temperatureAlertMinValueTextBox').val(-123456);
+            }
+
+            if ($('#temperatureAlertMaxValueTextBox').val() == '') {
+                $('#temperatureAlertMaxValueTextBox').val(123456);
+            }
+        }
+        else {
             $('#temperatureAlertMinValueTextBox').val(-123456);
-
-        if ($('#temperatureAlertMaxValueTextBox').val() == '')
             $('#temperatureAlertMaxValueTextBox').val(123456);
-
-        if ($('#humidityAlertMinValueTextBox').val() == '')
-            $('#humidityAlertMinValueTextBox').val(-123456);
-
-        if ($('#humidityAlertMaxValueTextBox').val() == '')
-            $('#humidityAlertMaxValueTextBox').val(123456);
-
-        if ($('#motionDetectionAlertYNCheckBox').not(':checked'))
-            $('#sendMotionDetectionEmailAlertIntervalTextBox').val('');
-
-        if ($('#soundDetectionAlertYNCheckBox').not(':checked'))
-            $('#sendSoundDetectionEmailAlertIntervalTextBox').val('');
-
-        if ($('#temperatureAlertYNCheckBox').not(':checked')) {
-            $('#temperatureAlertMinValueTextBox').val('');
-            $('#temperatureAlertMaxValueTextBox').val('');
             $('#sendTemperatureEmailAlertIntervalUnitMeasureDropDownList').val('');
             $('#sendTemperatureEmailAlertIntervalTextBox').val('');
         }
 
         if ($('#humidityAlertYNCheckBox').is(':checked')) {
-            $('#humidityAlertMinValueTextBox').val('');
-            $('#humidityAlertMaxValueTextBox').val('');
+            if ($('#humidityAlertMinValueTextBox').val() == '') {
+                $('#humidityAlertMinValueTextBox').val(-123456);
+            }
+
+            if ($('#humidityAlertMaxValueTextBox').val() == '') {
+                $('#humidityAlertMaxValueTextBox').val(123456);
+            }
+        }
+        else {
+            $('#humidityAlertMinValueTextBox').val(-123456);
+            $('#humidityAlertMaxValueTextBox').val(123456);
             $('#sendHumidityEmailAlertIntervalTextBox').val('');
             $('#sendHumidityEmailAlertIntervalUnitMeasureDropDownList').val('');
         }
+
+        if (!$('#motionDetectionAlertYNCheckBox').is(':checked'))
+            $('#sendMotionDetectionEmailAlertIntervalTextBox').val('');
+
+        if (!$('#soundDetectionAlertYNCheckBox').is(':checked'))
+            $('#sendSoundDetectionEmailAlertIntervalTextBox').val('');
 
 
         var settings = {
@@ -739,59 +776,36 @@ background-color: white;
         if ($('#humidityAlertMaxValueTextBox').val() == 123456)
             $('#humidityAlertMaxValueTextBox').val('');
 
-        if ($('#motionDetectionAlertYNCheckBox').is(':checked')) {
-            $('#sendMotionDetectionEmailAlertIntervalTextBox').removeAttr("disabled");
-            $('#sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList').removeAttr("disabled");
-        }
-        else {
-            $('#sendMotionDetectionEmailAlertIntervalTextBox').attr("disabled", "disabled");
-            $('#sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList').val('');
-            $('#sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList').attr("disabled", "disabled");
-        }
-
-        if ($('#soundDetectionAlertYNCheckBox').is(':checked')) {
-            $('#sendSoundDetectionEmailAlertIntervalTextBox').removeAttr("disabled");
-            $('#sendSoundDetectionEmailAlertIntervalUnitMeasureDropDownList').removeAttr("disabled");
-        }
-        else {
-            $('#sendSoundDetectionEmailAlertIntervalTextBox').attr("disabled", "disabled");
-            $('#sendSoundDetectionEmailAlertIntervalUnitMeasureDropDownList').val('');
-            $('#sendSoundDetectionEmailAlertIntervalUnitMeasureDropDownList').attr("disabled", "disabled");
-        }
-
         if ($('#temperatureAlertYNCheckBox').is(':checked')) {
-            $('#temperatureAlertMaxValueTextBox').removeAttr("disabled");
-            $('#temperatureAlertMinValueTextBox').removeAttr("disabled");
-            $('#sendTemperatureEmailAlertIntervalTextBox').removeAttr("disabled");
-            $('#sendTemperatureEmailAlertIntervalUnitMeasureDropDownList').removeAttr("disabled");
+            $('#temperatureMinMaxAlertValueSettings').show();
+            $('#temperatureAlertIntervalSettings').show();
         }
         else {
-            $('#temperatureAlertMaxValueTextBox').attr("disabled", "disabled");
-            $('#temperatureAlertMinValueTextBox').attr("disabled", "disabled");
-            $('#temperatureAlertMinValueTextBox').val('');
-            $('#temperatureAlertMaxValueTextBox').val('');
-            $('#sendTemperatureEmailAlertIntervalUnitMeasureDropDownList').val('');
-            $('#sendTemperatureEmailAlertIntervalTextBox').val('');
-            $('#sendTemperatureEmailAlertIntervalTextBox').attr("disabled", "disabled");
-            $('#sendTemperatureEmailAlertIntervalUnitMeasureDropDownList').attr("disabled", "disabled");
-
+            $('#temperatureMinMaxAlertValueSettings').hide();
+            $('#temperatureAlertIntervalSettings').hide();
         }
 
         if ($('#humidityAlertYNCheckBox').is(':checked')) {
-            $('#humidityAlertMaxValueTextBox').removeAttr("disabled");
-            $('#humidityAlertMinValueTextBox').removeAttr("disabled");
-            $('#sendHumidityEmailAlertIntervalTextBox').removeAttr("disabled");
-            $('#sendHumidityEmailAlertIntervalUnitMeasureDropDownList').removeAttr("disabled");
+            $('#humidityMinMaxAlertValueSettings').show();
+            $('#humidityAlertIntervalSettings').show();
         }
         else {
-            $('#humidityAlertMaxValueTextBox').attr("disabled", "disabled");
-            $('#humidityAlertMaxValueTextBox').val('');
-            $('#humidityAlertMinValueTextBox').val('');
-            $('#sendHumidityEmailAlertIntervalTextBox').val('');
-            $('#sendHumidityEmailAlertIntervalUnitMeasureDropDownList').val('');
-            $('#humidityAlertMinValueTextBox').attr("disabled", "disabled");
-            $('#sendHumidityEmailAlertIntervalTextBox').attr("disabled", "disabled");
-            $('#sendHumidityEmailAlertIntervalUnitMeasureDropDownList').attr("disabled", "disabled");
+            $('#humidityMinMaxAlertValueSettings').hide();
+            $('#humidityAlertIntervalSettings').hide();
+        }
+
+        if ($('#motionDetectionAlertYNCheckBox').is(':checked')) {
+            $('#motionDetectionAlertIntervalSettings').show();
+        }
+        else {
+            $('#motionDetectionAlertIntervalSettings').hide();
+        }
+
+        if ($('#soundDetectionAlertYNCheckBox').is(':checked')) {
+            $('#soundDetectionAlertIntervalSettings').show();
+        }
+        else {
+            $('#soundDetectionAlertIntervalSettings').hide(); 
         }
     });
 
