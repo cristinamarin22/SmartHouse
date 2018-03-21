@@ -140,7 +140,6 @@ background-color: white;
     padding: 2px 20px;
     font-size: 16px;
 }
-
 </style>
 
 <div class="w3-row-padding w3-margin-bottom">
@@ -161,51 +160,51 @@ background-color: white;
                     </th>
                 </tr>
 
-                <tr>
-                    <th>
-                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalTemperatureAlertMinValue)</h1>
-                    </th>
+                    <tr id="temperatureMinMaxAlertValueSettings">
+                        <th>
+                            <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalTemperatureAlertMinValue)</h1>
+                        </th>
 
-                    <th>
-                        <dd1>
-                            <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalTemperatureAlertMinValue, new { id = "temperatureAlertMinValueTextBox" })</h2>
-                        </dd1>
-                    </th>
-                    <th>
-                        <label><span> < Temperature < </span></label>
-                    </th>
-                    <th>
-                        <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalTemperatureAlertMaxValue, new { id = "temperatureAlertMaxValueTextBox" })</h2>
-                    </th>
-                </tr>
+                        <th>
+                            <dd1>
+                                <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalTemperatureAlertMinValue, new { id = "temperatureAlertMinValueTextBox" })</h2>
+                            </dd1>
+                        </th>
+                        <th>
+                            <label><span> < Temperature < </span></label>
+                        </th>
+                        <th>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalTemperatureAlertMaxValue, new { id = "temperatureAlertMaxValueTextBox" })</h2>
+                        </th>
+                    </tr>
 
-                <tr>
-                    <th>
-                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.SendTemperatureEmailAlertInterval)</h1>
-                    </th>
+                    <tr id="temperatureAlertIntervalSettings">
+                        <th>
+                            <h1 class="w3-large">@Html.DisplayNameFor(model => model.SendTemperatureEmailAlertInterval)</h1>
+                        </th>
 
-                    <th>
-                        <dd1>
-                            <h2 class="w3-large">@Html.TextBoxFor(model => model.SendTemperatureEmailAlertInterval, new { id = "sendTemperatureEmailAlertIntervalTextBox" })</h2>
-                        </dd1>
-                    </th>
+                        <th>
+                            <dd1>
+                                <h2 class="w3-large">@Html.TextBoxFor(model => model.SendTemperatureEmailAlertInterval, new { id = "sendTemperatureEmailAlertIntervalTextBox" })</h2>
+                            </dd1>
+                        </th>
 
-                    <th>
-                        <div class="w3-container">
-                            <h2 class="w3-large">
-                                @Html.DropDownListFor(model => model.SendTemperatureEmailAlertIntervalUnitMeasure, new SelectList(new List<Object>
-                                                                                                            {
-                                                                                                            new { value = 1 , text = "MINUTE"  },
-                                                                                                            new { value = 2 , text = "HOUR" },
-                                                                                                            new { value = 3 , text = "DAY"}
-                                                                                                            },
-                  "value",
-                  "text",
-                  @Model.SendTemperatureEmailAlertIntervalUnitMeasure), new { id = "sendTemperatureEmailAlertIntervalUnitMeasureDropDownList" })
-                            </h2>
-                        </div>
-                    </th>
-                </tr>
+                        <th>
+                            <div class="w3-container">
+                                <h2 class="w3-large">
+                                    @Html.DropDownListFor(model => model.SendTemperatureEmailAlertIntervalUnitMeasure, new SelectList(new List<Object>
+                                                                                                                    {
+                                                                                                                    new { value = 1 , text = "MINUTE"  },
+                                                                                                                    new { value = 2 , text = "HOUR" },
+                                                                                                                    new { value = 3 , text = "DAY"}
+                                                                                                                    },
+           "value",
+           "text",
+           @Model.SendTemperatureEmailAlertIntervalUnitMeasure), new { id = "sendTemperatureEmailAlertIntervalUnitMeasureDropDownList" })
+                                </h2>
+                            </div>
+                        </th>
+                    </tr>
 
                 <tr>
                     <th>
@@ -219,7 +218,7 @@ background-color: white;
                     </th>
                 </tr>
 
-                <tr>
+                <tr id="humidityMinMaxAlertValueSettings">
                     <th>
                         <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalHumidityAlertMinValue)</h1>
                     </th>
@@ -236,7 +235,7 @@ background-color: white;
                     </th>
                 </tr>
 
-                <tr>
+                <tr id="humidityAlertIntervalSettings">
                     <th>
                         <h1 class="w3-large">@Html.DisplayNameFor(model => model.SendHumidityEmailAlertInterval)</h1>
                     </th>
@@ -310,7 +309,7 @@ background-color: white;
                     </th>
                 </tr>
 
-                <tr>
+                <tr id="motionDetectionAlertIntervalSettings">
                     <th>
                         <h1 class="w3-large">@Html.DisplayNameFor(model => model.SendMotionDetectionEmailAlertInterval)</h1>
                     </th>
@@ -378,8 +377,36 @@ background-color: white;
 
                     <th>
                         <dd3>
-                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.SoundDetectionAlertYN, new { id = "soundDetectionAlertYNCheckBox" })</h2>
+                            <h2 class="w3-large">@Html.CheckBoxFor(model => model.SoundDetectionAlertYN, new { id = "soundDetectionAlertYNCheckBox", @onclick = "enableDisableSoundDetectionEmailAlertInterval()" })</h2>
                         </dd3>
+                    </th>
+                </tr>
+
+                <tr id="soundDetectionAlertIntervalSettings">
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.SendSoundDetectionEmailAlertInterval)</h1>
+                    </th>
+
+                    <th>
+                        <dd3>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.SendSoundDetectionEmailAlertInterval, new { id = "sendSoundDetectionEmailAlertIntervalTextBox" })</h2>
+                        </dd3>
+                    </th>
+
+                    <th>
+                        <div class="w3-container">
+                            <h2 class="w3-large">
+                                @Html.DropDownListFor(model => model.SendSoundDetectionEmailAlertIntervalUnitMeasure, new SelectList(new List<Object>
+                                                                                                    {
+                                                                                                    new { value = 1 , text = "MINUTE"  },
+                                                                                                    new { value = 2 , text = "HOUR" },
+                                                                                                    new { value = 3 , text = "DAY"}
+                                                                                                    },
+                         "value",
+                         "text",
+                         @Model.SendSoundDetectionEmailAlertIntervalUnitMeasure), new { id = "sendSoundDetectionEmailAlertIntervalUnitMeasureDropDownList" })
+                            </h2>
+                        </div>
                     </th>
                 </tr>
 
@@ -398,15 +425,15 @@ background-color: white;
                         <div class="w3-container">
                             <h2 class="w3-large">
                                 @Html.DropDownListFor(model => model.DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
-                                                                                    {
-                                                                                    new { value = 1 , text = "MINUTE"  },
-                                                                                    new { value = 2 , text = "HOUR" },
-                                                                                    new { value = 3 , text = "DAY"},
-                                                                                    new { value = 4 , text = "MONTH"}
-                                                                                    },
-                                       "value",
-                                       "text",
-                                       @Model.DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure), new { id = "deleteSoundDetectionOlderThanUnitMeasureDropDownList" })
+                                                                                            {
+                                                                                            new { value = 1 , text = "MINUTE"  },
+                                                                                            new { value = 2 , text = "HOUR" },
+                                                                                            new { value = 3 , text = "DAY"},
+                                                                                            new { value = 4 , text = "MONTH"}
+                                                                                            },
+                                "value",
+                                "text",
+                                @Model.DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure), new { id = "deleteSoundDetectionOlderThanUnitMeasureDropDownList" })
                             </h2>
                         </div>
                     </th>
@@ -428,7 +455,7 @@ background-color: white;
                     </th>
                 </tr>
 
-                <tr>
+                <tr  id="gasDetectionAlertIntervalSettings">
                     <th>
                         <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalGasHistoricalDataOlderThan)</h1>
                     </th>
@@ -575,6 +602,11 @@ background-color: white;
             validationError = true;
         } 
 
+        if ($('#soundDetectionAlertYNCheckBox').is(':checked') && $('#sendSoundDetectionEmailAlertIntervalTextBox').val() == '') {
+            validationMessage += '<p>Sound detection email alert interval is mandatory</p>';
+            validationError = true;
+        } 
+
         validationMessage += '</p>';
 
         if (validationError) {
@@ -599,6 +631,26 @@ background-color: white;
         if ($('#humidityAlertMaxValueTextBox').val() == '')
             $('#humidityAlertMaxValueTextBox').val(123456);
 
+        if ($('#motionDetectionAlertYNCheckBox').not(':checked'))
+            $('#sendMotionDetectionEmailAlertIntervalTextBox').val('');
+
+        if ($('#soundDetectionAlertYNCheckBox').not(':checked'))
+            $('#sendSoundDetectionEmailAlertIntervalTextBox').val('');
+
+        if ($('#temperatureAlertYNCheckBox').not(':checked')) {
+            $('#temperatureAlertMinValueTextBox').val('');
+            $('#temperatureAlertMaxValueTextBox').val('');
+            $('#sendTemperatureEmailAlertIntervalUnitMeasureDropDownList').val('');
+            $('#sendTemperatureEmailAlertIntervalTextBox').val('');
+        }
+
+        if ($('#humidityAlertYNCheckBox').is(':checked')) {
+            $('#humidityAlertMinValueTextBox').val('');
+            $('#humidityAlertMaxValueTextBox').val('');
+            $('#sendHumidityEmailAlertIntervalTextBox').val('');
+            $('#sendHumidityEmailAlertIntervalUnitMeasureDropDownList').val('');
+        }
+
 
         var settings = {
 
@@ -618,6 +670,8 @@ background-color: white;
             "SendMotionDetectionEmailAlertInterval": $('#sendMotionDetectionEmailAlertIntervalTextBox').val(),
             "SendMotionDetectionEmailAlertIntervalUnitMeasure": $('#sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList').val(),
             "SoundDetectionAlertYN": $('#soundDetectionAlertYNCheckBox').is(':checked'),
+            "SendSoundDetectionEmailAlertInterval": $('#sendSoundDetectionEmailAlertIntervalTextBox').val(),
+            "SendSoundDetectionEmailAlertIntervalUnitMeasure": $('#sendSoundDetectionEmailAlertIntervalUnitMeasureDropDownList').val(),
             "CriticalGasAlertYN": $('#gasDetectionAlertYNCheckBox').is(':checked'),
             "AlertsToEmail": $('#alertsToEmail').val(),
             "DeleteMotionDetectionHistoricalDataOlderThan": $('#deleteMotionDetectionOlderThanTextBox').val(),
@@ -695,6 +749,16 @@ background-color: white;
             $('#sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList').attr("disabled", "disabled");
         }
 
+        if ($('#soundDetectionAlertYNCheckBox').is(':checked')) {
+            $('#sendSoundDetectionEmailAlertIntervalTextBox').removeAttr("disabled");
+            $('#sendSoundDetectionEmailAlertIntervalUnitMeasureDropDownList').removeAttr("disabled");
+        }
+        else {
+            $('#sendSoundDetectionEmailAlertIntervalTextBox').attr("disabled", "disabled");
+            $('#sendSoundDetectionEmailAlertIntervalUnitMeasureDropDownList').val('');
+            $('#sendSoundDetectionEmailAlertIntervalUnitMeasureDropDownList').attr("disabled", "disabled");
+        }
+
         if ($('#temperatureAlertYNCheckBox').is(':checked')) {
             $('#temperatureAlertMaxValueTextBox').removeAttr("disabled");
             $('#temperatureAlertMinValueTextBox').removeAttr("disabled");
@@ -703,13 +767,14 @@ background-color: white;
         }
         else {
             $('#temperatureAlertMaxValueTextBox').attr("disabled", "disabled");
-            $('#temperatureAlertMaxValueTextBox').val('');
             $('#temperatureAlertMinValueTextBox').attr("disabled", "disabled");
             $('#temperatureAlertMinValueTextBox').val('');
-            $('#sendTemperatureEmailAlertIntervalTextBox').attr("disabled", "disabled");
-            $('#sendTemperatureEmailAlertIntervalTextBox').val('');
-            $('#sendTemperatureEmailAlertIntervalUnitMeasureDropDownList').attr("disabled", "disabled");
+            $('#temperatureAlertMaxValueTextBox').val('');
             $('#sendTemperatureEmailAlertIntervalUnitMeasureDropDownList').val('');
+            $('#sendTemperatureEmailAlertIntervalTextBox').val('');
+            $('#sendTemperatureEmailAlertIntervalTextBox').attr("disabled", "disabled");
+            $('#sendTemperatureEmailAlertIntervalUnitMeasureDropDownList').attr("disabled", "disabled");
+
         }
 
         if ($('#humidityAlertYNCheckBox').is(':checked')) {
@@ -721,65 +786,66 @@ background-color: white;
         else {
             $('#humidityAlertMaxValueTextBox').attr("disabled", "disabled");
             $('#humidityAlertMaxValueTextBox').val('');
-            $('#humidityAlertMinValueTextBox').attr("disabled", "disabled");
             $('#humidityAlertMinValueTextBox').val('');
-            $('#sendHumidityEmailAlertIntervalTextBox').attr("disabled", "disabled");
             $('#sendHumidityEmailAlertIntervalTextBox').val('');
-            $('#sendHumidityEmailAlertIntervalUnitMeasureDropDownList').attr("disabled", "disabled");
             $('#sendHumidityEmailAlertIntervalUnitMeasureDropDownList').val('');
+            $('#humidityAlertMinValueTextBox').attr("disabled", "disabled");
+            $('#sendHumidityEmailAlertIntervalTextBox').attr("disabled", "disabled");
+            $('#sendHumidityEmailAlertIntervalUnitMeasureDropDownList').attr("disabled", "disabled");
         }
     });
+
+    function enableDisableGasDetectionEmailAlertInterval() {
+
+        if ($('#gasDetectionAlertYNCheckBox').is(':checked')) {
+            $('#gasDetectionAlertIntervalSettings').show();
+        }
+        else {
+            $('#gasDetectionAlertIntervalSettings').hide();
+        }
+    }
 
     function enableDisableMotionDetectionEmailAlertInterval() {
 
         if ($('#motionDetectionAlertYNCheckBox').is(':checked')) {
-            $('#sendMotionDetectionEmailAlertIntervalTextBox').removeAttr("disabled");
-            $('#sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList').removeAttr("disabled");
+            $('#motionDetectionAlertIntervalSettings').show(); 
         }
         else {
-            $('#sendMotionDetectionEmailAlertIntervalTextBox').attr("disabled", "disabled");
-            $('#sendMotionDetectionEmailAlertIntervalTextBox').val('');
-            $('#sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList').attr("disabled", "disabled");
+            $('#motionDetectionAlertIntervalSettings').hide(); 
+        }
+    }
+
+    function enableDisableSoundDetectionEmailAlertInterval() {
+
+        if ($('#soundDetectionAlertYNCheckBox').is(':checked')) {
+            $('#soundDetectionAlertIntervalSettings').show(); 
+        }
+        else {
+            $('#soundDetectionAlertIntervalSettings').hide(); 
         }
     }
 
     function enableDisableTemperatureEmailAlert() {
         
         if ($('#temperatureAlertYNCheckBox').is(':checked')) { 
-            $('#temperatureAlertMaxValueTextBox').removeAttr("disabled");
-            $('#temperatureAlertMinValueTextBox').removeAttr("disabled");
-            $('#sendTemperatureEmailAlertIntervalTextBox').removeAttr("disabled");
-            $('#sendTemperatureEmailAlertIntervalUnitMeasureDropDownList').removeAttr("disabled");
+            $('#temperatureMinMaxAlertValueSettings').show();
+            $('#temperatureAlertIntervalSettings').show();   
         }
         else {
-            $('#temperatureAlertMaxValueTextBox').attr("disabled", "disabled");
-            $('#temperatureAlertMaxValueTextBox').val('');
-            $('#temperatureAlertMinValueTextBox').attr("disabled", "disabled");
-            $('#temperatureAlertMinValueTextBox').val('');
-            $('#sendTemperatureEmailAlertIntervalTextBox').attr("disabled", "disabled");
-            $('#sendTemperatureEmailAlertIntervalTextBox').val('');
-            $('#sendTemperatureEmailAlertIntervalUnitMeasureDropDownList').attr("disabled", "disabled");
-            $('#sendTemperatureEmailAlertIntervalUnitMeasureDropDownList').val('');
+            $('#temperatureMinMaxAlertValueSettings').hide();
+            $('#temperatureAlertIntervalSettings').hide();
         }
     }
 
     function enableDisableHumidityEmailAlert() {
 
         if ($('#humidityAlertYNCheckBox').is(':checked')) {
-            $('#humidityAlertMaxValueTextBox').removeAttr("disabled");
-            $('#humidityAlertMinValueTextBox').removeAttr("disabled");
-            $('#sendHumidityEmailAlertIntervalTextBox').removeAttr("disabled");
-            $('#sendHumidityEmailAlertIntervalUnitMeasureDropDownList').removeAttr("disabled");
+            $('#humidityMinMaxAlertValueSettings').show();
+            $('#humidityAlertIntervalSettings').show();  
         }
         else {
-            $('#humidityAlertMaxValueTextBox').attr("disabled", "disabled");
-            $('#humidityAlertMaxValueTextBox').val('');
-            $('#humidityAlertMinValueTextBox').attr("disabled", "disabled");
-            $('#humidityAlertMinValueTextBox').val('');
-            $('#sendHumidityEmailAlertIntervalTextBox').attr("disabled", "disabled");
-            $('#sendHumidityEmailAlertIntervalTextBox').val('');
-            $('#sendHumidityEmailAlertIntervalUnitMeasureDropDownList').attr("disabled", "disabled");
-            $('#sendHumidityEmailAlertIntervalUnitMeasureDropDownList').val('');
+            $('#humidityMinMaxAlertValueSettings').hide();
+            $('#humidityAlertIntervalSettings').hide();
         }
     }
 

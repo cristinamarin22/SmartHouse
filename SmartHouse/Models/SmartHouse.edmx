@@ -43,6 +43,8 @@
           <Property Name="SendMotionDetectionEmailAlertInterval" Type="int" Nullable="false" />
           <Property Name="SendMotionDetectionEmailAlertIntervalUnitMeasure" Type="int" Nullable="false" />
           <Property Name="SoundDetectionAlertYN" Type="bool" Nullable="false" />
+          <Property Name="SendSoundDetectionEmailAlertInterval" Type="int" Nullable="false" />
+          <Property Name="SendSoundDetectionEmailAlertIntervalUnitMeasure" Type="int" Nullable="false" />
           <Property Name="DeleteSoundDetectionHistoricalDataOlderThan" Type="int" Nullable="false" />
           <Property Name="DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure" Type="int" Nullable="false" />
           <Property Name="CriticalGasAlertYN" Type="bool" Nullable="false" />
@@ -182,6 +184,8 @@
           <Property Name="SendTemperatureEmailAlertIntervalUnitMeasure" Type="Int32" Nullable="false" />
           <Property Name="SendHumidityEmailAlertInterval" Type="Int32" Nullable="false" />
           <Property Name="SendHumidityEmailAlertIntervalUnitMeasure" Type="Int32" Nullable="false" />
+          <Property Name="SendSoundDetectionEmailAlertInterval" Type="Int32" Nullable="false" />
+          <Property Name="SendSoundDetectionEmailAlertIntervalUnitMeasure" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -245,6 +249,8 @@
           <EntitySetMapping Name="Settings">
             <EntityTypeMapping TypeName="SmartHouseModel.Settings">
               <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="SendSoundDetectionEmailAlertIntervalUnitMeasure" ColumnName="SendSoundDetectionEmailAlertIntervalUnitMeasure" />
+                <ScalarProperty Name="SendSoundDetectionEmailAlertInterval" ColumnName="SendSoundDetectionEmailAlertInterval" />
                 <ScalarProperty Name="SendHumidityEmailAlertIntervalUnitMeasure" ColumnName="SendHumidityEmailAlertIntervalUnitMeasure" />
                 <ScalarProperty Name="SendHumidityEmailAlertInterval" ColumnName="SendHumidityEmailAlertInterval" />
                 <ScalarProperty Name="SendTemperatureEmailAlertIntervalUnitMeasure" ColumnName="SendTemperatureEmailAlertIntervalUnitMeasure" />

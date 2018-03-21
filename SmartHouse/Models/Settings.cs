@@ -78,5 +78,9 @@ namespace SmartHouse.Models
         [Display(Name = "Humidity email alert interval")]
         public int SendHumidityEmailAlertInterval { get; set; }
         public int SendHumidityEmailAlertIntervalUnitMeasure { get; set; }
+
+        [Display(Name = "Sound detection email alert interval")]
+        public int SendSoundDetectionEmailAlertInterval { get; set; }
+        public int SendSoundDetectionEmailAlertIntervalUnitMeasure { get; set; }
     }
 }

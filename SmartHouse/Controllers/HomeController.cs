@@ -417,6 +417,8 @@ namespace SmartHouse.Controllers
 
                 #region Sound Detection
                 smartHouseEntities.Settings.FirstOrDefault().SoundDetectionAlertYN = settings.SoundDetectionAlertYN;
+                smartHouseEntities.Settings.FirstOrDefault().SendSoundDetectionEmailAlertInterval = settings.SendSoundDetectionEmailAlertInterval;
+                smartHouseEntities.Settings.FirstOrDefault().SendSoundDetectionEmailAlertIntervalUnitMeasure = settings.SendSoundDetectionEmailAlertIntervalUnitMeasure;
                 smartHouseEntities.Settings.FirstOrDefault().DeleteSoundDetectionHistoricalDataOlderThan = settings.DeleteSoundDetectionHistoricalDataOlderThan;
                 smartHouseEntities.Settings.FirstOrDefault().DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure = settings.DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure;
                 #endregion
