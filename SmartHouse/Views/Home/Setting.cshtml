@@ -147,19 +147,19 @@ border: 2px solid #009688;
 }
 
 .buttonGasDetectionOnOff3 {
-    background-color: white;
-    color: black;
-    border: 2px solid #ff9800;
+background-color: white;
+color: black;
+border: 2px solid #ff9800;
 }
 
-    .buttonGasDetectionOnOff3:hover {
-        background-color: #ff9800;
-        color: white;
-    }
+.buttonGasDetectionOnOff3:hover {
+    background-color: #ff9800;
+    color: white;
+}
 
-    .buttonGasDetectionOnOff3.active {
-        background: #ff9800;
-    }
+.buttonGasDetectionOnOff3.active {
+    background: #ff9800;
+}
 
 
 .divred {
@@ -761,64 +761,71 @@ background-color: white;
         var validationMessage = '<p>';
         var validationError = false;
 
-        if ($('#temperatureAlertYNCheckBox').is(':checked')) {
-            if ($('#temperatureAlertMaxValueTextBox').val() == '' && $('#temperatureAlertMinValueTextBox').val() == '') {
-                validationMessage += '<p>Critical temperature is mandatory</p>';
-                validationError = true;
+        if ($('#buttonTemperatureHumidityOn').hasClass('active')) {
+
+            if ($('#temperatureAlertYNCheckBox').is(':checked')) {
+                if ($('#temperatureAlertMaxValueTextBox').val() == '' && $('#temperatureAlertMinValueTextBox').val() == '') {
+                    validationMessage += '<p>Critical temperature is mandatory</p>';
+                    validationError = true;
+                }
+
+                if ($('#sendTemperatureEmailAlertIntervalTextBox').val() == '') {
+                    validationMessage += '<p>Temperature email alert interval is mandatory</p>';
+                    validationError = true;
+                }
+
+                if ($('#sendTemperatureEmailAlertIntervalTextBox').val() == '0') {
+                    validationMessage += '<p>Critical temperature email alert interval should be greater than 0</p>';
+                    validationError = true;
+                }
+
             }
 
-            if ($('#sendTemperatureEmailAlertIntervalTextBox').val() == '') {
-                validationMessage += '<p>Temperature email alert interval is mandatory</p>';
-                validationError = true;
-            }
+            if ($('#humidityAlertYNCheckBox').is(':checked')) {
+                if ($('#humidityAlertMaxValueTextBox').val() == '' && $('#humidityAlertMinValueTextBox').val() == '') {
+                    validationMessage += '<p>Critical humidity is mandatory</p>';
+                    validationError = true;
+                }
 
-            if ($('#sendTemperatureEmailAlertIntervalTextBox').val() == '0') {
-                validationMessage += '<p>Critical temperature email alert interval should be greater than 0</p>';
-                validationError = true;
-            }
+                if ($('#sendHumidityEmailAlertIntervalTextBox').val() == '') {
+                    validationMessage += '<p>Humidity email alert interval is mandatory</p>';
+                    validationError = true;
+                }
 
-        }
-
-        if ($('#humidityAlertYNCheckBox').is(':checked')) {
-            if ($('#humidityAlertMaxValueTextBox').val() == '' && $('#humidityAlertMinValueTextBox').val() == '') {
-                validationMessage += '<p>Critical humidity is mandatory</p>';
-                validationError = true;
-            }
-
-            if ($('#sendHumidityEmailAlertIntervalTextBox').val() == '') {
-                validationMessage += '<p>Humidity email alert interval is mandatory</p>';
-                validationError = true;
-            }
-
-            if ($('#sendHumidityEmailAlertIntervalTextBox').val() == '0') {
-                validationMessage += '<p>Critical humidity email alert interval should be greater than 0</p>';
-                validationError = true;
-            }
-        }
-
-
-        if ($('#motionDetectionAlertYNCheckBox').is(':checked')) {
-            if ($('#sendMotionDetectionEmailAlertIntervalTextBox').val() == '') {
-                validationMessage += '<p>Motion detection email alert interval is mandatory</p>';
-                validationError = true;
-            }
-
-            if ($('#sendMotionDetectionEmailAlertIntervalTextBox').val() == '0') {
-                validationMessage += '<p>Motion detection email alert interval should be greater than 0</p>';
-                validationError = true;
+                if ($('#sendHumidityEmailAlertIntervalTextBox').val() == '0') {
+                    validationMessage += '<p>Critical humidity email alert interval should be greater than 0</p>';
+                    validationError = true;
+                }
             }
         }
 
+        if ($('#buttonMotionDetectionOn').hasClass('active')) {
 
-        if ($('#soundDetectionAlertYNCheckBox').is(':checked')) {
-            if ($('#sendSoundDetectionEmailAlertIntervalTextBox').val() == '') {
-                validationMessage += '<p>Sound detection email alert interval is mandatory</p>';
-                validationError = true;
+            if ($('#motionDetectionAlertYNCheckBox').is(':checked')) {
+                if ($('#sendMotionDetectionEmailAlertIntervalTextBox').val() == '') {
+                    validationMessage += '<p>Motion detection email alert interval is mandatory</p>';
+                    validationError = true;
+                }
+
+                if ($('#sendMotionDetectionEmailAlertIntervalTextBox').val() == '0') {
+                    validationMessage += '<p>Motion detection email alert interval should be greater than 0</p>';
+                    validationError = true;
+                }
             }
+        }
 
-            if ($('#sendSoundDetectionEmailAlertIntervalTextBox').val() == '0') {
-                validationMessage += '<p>Sound detection email alert interval should be greater than 0</p>';
-                validationError = true;
+        if ($('#buttonSoundDetectionOn').hasClass('active')) {
+
+            if ($('#soundDetectionAlertYNCheckBox').is(':checked')) {
+                if ($('#sendSoundDetectionEmailAlertIntervalTextBox').val() == '') {
+                    validationMessage += '<p>Sound detection email alert interval is mandatory</p>';
+                    validationError = true;
+                }
+
+                if ($('#sendSoundDetectionEmailAlertIntervalTextBox').val() == '0') {
+                    validationMessage += '<p>Sound detection email alert interval should be greater than 0</p>';
+                    validationError = true;
+                }
             }
         }
 
