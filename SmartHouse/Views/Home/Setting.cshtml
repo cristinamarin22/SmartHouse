@@ -34,6 +34,134 @@ border: 2px solid #A1A1A1;
     color: white;
 }
 
+.buttonTempHumidityOnOff {
+background-color: #4CAF50; /* Green */
+border: none;
+color: white;
+padding: 10px 20px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+-webkit-transition-duration: 0.4s; /* Safari */
+transition-duration: 0.4s;
+cursor: pointer;
+}
+
+.buttonTempHumidityOnOff3 {
+    background-color: white;
+    color: black;
+    border: 2px solid #f44336;
+}
+
+.buttonTempHumidityOnOff3:hover {
+    background-color: #f44336;
+    color: white;
+}
+
+.buttonTempHumidityOnOff3.active {
+    background: #f44336;
+}
+
+
+/* Button Motion Detection ON/OFF*/
+.buttonMotionDetectionOnOff {
+background-color: #4CAF50; /* Green */
+border: none;
+color: white;
+padding: 10px 20px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+-webkit-transition-duration: 0.4s; /* Safari */
+transition-duration: 0.4s;
+cursor: pointer;
+}
+
+.buttonMotionDetectionOnOff3 {
+    background-color: white;
+    color: black;
+    border: 2px solid #2196F3;
+}
+
+.buttonMotionDetectionOnOff3:hover {
+    background-color: #2196F3;
+    color: white;
+}
+
+.buttonMotionDetectionOnOff3.active {
+    background: #2196F3;
+}
+
+
+
+
+/* Button Sound Detection ON/OFF*/
+.buttonSoundDetectionOnOff {
+background-color: #4CAF50; 
+border: none;
+color: white;
+padding: 10px 20px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+-webkit-transition-duration: 0.4s; /* Safari */
+transition-duration: 0.4s;
+cursor: pointer;
+}
+
+.buttonSoundDetectionOnOff3 {
+background-color: white;
+color: black;
+border: 2px solid #009688;
+}
+
+.buttonSoundDetectionOnOff3:hover {
+    background-color: #009688;
+    color: white;
+}
+
+.buttonSoundDetectionOnOff3.active {
+    background: #009688;
+}
+
+/* Button Gas Detection ON/OFF*/
+.buttonGasDetectionOnOff {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.buttonGasDetectionOnOff3 {
+    background-color: white;
+    color: black;
+    border: 2px solid #ff9800;
+}
+
+    .buttonGasDetectionOnOff3:hover {
+        background-color: #ff9800;
+        color: white;
+    }
+
+    .buttonGasDetectionOnOff3.active {
+        background: #ff9800;
+    }
+
+
 .divred {
     background-color: white;
 }
@@ -150,6 +278,20 @@ background-color: white;
             <table>
                 <tr>
                     <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.TemperatureHumidityOn)</h1>
+                    </th>
+
+                    <th>
+                        <dd1> 
+                            <h2>
+                                <button type="buttonTempHumidityOnOff" class="buttonTempHumidityOnOff buttonTempHumidityOnOff3" id="buttonTemperatureHumidityOn" onclick="turnOnTemperatureHumidity()">ON</button>
+                                <button type="buttonTempHumidityOnOff" class="buttonTempHumidityOnOff buttonTempHumidityOnOff3" id="buttonTemperatureHumidityOff" onclick="turnOffTemperatureHumidity()">OFF</button>
+                            </h2>
+                        </dd1>
+                    </th>
+                </tr>
+                <tr id="temperatureEmailAlertYN">
+                    <th>
                         <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalTemperatureAlertYN)</h1>
                     </th>
 
@@ -160,53 +302,53 @@ background-color: white;
                     </th>
                 </tr>
 
-                    <tr id="temperatureMinMaxAlertValueSettings">
-                        <th>
-                            <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalTemperatureAlertMinValue)</h1>
-                        </th>
+                <tr id="temperatureMinMaxAlertValueSettings">
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalTemperatureAlertMinValue)</h1>
+                    </th>
 
-                        <th>
-                            <dd1>
-                                <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalTemperatureAlertMinValue, new { id = "temperatureAlertMinValueTextBox" })</h2>
-                            </dd1>
-                        </th>
-                        <th>
-                            <label><span> < Temperature < </span></label>
-                        </th>
-                        <th>
-                            <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalTemperatureAlertMaxValue, new { id = "temperatureAlertMaxValueTextBox" })</h2>
-                        </th>
-                    </tr>
+                    <th>
+                        <dd1>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalTemperatureAlertMinValue, new { id = "temperatureAlertMinValueTextBox" })</h2>
+                        </dd1>
+                    </th>
+                    <th>
+                        <label><span> < Temperature < </span></label>
+                    </th>
+                    <th>
+                        <h2 class="w3-large">@Html.TextBoxFor(model => model.CriticalTemperatureAlertMaxValue, new { id = "temperatureAlertMaxValueTextBox" })</h2>
+                    </th>
+                </tr>
 
-                    <tr id="temperatureAlertIntervalSettings">
-                        <th>
-                            <h1 class="w3-large">@Html.DisplayNameFor(model => model.SendTemperatureEmailAlertInterval)</h1>
-                        </th>
+                <tr id="temperatureAlertIntervalSettings">
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.SendTemperatureEmailAlertInterval)</h1>
+                    </th>
 
-                        <th>
-                            <dd1>
-                                <h2 class="w3-large">@Html.TextBoxFor(model => model.SendTemperatureEmailAlertInterval, new { id = "sendTemperatureEmailAlertIntervalTextBox" })</h2>
-                            </dd1>
-                        </th>
+                    <th>
+                        <dd1>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.SendTemperatureEmailAlertInterval, new { id = "sendTemperatureEmailAlertIntervalTextBox" })</h2>
+                        </dd1>
+                    </th>
 
-                        <th>
-                            <div class="w3-container">
-                                <h2 class="w3-large">
-                                    @Html.DropDownListFor(model => model.SendTemperatureEmailAlertIntervalUnitMeasure, new SelectList(new List<Object>
-                                                                                                                    {
-                                                                                                                    new { value = 1 , text = "MINUTE"  },
-                                                                                                                    new { value = 2 , text = "HOUR" },
-                                                                                                                    new { value = 3 , text = "DAY"}
-                                                                                                                    },
-           "value",
-           "text",
-           @Model.SendTemperatureEmailAlertIntervalUnitMeasure), new { id = "sendTemperatureEmailAlertIntervalUnitMeasureDropDownList" })
-                                </h2>
-                            </div>
-                        </th>
-                    </tr>
+                    <th>
+                        <div class="w3-container">
+                            <h2 class="w3-large">
+                                @Html.DropDownListFor(model => model.SendTemperatureEmailAlertIntervalUnitMeasure, new SelectList(new List<Object>
+                                                                                                                        {
+                                                                                                                        new { value = 1 , text = "MINUTE"  },
+                                                                                                                        new { value = 2 , text = "HOUR" },
+                                                                                                                        new { value = 3 , text = "DAY"}
+                                                                                                                        },
+"value",
+"text",
+@Model.SendTemperatureEmailAlertIntervalUnitMeasure), new { id = "sendTemperatureEmailAlertIntervalUnitMeasureDropDownList" })
+                            </h2>
+                        </div>
+                    </th>
+                </tr>
 
-                <tr>
+                <tr id="humidityEmailAlertYN">
                     <th>
                         <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalHumidityAlertYN)</h1>
                     </th>
@@ -250,14 +392,14 @@ background-color: white;
                         <div class="w3-container">
                             <h2 class="w3-large">
                                 @Html.DropDownListFor(model => model.SendHumidityEmailAlertIntervalUnitMeasure, new SelectList(new List<Object>
-                                                                                                            {
-                                                                                                            new { value = 1 , text = "MINUTE"  },
-                                                                                                            new { value = 2 , text = "HOUR" },
-                                                                                                            new { value = 3 , text = "DAY"}
-                                                                                                            },
-                  "value",
-                  "text",
-                  @Model.SendHumidityEmailAlertIntervalUnitMeasure), new { id = "sendHumidityEmailAlertIntervalUnitMeasureDropDownList" })
+                                                                                                                    {
+                                                                                                                    new { value = 1 , text = "MINUTE"  },
+                                                                                                                    new { value = 2 , text = "HOUR" },
+                                                                                                                    new { value = 3 , text = "DAY"}
+                                                                                                                    },
+           "value",
+           "text",
+           @Model.SendHumidityEmailAlertIntervalUnitMeasure), new { id = "sendHumidityEmailAlertIntervalUnitMeasureDropDownList" })
                             </h2>
                         </div>
                     </th>
@@ -278,15 +420,15 @@ background-color: white;
                         <div class="w3-container">
                             <h2 class="w3-large">
                                 @Html.DropDownListFor(model => model.DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
-                                                                                                    {
-                                                                                                    new { value = 1 , text = "MINUTE"  },
-                                                                                                    new { value = 2 , text = "HOUR" },
-                                                                                                    new { value = 3 , text = "DAY"},
-                                                                                                    new { value = 4 , text = "MONTH"}
-                                                                                                    },
-                         "value",
-                         "text",
-                         @Model.DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure), new { id = "deleteTemperatureHumidityOlderThanUnitMeasureDropDownList" })
+                                                                                                            {
+                                                                                                            new { value = 1 , text = "MINUTE"  },
+                                                                                                            new { value = 2 , text = "HOUR" },
+                                                                                                            new { value = 3 , text = "DAY"},
+                                                                                                            new { value = 4 , text = "MONTH"}
+                                                                                                            },
+                  "value",
+                  "text",
+                  @Model.DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure), new { id = "deleteTemperatureHumidityOlderThanUnitMeasureDropDownList" })
                             </h2>
                         </div>
                     </th>
@@ -298,6 +440,20 @@ background-color: white;
         <div class="w3-container divblue">
             <table>
                 <tr>
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.MotionDetectionOn)</h1>
+                    </th>
+
+                    <th>
+                        <dd2>
+                            <h2>
+                                <button type="buttonMotionDetectionOnOff" class="buttonMotionDetectionOnOff buttonMotionDetectionOnOff3" id="buttonMotionDetectionOn" onclick="turnOnMotionDetection()">ON</button>
+                                <button type="buttonMotionDetectionOnOff" class="buttonMotionDetectionOnOff buttonMotionDetectionOnOff3" id="buttonMotionDetectionOff" onclick="turnOffMotionDetection()">OFF</button>
+                            </h2>
+                        </dd2>
+                    </th>
+                </tr>
+                <tr id="motionDetectionEmailAlertYN">
                     <th>
                         <h1 class="w3-large">@Html.DisplayNameFor(model => model.MotionDetectionAlertYN)</h1>
                     </th>
@@ -324,14 +480,14 @@ background-color: white;
                         <div class="w3-container">
                             <h2 class="w3-large">
                                 @Html.DropDownListFor(model => model.SendMotionDetectionEmailAlertIntervalUnitMeasure, new SelectList(new List<Object>
-                                                                                            {
-                                                                                            new { value = 1 , text = "MINUTE"  },
-                                                                                            new { value = 2 , text = "HOUR" },
-                                                                                            new { value = 3 , text = "DAY"}
-                                                                                            },
-                                "value",
-                                "text",
-                                @Model.SendMotionDetectionEmailAlertIntervalUnitMeasure), new { id = "sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList" })
+                                                                                                    {
+                                                                                                    new { value = 1 , text = "MINUTE"  },
+                                                                                                    new { value = 2 , text = "HOUR" },
+                                                                                                    new { value = 3 , text = "DAY"}
+                                                                                                    },
+                         "value",
+                         "text",
+                         @Model.SendMotionDetectionEmailAlertIntervalUnitMeasure), new { id = "sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList" })
                             </h2>
                         </div>
                     </th>
@@ -352,15 +508,15 @@ background-color: white;
                         <div class="w3-container">
                             <h2 class="w3-large">
                                 @Html.DropDownListFor(model => model.DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
-                                                                                            {
-                                                                                            new { value = 1 , text = "MINUTE"  },
-                                                                                            new { value = 2 , text = "HOUR" },
-                                                                                            new { value = 3 , text = "DAY"},
-                                                                                            new { value = 4 , text = "MONTH"}
-                                                                                            },
-                                "value",
-                                "text",
-                                @Model.DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure), new { id = "deleteMotionDetectionOlderThanUnitMeasureDropDownList" })
+                                                                                                    {
+                                                                                                    new { value = 1 , text = "MINUTE"  },
+                                                                                                    new { value = 2 , text = "HOUR" },
+                                                                                                    new { value = 3 , text = "DAY"},
+                                                                                                    new { value = 4 , text = "MONTH"}
+                                                                                                    },
+                         "value",
+                         "text",
+                         @Model.DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure), new { id = "deleteMotionDetectionOlderThanUnitMeasureDropDownList" })
                             </h2>
                         </div>
                     </th>
@@ -371,6 +527,20 @@ background-color: white;
         <div class="w3-container divgreen">
             <table>
                 <tr>
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.SoundDetectionOn)</h1>
+                    </th>
+
+                    <th>
+                        <dd3>
+                            <h2>
+                                <button type="buttonSoundDetectionOnOff" class="buttonSoundDetectionOnOff buttonSoundDetectionOnOff3" id="buttonSoundDetectionOn" onclick="turnOnSoundDetection()">ON</button>
+                                <button type="buttonSoundDetectionOnOff" class="buttonSoundDetectionOnOff buttonSoundDetectionOnOff3" id="buttonSoundDetectionOff" onclick="turnOffSoundDetection()">OFF</button>
+                            </h2>
+                        </dd3>
+                    </th>
+                </tr>
+                <tr  id="soundDetectionEmailAlertYN">
                     <th>
                         <h1 class="w3-large">@Html.DisplayNameFor(model => model.SoundDetectionAlertYN)</h1>
                     </th>
@@ -397,14 +567,14 @@ background-color: white;
                         <div class="w3-container">
                             <h2 class="w3-large">
                                 @Html.DropDownListFor(model => model.SendSoundDetectionEmailAlertIntervalUnitMeasure, new SelectList(new List<Object>
-                                                                                                    {
-                                                                                                    new { value = 1 , text = "MINUTE"  },
-                                                                                                    new { value = 2 , text = "HOUR" },
-                                                                                                    new { value = 3 , text = "DAY"}
-                                                                                                    },
-                         "value",
-                         "text",
-                         @Model.SendSoundDetectionEmailAlertIntervalUnitMeasure), new { id = "sendSoundDetectionEmailAlertIntervalUnitMeasureDropDownList" })
+                                                                                                            {
+                                                                                                            new { value = 1 , text = "MINUTE"  },
+                                                                                                            new { value = 2 , text = "HOUR" },
+                                                                                                            new { value = 3 , text = "DAY"}
+                                                                                                            },
+                  "value",
+                  "text",
+                  @Model.SendSoundDetectionEmailAlertIntervalUnitMeasure), new { id = "sendSoundDetectionEmailAlertIntervalUnitMeasureDropDownList" })
                             </h2>
                         </div>
                     </th>
@@ -425,15 +595,15 @@ background-color: white;
                         <div class="w3-container">
                             <h2 class="w3-large">
                                 @Html.DropDownListFor(model => model.DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
-                                                                                            {
-                                                                                            new { value = 1 , text = "MINUTE"  },
-                                                                                            new { value = 2 , text = "HOUR" },
-                                                                                            new { value = 3 , text = "DAY"},
-                                                                                            new { value = 4 , text = "MONTH"}
-                                                                                            },
-                                "value",
-                                "text",
-                                @Model.DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure), new { id = "deleteSoundDetectionOlderThanUnitMeasureDropDownList" })
+                                                                                                    {
+                                                                                                    new { value = 1 , text = "MINUTE"  },
+                                                                                                    new { value = 2 , text = "HOUR" },
+                                                                                                    new { value = 3 , text = "DAY"},
+                                                                                                    new { value = 4 , text = "MONTH"}
+                                                                                                    },
+                         "value",
+                         "text",
+                         @Model.DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure), new { id = "deleteSoundDetectionOlderThanUnitMeasureDropDownList" })
                             </h2>
                         </div>
                     </th>
@@ -445,6 +615,20 @@ background-color: white;
             <table>
                 <tr>
                     <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.GasDetectionOn)</h1>
+                    </th>
+
+                    <th>
+                        <dd4>
+                            <h2>
+                                <button type="buttonGasDetectionOnOff" class="buttonGasDetectionOnOff buttonGasDetectionOnOff3" id="buttonGasDetectionOn" onclick="turnOnGasDetection()">ON</button>
+                                <button type="buttonGasDetectionOnOff" class="buttonGasDetectionOnOff buttonGasDetectionOnOff3" id="buttonGasDetectionOff" onclick="turnOffGasDetection()">OFF</button>
+                            </h2>
+                        </dd4>
+                    </th>
+                </tr>
+                <tr  id="gasDetectionEmailAlertYN">
+                    <th>
                         <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalGasAlertYN)</h1>
                     </th>
 
@@ -455,7 +639,7 @@ background-color: white;
                     </th>
                 </tr>
 
-                <tr  id="gasDetectionAlertIntervalSettings">
+                <tr>
                     <th>
                         <h1 class="w3-large">@Html.DisplayNameFor(model => model.CriticalGasHistoricalDataOlderThan)</h1>
                     </th>
@@ -470,15 +654,15 @@ background-color: white;
                         <div class="w3-container">
                             <h2 class="w3-large">
                                 @Html.DropDownListFor(model => model.CriticalGasHistoricalDataOlderThanUnitMeasure, new SelectList(new List<Object>
-                                                                                    {
-                                                                                    new { value = 1 , text = "MINUTE"  },
-                                                                                    new { value = 2 , text = "HOUR" },
-                                                                                    new { value = 3 , text = "DAY"},
-                                                                                    new { value = 4 , text = "MONTH"}
-                                                                                    },
-                                       "value",
-                                       "text",
-                                       @Model.CriticalGasHistoricalDataOlderThanUnitMeasure), new { id = "deleteGasOlderThanUnitMeasureDropDownList" })
+                                                                                            {
+                                                                                            new { value = 1 , text = "MINUTE"  },
+                                                                                            new { value = 2 , text = "HOUR" },
+                                                                                            new { value = 3 , text = "DAY"},
+                                                                                            new { value = 4 , text = "MONTH"}
+                                                                                            },
+                                "value",
+                                "text",
+                                @Model.CriticalGasHistoricalDataOlderThanUnitMeasure), new { id = "deleteGasOlderThanUnitMeasureDropDownList" })
                             </h2>
                         </div>
                     </th>
@@ -636,7 +820,7 @@ background-color: white;
                 validationMessage += '<p>Sound detection email alert interval should be greater than 0</p>';
                 validationError = true;
             }
-        } 
+        }
 
         validationMessage += '</p>';
 
@@ -691,6 +875,7 @@ background-color: white;
 
         var settings = {
 
+            "TemperatureHumidityOn": $('#buttonTemperatureHumidityOn').hasClass('active'),
             "CriticalTemperatureAlertYN": $('#temperatureAlertYNCheckBox').is(':checked'),
             "CriticalTemperatureAlertMinValue": $('#temperatureAlertMinValueTextBox').val(),
             "CriticalTemperatureAlertMaxValue": $('#temperatureAlertMaxValueTextBox').val(),
@@ -703,12 +888,15 @@ background-color: white;
             "SendHumidityEmailAlertIntervalUnitMeasure": $('#sendHumidityEmailAlertIntervalUnitMeasureDropDownList').val(),
             "DeleteTemperatureHumidityHistoricalDataOlderThan": $('#deleteTemperatureHumidityOlderThanTextBox').val(),
             "DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure": $('#deleteTemperatureHumidityOlderThanUnitMeasureDropDownList').val(),
-            "MotionDetectionAlertYN": $('#motionDetectionAlertYNCheckBox').is(':checked'), 
+            "MotionDetectionOn": $('#buttonMotionDetectionOn').hasClass('active'),
+            "MotionDetectionAlertYN": $('#motionDetectionAlertYNCheckBox').is(':checked'),
             "SendMotionDetectionEmailAlertInterval": $('#sendMotionDetectionEmailAlertIntervalTextBox').val(),
             "SendMotionDetectionEmailAlertIntervalUnitMeasure": $('#sendMotionDetectionEmailAlertIntervalUnitMeasureDropDownList').val(),
+            "SoundDetectionOn": $('#buttonSoundDetectionOn').hasClass('active'),
             "SoundDetectionAlertYN": $('#soundDetectionAlertYNCheckBox').is(':checked'),
             "SendSoundDetectionEmailAlertInterval": $('#sendSoundDetectionEmailAlertIntervalTextBox').val(),
             "SendSoundDetectionEmailAlertIntervalUnitMeasure": $('#sendSoundDetectionEmailAlertIntervalUnitMeasureDropDownList').val(),
+            "GasDetectionOn": $('#buttonGasDetectionOn').hasClass('active'),
             "CriticalGasAlertYN": $('#gasDetectionAlertYNCheckBox').is(':checked'),
             "AlertsToEmail": $('#alertsToEmail').val(),
             "DeleteMotionDetectionHistoricalDataOlderThan": $('#deleteMotionDetectionOlderThanTextBox').val(),
@@ -764,35 +952,128 @@ background-color: white;
 
     $(window).bind("load", function () {
 
-        if ($('#temperatureAlertMinValueTextBox').val() == -123456)
-            $('#temperatureAlertMinValueTextBox').val('');
+        var settings = @Html.Raw(Json.Encode(Model));
 
-        if ($('#temperatureAlertMaxValueTextBox').val() == 123456)
-            $('#temperatureAlertMaxValueTextBox').val('');
+        if (settings.TemperatureHumidityOn == true) {
+            $('#buttonTemperatureHumidityOn').addClass('active')
+            $('#buttonTemperatureHumidityOff').removeClass('active')
 
-        if ($('#humidityAlertMinValueTextBox').val() == -123456)
-            $('#humidityAlertMinValueTextBox').val('');
+            $('#temperatureEmailAlertYN').show();
 
-        if ($('#humidityAlertMaxValueTextBox').val() == 123456)
-            $('#humidityAlertMaxValueTextBox').val('');
+            if (settings.CriticalTemperatureAlertYN) {
+                $('#temperatureMinMaxAlertValueSettings').show();
+                $('#temperatureAlertIntervalSettings').show();
+            }
+            else {
+                $('#temperatureMinMaxAlertValueSettings').hide();
+                $('#temperatureAlertIntervalSettings').hide();
+            }
 
-        if ($('#temperatureAlertYNCheckBox').is(':checked')) {
-            $('#temperatureMinMaxAlertValueSettings').show();
-            $('#temperatureAlertIntervalSettings').show();
+            $('#humidityEmailAlertYN').show();
+
+            if (settings.CriticalHumidityAlertYN) {
+                $('#humidityMinMaxAlertValueSettings').show();
+                $('#humidityAlertIntervalSettings').show();
+            }
+            else {
+                $('#humidityMinMaxAlertValueSettings').hide();
+                $('#humidityAlertIntervalSettings').hide();
+            }
         }
         else {
+            $('#buttonTemperatureHumidityOff').addClass('active');
+            $('#buttonTemperatureHumidityOn').removeClass('active');
+
+            $('#temperatureEmailAlertYN').hide();
+            $('#humidityEmailAlertYN').hide();
+
             $('#temperatureMinMaxAlertValueSettings').hide();
             $('#temperatureAlertIntervalSettings').hide();
-        }
 
-        if ($('#humidityAlertYNCheckBox').is(':checked')) {
-            $('#humidityMinMaxAlertValueSettings').show();
-            $('#humidityAlertIntervalSettings').show();
-        }
-        else {
             $('#humidityMinMaxAlertValueSettings').hide();
             $('#humidityAlertIntervalSettings').hide();
         }
+
+        if (settings.MotionDetectionOn == true) {
+            $('#buttonMotionDetectionOn').addClass('active');
+            $('#buttonMotionDetectionOff').removeClass('active');
+
+            $('#motionDetectionEmailAlertYN').show();
+
+            if (settings.MotionDetectionAlertYN) {
+                $('#motionDetectionAlertIntervalSettings').show();
+            }
+            else {
+                $('#motionDetectionAlertIntervalSettings').hide();
+            }
+        }
+        else {
+            $('#buttonMotionDetectionOff').addClass('active');
+            $('#buttonMotionDetectionOn').removeClass('active');
+
+            $('#motionDetectionEmailAlertYN').hide();
+            $('#motionDetectionAlertIntervalSettings').hide();
+        }
+
+        if (settings.SoundDetectionOn == true) {
+            $('#buttonSoundDetectionOn').addClass('active');
+            $('#buttonSoundDetectionOff').removeClass('active');
+
+            $('#soundDetectionEmailAlertYN').show();
+
+            if (settings.SoundDetectionAlertYN) {
+                $('#soundDetectionAlertIntervalSettings').show();
+            }
+            else {
+                $('#soundDetectionAlertIntervalSettings').hide();
+            }
+        }
+        else {
+            $('#buttonSoundDetectionOff').addClass('active');
+            $('#buttonSoundDetectionOn').removeClass('active');
+
+            $('#soundDetectionEmailAlertYN').hide();
+
+            $('#soundDetectionAlertIntervalSettings').hide();
+        }
+
+        if (settings.GasDetectionOn == true) {
+            $('#buttonGasDetectionOn').addClass('active');
+            $('#buttonGasDetectionOff').removeClass('active');
+
+            $('#gasDetectionEmailAlertYN').show();
+        }
+        else {
+            $('#buttonGasDetectionOff').addClass('active');
+            $('#buttonGasDetectionOn').removeClass('active');
+
+            $('#gasDetectionEmailAlertYN').hide();
+        }
+
+        if (settings.CriticalTemperatureAlertMinValue == -123456)
+            $('#temperatureAlertMinValueTextBox').val('');
+
+        if (settings.CriticalTemperatureAlertMaxValue == 123456)
+            $('#temperatureAlertMaxValueTextBox').val('');
+
+        if (settings.CriticalHumidityAlertMinValue == -123456)
+            $('#humidityAlertMinValueTextBox').val('');
+
+        if (settings.CriticalHumidityAlertMaxValue == 123456)
+            $('#humidityAlertMaxValueTextBox').val('');
+    });
+
+    //function enableDisableGasDetectionEmailAlertInterval() {
+
+    //    if ($('#gasDetectionAlertYNCheckBox').is(':checked')) {
+    //        $('#gasDetectionAlertIntervalSettings').show();
+    //    }
+    //    else {
+    //        $('#gasDetectionAlertIntervalSettings').hide();
+    //    }
+    //}
+
+    function enableDisableMotionDetectionEmailAlertInterval() {
 
         if ($('#motionDetectionAlertYNCheckBox').is(':checked')) {
             $('#motionDetectionAlertIntervalSettings').show();
@@ -800,50 +1081,23 @@ background-color: white;
         else {
             $('#motionDetectionAlertIntervalSettings').hide();
         }
-
-        if ($('#soundDetectionAlertYNCheckBox').is(':checked')) {
-            $('#soundDetectionAlertIntervalSettings').show();
-        }
-        else {
-            $('#soundDetectionAlertIntervalSettings').hide(); 
-        }
-    });
-
-    function enableDisableGasDetectionEmailAlertInterval() {
-
-        if ($('#gasDetectionAlertYNCheckBox').is(':checked')) {
-            $('#gasDetectionAlertIntervalSettings').show();
-        }
-        else {
-            $('#gasDetectionAlertIntervalSettings').hide();
-        }
-    }
-
-    function enableDisableMotionDetectionEmailAlertInterval() {
-
-        if ($('#motionDetectionAlertYNCheckBox').is(':checked')) {
-            $('#motionDetectionAlertIntervalSettings').show(); 
-        }
-        else {
-            $('#motionDetectionAlertIntervalSettings').hide(); 
-        }
     }
 
     function enableDisableSoundDetectionEmailAlertInterval() {
 
         if ($('#soundDetectionAlertYNCheckBox').is(':checked')) {
-            $('#soundDetectionAlertIntervalSettings').show(); 
+            $('#soundDetectionAlertIntervalSettings').show();
         }
         else {
-            $('#soundDetectionAlertIntervalSettings').hide(); 
+            $('#soundDetectionAlertIntervalSettings').hide();
         }
     }
 
     function enableDisableTemperatureEmailAlert() {
-        
-        if ($('#temperatureAlertYNCheckBox').is(':checked')) { 
+
+        if ($('#temperatureAlertYNCheckBox').is(':checked')) {
             $('#temperatureMinMaxAlertValueSettings').show();
-            $('#temperatureAlertIntervalSettings').show();   
+            $('#temperatureAlertIntervalSettings').show();
         }
         else {
             $('#temperatureMinMaxAlertValueSettings').hide();
@@ -855,11 +1109,121 @@ background-color: white;
 
         if ($('#humidityAlertYNCheckBox').is(':checked')) {
             $('#humidityMinMaxAlertValueSettings').show();
-            $('#humidityAlertIntervalSettings').show();  
+            $('#humidityAlertIntervalSettings').show();
         }
         else {
             $('#humidityMinMaxAlertValueSettings').hide();
             $('#humidityAlertIntervalSettings').hide();
+        }
+    }
+
+    function turnOnTemperatureHumidity() {
+
+        if (!$('#buttonTemperatureHumidityOn').hasClass('active')) {
+            $('#buttonTemperatureHumidityOn').addClass('active')
+            $('#buttonTemperatureHumidityOff').removeClass('active')
+
+            $('#temperatureEmailAlertYN').show();
+            if ($('#temperatureAlertYNCheckBox').is(':checked')) {
+                $('#temperatureMinMaxAlertValueSettings').show();
+                $('#temperatureAlertIntervalSettings').show();
+            }
+            else {
+                $('#temperatureMinMaxAlertValueSettings').hide();
+                $('#temperatureAlertIntervalSettings').hide();
+            }
+
+            $('#humidityEmailAlertYN').show();
+            if ($('#humidityAlertYNCheckBox').is(':checked')) {
+                $('#humidityMinMaxAlertValueSettings').show();
+                $('#humidityAlertIntervalSettings').show();
+            }
+            else {
+                $('#humidityMinMaxAlertValueSettings').hide();
+                $('#humidityAlertIntervalSettings').hide();
+            }
+        }
+    }
+
+    function turnOffTemperatureHumidity() {
+
+        if (!$('#buttonTemperatureHumidityOff').hasClass('active')) {
+            $('#buttonTemperatureHumidityOff').addClass('active')
+            $('#buttonTemperatureHumidityOn').removeClass('active')
+
+            $('#temperatureEmailAlertYN').hide();
+            $('#temperatureMinMaxAlertValueSettings').hide();
+            $('#temperatureAlertIntervalSettings').hide();
+            $('#humidityEmailAlertYN').hide();
+            $('#humidityMinMaxAlertValueSettings').hide();
+            $('#humidityAlertIntervalSettings').hide();
+        }
+    }
+
+    function turnOnMotionDetection() {
+
+        if (!$('#buttonMotionDetectionOn').hasClass('active')) {
+            $('#buttonMotionDetectionOn').addClass('active')
+            $('#buttonMotionDetectionOff').removeClass('active')
+
+            $('#motionDetectionEmailAlertYN').show();
+            $('#motionDetectionAlertIntervalSettings').show();
+        }
+    }
+
+    function turnOffMotionDetection() {
+
+        if (!$('#buttonMotionDetectionOff').hasClass('active')) {
+            $('#buttonMotionDetectionOff').addClass('active')
+            $('#buttonMotionDetectionOn').removeClass('active')
+
+            $('#motionDetectionEmailAlertYN').hide();
+            $('#motionDetectionAlertIntervalSettings').hide();
+        }
+    }
+
+    function turnOnSoundDetection() {
+
+        if (!$('#buttonSoundDetectionOn').hasClass('active')) {
+            $('#buttonSoundDetectionOn').addClass('active')
+            $('#buttonSoundDetectionOff').removeClass('active')
+
+            $('#soundDetectionEmailAlertYN').show();
+            $('#soundDetectionAlertIntervalSettings').show();
+        }
+    }
+
+    function turnOffSoundDetection() {
+
+        if (!$('#buttonSoundDetectionOff').hasClass('active')) {
+            $('#buttonSoundDetectionOff').addClass('active')
+            $('#buttonSoundDetectionOn').removeClass('active')
+
+            $('#soundDetectionEmailAlertYN').hide();
+            $('#soundDetectionAlertIntervalSettings').hide();
+        }
+    }
+
+
+    function turnOnGasDetection() {
+
+        if (!$('#buttonGasDetectionOn').hasClass('active')) {
+            $('#buttonGasDetectionOn').addClass('active')
+            $('#buttonGasDetectionOff').removeClass('active')
+
+            $('#gasDetectionEmailAlertYN').show();
+           // $('#gasDetectionAlertIntervalSettings').show();
+        }
+    }
+
+    function turnOffGasDetection() {
+
+        if (!$('#buttonGasDetectionOff').hasClass('active')) {
+            $('#buttonGasDetectionOff').addClass('active')
+            $('#buttonGasDetectionOn').removeClass('active')
+
+            $('#gasDetectionEmailAlertYN').hide();
+            //$('#gasDetectionAlertIntervalSettings').hide();
         }
     }
 

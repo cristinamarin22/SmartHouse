@@ -25,6 +25,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TemperatureHumidityOn" Type="bool" Nullable="false" />
           <Property Name="CriticalTemperatureAlertYN" Type="bool" Nullable="false" />
           <Property Name="CriticalTemperatureAlertMinValue" Type="float" Nullable="false" />
           <Property Name="CriticalTemperatureAlertMaxValue" Type="float" Nullable="false" />
@@ -37,16 +38,19 @@
           <Property Name="SendHumidityEmailAlertIntervalUnitMeasure" Type="int" Nullable="false" />
           <Property Name="DeleteTemperatureHumidityHistoricalDataOlderThan" Type="int" Nullable="false" />
           <Property Name="DeleteTemperatureHumidityHistoricalDataOlderThanUnitMeasure" Type="int" Nullable="false" />
+          <Property Name="MotionDetectionOn" Type="bool" Nullable="false" />
           <Property Name="MotionDetectionAlertYN" Type="bool" Nullable="false" />
           <Property Name="DeleteMotionDetectionHistoricalDataOlderThan" Type="int" Nullable="false" />
           <Property Name="DeleteMotionDetectionHistoricalDataOlderThanUnitMeasure" Type="int" Nullable="false" />
           <Property Name="SendMotionDetectionEmailAlertInterval" Type="int" Nullable="false" />
           <Property Name="SendMotionDetectionEmailAlertIntervalUnitMeasure" Type="int" Nullable="false" />
+          <Property Name="SoundDetectionOn" Type="bool" Nullable="false" />
           <Property Name="SoundDetectionAlertYN" Type="bool" Nullable="false" />
           <Property Name="SendSoundDetectionEmailAlertInterval" Type="int" Nullable="false" />
           <Property Name="SendSoundDetectionEmailAlertIntervalUnitMeasure" Type="int" Nullable="false" />
           <Property Name="DeleteSoundDetectionHistoricalDataOlderThan" Type="int" Nullable="false" />
           <Property Name="DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure" Type="int" Nullable="false" />
+          <Property Name="GasDetectionOn" Type="bool" Nullable="false" />
           <Property Name="CriticalGasAlertYN" Type="bool" Nullable="false" />
           <Property Name="CriticalGasHistoricalDataOlderThan" Type="int" Nullable="false" />
           <Property Name="CriticalGasHistoricalDataOlderThanUnitMeasure" Type="int" Nullable="false" />
@@ -186,6 +190,10 @@
           <Property Name="SendHumidityEmailAlertIntervalUnitMeasure" Type="Int32" Nullable="false" />
           <Property Name="SendSoundDetectionEmailAlertInterval" Type="Int32" Nullable="false" />
           <Property Name="SendSoundDetectionEmailAlertIntervalUnitMeasure" Type="Int32" Nullable="false" />
+          <Property Name="TemperatureHumidityOn" Type="Boolean" Nullable="false" />
+          <Property Name="MotionDetectionOn" Type="Boolean" Nullable="false" />
+          <Property Name="SoundDetectionOn" Type="Boolean" Nullable="false" />
+          <Property Name="GasDetectionOn" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -249,6 +257,10 @@
           <EntitySetMapping Name="Settings">
             <EntityTypeMapping TypeName="SmartHouseModel.Settings">
               <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="GasDetectionOn" ColumnName="GasDetectionOn" />
+                <ScalarProperty Name="SoundDetectionOn" ColumnName="SoundDetectionOn" />
+                <ScalarProperty Name="MotionDetectionOn" ColumnName="MotionDetectionOn" />
+                <ScalarProperty Name="TemperatureHumidityOn" ColumnName="TemperatureHumidityOn" />
                 <ScalarProperty Name="SendSoundDetectionEmailAlertIntervalUnitMeasure" ColumnName="SendSoundDetectionEmailAlertIntervalUnitMeasure" />
                 <ScalarProperty Name="SendSoundDetectionEmailAlertInterval" ColumnName="SendSoundDetectionEmailAlertInterval" />
                 <ScalarProperty Name="SendHumidityEmailAlertIntervalUnitMeasure" ColumnName="SendHumidityEmailAlertIntervalUnitMeasure" />

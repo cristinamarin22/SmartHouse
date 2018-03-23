@@ -82,5 +82,17 @@ namespace SmartHouse.Models
         [Display(Name = "Sound detection email alert interval")]
         public int SendSoundDetectionEmailAlertInterval { get; set; }
         public int SendSoundDetectionEmailAlertIntervalUnitMeasure { get; set; }
+
+        [Display(Name = "Temperature & Humidity sensor readings ON/OFF")]
+        public bool TemperatureHumidityOn { get; set; }
+
+        [Display(Name = "Motion detection sensor ON/OFF")]
+        public bool MotionDetectionOn { get; set; }
+
+        [Display(Name = "Sound detection sensor ON/OFF")]
+        public bool SoundDetectionOn { get; set; }
+
+        [Display(Name = "Gas detection sensor ON/OFF")]
+        public bool GasDetectionOn { get; set; }
     }
 }

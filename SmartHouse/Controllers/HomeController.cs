@@ -381,9 +381,13 @@ namespace SmartHouse.Controllers
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
             if (smartHouseEntities.Database.Exists())
+            {
                 return View(smartHouseEntities.Settings.FirstOrDefault());
+            }
             else
+            {
                 return View(new List<Settings>().FirstOrDefault());
+            }
         }
 
         [HttpPost]
@@ -393,6 +397,7 @@ namespace SmartHouse.Controllers
             if (smartHouseEntities.Database.Exists())
             {
                 #region Temperature & Humidity
+                smartHouseEntities.Settings.FirstOrDefault().TemperatureHumidityOn = settings.TemperatureHumidityOn;
                 smartHouseEntities.Settings.FirstOrDefault().CriticalTemperatureAlertYN = settings.CriticalTemperatureAlertYN;
                 smartHouseEntities.Settings.FirstOrDefault().CriticalTemperatureAlertMinValue = settings.CriticalTemperatureAlertMinValue;
                 smartHouseEntities.Settings.FirstOrDefault().CriticalTemperatureAlertMaxValue = settings.CriticalTemperatureAlertMaxValue;
@@ -408,6 +413,7 @@ namespace SmartHouse.Controllers
                 #endregion
 
                 #region Motion Detection
+                smartHouseEntities.Settings.FirstOrDefault().MotionDetectionOn = settings.MotionDetectionOn;
                 smartHouseEntities.Settings.FirstOrDefault().MotionDetectionAlertYN = settings.MotionDetectionAlertYN;
                 smartHouseEntities.Settings.FirstOrDefault().SendMotionDetectionEmailAlertInterval = settings.SendMotionDetectionEmailAlertInterval;
                 smartHouseEntities.Settings.FirstOrDefault().SendMotionDetectionEmailAlertIntervalUnitMeasure = settings.SendMotionDetectionEmailAlertIntervalUnitMeasure;
@@ -416,6 +422,7 @@ namespace SmartHouse.Controllers
                 #endregion
 
                 #region Sound Detection
+                smartHouseEntities.Settings.FirstOrDefault().SoundDetectionOn = settings.SoundDetectionOn;
                 smartHouseEntities.Settings.FirstOrDefault().SoundDetectionAlertYN = settings.SoundDetectionAlertYN;
                 smartHouseEntities.Settings.FirstOrDefault().SendSoundDetectionEmailAlertInterval = settings.SendSoundDetectionEmailAlertInterval;
                 smartHouseEntities.Settings.FirstOrDefault().SendSoundDetectionEmailAlertIntervalUnitMeasure = settings.SendSoundDetectionEmailAlertIntervalUnitMeasure;
@@ -424,6 +431,7 @@ namespace SmartHouse.Controllers
                 #endregion
 
                 #region Gas Detection
+                smartHouseEntities.Settings.FirstOrDefault().GasDetectionOn = settings.GasDetectionOn;
                 smartHouseEntities.Settings.FirstOrDefault().CriticalGasAlertYN = settings.CriticalGasAlertYN;
                 smartHouseEntities.Settings.FirstOrDefault().CriticalGasHistoricalDataOlderThan = settings.CriticalGasHistoricalDataOlderThan;
                 smartHouseEntities.Settings.FirstOrDefault().CriticalGasHistoricalDataOlderThanUnitMeasure = settings.CriticalGasHistoricalDataOlderThanUnitMeasure;
