@@ -468,6 +468,39 @@ namespace SmartHouse.Controllers
         }
         #endregion
 
+        #region AirConditioning
+        public ActionResult AirConditioning()
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            if (smartHouseEntities.Database.Exists())
+            {
+                return View(smartHouseEntities.AirConditioningSettings.FirstOrDefault());
+            }
+            else
+            {
+                return View(new List<AirConditioningSettings>().FirstOrDefault());
+            }
+        }
+
+        [HttpPost]
+        public JsonResult SaveAirConditioningSettings(AirConditioningSettings airConditioningSettings)
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            if (smartHouseEntities.Database.Exists())
+            {
+                smartHouseEntities.AirConditioningSettings.FirstOrDefault().AirConditioningOn = airConditioningSettings.AirConditioningOn;
+                smartHouseEntities.AirConditioningSettings.FirstOrDefault().WantedTemperature = airConditioningSettings.WantedTemperature;
+                smartHouseEntities.AirConditioningSettings.FirstOrDefault().AirConditioningMode = airConditioningSettings.AirConditioningMode;
+
+                smartHouseEntities.SaveChanges();
+
+                RedirectToAction("AirConditioning");
+            }
+
+            return Json(new object[] { new object() }, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
         #endregion
 
         #region Filter Data

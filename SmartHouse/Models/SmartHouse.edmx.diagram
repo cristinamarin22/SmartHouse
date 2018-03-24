@@ -11,6 +11,7 @@
         <EntityTypeShape EntityType="SmartHouseModel.TemperatureHumidityCriticalData" Width="2.75" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="SmartHouseModel.DictionaryTime" Width="1.5" PointX="8.875" PointY="0.75" />
         <EntityTypeShape EntityType="SmartHouseModel.Settings" Width="5.75" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="SmartHouseModel.AirConditioningSettings" Width="1.5" PointX="7.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

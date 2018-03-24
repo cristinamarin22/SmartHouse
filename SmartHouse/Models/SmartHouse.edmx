@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SmartHouseModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AirConditioningSettings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AirConditioningOn" Type="bool" Nullable="false" />
+          <Property Name="WantedTemperature" Type="float" Nullable="false" />
+          <Property Name="AirConditioningMode" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="DictionaryTime">
           <Key>
             <PropertyRef Name="Id" />
@@ -91,6 +100,7 @@
           <Property Name="Humidity" Type="float" Nullable="false" />
         </EntityType>
         <EntityContainer Name="SmartHouseModelStoreContainer">
+          <EntitySet Name="AirConditioningSettings" EntityType="Self.AirConditioningSettings" Schema="SmartHouse" store:Type="Tables" />
           <EntitySet Name="DictionaryTime" EntityType="Self.DictionaryTime" Schema="SmartHouse" store:Type="Tables" />
           <EntitySet Name="MotionDetectionData" EntityType="Self.MotionDetectionData" Schema="SmartHouse" store:Type="Tables" />
           <EntitySet Name="Settings" EntityType="Self.Settings" Schema="SmartHouse" store:Type="Tables" />
@@ -134,6 +144,7 @@
           <EntitySet Name="TemperatureHumidityCriticalDatas" EntityType="SmartHouseModel.TemperatureHumidityCriticalData" />
           <EntitySet Name="DictionaryTime" EntityType="SmartHouseModel.DictionaryTime" />
           <EntitySet Name="Settings" EntityType="SmartHouseModel.Settings" />
+          <EntitySet Name="AirConditioningSettings" EntityType="SmartHouseModel.AirConditioningSettings" />
         </EntityContainer>
         <EntityType Name="TemperatureHumidityCriticalData">
           <Key>
@@ -194,6 +205,15 @@
           <Property Name="MotionDetectionOn" Type="Boolean" Nullable="false" />
           <Property Name="SoundDetectionOn" Type="Boolean" Nullable="false" />
           <Property Name="GasDetectionOn" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AirConditioningSettings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AirConditioningOn" Type="Boolean" Nullable="false" />
+          <Property Name="WantedTemperature" Type="Single" Nullable="false" />
+          <Property Name="AirConditioningMode" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -288,6 +308,16 @@
                 <ScalarProperty Name="DeleteTemperatureHumidityHistoricalDataOlderThan" ColumnName="DeleteTemperatureHumidityHistoricalDataOlderThan" />
                 <ScalarProperty Name="CriticalHumidityAlertYN" ColumnName="CriticalHumidityAlertYN" />
                 <ScalarProperty Name="CriticalTemperatureAlertYN" ColumnName="CriticalTemperatureAlertYN" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AirConditioningSettings">
+            <EntityTypeMapping TypeName="SmartHouseModel.AirConditioningSettings">
+              <MappingFragment StoreEntitySet="AirConditioningSettings">
+                <ScalarProperty Name="AirConditioningMode" ColumnName="AirConditioningMode" />
+                <ScalarProperty Name="WantedTemperature" ColumnName="WantedTemperature" />
+                <ScalarProperty Name="AirConditioningOn" ColumnName="AirConditioningOn" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

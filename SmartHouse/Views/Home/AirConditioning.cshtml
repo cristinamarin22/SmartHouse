@@ -1,0 +1,386 @@
+﻿@model SmartHouse.Models.AirConditioningSettings
+
+@{
+    ViewBag.Title = "AirConditioning";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+.buttonAirConditioningOnOff {
+background-color: #4CAF50; /* Green */
+border: none;
+color: white;
+padding: 10px 20px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+-webkit-transition-duration: 0.4s; /* Safari */
+transition-duration: 0.4s;
+cursor: pointer;
+}
+
+.buttonAirConditioningOnOff3 {
+background-color: white;
+color: black;
+border: 2px solid #8f54bb;
+}
+
+.buttonAirConditioningOnOff3:hover {
+    background-color: #8f54bb;
+    color: white;
+}
+
+
+
+.buttonAirConditioningOnOff3.active {
+    background: #8f54bb;
+}
+
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        -webkit-animation-name: fadeIn; /* Fade in the background */
+        -webkit-animation-duration: 0.4s;
+        animation-name: fadeIn;
+        animation-duration: 0.4s
+    }
+
+    /* Modal Content */
+    .modal-content {
+        position: fixed;
+        bottom: 0;
+        background-color: #fefefe;
+        width: 100%;
+        -webkit-animation-name: slideIn;
+        -webkit-animation-duration: 0.4s;
+        animation-name: slideIn;
+        animation-duration: 0.4s
+    }
+
+    .modal-header {
+        padding: 2px 16px;
+        background-color: #8f54bb;
+        color: white;
+    }
+
+    .modal-footer {
+        padding: 2px 16px;
+        background-color: white;
+        color: white;
+    }
+
+    /* Add Animation */
+    @@-webkit-keyframes slideIn {
+        from {
+            bottom: -300px;
+            opacity: 0
+        }
+
+        to {
+            bottom: 0;
+            opacity: 1
+        }
+    }
+
+    @@keyframes slideIn {
+        from {
+            bottom: -300px;
+            opacity: 0
+        }
+
+        to {
+            bottom: 0;
+            opacity: 1
+        }
+    }
+
+    @@-webkit-keyframes fadeIn {
+        from {
+            opacity: 0
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    .modal-body {
+        padding: 2px 20px;
+        font-size: 16px;
+    }
+</style>
+
+<div class="w3-row-padding w3-margin-bottom">
+    <hr />
+    <dl class="dl-horizontal">
+
+        <div class="w3-container divred">
+            <table>
+                <tr>
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.AirConditioningOn)</h1>
+                    </th>
+
+                    <th>
+                        <dd4>
+                            <h2>
+                                <button type="buttonAirConditioningOnOff" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="buttonAirConditioningOn" onclick="turnOnAirConditioning()">ON</button>
+                                <button type="buttonAirConditioningOnOff" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="buttonAirConditioningOff" onclick="turnOffAirConditioning()">OFF</button>
+                            </h2>
+                        </dd4>
+                    </th>
+                </tr>
+
+                <tr id="airConditioningWantedTemperature" hidden="true">
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.WantedTemperature)</h1>
+                    </th>
+
+                    <th>
+                        <dd4>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.WantedTemperature, new { id = "airCoditioningWantedTemperatureTextBox" })</h2>
+                        </dd4>
+                    </th>
+
+                </tr>
+
+                <tr id="airConditioningMode" hidden="true">
+                    <th>
+                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.AirConditioningMode)</h1>
+                    </th>
+
+                    <th>
+                        <dd4>
+                            <h2>
+                                <button type="buttonAirConditioningOnOff" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="buttonAirConditioningModeAuto" onclick="turnOnAirConditioningModeAuto()">AUTO</button>
+                                <button type="buttonAirConditioningOnOff" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="buttonAirConditioningModeCool" onclick="turnOnAirConditioningModeCool()">COOL</button>
+                                <button type="buttonAirConditioningOnOff" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="buttonAirConditioningModeDry" onclick="turnOnAirConditioningModeDry()">DRY</button>
+                            </h2>
+                        </dd4>
+                    </th>
+                </tr>
+            </table>
+        </div>
+
+        <button type="button" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="saveAirConditioningSettingsButton" onclick="saveAirConditioningSettings()">Save settings</button>
+
+        <!-- Popup for success -->
+        <div id="popup" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h2>Success!</h2>
+                </div>
+                <div class="modal-body">
+                    <p>Settings were successfully saved!</p>
+                </div>
+                <div class="modal-footer">
+                    <h3></h3>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Popup for validation -->
+        <div id="popupValidation" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h2>Error!</h2>
+                </div>
+                <div id="validationBody" class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <h3></h3>
+                </div>
+            </div>
+
+        </div>
+    </dl>
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    var span = document.getElementsByClassName("close")[0];
+    var modal = document.getElementById('popup');
+    var modalValidation = document.getElementById('popupValidation');
+
+    $(window).bind("load", function () {
+
+        var airConditioningSettings = @Html.Raw(Json.Encode(Model));
+
+        if (airConditioningSettings.AirConditioningOn == true) {
+            $('#buttonAirConditioningOn').addClass('active')
+            $('#buttonAirConditioningOff').removeClass('active')
+
+            if (airConditioningSettings.AirConditioningMode == 1)
+                $('#buttonAirConditioningModeAuto').addClass('active');
+            if (airConditioningSettings.AirConditioningMode == 2)
+                $('#buttonAirConditioningModeCool').addClass('active');
+            if (airConditioningSettings.AirConditioningMode == 3)
+                $('#buttonAirConditioningModeDry').addClass('active');
+
+            $('#airConditioningWantedTemperature').show();
+            $('#airConditioningMode').show();
+        }
+        else {
+            $('#buttonAirConditioningOn').removeClass('active')
+            $('#buttonAirConditioningOff').addClass('active')
+
+        }
+    });
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modalValidation) {
+            modalValidation.style.display = "none";
+        }
+
+        if (event.target == modal) {
+            modal.style.display = "none";
+            modalValidation.style.display = "none";
+        }
+    }
+
+    function turnOnAirConditioning() {
+
+        if (!$('#buttonAirConditioningOn').hasClass('active')) {
+            $('#buttonAirConditioningOn').addClass('active')
+            $('#buttonAirConditioningOff').removeClass('active')
+
+            $('#airConditioningWantedTemperature').show();
+            $('#airConditioningMode').show();
+        }
+    }
+
+    function turnOffAirConditioning() {
+
+        if (!$('#buttonAirConditioningOff').hasClass('active')) {
+            $('#buttonAirConditioningOff').addClass('active')
+            $('#buttonAirConditioningOn').removeClass('active')
+
+            $('#airConditioningWantedTemperature').hide();
+            $('#airConditioningMode').hide();
+        }
+    }
+
+
+    function saveAirConditioningSettings() {
+
+        var validationMessage = '<p>';
+        var validationError = false;
+
+        if ($('#buttonAirConditioningOn').hasClass('active')) {
+            if ($('#airCoditioningWantedTemperatureTextBox').val() == '') {
+                validationMessage += '<p>Wanted temperature is mandatory</p>';
+                validationError = true;
+            }
+        }
+
+        validationMessage += '</p>';
+
+        if (validationError) {
+            $("#validationBody").empty();
+            $("#validationBody").append(validationMessage);
+            modalValidation.style.display = "block";
+            return;
+        }
+        else {
+            modal.style.display = "block";
+        }
+
+        var airConditioningMode = null;
+        if ($('#buttonAirConditioningModeAuto').hasClass('active'))
+            airConditioningMode = 1;
+        else if ($('#buttonAirConditioningModeCool').hasClass('active'))
+            airConditioningMode = 2;
+        else 
+            airConditioningMode = 3;
+
+        var airConditioningSettings = {
+
+            "AirConditioningOn": $('#buttonAirConditioningOn').hasClass('active'),
+            "WantedTemperature": $('#airCoditioningWantedTemperatureTextBox').val(),
+            "AirConditioningMode": airConditioningMode
+        };
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("SaveAirConditioningSettings", "Home")',
+            data: airConditioningSettings,
+            dataType: "json",
+            success: function (response) {
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(textStatus + " " + errorThrown);
+            }
+        });
+    }
+
+
+    function turnOnAirConditioningModeAuto() {
+
+        if (!$('#buttonAirConditioningModeAuto').hasClass('active')) {
+            $('#buttonAirConditioningModeAuto').addClass('active')
+            $('#buttonAirConditioningModeCool').removeClass('active')
+            $('#buttonAirConditioningModeDry').removeClass('active')
+        }
+    }
+
+    function turnOnAirConditioningModeCool() {
+
+        if (!$('#buttonAirConditioningModeCool').hasClass('active')) {
+            $('#buttonAirConditioningModeCool').addClass('active')
+            $('#buttonAirConditioningModeAuto').removeClass('active')
+            $('#buttonAirConditioningModeDry').removeClass('active')
+        }
+    }
+
+    function turnOnAirConditioningModeDry() {
+
+        if (!$('#buttonAirConditioningModeDry').hasClass('active')) {
+            $('#buttonAirConditioningModeDry').addClass('active')
+            $('#buttonAirConditioningModeAuto').removeClass('active')
+            $('#buttonAirConditioningModeCool').removeClass('active')
+        }
+    }
+
+</script>
+
+
