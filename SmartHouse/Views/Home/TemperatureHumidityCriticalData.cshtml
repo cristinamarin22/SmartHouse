@@ -169,60 +169,69 @@ th {
 
         <button type="button" class="button button3" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
 
+        <tr>
+            <th>
+                <span>
+                    @Html.TextBox("TemperatureTextBoxMinValue", "", new { id = "TemperatureMinValueTextBox", style = "width:70px; background:#ff9191" })
+                </span>
+            </th>
 
-        <td>
-            <span style="margin-left: 2%;">
-                @Html.TextBox("TemperatureTextBoxMinValue", "", new { id = "TemperatureMinValueTextBox", style = "width:70px; background:#ff9191" })
-            </span>
-        </td>
+            <th>
+                <label><span> <= Temperature <= </span></label>
+            </th>
 
-        <td>
-            <label><span> <= Temperature <= </span></label>
-        </td>
+            <th>
+                @Html.TextBox("TemperatureTextBoxMaxValue", "", new { id = "TemperatureMaxValueTextBox", style = "width:70px; background:#ff9191" })
+            </th>
 
-        <td>
-            @Html.TextBox("TemperatureTextBoxMaxValue", "", new { id = "TemperatureMaxValueTextBox", style = "width:70px; background:#ff9191" })
-        </td>
+            <th>
+                <span>
+                    @Html.TextBox("HumidityTextBoxMinValue", "", new { id = "HumidityMinValueTextBox", style = "width:70px; background:#ff9191" })
+                </span>
+            </th>
 
-        <td>
-            <span style="margin-left: 2.5%;">
-                @Html.TextBox("HumidityTextBoxMinValue", "", new { id = "HumidityMinValueTextBox", style = "width:70px; background:#ff9191" })
-            </span>
-        </td>
+            <th>
+                <label><span> <= Humidity <= </span></label>
+            </th>
 
-        <td>
-            <label><span> <= Humidity <= </span></label>
-        </td>
+            <th>
+                @Html.TextBox("HumidityTextBoxMaxValue", "", new { id = "HumidityMaxValueTextBox", style = "width:70px; background:#ff9191" })
+            </th>
 
-        <td>
-            @Html.TextBox("HumidityTextBoxMaxValue", "", new { id = "HumidityMaxValueTextBox", style = "width:70px; background:#ff9191" })
-        </td>
+            <th>
+                <span>
+                    @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
+                </span>
+            </th>
 
-        <td>
-            <span style="margin-left: 2.5%;">
-                @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
-            </span>
-        </td>
+            <th>
+                <label><span> <= Date <= </span></label>
+            </th>
 
-        <td>
-            <label><span> <= Date <= </span></label>
-        </td>
+            <th>
+                @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
+            </th>
 
-        <td>
-            @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
-        </td>
+            <th>
+                <label>T Email Sent</label>
+            </th>
 
-        <td>
-            <input type="checkbox" id="ChkTemperatureEmailSent">T Email sent<br>
-        </td>
+            <th>
+                <input type="checkbox" id="ChkTemperatureEmailSent">
+            </th>
 
-        <td>
-            <input type="checkbox" id="ChkHumidityEmailSent">H Email sent<br>
-        </td>
+            <th>
+                <label>H Email Sent</label>
+            </th>
 
-        <td>
-            <button style="float: right;" type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
-        </td>
+            <th>
+                <input type="checkbox" id="ChkHumidityEmailSent">
+            </th>
+
+            <th>
+                <button style="float: right;" type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
+            </th>
+        </tr>
 
 
         <table class="table" id="tableTemperatureHumidity">
@@ -364,16 +373,6 @@ th {
                     if (sessionStorage.scrollTop != "undefined")
                         $(window).scrollTop(sessionStorage.scrollTop);
 
-                    //if (selectedRow != null) {
-                    //    $("#tableTemperatureHumidity tr").children().each(function (index, td) {
-                    //        $(this).removeClass('highlight');
-                    //    });
-                    //    //selectedRow.addClass('highlight');
-                    //    //selectedRow.children().each(function (index, td) {
-                    //    //    $(this).addClass('highlight');
-                    //    //});
-                    //} 
-
                     var tdEndTdStart = '</td><td>';
                     var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> InternalTime </th> <th> Min critical temperature </th> <th> Temperature </th> <th> Max critical temperature </th> <th> Email alert sent (T) </th> <th> Min critical humidity </th> <th> Humidity </th> <th> Max critical humidity </th> <th> Email alert sent (H) </th> <th> Action </th> </tr> ';
                     for (var i = 0; i < data.length; i++) {
@@ -460,6 +459,8 @@ th {
                         $('#HumidityMaxValueTextBox').val("");
                         $('#DateMinValueTextBox').val("");
                         $('#DateMaxValueTextBox').val("");
+                        $('#ChkTemperatureEmailSent').prop("checked", false);
+                        $('#ChkHumidityEmailSent').prop("checked", false);
 
                         dataIsFiltered = false;
                         $('#deleteFilteredData').css("visibility", "hidden");
