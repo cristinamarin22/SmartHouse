@@ -163,34 +163,32 @@ th {
 </style>
 <body>
     <div class="w3-container">
+        <table>
+            <tr>
+                <td style="float: left;">
+                    <button type="button" class="button button3" id="refreshButton" onclick="getAllRows()">History data</button>
 
-        <button type="button" class="button button3" id="refreshButton" onclick="getAllRows()">History data</button>
+                    <button type="button" class="button button3" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
 
-        <button type="button" class="button button3" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
+                    <button type="button" class="button button3" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
+                </td>
 
-        <button type="button" class="button button3" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
+                <td style="float: right;">
+                    <span>
+                        @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#64b1f4", @type = "date" })
+                    </span>
 
-        <td>
-            <span style="margin-left: 45%;">
-                @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#64b1f4", @type = "date" })
-            </span>
-        </td>
+                    <label><span> < Date < </span></label>
 
-        <td>
-            <label><span> < Date < </span></label>
-        </td>
+                    @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#64b1f4", @type = "date" })
 
-        <td>
-            @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#64b1f4", @type = "date" })
-        </td>
+                    <input type="checkbox" id="ChkMotionDetectionEmailSent">Email sent
 
-        <td>
-            <input type="checkbox" id="ChkMotionDetectionEmailSent">Email sent<br>
-        </td>
+                    <button type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
 
-        <td>
-            <button style="float: right;" type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
-        </td>
+                </td>
+            </tr>
+        </table>
 
         <table class="table" id="tableMotionDetection">
             <tr>

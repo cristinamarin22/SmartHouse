@@ -163,76 +163,54 @@ th {
 </style>
 <body>
     <div class="w3-container">
-        <button type="button" class="button button3" id="refreshButton" onclick="getAllRows()">Refresh</button>
+        <table>
+            <tr>
+                <td style="float: left;">
+                    <button type="button" class="button button3" id="refreshButton" onclick="getAllRows()">Refresh</button>
 
-        <button type="button" class="button button3" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
+                    <button type="button" class="button button3" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
 
-        <button type="button" class="button button3" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
+                    <button type="button" class="button button3" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
+                </td>
 
-        <tr>
-            <th>
-                <span>
-                    @Html.TextBox("TemperatureTextBoxMinValue", "", new { id = "TemperatureMinValueTextBox", style = "width:70px; background:#ff9191" })
-                </span>
-            </th>
+                <td style="float: right;">
+                    <span>
+                        @Html.TextBox("TemperatureTextBoxMinValue", "", new { id = "TemperatureMinValueTextBox", style = "width:70px; background:#ff9191" })
+                    </span>
 
-            <th>
-                <label><span> <= Temperature <= </span></label>
-            </th>
+                    <label><span> <= Temperature <= </span></label>
 
-            <th>
-                @Html.TextBox("TemperatureTextBoxMaxValue", "", new { id = "TemperatureMaxValueTextBox", style = "width:70px; background:#ff9191" })
-            </th>
+                    @Html.TextBox("TemperatureTextBoxMaxValue", "", new { id = "TemperatureMaxValueTextBox", style = "width:70px; background:#ff9191" })
 
-            <th>
-                <span>
-                    @Html.TextBox("HumidityTextBoxMinValue", "", new { id = "HumidityMinValueTextBox", style = "width:70px; background:#ff9191" })
-                </span>
-            </th>
+                    <span>
+                        @Html.TextBox("HumidityTextBoxMinValue", "", new { id = "HumidityMinValueTextBox", style = "width:70px; background:#ff9191" })
+                    </span>
 
-            <th>
-                <label><span> <= Humidity <= </span></label>
-            </th>
+                    <label><span> <= Humidity <= </span></label>
 
-            <th>
-                @Html.TextBox("HumidityTextBoxMaxValue", "", new { id = "HumidityMaxValueTextBox", style = "width:70px; background:#ff9191" })
-            </th>
+                    @Html.TextBox("HumidityTextBoxMaxValue", "", new { id = "HumidityMaxValueTextBox", style = "width:70px; background:#ff9191" })
 
-            <th>
-                <span>
-                    @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
-                </span>
-            </th>
+                    <span>
+                        @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
+                    </span>
 
-            <th>
-                <label><span> <= Date <= </span></label>
-            </th>
+                    <label><span> <= Date <= </span></label>
 
-            <th>
-                @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
-            </th>
+                    @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
 
-            <th>
-                <label>T Email Sent</label>
-            </th>
+                    <label>T Email Sent</label>
 
-            <th>
-                <input type="checkbox" id="ChkTemperatureEmailSent">
-            </th>
+                    <input type="checkbox" id="ChkTemperatureEmailSent">
 
-            <th>
-                <label>H Email Sent</label>
-            </th>
+                    <label>H Email Sent</label>
 
-            <th>
-                <input type="checkbox" id="ChkHumidityEmailSent">
-            </th>
+                    <input type="checkbox" id="ChkHumidityEmailSent">
 
-            <th>
-                <button style="float: right;" type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
-            </th>
-        </tr>
+                    <button type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
 
+                </td>
+            </tr>
+        </table>
 
         <table class="table" id="tableTemperatureHumidity">
             <tr>

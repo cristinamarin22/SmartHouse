@@ -164,60 +164,47 @@ th {
 </style>
 <body>
     <div class="w3-container">
-        <div>
-            <button type="button" class="button button3 header" id="refreshButton" onclick="getAllRows()">Refresh</button>
+        <table>
+            <tr>
+                <td style="float: left;">
+                    <button type="button" class="button button3 header" id="refreshButton" onclick="getAllRows()">Refresh</button>
 
-            <button type="button" class="button button3 header" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
+                    <button type="button" class="button button3 header" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
 
-            <button type="button" class="button button3 header" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
+                    <button type="button" class="button button3 header" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
 
-            @*<button type="button" class="button button3" id="sendEmailButton" onclick="sendEmail()">Send email</button>*@
-            <td>
-                <span style="margin-left: 12%;">
-                    @Html.TextBox("TemperatureTextBoxMinValue", "", new { id = "TemperatureMinValueTextBox", style = "width:70px; background:#ff9191" })
-                </span>
-            </td>
+                    @*<button type="button" class="button button3" id="sendEmailButton" onclick="sendEmail()">Send email</button>*@
+                </td>
 
-            <td>
-                <label><span> < Temperature < </span></label>
-            </td>
+                <td style="float: right;">
+                    <span>
+                        @Html.TextBox("TemperatureTextBoxMinValue", "", new { id = "TemperatureMinValueTextBox", style = "width:70px; background:#ff9191" })
+                    </span>
 
-            <td>
-                @Html.TextBox("TemperatureTextBoxMaxValue", "", new { id = "TemperatureMaxValueTextBox", style = "width:70px; background:#ff9191" })
-            </td>
+                    <label><span> <= Temperature <= </span></label>
 
-            <td>
-                <span style="margin-left: 2.5%;">
-                    @Html.TextBox("HumidityTextBoxMinValue", "", new { id = "HumidityMinValueTextBox", style = "width:70px; background:#ff9191" })
-                </span>
-            </td>
+                    @Html.TextBox("TemperatureTextBoxMaxValue", "", new { id = "TemperatureMaxValueTextBox", style = "width:70px; background:#ff9191" })
 
-            <td>
-                <label><span> < Humidity < </span></label>
-            </td>
+                    <span>
+                        @Html.TextBox("HumidityTextBoxMinValue", "", new { id = "HumidityMinValueTextBox", style = "width:70px; background:#ff9191" })
+                    </span>
 
-            <td>
-                @Html.TextBox("HumidityTextBoxMaxValue", "", new { id = "HumidityMaxValueTextBox", style = "width:70px; background:#ff9191" })
-            </td>
+                    <label><span> <= Humidity <= </span></label>
 
-            <td>
-                <span style="margin-left: 2.5%;">
-                    @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
-                </span>
-            </td>
+                    @Html.TextBox("HumidityTextBoxMaxValue", "", new { id = "HumidityMaxValueTextBox", style = "width:70px; background:#ff9191" })
 
-            <td>
-                <label><span> < Date < </span></label>
-            </td>
+                    <span>
+                        @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
+                    </span>
 
-            <td>
-                @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
-            </td>
+                    <label><span> <= Date <= </span></label>
 
-            <td>
-                <button style="float: right;" type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
-            </td>
-        </div>
+                    @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
+
+                    <button type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
+                </td>
+            </tr>
+        </table>
 
         <table class="table" id="tableTemperatureHumidity">
             <tr>
@@ -239,7 +226,7 @@ th {
             </tr>
 
             @foreach (var item in Model)
-             {
+        {
             <tr>
                 <td style="display:none;">
                     @Html.DisplayFor(modelItem => item.Id)
@@ -257,7 +244,7 @@ th {
                     @Html.ActionLink("Delete", "DeleteTemperatureHumidityData", "Home", new { id = item.Id }, null)
                 </td>
             </tr>
-             }
+    }
 
         </table><br>
     </div>

@@ -164,33 +164,30 @@
 </style>
 <body>
     <div class="w3-container">
-        <button type="button" class="button button3" id="refreshButton" onclick="getAllRows()">History data</button>
+        <table>
+            <tr>
+                <td style="float: left;">
+                    <button type="button" class="button button3" id="refreshButton" onclick="getAllRows()">History data</button>
 
-        <button type="button" class="button button3" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
+                    <button type="button" class="button button3" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
 
-        <button type="button" class="button button3" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
+                    <button type="button" class="button button3" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
+                </td>
 
-        <td>
-            <span style="margin-left: 45%;">
-                @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#4ba394", @type = "date" })
-            </span>
-        </td>
+                <td style="float: right;">
 
-        <td>
-            <label><span> < Date < </span></label>
-        </td>
+                    @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#4ba394", @type = "date" })
 
-        <td>
-            @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#4ba394", @type = "date" })
-        </td>
+                    <label> <= Date <= </label>
 
-        <td>
-            <input type="checkbox" id="ChkSoundDetectionEmailSent">Email sent<br>
-        </td>
+                    @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#4ba394", @type = "date" })
 
-        <td>
-            <button style="float: right;" type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
-        </td>
+                    <input type="checkbox" id="ChkSoundDetectionEmailSent">Email sent<br>
+
+                    <button type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
+                </td>
+            </tr>
+        </table>
 
         <table class="table" id="tableSoundDetection">
             <tr>
@@ -209,24 +206,24 @@
             </tr>
 
             @foreach (var item in Model)
-            {
-                <tr>
-                    <td style="display:none;">
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.InternalTime)
-                    </td>
-                    <td>
-                        @Html.CheckBoxFor(modelItem => item.EmailAlertSent, new { @checked = "checked", @readonly = "readonly" })
-                    </td>
-                    <td>
-                        @Html.ActionLink("Delete", "DeleteSoundDetection", "Home", new { id = item.Id }, null)
-                    </td>
-                </tr>
-            }
+        {
+            <tr>
+                <td style="display:none;">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InternalTime)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => item.EmailAlertSent, new { @checked = "checked", @readonly = "readonly" })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteSoundDetection", "Home", new { id = item.Id }, null)
+                </td>
+            </tr>
+    }
 
-        </table><br>
+        </table>
     </div>
 
     <!-- Popup for Delete All-->
