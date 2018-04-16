@@ -1,0 +1,97 @@
+﻿@model SmartHouse.Models.TemperatureHumidityData
+
+@{
+    ViewBag.Title = "Charts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <h1></h1>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<body>
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="/js/jquery.dataTables.js"></script>
+
+    <script type="text/javascript">
+
+        var dataPoints = [], chart;
+
+        $.get("/home/GetChartsInfo", function (data) {
+            dataPoints = data;
+
+                var lowestY = Number.POSITIVE_INFINITY;
+                var highestY = Number.NEGATIVE_INFINITY;
+                var yValue;
+                var lowestX = Number.POSITIVE_INFINITY;
+                var highestX = Number.NEGATIVE_INFINITY;
+                var xValue;
+                for (var i = dataPoints.length - 1; i >= 0; i--) {
+                    yValue = dataPoints[i].y;
+                    if (yValue < lowestY) lowestY = yValue;
+                    if (yValue > highestY) highestY = yValue;
+
+                    xValue = dataPoints[i].x;
+                    if (xValue < lowestX) lowestX = xValue;
+                    if (xValue > highestX) highestX = xValue;
+                }
+
+                chart = new CanvasJS.Chart("chartContainer", {
+                title: {
+                    text: "Temperature evolution"
+                },
+                zoomEnabled: true,
+                zoomType: "xy",
+                animationEnabled: true,
+                axisX: {
+                    title: "Hour",
+                    minimum: lowestX - 1,
+                    maximum: highestX + 1
+                },
+                axisY: {
+                    includeZero: true,
+                    title: "Temperature",
+                    minimum: lowestY-1,
+                    maximum: highestY+1
+                },
+                toolTip: {
+                    shared: true,
+                    content: "<span style='\"'color: {color};'\"'><strong>{name}</strong></span> <span style='\"'color: dimgrey;'\"'>{y}</span> "
+                },
+                legend: {
+                    fontSize: 13
+                },
+                data: [
+                    {
+                        type: "splineArea",
+                        showInLegend: true,
+                        name: "Temperature",
+                        markerSize: 0,
+                        color: "rgba(54,158,173,.6)",
+                        dataPoints: dataPoints
+                    }
+                ]
+            });
+
+            chart.render();
+        });
+
+        function updateChart() {
+            $.get("/home/JSONTemperatureChart", function (data) {
+                $.each(data, function (index) {
+                    dataPoints.push(data[index]);
+                });
+                chart.render();
+                setTimeout(function () { updateChart() }, 1000);
+            });
+        }
+    </script>
+</body>
+</html>			

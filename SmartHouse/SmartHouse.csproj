@@ -153,6 +153,7 @@
     <Compile Include="Models\AirConditioningSettings.cs">
       <DependentUpon>SmartHouse.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataPoint.cs" />
     <Compile Include="Models\DictionaryTime.cs">
       <DependentUpon>SmartHouse.tt</DependentUpon>
     </Compile>
@@ -274,6 +275,7 @@
     <Content Include="webfonts\fa-solid-900.woff2" />
     <Content Include="Views\Home\AirConditioning.cshtml" />
     <Content Include="Views\Home\GasDetection.cshtml" />
+    <Content Include="Views\Home\Charts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

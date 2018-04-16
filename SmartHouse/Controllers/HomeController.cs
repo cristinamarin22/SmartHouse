@@ -1,4 +1,5 @@
-﻿using SmartHouse.Models;
+﻿using Newtonsoft.Json;
+using SmartHouse.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -230,9 +231,9 @@ namespace SmartHouse.Controllers
 
             smartHouseEntities.SaveChanges();
 
-            return Json(new List<TemperatureHumidityData>() , JsonRequestBehavior.AllowGet);
+            return Json(new List<TemperatureHumidityData>(), JsonRequestBehavior.AllowGet);
         }
-        
+
         public JsonResult DeleteFilteredTemperatureHumidityCriticalData(FilterTemperatureHumidityClass filter)
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
@@ -730,8 +731,79 @@ namespace SmartHouse.Controllers
             }
             catch (Exception ex)
             {
-                
+
             }
         }
+
+        #region Charts
+        public ActionResult Charts()
+        {
+            List<DataPoint> temperaturePoints = new List<DataPoint>();
+
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            if (smartHouseEntities.Database.Exists())
+            {
+                foreach (TemperatureHumidityData temperatureData in smartHouseEntities.TemperatureHumidityDatas)
+                {
+                    DataPoint temperaturePoint = new DataPoint(Convert.ToDouble(temperatureData.Temperature), Convert.ToDouble(temperatureData.InternalTime.Month));
+                    temperaturePoints.Add(temperaturePoint);
+                }
+            }
+
+            ViewBag.DataPoints = JsonConvert.SerializeObject(temperaturePoints);
+
+            return View();
+        }
+
+        public ContentResult JSONTemperatureChartToday()
+        {
+            List<DataPoint> temperaturePoints = new List<DataPoint>();
+
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            if (smartHouseEntities.Database.Exists())
+            {
+                foreach (TemperatureHumidityData temperatureData in smartHouseEntities.TemperatureHumidityDatas)
+                {
+                    if (temperatureData.InternalTime.Date == DateTime.Now.Date)
+                    {
+                        DataPoint temperaturePoint = new DataPoint(Convert.ToDouble(temperatureData.InternalTime.Hour), Convert.ToDouble(temperatureData.Temperature));
+                        temperaturePoints.Add(temperaturePoint);
+                    }
+                }
+            }
+
+            JsonSerializerSettings _jsonSetting = new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            };
+
+            return Content(JsonConvert.SerializeObject(temperaturePoints, _jsonSetting), "application/json");
+        }
+
+        public ContentResult GetChartsInfo()
+        {
+            List<DataPoint> temperaturePoints = new List<DataPoint>();
+
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            if (smartHouseEntities.Database.Exists())
+            {
+                foreach (TemperatureHumidityData temperatureData in smartHouseEntities.TemperatureHumidityDatas)
+                {
+                    if (temperatureData.InternalTime.Date == DateTime.Now.Date)
+                    {
+                        DataPoint temperaturePoint = new DataPoint(Convert.ToDouble(temperatureData.InternalTime.Hour), Math.Round(Convert.ToDouble(temperatureData.Temperature), 2));
+                        temperaturePoints.Add(temperaturePoint);
+                    }
+                }
+            }
+
+            JsonSerializerSettings _jsonSetting = new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            };
+
+            return Content(JsonConvert.SerializeObject(temperaturePoints, _jsonSetting), "application/json");
+        }
     }
+    #endregion
 }
