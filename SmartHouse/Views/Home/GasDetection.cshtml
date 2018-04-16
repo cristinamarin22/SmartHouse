@@ -1,0 +1,510 @@
+﻿@model IEnumerable<SmartHouse.Models.GasDetectionData>
+
+@{
+    ViewBag.Title = "GasDetection";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html, body, h1, h2, h3, h4, h5 {
+    font-family: "Raleway", sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+th {
+    background-color: #ff9800;
+    color: white;
+}
+
+.button {
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button3 {
+    background-color: white;
+    color: black;
+    border: 2px solid #ff9800;
+}
+
+.button3:hover {
+    background-color: #ff9800;
+    color: white;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    -webkit-animation-name: fadeIn; /* Fade in the background */
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+}
+
+    /* Modal Content */
+.modal-content {
+    position: fixed;
+    bottom: 0;
+    background-color: #fefefe;
+    width: 100%;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #ff9800;
+    color: white;
+}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: white;
+    color: white;
+}
+
+/* Add Animation */
+@@-webkit-keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0;
+        opacity: 1
+    }
+}
+
+@@keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0;
+        opacity: 1
+    }
+}
+
+@@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+.modal-body {
+    padding: 2px 20px;
+    font-size: 16px;
+}
+
+    .highlight {
+        background-color: #f9b975;
+    }
+</style>
+<body>
+    <div class="w3-container">
+        <table>
+            <tr>
+                <td style="float: left;">
+                    <button type="button" class="button button3" id="refreshButton" onclick="getAllRows()">History data</button>
+
+                    <button type="button" class="button button3" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
+
+                    <button type="button" class="button button3" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
+                </td>
+
+                <td style="float: right;">
+                    <span>
+                        @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#f9b975", @type = "date" })
+                    </span>
+
+                    <label><span> < Date < </span></label>
+
+                    @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#f9b975", @type = "date" })
+
+                    <input type="checkbox" id="ChkGasDetectionEmailSent">Email sent
+
+                    <button type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
+
+                </td>
+            </tr>
+        </table>
+
+        <table class="table" id="tableGasDetection">
+            <tr>
+                <th style="display:none;">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Email alert sent
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="display:none;">
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InternalTime)
+                    </td>
+                    <td>
+                        @Html.CheckBoxFor(modelItem => item.EmailAlertSent, new { @checked = "checked", @readonly = "readonly" })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteGasDetection", "Home", new { id = item.Id }, null)
+                    </td>
+                </tr>
+            }
+
+        </table><br>
+    </div>
+
+    <!-- Popup for Delete All-->
+    <div id="deleteAllPopup" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Delete</h2>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to delete all records? <button type="button" style="float: right;" class="button button3" id="deleteAllRecordsNoButton">No</button><button type="button" style="float: right;" class="button button3" id="deleteAllRecordsYesButton">Yes</button></p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Popup for Delete Filtered Data-->
+    <div id="deleteFilteredDataPopup" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Delete</h2>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to delete all filtered records? <button type="button" style="float: right;" class="button button3" id="deleteFilteredRecordsNoButton">No</button><button type="button" style="float: right;" class="button button3" id="deleteFilteredRecordsYesButton">Yes</button></p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="/js/jquery.dataTables.js"></script>
+
+    <script type="text/javascript">
+
+        var intervalReadings = 0;
+        var dataIsFiltered = false;
+
+        var span = document.getElementsByClassName("close")[0];
+        var modal = document.getElementById('deleteAllPopup');
+        var modalFiltered = document.getElementById('deleteFilteredDataPopup');
+
+        var selectedRow = null;
+        var selectedRowYN = null;
+        var selectedRowIndex = null;
+
+        function getAllRows() {
+            $.ajax({
+                url: '@Url.Action("GetGasDetectionHistoryData", "Home")',
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+
+                    var tdEndTdStart = '</td><td>';
+                    var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> Date </th> <th> Email alert sent </th> <th> Action </th>  </tr> ';
+
+                    for (var i = 0; i < data.length; i++) {
+
+                        tdEndTdStart = '</td><td>';
+
+                        if (selectedRow != null && data[i].Id == selectedRowIndex) {
+                            html += '<tr><td style="display:none;" class="highlight">' + data[i].Id + '</td><td class="highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td class="highlight"><input ';
+                            tdEndTdStart = '</td><td class="highlight">'
+                        }
+                        else {
+                            html += '<tr><td style="display:none;">' + data[i].Id + '</td><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td><input ';
+                        }
+
+                        if (data[i].EmailAlertSent)
+                            html += ' checked="checked" data-val="' + data[i].EmailAlertSent + '"';
+
+                        html += ' id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" /></td>';
+
+                        if (selectedRow != null && data[i].Id == selectedRowIndex) {
+                            html += '<td class="highlight"><a href="/Home/DeleteGasDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                        }
+                        else {
+                            html += '<td><a href="/Home/DeleteGasDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                        }
+                    }
+
+                    html += ' </tbody>';
+
+                    $('#tableGasDetection').empty();
+                    $("#tableGasDetection").append($(html));
+
+                    intervalReadings = setTimeout("getAllRows()", 10000);
+
+                    $('#refreshButton').text('Refresh');
+
+                    if (dataIsFiltered) {
+                        $('#DateMinValueTextBox').val("");
+                        $('#DateMaxValueTextBox').val("");
+                        $('#ChkGasDetectionEmailSent').prop("checked", false);
+
+                        dataIsFiltered = false;
+                        $('#deleteFilteredData').css("visibility", "hidden");
+                    }
+              }
+           });
+        }
+
+        $(window).bind("load", function () {
+            intervalReadings = setTimeout("getAllRows()", 10000);
+            $('#deleteFilteredData').css("visibility", "hidden");
+        });
+
+        function filterData() {
+
+            var filter = {
+                "DateMinValue": $('#DateMinValueTextBox').val(),
+                "DateMaxValue": $('#DateMaxValueTextBox').val(),
+                "TemperatureEmailAlertSent": $('#ChkGasDetectionEmailSent').is(':checked')
+            };
+
+            $.ajax({
+                url: '@Url.Action("FilterGasDetectionData", "Home")',
+                method: 'GET',
+                data: filter,
+                dataType: "json",
+                success: function (response) {
+                    $('#deleteFilteredData').css("visibility", "visible");
+                    $('#tableGasDetection tr>td').remove();
+                    var html = '';
+                    for (var i = 0; i < response.length; i++) {
+                        html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td><input ';
+                        if (data[i].EmailAlertSent)
+                            html += ' checked="checked" data-val="' + data[i].EmailAlertSent + '"';
+
+                        html += ' id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
+                            '</td><td>' + '<a href="/Home/DeleteGasDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                    }
+
+                    $("#tableGasDetection").find('tbody').append($(html));
+
+                    intervalReadings = clearTimeout(intervalReadings);
+
+                    $('#refreshButton').text('Get all');
+
+                    dataIsFiltered = true;
+                }
+            });
+        }
+
+        function deleteAllRecords() {
+
+            modal.style.display = "block";
+
+            confirmDeleteRows(function (confirmed) {
+                if (confirmed) {
+                    // Whatever you need to do if they clicked confirm
+                    $.ajax({
+                        url: '@Url.Action("DeleteAllRecordsGasDetectionData", "Home")',
+                        method: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            var html = '';
+                            for (var i = 0; i < data.length; i++) {
+                                html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td><input ';
+                                if (data[i].EmailAlertSent)
+                                    html += ' checked="checked" data-val="' + data[i].EmailAlertSent + '"';
+
+                                html += ' id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
+                                    '</td><td>' + '<a href="/Home/DeleteGasDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                            }
+
+                            $('#tableGasDetection tr>td').remove();
+                            $("#tableGasDetection").find('tbody').append($(html));
+
+                            intervalReadings = setTimeout("getAllRows()", 10000);
+
+                            $('#deleteFilteredData').css("visibility", "hidden");
+                        }
+                    });
+                }
+
+                modal.style.display = "none";
+            });
+        }
+
+        function deleteFilteredData() {
+
+            modalFiltered.style.display = "block";
+
+            confirmDeleteFilteredRows(function (confirmed) {
+                if (confirmed) {
+
+                    var filter = {
+                        "DateMinValue": $('#DateMinValueTextBox').val(),
+                        "DateMaxValue": $('#DateMaxValueTextBox').val(),
+                        "TemperatureEmailAlertSent": $('#ChkGasDetectionEmailSent').is(':checked')
+                    };
+
+                    // Whatever you need to do if they clicked confirm
+                    $.ajax({
+                        url: '@Url.Action("DeleteFilteredGasDetectionData", "Home")',
+                        method: 'GET',
+                        data: filter,
+                        dataType: 'json',
+                        success: function (response) {
+                            var html = '';
+                            for (var i = 0; i < response.length; i++) {
+                                html += '<tr><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td><input ';
+                                if (data[i].EmailAlertSent)
+                                    html += ' checked="checked" data-val="' + data[i].EmailAlertSent + '"';
+
+                                html += ' id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" />' +
+                                    '</td><td>' + '<a href="/Home/DeleteGasDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                            }
+
+                            $('#tableGasDetection tr>td').remove();
+                            $("#tableGasDetection").find('tbody').append($(html));
+
+                            intervalReadings = clearTimeout(intervalReadings);
+                        }
+                    });
+                }
+
+                modalFiltered.style.display = "none";
+            });
+        }
+
+        function confirmDeleteRows(callback) {
+
+            $('#deleteAllRecordsYesButton').click(function () { callback(true) });
+            $('#deleteAllRecordsNoButton').click(function () { callback(false) });
+        }
+
+
+        function confirmDeleteFilteredRows(callback) {
+
+            $('#deleteFilteredRecordsYesButton').click(function () { callback(true) });
+            $('#deleteFilteredRecordsNoButton').click(function () { callback(false) });
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+            modalFiltered.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+
+            if (event.target == modalFiltered) {
+                modalFiltered.style.display = "none";
+            }
+        }
+
+        //color with blue selected line
+        $("#tableGasDetection").on("click", "tr", function () {
+            selectedRow = $(this);
+            selectedRowIndex = parseInt($(this)[0].cells[0].innerHTML);
+            selectedRowYN = $(this).hasClass("highlight");
+            $("#tableGasDetection tr").children().each(function (index, td) {
+                $(this).removeClass('highlight');
+            });
+            $("#tableGasDetection tr>td").children().each(function (index, td) {
+                $(this).removeClass('highlight');
+            });
+            if (!selectedRowYN)
+                selectedRow.children().each(function (index, td) {
+                    $(this).addClass('highlight');
+                });
+            else {
+                selectedRow = null;
+                selectedRowIndex = null;
+            }
+
+        });
+
+    </script>
+</body>
+</html>

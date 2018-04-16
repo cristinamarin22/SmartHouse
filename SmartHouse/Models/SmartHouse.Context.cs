@@ -32,5 +32,6 @@ namespace SmartHouse.Models
         public DbSet<DictionaryTime> DictionaryTime { get; set; }
         public DbSet<Settings> Settings { get; set; }
         public DbSet<AirConditioningSettings> AirConditioningSettings { get; set; }
+        public DbSet<GasDetectionData> GasDetectionData { get; set; }
     }
 }

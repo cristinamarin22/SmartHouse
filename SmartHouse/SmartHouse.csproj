@@ -157,6 +157,9 @@
       <DependentUpon>SmartHouse.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FilterTemperatureHumidityClass.cs" />
+    <Compile Include="Models\GasDetectionData.cs">
+      <DependentUpon>SmartHouse.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MotionDetectionData.cs">
       <DependentUpon>SmartHouse.tt</DependentUpon>
     </Compile>
@@ -270,6 +273,7 @@
     <Content Include="webfonts\fa-solid-900.woff" />
     <Content Include="webfonts\fa-solid-900.woff2" />
     <Content Include="Views\Home\AirConditioning.cshtml" />
+    <Content Include="Views\Home\GasDetection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

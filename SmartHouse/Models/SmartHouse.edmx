@@ -21,6 +21,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Time" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
+        <EntityType Name="GasDetectionData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InternalTime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="EmailAlertSent" Type="bool" Nullable="false" />
+        </EntityType>
         <EntityType Name="MotionDetectionData">
           <Key>
             <PropertyRef Name="Id" />
@@ -102,6 +110,7 @@
         <EntityContainer Name="SmartHouseModelStoreContainer">
           <EntitySet Name="AirConditioningSettings" EntityType="Self.AirConditioningSettings" Schema="SmartHouse" store:Type="Tables" />
           <EntitySet Name="DictionaryTime" EntityType="Self.DictionaryTime" Schema="SmartHouse" store:Type="Tables" />
+          <EntitySet Name="GasDetectionData" EntityType="Self.GasDetectionData" Schema="SmartHouse" store:Type="Tables" />
           <EntitySet Name="MotionDetectionData" EntityType="Self.MotionDetectionData" Schema="SmartHouse" store:Type="Tables" />
           <EntitySet Name="Settings" EntityType="Self.Settings" Schema="SmartHouse" store:Type="Tables" />
           <EntitySet Name="SoundDetectionData" EntityType="Self.SoundDetectionData" Schema="SmartHouse" store:Type="Tables" />
@@ -145,6 +154,7 @@
           <EntitySet Name="DictionaryTime" EntityType="SmartHouseModel.DictionaryTime" />
           <EntitySet Name="Settings" EntityType="SmartHouseModel.Settings" />
           <EntitySet Name="AirConditioningSettings" EntityType="SmartHouseModel.AirConditioningSettings" />
+          <EntitySet Name="GasDetectionData" EntityType="SmartHouseModel.GasDetectionData" />
         </EntityContainer>
         <EntityType Name="TemperatureHumidityCriticalData">
           <Key>
@@ -214,6 +224,14 @@
           <Property Name="AirConditioningOn" Type="Boolean" Nullable="false" />
           <Property Name="WantedTemperature" Type="Single" Nullable="false" />
           <Property Name="AirConditioningMode" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GasDetectionData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InternalTime" Type="DateTime" Nullable="false" />
+          <Property Name="EmailAlertSent" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -318,6 +336,15 @@
                 <ScalarProperty Name="AirConditioningMode" ColumnName="AirConditioningMode" />
                 <ScalarProperty Name="WantedTemperature" ColumnName="WantedTemperature" />
                 <ScalarProperty Name="AirConditioningOn" ColumnName="AirConditioningOn" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GasDetectionData">
+            <EntityTypeMapping TypeName="SmartHouseModel.GasDetectionData">
+              <MappingFragment StoreEntitySet="GasDetectionData">
+                <ScalarProperty Name="EmailAlertSent" ColumnName="EmailAlertSent" />
+                <ScalarProperty Name="InternalTime" ColumnName="InternalTime" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -70,6 +70,23 @@ namespace SmartHouse.Controllers
                 return Json(new List<MotionDetectionData>(), JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult DeleteAllRecordsGasDetectionData()
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            if (smartHouseEntities.Database.Exists())
+            {
+                using (var context = new SmartHouseEntities())
+                {
+                    var deleted = context.Database.ExecuteSqlCommand("delete from GasDetectionData");
+                }
+
+                var gasDetectionList = smartHouseEntities.GasDetectionData.ToList().OrderByDescending(x => x.InternalTime);
+                return Json(gasDetectionList, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Json(new List<GasDetectionData>(), JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult DeleteAllRecordsSoundDetectionData()
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
@@ -141,6 +158,24 @@ namespace SmartHouse.Controllers
             smartHouse.MotionDetectionDatas.Remove(motionDetection);
             smartHouse.SaveChanges();
             return RedirectToAction("MotionDetection");
+        }
+
+        public ActionResult DeleteGasDetectionData(int? id)
+        {
+            if (id == null)
+            {
+                return null;
+            }
+
+            SmartHouseEntities smartHouse = new SmartHouseEntities();
+            GasDetectionData gasDetection = smartHouse.GasDetectionData.Find(id);
+            if (gasDetection == null)
+            {
+                return HttpNotFound();
+            }
+            smartHouse.GasDetectionData.Remove(gasDetection);
+            smartHouse.SaveChanges();
+            return RedirectToAction("GasDetection");
         }
 
         public ActionResult DeleteSoundDetectionData(int? id)
@@ -353,6 +388,26 @@ namespace SmartHouse.Controllers
                 return Json(smartHouseEntities.MotionDetectionDatas.ToList().OrderByDescending(x => x.InternalTime), JsonRequestBehavior.AllowGet);
             else
                 return Json(new List<MotionDetectionData>(), JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Gas Detection
+        public ActionResult GasDetection()
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            if (smartHouseEntities.Database.Exists())
+                return View(smartHouseEntities.GasDetectionData.ToList().OrderByDescending(x => x.InternalTime));
+            else
+                return View(new List<GasDetectionData>());
+        }
+
+        public JsonResult GetGasDetectionHistoryData()
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            if (smartHouseEntities.Database.Exists())
+                return Json(smartHouseEntities.GasDetectionData.ToList().OrderByDescending(x => x.InternalTime), JsonRequestBehavior.AllowGet);
+            else
+                return Json(new List<GasDetectionData>(), JsonRequestBehavior.AllowGet);
         }
         #endregion
 
@@ -602,6 +657,31 @@ namespace SmartHouse.Controllers
             }
             else
                 return Json(new List<MotionDetectionData>(), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult FilterGasDetectionData(FilterTemperatureHumidityClass filter)
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+
+            if (smartHouseEntities.Database.Exists())
+            {
+                var gasDetectionList = smartHouseEntities.GasDetectionData.ToList();
+
+                if (filter.DateMinValue != null)
+                    gasDetectionList = gasDetectionList.Where(x => x.InternalTime >= filter.DateMinValue).ToList();
+
+                if (filter.DateMaxValue != null)
+                    gasDetectionList = gasDetectionList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
+
+                if (filter.TemperatureEmailAlertSent)
+                    gasDetectionList = gasDetectionList.Where(x => x.EmailAlertSent).ToList();
+
+                gasDetectionList = gasDetectionList.OrderByDescending(x => x.InternalTime).ToList();
+
+                return Json(gasDetectionList, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Json(new List<GasDetectionData>(), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult FilterSoundDetectionData(FilterTemperatureHumidityClass filter)
