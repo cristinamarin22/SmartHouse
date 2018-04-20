@@ -20,7 +20,16 @@
     <script type="text/javascript">
         window.onload = function () {
 
+            //var today = '0' + (new Date($.now()).getMonth() + 1).toString() + '-' + new Date($.now()).getDate().toString() + '-' + new Date($.now()).getFullYear().toString().toString();
+            //$('#TemperatureEvolutionDateTextBox').val(today);
+
+            // Initial Values
             var dataPoints = [];
+            var xValue = 0;
+            var yValue = 10;
+            var newDataCount = 6;
+            var dateChanged = false;
+            var chartTitle = "Temperature evolution today";
 
             var chart = new CanvasJS.Chart("chartTemperatureEvolutionToday", {
                 theme: "light2",
@@ -28,13 +37,13 @@
                 zoomType: "xy",
                 animationEnabled: true,
                 title: {
-                    text: "Temperature evolution today"
+                    text: chartTitle
                 },
                 toolTip: {
                     enabled: true,
                     contentFormatter: function (e) {
                         return "Temperature: " + e.entries[0].dataPoint.y + "°C <br>Hour: " + e.entries[0].dataPoint.x.toLocaleTimeString('en-GB') + "<br>Date: " + e.entries[0].dataPoint.x.toLocaleDateString('en-GB');
-                    }  
+                    }
                 },
                 axisX: {
                     title: "Time",
@@ -52,11 +61,6 @@
             });
             updateData();
 
-            // Initial Values
-            var xValue = 0;
-            var yValue = 10;
-            var newDataCount = 6;
-
             function addData(data) {
                 $.each(data, function (key, value) {
                     if (key == xValue) {
@@ -67,20 +71,97 @@
                 });
 
                 chart.render();
-                setTimeout(updateData, 1500);
             }
 
             function updateData() {
-                $.get("/home/JSONTemperatureChartToday", function (data) {
-                    addData(data);
-                });
+
+                if (dateChanged) {
+
+                    clearTimeout();
+
+                    var filter = {
+                        "DateMinValue": $('#TemperatureEvolutionDateTextBox').val()
+                    };
+
+                    $.ajax({
+                        url: '@Url.Action("JSONTemperatureChartAnotherDay", "Home")',
+                        method: 'GET',
+                        data: filter,
+                        dataType: 'json',
+                        success: function (response) {
+                            addData(response);
+                        }
+                    });
+                }
+                else {
+                    setTimeout(updateData, 1500);
+
+                    $.get("/home/JSONTemperatureChartToday", function (data) {
+                        addData(data);
+                    });
+                }
             }
+
+            $('#TemperatureEvolutionDateTextBox').change(function () {
+                // Initial Values
+                xValue = 0;
+                yValue = 10;
+                newDataCount = 6;
+                dataPoints = [];
+                setTimeout(updateData, 1500);
+
+                var date = $('#TemperatureEvolutionDateTextBox').val();
+
+                if (date == '') {
+                    dateChanged = false;
+                    chartTitle = "Temperature evolution today";
+                }
+                else {
+                    dateChanged = true;
+                    chartTitle = "Temperature evolution on " + new Date(date).toLocaleDateString('en-GB');
+                }
+
+                chart = new CanvasJS.Chart("chartTemperatureEvolutionToday", {
+                    theme: "light2",
+                    zoomEnabled: true,
+                    zoomType: "xy",
+                    animationEnabled: true,
+                    title: {
+                        text: chartTitle
+                    },
+                    toolTip: {
+                        enabled: true,
+                        contentFormatter: function (e) {
+                            return "Temperature: " + e.entries[0].dataPoint.y + "°C <br>Hour: " + e.entries[0].dataPoint.x.toLocaleTimeString('en-GB') + "<br>Date: " + e.entries[0].dataPoint.x.toLocaleDateString('en-GB');
+                        }
+                    },
+                    axisX: {
+                        title: "Time",
+                        intervalType: "minute",
+                        interval: 30,
+                        valueFormatString: "H:mm"
+                    },
+                    axisY: {
+                        title: "Temperature (in °C)"
+                    },
+                    data: [{
+                        type: "spline",
+                        dataPoints: dataPoints
+                    }]
+                });
+            });
 
         }
     </script>
 </head>
 <body>
-    <div id="chartTemperatureEvolutionToday" style="height: 370px; width: 100%;"></div>
+    <div class="w3-row-padding w3-margin-bottom">
+        <label><span>Date </span></label>
+
+        @Html.TextBox("TemperatureEvolutionDate", "", new { id = "TemperatureEvolutionDateTextBox", style = "width:150px; background:#7f9be7", @type = "date" })
+
+        <div id="chartTemperatureEvolutionToday" style="height: 370px; width: 100%;"></div>
+    </div>
 </body>
 </html>
 

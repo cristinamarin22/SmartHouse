@@ -766,7 +766,7 @@ namespace SmartHouse.Controllers
             return Content(JsonConvert.SerializeObject(temperaturePoints, _jsonSetting), "application/json");
         }
 
-        public ContentResult GetChartsInfo()
+        public ContentResult JSONTemperatureChartAnotherDay(FilterTemperatureHumidityClass filter)
         {
             List<DataPoint> temperaturePoints = new List<DataPoint>();
 
@@ -775,7 +775,7 @@ namespace SmartHouse.Controllers
             {
                 foreach (TemperatureHumidityData temperatureData in smartHouseEntities.TemperatureHumidityDatas)
                 {
-                    if (temperatureData.InternalTime.Date == DateTime.Now.Date)
+                    if (filter.DateMinValue.HasValue && temperatureData.InternalTime.Date == filter.DateMinValue.Value)
                     {
                         DataPoint temperaturePoint = new DataPoint(temperatureData.InternalTime, Math.Round(Convert.ToDouble(temperatureData.Temperature), 2));
                         temperaturePoints.Add(temperaturePoint);
