@@ -738,20 +738,6 @@ namespace SmartHouse.Controllers
         #region Charts
         public ActionResult Charts()
         {
-            List<DataPoint> temperaturePoints = new List<DataPoint>();
-
-            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
-            if (smartHouseEntities.Database.Exists())
-            {
-                foreach (TemperatureHumidityData temperatureData in smartHouseEntities.TemperatureHumidityDatas)
-                {
-                    DataPoint temperaturePoint = new DataPoint(Convert.ToDouble(temperatureData.Temperature), Convert.ToDouble(temperatureData.InternalTime.Month));
-                    temperaturePoints.Add(temperaturePoint);
-                }
-            }
-
-            ViewBag.DataPoints = JsonConvert.SerializeObject(temperaturePoints);
-
             return View();
         }
 
@@ -766,7 +752,7 @@ namespace SmartHouse.Controllers
                 {
                     if (temperatureData.InternalTime.Date == DateTime.Now.Date)
                     {
-                        DataPoint temperaturePoint = new DataPoint(Convert.ToDouble(temperatureData.InternalTime.Hour), Convert.ToDouble(temperatureData.Temperature));
+                        DataPoint temperaturePoint = new DataPoint(temperatureData.InternalTime, Math.Round(Convert.ToDouble(temperatureData.Temperature), 2));
                         temperaturePoints.Add(temperaturePoint);
                     }
                 }
@@ -791,7 +777,7 @@ namespace SmartHouse.Controllers
                 {
                     if (temperatureData.InternalTime.Date == DateTime.Now.Date)
                     {
-                        DataPoint temperaturePoint = new DataPoint(Convert.ToDouble(temperatureData.InternalTime.Hour), Math.Round(Convert.ToDouble(temperatureData.Temperature), 2));
+                        DataPoint temperaturePoint = new DataPoint(temperatureData.InternalTime, Math.Round(Convert.ToDouble(temperatureData.Temperature), 2));
                         temperaturePoints.Add(temperaturePoint);
                     }
                 }
