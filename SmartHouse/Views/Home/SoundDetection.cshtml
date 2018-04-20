@@ -175,17 +175,18 @@
                 </td>
 
                 <td style="float: right;">
+                <span>
+                        @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#4ba394", @type = "date" })
+                </span>
 
-                    @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#4ba394", @type = "date" })
+                <label><span> <= Date <= </span></label>
 
-                    <label> <= Date <= </label>
+                @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#4ba394", @type = "date" })
 
-                    @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#4ba394", @type = "date" })
+                <input type="checkbox" id="ChkSoundDetectionEmailSent">Email sent
 
-                    <input type="checkbox" id="ChkSoundDetectionEmailSent">Email sent<br>
-
-                    <button type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
-                </td>
+                <button type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
+</td>
             </tr>
         </table>
 
@@ -218,7 +219,7 @@
                     @Html.CheckBoxFor(modelItem => item.EmailAlertSent, new { @checked = "checked", @readonly = "readonly" })
                 </td>
                 <td>
-                    @Html.ActionLink("Delete", "DeleteSoundDetection", "Home", new { id = item.Id }, null)
+                    @Html.ActionLink("Delete", "DeleteSoundDetectionData", "Home", new { id = item.Id }, null)
                 </td>
             </tr>
     }

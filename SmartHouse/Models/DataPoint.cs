@@ -15,6 +15,12 @@ namespace SmartHouse.Models
             this.Y = y;
         }
 
+        public DataPoint(string x, double y)
+        {
+            this.XMonth = x;
+            this.Y = y;
+        }
+
         //Explicitly setting the name to be used while serializing to JSON.
         [DataMember(Name = "x")]
         public Nullable<DateTime> X = null;
@@ -22,5 +28,9 @@ namespace SmartHouse.Models
         //Explicitly setting the name to be used while serializing to JSON.
         [DataMember(Name = "y")]
         public Nullable<double> Y = null;
+
+        //Explicitly setting the name to be used while serializing to JSON.
+        [DataMember(Name = "xMonth")]
+        public string XMonth = String.Empty;
     }
 }

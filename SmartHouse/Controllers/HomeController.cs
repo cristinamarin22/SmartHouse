@@ -218,10 +218,10 @@ namespace SmartHouse.Controllers
                 temperatureHumidityList = temperatureHumidityList.Where(x => x.Humidity <= filter.HumidityMaxValue).ToList();
 
             if (filter.DateMinValue != null)
-                temperatureHumidityList = temperatureHumidityList.Where(x => x.InternalTime >= filter.DateMinValue).ToList();
+                temperatureHumidityList = temperatureHumidityList.Where(x => x.InternalTime.Date >= filter.DateMinValue.Value.Date).ToList();
 
             if (filter.DateMaxValue != null)
-                temperatureHumidityList = temperatureHumidityList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
+                temperatureHumidityList = temperatureHumidityList.Where(x => x.InternalTime.Date <= filter.DateMaxValue.Value.Date).ToList();
 
             foreach (var filteredItem in temperatureHumidityList)
             {
@@ -253,10 +253,10 @@ namespace SmartHouse.Controllers
                 temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.Humidity <= filter.HumidityMaxValue).ToList();
 
             if (filter.DateMinValue != null)
-                temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.InternalTime >= filter.DateMinValue).ToList();
+                temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.InternalTime.Date >= filter.DateMinValue.Value.Date).ToList();
 
             if (filter.DateMaxValue != null)
-                temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
+                temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.InternalTime.Date <= filter.DateMaxValue.Value.Date).ToList();
 
             if (filter.TemperatureEmailAlertSent)
                 temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.TemperatureEmailAlertSent).ToList();
@@ -282,10 +282,10 @@ namespace SmartHouse.Controllers
             var motionDetectionList = smartHouseEntities.MotionDetectionDatas.ToList();
 
             if (filter.DateMinValue != null)
-                motionDetectionList = motionDetectionList.Where(x => x.InternalTime >= filter.DateMinValue).ToList();
+                motionDetectionList = motionDetectionList.Where(x => x.InternalTime.Date >= filter.DateMinValue.Value.Date).ToList();
 
             if (filter.DateMaxValue != null)
-                motionDetectionList = motionDetectionList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
+                motionDetectionList = motionDetectionList.Where(x => x.InternalTime.Date <= filter.DateMaxValue.Value.Date).ToList();
 
             if (filter.TemperatureEmailAlertSent)
                 motionDetectionList = motionDetectionList.Where(x => x.EmailAlertSent).ToList();
@@ -308,10 +308,10 @@ namespace SmartHouse.Controllers
             var soundDetectionList = smartHouseEntities.SoundDetectionDatas.ToList();
 
             if (filter.DateMinValue != null)
-                soundDetectionList = soundDetectionList.Where(x => x.InternalTime >= filter.DateMinValue).ToList();
+                soundDetectionList = soundDetectionList.Where(x => x.InternalTime.Date >= filter.DateMinValue.Value.Date).ToList();
 
             if (filter.DateMaxValue != null)
-                soundDetectionList = soundDetectionList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
+                soundDetectionList = soundDetectionList.Where(x => x.InternalTime.Date <= filter.DateMaxValue.Value.Date).ToList();
 
             if (filter.TemperatureEmailAlertSent)
                 soundDetectionList = soundDetectionList.Where(x => x.EmailAlertSent).ToList();
@@ -581,10 +581,10 @@ namespace SmartHouse.Controllers
                     temperatureHumidityList = temperatureHumidityList.Where(x => x.Humidity <= filter.HumidityMaxValue).ToList();
 
                 if (filter.DateMinValue != null)
-                    temperatureHumidityList = temperatureHumidityList.Where(x => x.InternalTime >= filter.DateMinValue).ToList();
+                    temperatureHumidityList = temperatureHumidityList.Where(x => x.InternalTime.Date >= filter.DateMinValue.Value.Date).ToList();
 
                 if (filter.DateMaxValue != null)
-                    temperatureHumidityList = temperatureHumidityList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
+                    temperatureHumidityList = temperatureHumidityList.Where(x => x.InternalTime.Date <= filter.DateMaxValue.Value.Date).ToList();
 
                 temperatureHumidityList = temperatureHumidityList.OrderByDescending(x => x.InternalTime).ToList();
 
@@ -616,10 +616,10 @@ namespace SmartHouse.Controllers
                     temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.Humidity <= filter.HumidityMaxValue).ToList();
 
                 if (filter.DateMinValue != null)
-                    temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.InternalTime >= filter.DateMinValue).ToList();
+                    temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.InternalTime.Date >= filter.DateMinValue.Value.Date).ToList();
 
                 if (filter.DateMaxValue != null)
-                    temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
+                    temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.InternalTime.Date <= filter.DateMaxValue.Value.Date).ToList();
 
                 if (filter.TemperatureEmailAlertSent)
                     temperatureHumidityCriticalDataList = temperatureHumidityCriticalDataList.Where(x => x.TemperatureEmailAlertSent).ToList();
@@ -644,10 +644,10 @@ namespace SmartHouse.Controllers
                 var motionDetectionList = smartHouseEntities.MotionDetectionDatas.ToList();
 
                 if (filter.DateMinValue != null)
-                    motionDetectionList = motionDetectionList.Where(x => x.InternalTime >= filter.DateMinValue).ToList();
+                    motionDetectionList = motionDetectionList.Where(x => x.InternalTime.Date >= filter.DateMinValue.Value.Date).ToList();
 
                 if (filter.DateMaxValue != null)
-                    motionDetectionList = motionDetectionList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
+                    motionDetectionList = motionDetectionList.Where(x => x.InternalTime.Date <= filter.DateMaxValue.Value.Date).ToList();
 
                 if (filter.TemperatureEmailAlertSent)
                     motionDetectionList = motionDetectionList.Where(x => x.EmailAlertSent).ToList();
@@ -669,10 +669,10 @@ namespace SmartHouse.Controllers
                 var gasDetectionList = smartHouseEntities.GasDetectionData.ToList();
 
                 if (filter.DateMinValue != null)
-                    gasDetectionList = gasDetectionList.Where(x => x.InternalTime >= filter.DateMinValue).ToList();
+                    gasDetectionList = gasDetectionList.Where(x => x.InternalTime.Date >= filter.DateMinValue.Value.Date).ToList();
 
                 if (filter.DateMaxValue != null)
-                    gasDetectionList = gasDetectionList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
+                    gasDetectionList = gasDetectionList.Where(x => x.InternalTime.Date <= filter.DateMaxValue.Value.Date).ToList();
 
                 if (filter.TemperatureEmailAlertSent)
                     gasDetectionList = gasDetectionList.Where(x => x.EmailAlertSent).ToList();
@@ -694,10 +694,10 @@ namespace SmartHouse.Controllers
                 var soundDetectionList = smartHouseEntities.SoundDetectionDatas.ToList();
 
                 if (filter.DateMinValue != null)
-                    soundDetectionList = soundDetectionList.Where(x => x.InternalTime >= filter.DateMinValue).ToList();
+                    soundDetectionList = soundDetectionList.Where(x => x.InternalTime.Date >= filter.DateMinValue.Value.Date).ToList();
 
                 if (filter.DateMaxValue != null)
-                    soundDetectionList = soundDetectionList.Where(x => x.InternalTime <= filter.DateMaxValue).ToList();
+                    soundDetectionList = soundDetectionList.Where(x => x.InternalTime.Date <= filter.DateMaxValue.Value.Date).ToList();
 
                 if (filter.TemperatureEmailAlertSent)
                     soundDetectionList = soundDetectionList.Where(x => x.EmailAlertSent).ToList();
@@ -789,6 +789,213 @@ namespace SmartHouse.Controllers
             };
 
             return Content(JsonConvert.SerializeObject(temperaturePoints, _jsonSetting), "application/json");
+        }
+
+        public ContentResult JSONMotionDetection()
+        {
+            List<DataPoint> motionDetectionPoints = new List<DataPoint>();
+            string month = String.Empty;
+            int count = 0;
+
+            DateTime target = new DateTime(DateTime.Now.Year, 1, 1);
+            while (target < DateTime.Today)
+            {
+                switch (target.Month)
+                {
+                    case 1:
+                        month = "January";
+                        break;
+                    case 2:
+                        month = "February";
+                        break;
+                    case 3:
+                        month = "March";
+                        break;
+                    case 4:
+                        month = "April";
+                        break;
+                    case 5:
+                        month = "May";
+                        break;
+                    case 6:
+                        month = "June";
+                        break;
+                     case 7:
+                        month = "July";
+                        break;
+                    case 8:
+                        month = "August";
+                        break;
+                    case 9:
+                        month = "September";
+                        break;
+                    case 10:
+                        month = "October";
+                        break;
+                    case 11:
+                        month = "November";
+                        break;
+                    case 12:
+                        month = "December";
+                        break;
+                }
+
+                SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+                if (smartHouseEntities.Database.Exists())
+                {
+                    count = smartHouseEntities.MotionDetectionDatas.Count(x => x.InternalTime.Month == target.Month);
+                }
+
+                DataPoint motionDetectionPoint = new DataPoint(month, count);
+                motionDetectionPoints.Add(motionDetectionPoint);
+
+                target = target.AddMonths(1);
+            }
+
+            JsonSerializerSettings _jsonSetting = new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            };
+
+            return Content(JsonConvert.SerializeObject(motionDetectionPoints, _jsonSetting), "application/json");
+        }
+
+        public ContentResult JSONSoundDetection()
+        {
+            List<DataPoint> soundDetectionPoints = new List<DataPoint>();
+            string month = String.Empty;
+            int count = 0;
+
+            DateTime target = new DateTime(DateTime.Now.Year, 1, 1);
+            while (target < DateTime.Today)
+            {
+                switch (target.Month)
+                {
+                    case 1:
+                        month = "January";
+                        break;
+                    case 2:
+                        month = "February";
+                        break;
+                    case 3:
+                        month = "March";
+                        break;
+                    case 4:
+                        month = "April";
+                        break;
+                    case 5:
+                        month = "May";
+                        break;
+                    case 6:
+                        month = "June";
+                        break;
+                    case 7:
+                        month = "July";
+                        break;
+                    case 8:
+                        month = "August";
+                        break;
+                    case 9:
+                        month = "September";
+                        break;
+                    case 10:
+                        month = "October";
+                        break;
+                    case 11:
+                        month = "November";
+                        break;
+                    case 12:
+                        month = "December";
+                        break;
+                }
+
+                SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+                if (smartHouseEntities.Database.Exists())
+                {
+                    count = smartHouseEntities.SoundDetectionDatas.Count(x => x.InternalTime.Month == target.Month);
+                }
+
+                DataPoint soundDetectionPoint = new DataPoint(month, count);
+                soundDetectionPoints.Add(soundDetectionPoint);
+
+                target = target.AddMonths(1);
+            }
+
+            JsonSerializerSettings _jsonSetting = new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            };
+
+            return Content(JsonConvert.SerializeObject(soundDetectionPoints, _jsonSetting), "application/json");
+        }
+
+        public ContentResult JSONGasDetection()
+        {
+            List<DataPoint> gasDetectionPoints = new List<DataPoint>();
+            string month = String.Empty;
+            int count = 0;
+
+            DateTime target = new DateTime(DateTime.Now.Year, 1, 1);
+            while (target < DateTime.Today)
+            {
+                switch (target.Month)
+                {
+                    case 1:
+                        month = "January";
+                        break;
+                    case 2:
+                        month = "February";
+                        break;
+                    case 3:
+                        month = "March";
+                        break;
+                    case 4:
+                        month = "April";
+                        break;
+                    case 5:
+                        month = "May";
+                        break;
+                    case 6:
+                        month = "June";
+                        break;
+                    case 7:
+                        month = "July";
+                        break;
+                    case 8:
+                        month = "August";
+                        break;
+                    case 9:
+                        month = "September";
+                        break;
+                    case 10:
+                        month = "October";
+                        break;
+                    case 11:
+                        month = "November";
+                        break;
+                    case 12:
+                        month = "December";
+                        break;
+                }
+
+                SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+                if (smartHouseEntities.Database.Exists())
+                {
+                    count = smartHouseEntities.GasDetectionData.Count(x => x.InternalTime.Month == target.Month);
+                }
+
+                DataPoint gasDetectionPoint = new DataPoint(month, count);
+                gasDetectionPoints.Add(gasDetectionPoint);
+
+                target = target.AddMonths(1);
+            }
+
+            JsonSerializerSettings _jsonSetting = new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            };
+
+            return Content(JsonConvert.SerializeObject(gasDetectionPoints, _jsonSetting), "application/json");
         }
     }
     #endregion

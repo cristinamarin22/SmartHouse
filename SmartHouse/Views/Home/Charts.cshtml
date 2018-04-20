@@ -20,9 +20,6 @@
     <script type="text/javascript">
         window.onload = function () {
 
-            //var today = '0' + (new Date($.now()).getMonth() + 1).toString() + '-' + new Date($.now()).getDate().toString() + '-' + new Date($.now()).getFullYear().toString().toString();
-            //$('#TemperatureEvolutionDateTextBox').val(today);
-
             // Initial Values
             var dataPoints = [];
             var xValue = 0;
@@ -31,7 +28,11 @@
             var dateChanged = false;
             var chartTitle = "Temperature evolution today";
 
-            var chart = new CanvasJS.Chart("chartTemperatureEvolutionToday", {
+            var dataPointsMotionDetection = [];
+            var dataPointsSoundDetection = [];
+            var dataPointsGasDetection = [];
+
+            var chartTemperatureByDay = new CanvasJS.Chart("chartTemperatureEvolutionToday", {
                 theme: "light2",
                 zoomEnabled: true,
                 zoomType: "xy",
@@ -70,7 +71,7 @@
                     }
                 });
 
-                chart.render();
+                chartTemperatureByDay.render();
             }
 
             function updateData() {
@@ -121,7 +122,7 @@
                     chartTitle = "Temperature evolution on " + new Date(date).toLocaleDateString('en-GB');
                 }
 
-                chart = new CanvasJS.Chart("chartTemperatureEvolutionToday", {
+                chartTemperatureByDay = new CanvasJS.Chart("chartTemperatureEvolutionToday", {
                     theme: "light2",
                     zoomEnabled: true,
                     zoomType: "xy",
@@ -149,8 +150,105 @@
                         dataPoints: dataPoints
                     }]
                 });
-            });
+            });    
 
+
+            var chartMotionDetection = new CanvasJS.Chart("chartMotionDetection", {
+                animationEnabled: true,
+                theme: "light2",
+                title: {
+                    text: "Motion detection"
+                },
+                axisY: {
+                    title: "Number of times"
+                },
+                data: [{
+                    type: "column",
+                    dataPoints: dataPointsMotionDetection
+                }]
+            });
+            updateDataMotionDetection();
+
+
+            function updateDataMotionDetection() {
+
+                $.get("/home/JSONMotionDetection", function (data) {
+                    addDataMotionDetection(data);
+                });
+            }
+
+            function addDataMotionDetection(data) {
+                $.each(data, function (key, value) {
+                    dataPointsMotionDetection.push({ y: value.y, label: value.xMonth });
+                });
+
+                chartMotionDetection.render();
+            }
+
+
+            var chartSoundDetection = new CanvasJS.Chart("chartSoundDetection", {
+                animationEnabled: true,
+                theme: "light2",
+                title: {
+                    text: "Sound detection"
+                },
+                axisY: {
+                    title: "Number of times"
+                },
+                data: [{
+                    type: "column",
+                    dataPoints: dataPointsSoundDetection
+                }]
+            });
+            updateDataSoundDetection();
+
+
+            function updateDataSoundDetection() {
+
+                $.get("/home/JSONSoundDetection", function (data) {
+                    addDataSoundDetection(data);
+                });
+            }
+
+            function addDataSoundDetection(data) {
+                $.each(data, function (key, value) {
+                    dataPointsSoundDetection.push({ y: value.y, label: value.xMonth });
+                });
+
+                chartSoundDetection.render();
+            }
+
+            var chartGasDetection = new CanvasJS.Chart("chartGasDetection", {
+                animationEnabled: true,
+                theme: "light2",
+                title: {
+                    text: "Gas detection"
+                },
+                axisY: {
+                    title: "Number of times"
+                },
+                data: [{
+                    type: "column",
+                    dataPoints: dataPointsGasDetection
+                }]
+            });
+            updateDataGasDetection();
+
+
+            function updateDataGasDetection() {
+
+                $.get("/home/JSONGasDetection", function (data) {
+                    addDataGasDetection(data);
+                });
+            }
+
+            function addDataGasDetection(data) {
+                $.each(data, function (key, value) {
+                    dataPointsGasDetection.push({ y: value.y, label: value.xMonth });
+                });
+
+                chartGasDetection.render();
+            }
         }
     </script>
 </head>
@@ -161,6 +259,18 @@
         @Html.TextBox("TemperatureEvolutionDate", "", new { id = "TemperatureEvolutionDateTextBox", style = "width:150px; background:#7f9be7", @type = "date" })
 
         <div id="chartTemperatureEvolutionToday" style="height: 370px; width: 100%;"></div>
+    </div>
+    <br />
+    <div class="w3-row-padding w3-margin-bottom">
+        <div id="chartMotionDetection" style="height: 370px; width: 100%;"></div>
+    </div>
+    <br />
+    <div class="w3-row-padding w3-margin-bottom">
+        <div id="chartSoundDetection" style="height: 370px; width: 100%;"></div>
+    </div>
+    <br />
+    <div class="w3-row-padding w3-margin-bottom">
+        <div id="chartGasDetection" style="height: 370px; width: 100%;"></div>
     </div>
 </body>
 </html>
