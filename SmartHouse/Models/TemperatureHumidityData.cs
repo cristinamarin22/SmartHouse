@@ -17,6 +17,7 @@ namespace SmartHouse.Models
     {
         public int Id { get; set; }
 
+        [Display(Name = "Date")]
         public System.DateTime InternalTime { get; set; }
 
         [Display(Name = "Temperature")]

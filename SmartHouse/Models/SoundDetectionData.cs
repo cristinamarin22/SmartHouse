@@ -16,7 +16,10 @@ namespace SmartHouse.Models
     public partial class SoundDetectionData
     {
         public int Id { get; set; }
+
+        [Display(Name = "Date")]
         public System.DateTime InternalTime { get; set; }
+
         [Display(Name = "Email alert sent")]
         public bool EmailAlertSent { get; set; }
     }
