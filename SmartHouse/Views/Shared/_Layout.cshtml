@@ -19,6 +19,20 @@ html, body, h1, h2, h3, h4, h5 {
     font-family: "Raleway", sans-serif;
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
 dd1 {
     display: block;
     margin-left: 175px;
@@ -116,26 +130,15 @@ dd6 {
     </div>
     <div class="header">
         <div class="w3-row-padding w3-margin-bottom">
-            <a href="/Home/Setting">
+            <a href="/Home/GasDetection">
                 <div class="w3-quarter">
-                    <div class="w3-container w3-gray w3-padding-16">
-                        <div class="w3-left"><i class="fa fa-list-alt w3-xxxlarge"></i></div>
+                    <div class="w3-container w3-orange w3-text-white w3-padding-16">
+                        <div class="w3-left"><i class="fa fa-exclamation-triangle w3-xxxlarge"></i></div>
                         <div class="w3-right">
                         </div>
                         <div class="w3-clear"></div>
-                        <h4>Settings</h4>
+                        <h4>Gas Detection</h4>
                     </div>
-            </a>
-        </div>
-        <div class="w3-quarter">
-            <a href="/Home/GasDetection">
-                <div class="w3-container w3-orange w3-text-white w3-padding-16">
-                    <div class="w3-left"><i class="fa fa-exclamation-triangle w3-xxxlarge"></i></div>
-                    <div class="w3-right">
-                    </div>
-                    <div class="w3-clear"></div>
-                    <h4>Gas Detection</h4>
-                </div>
             </a>
         </div>
         <div class="w3-quarter">
@@ -158,6 +161,16 @@ dd6 {
                     <div class="w3-clear"></div>
                     <h4>Charts</h4>
                 </div>
+            </a>
+        </div>
+        <div class="w3-quarter">
+            <a href="/Home/Setting">
+                    <div class="w3-container w3-gray w3-padding-16">
+                        <div class="w3-left"><i class="fa fa-list-alt w3-xxxlarge"></i></div>
+                        <div class="w3-right">
+                        </div>
+                        <div class="w3-clear"></div>
+                        <h4>Settings</h4>
             </a>
         </div>
     </div>

@@ -8,9 +8,6 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-</head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -34,144 +31,17 @@ th, td {
 tr:nth-child(even) {
     background-color: #f2f2f2
 }
-
-th {
-    background-color: #ff9800;
-    color: white;
-}
-
-.button {
-    background-color: #4CAF50; 
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    cursor: pointer;
-}
-
-.button3 {
-    background-color: white;
-    color: black;
-    border: 2px solid #ff9800;
-}
-
-.button3:hover {
-    background-color: #ff9800;
-    color: white;
-}
-
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    -webkit-animation-name: fadeIn; /* Fade in the background */
-    -webkit-animation-duration: 0.4s;
-    animation-name: fadeIn;
-    animation-duration: 0.4s
-}
-
-    /* Modal Content */
-.modal-content {
-    position: fixed;
-    bottom: 0;
-    background-color: #fefefe;
-    width: 100%;
-    -webkit-animation-name: slideIn;
-    -webkit-animation-duration: 0.4s;
-    animation-name: slideIn;
-    animation-duration: 0.4s
-}
-
-.modal-header {
-    padding: 2px 16px;
-    background-color: #ff9800;
-    color: white;
-}
-
-.modal-footer {
-    padding: 2px 16px;
-    background-color: white;
-    color: white;
-}
-
-/* Add Animation */
-@@-webkit-keyframes slideIn {
-    from {
-        bottom: -300px;
-        opacity: 0
-    }
-
-    to {
-        bottom: 0;
-        opacity: 1
-    }
-}
-
-@@keyframes slideIn {
-    from {
-        bottom: -300px;
-        opacity: 0
-    }
-
-    to {
-        bottom: 0;
-        opacity: 1
-    }
-}
-
-@@-webkit-keyframes fadeIn {
-    from {
-        opacity: 0
-    }
-
-    to {
-        opacity: 1
-    }
-}
-
-@@keyframes fadeIn {
-    from {
-        opacity: 0
-    }
-
-    to {
-        opacity: 1
-    }
-}
-
-.modal-body {
-    padding: 2px 20px;
-    font-size: 16px;
-}
-
-    .highlight {
-        background-color: #f9b975;
-    }
 </style>
 <body>
     <div class="w3-container">
         <table>
             <tr>
                 <td style="float: left;">
-                    <button type="button" class="button button3" id="refreshButton" onclick="getAllRows()">History data</button>
+                    <button type="button" class="buttonGasDetection buttonGasDetection3" id="refreshButton" onclick="getAllRows()">History data</button>
 
-                    <button type="button" class="button button3" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
+                    <button type="button" class="buttonGasDetection buttonGasDetection3" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
 
-                    <button type="button" class="button button3" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
+                    <button type="button" class="buttonGasDetection buttonGasDetection3" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
                 </td>
 
                 <td style="float: right;">
@@ -185,7 +55,7 @@ th {
 
                     <input type="checkbox" id="ChkGasDetectionEmailSent">Email sent
 
-                    <button type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
+                    <button type="button" class="buttonGasDetection buttonGasDetection3" id="filterButton" onclick="filterData()">Filter</button>
 
                 </td>
             </tr>
@@ -193,16 +63,16 @@ th {
 
         <table class="table" id="tableGasDetection">
             <tr>
-                <th style="display:none;">
+                <th class="thGasDetection" style="display:none;">
                     @Html.DisplayNameFor(model => model.Id)
                 </th>
-                <th>
+                <th class="thGasDetection">
                     Date
                 </th>
-                <th>
+                <th class="thGasDetection">
                     Email alert sent
                 </th>
-                <th>
+                <th class="thGasDetection">
                     Action
                 </th>
             </tr>
@@ -229,16 +99,16 @@ th {
     </div>
 
     <!-- Popup for Delete All-->
-    <div id="deleteAllPopup" class="modal">
+    <div id="deleteAllPopup" class="modalGasDetection">
 
         <!-- Modal content -->
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="modalGasDetection-content">
+            <div class="modalGasDetection-header">
                 <span class="close">&times;</span>
                 <h2>Delete</h2>
             </div>
-            <div class="modal-body">
-                <p>Do you want to delete all records? <button type="button" style="float: right;" class="button button3" id="deleteAllRecordsNoButton">No</button><button type="button" style="float: right;" class="button button3" id="deleteAllRecordsYesButton">Yes</button></p>
+            <div class="modalGasDetection-body">
+                <p>Do you want to delete all records? <button type="button" style="float: right;" class="buttonGasDetection buttonGasDetection3" id="deleteAllRecordsNoButton">No</button><button type="button" style="float: right;" class="buttonGasDetection buttonGasDetection3" id="deleteAllRecordsYesButton">Yes</button></p>
             </div>
         </div>
 
@@ -246,21 +116,21 @@ th {
 
 
     <!-- Popup for Delete Filtered Data-->
-    <div id="deleteFilteredDataPopup" class="modal">
+    <div id="deleteFilteredDataPopup" class="modalGasDetection">
 
         <!-- Modal content -->
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="modalGasDetection-content">
+            <div class="modalGasDetection-header">
                 <span class="close">&times;</span>
                 <h2>Delete</h2>
             </div>
-            <div class="modal-body">
-                <p>Do you want to delete all filtered records? <button type="button" style="float: right;" class="button button3" id="deleteFilteredRecordsNoButton">No</button><button type="button" style="float: right;" class="button button3" id="deleteFilteredRecordsYesButton">Yes</button></p>
+            <div class="modalGasDetection-body">
+                <p>Do you want to delete all filtered records? <button type="button" style="float: right;" class="buttonGasDetection buttonGasDetection3" id="deleteFilteredRecordsNoButton">No</button><button type="button" style="float: right;" class="buttonGasDetection buttonGasDetection3" id="deleteFilteredRecordsYesButton">Yes</button></p>
             </div>
         </div>
 
     </div>
-
+    <link href="~/CssItems/custom.css" rel="stylesheet" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" charset="utf8" src="/js/jquery.dataTables.js"></script>
 
@@ -285,15 +155,15 @@ th {
                 success: function (data) {
 
                     var tdEndTdStart = '</td><td>';
-                    var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> Date </th> <th> Email alert sent </th> <th> Action </th>  </tr> ';
+                    var html = '<tbody> <tr> <th class="thGasDetection" style = "display:none;" > Id </th> <th class="thGasDetection"> Date </th> <th class="thGasDetection"> Email alert sent </th> <th class="thGasDetection"> Action </th>  </tr> ';
 
                     for (var i = 0; i < data.length; i++) {
 
                         tdEndTdStart = '</td><td>';
 
                         if (selectedRow != null && data[i].Id == selectedRowIndex) {
-                            html += '<tr><td style="display:none;" class="highlight">' + data[i].Id + '</td><td class="highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td class="highlight"><input ';
-                            tdEndTdStart = '</td><td class="highlight">'
+                            html += '<tr><td style="display:none;" class="highlightGasDetection">' + data[i].Id + '</td><td class="highlightGasDetection">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td class="highlightGasDetection"><input ';
+                            tdEndTdStart = '</td><td class="highlightGasDetection">'
                         }
                         else {
                             html += '<tr><td style="display:none;">' + data[i].Id + '</td><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString() + '</td><td><input ';
@@ -305,7 +175,7 @@ th {
                         html += ' id="item_EmailAlertSent" name="item.EmailAlertSent" type="checkbox" value="' + data[i].EmailAlertSent + '" /> <input name="item.EmailAlertSent" type="hidden" value="' + data[i].EmailAlertSent + '" /></td>';
 
                         if (selectedRow != null && data[i].Id == selectedRowIndex) {
-                            html += '<td class="highlight"><a href="/Home/DeleteGasDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                            html += '<td class="highlightGasDetection"><a href="/Home/DeleteGasDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
                         }
                         else {
                             html += '<td><a href="/Home/DeleteGasDetectionData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
@@ -487,16 +357,16 @@ th {
         $("#tableGasDetection").on("click", "tr", function () {
             selectedRow = $(this);
             selectedRowIndex = parseInt($(this)[0].cells[0].innerHTML);
-            selectedRowYN = $(this).hasClass("highlight");
+            selectedRowYN = $(this).hasClass("highlightGasDetection");
             $("#tableGasDetection tr").children().each(function (index, td) {
-                $(this).removeClass('highlight');
+                $(this).removeClass('highlightGasDetection');
             });
             $("#tableGasDetection tr>td").children().each(function (index, td) {
-                $(this).removeClass('highlight');
+                $(this).removeClass('highlightGasDetection');
             });
             if (!selectedRowYN)
                 selectedRow.children().each(function (index, td) {
-                    $(this).addClass('highlight');
+                    $(this).addClass('highlightGasDetection');
                 });
             else {
                 selectedRow = null;
