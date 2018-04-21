@@ -310,6 +310,13 @@
                 validationMessage += '<p>Wanted temperature is mandatory</p>';
                 validationError = true;
             }
+
+            if ($('#buttonAirConditioningOn').hasClass('active')) {
+                if ($('#airCoditioningWantedTemperatureTextBox').val() < 16) {
+                    validationMessage += '<p>Wanted temperature should be greater or equal to 16 degrees Celsius</p>';
+                    validationError = true;
+                }
+            }
         }
 
         validationMessage += '</p>';

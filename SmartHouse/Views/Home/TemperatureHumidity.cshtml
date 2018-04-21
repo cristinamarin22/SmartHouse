@@ -158,9 +158,9 @@ th {
     font-size: 16px;
 }
 
-.highlight {
-    background-color: #ff9191;
-}
+    .highlight {
+        background-color: #ffa5a5;
+    }
 </style>
 <body>
     <div class="w3-container">
@@ -171,33 +171,33 @@ th {
 
                     <button type="button" class="button button3 header" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
 
-                    <button type="button" class="button button3 header" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
+                    <button type="button" class="button button3 header" style="visibility: hidden;" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
                 </td>
 
                 <td style="float: right;">
                     <span>
-                        @Html.TextBox("TemperatureTextBoxMinValue", "", new { id = "TemperatureMinValueTextBox", style = "width:70px; background:#ff9191" })
+                        @Html.TextBox("TemperatureTextBoxMinValue", "", new { id = "TemperatureMinValueTextBox", style = "width:70px; background:#ffa5a5" })
                     </span>
 
                     <label><span> <= Temperature <= </span></label>
 
-                    @Html.TextBox("TemperatureTextBoxMaxValue", "", new { id = "TemperatureMaxValueTextBox", style = "width:70px; background:#ff9191" })
+                    @Html.TextBox("TemperatureTextBoxMaxValue", "", new { id = "TemperatureMaxValueTextBox", style = "width:70px; background:#ffa5a5" })
 
                     <span>
-                        @Html.TextBox("HumidityTextBoxMinValue", "", new { id = "HumidityMinValueTextBox", style = "width:70px; background:#ff9191" })
+                        @Html.TextBox("HumidityTextBoxMinValue", "", new { id = "HumidityMinValueTextBox", style = "width:70px; background:#ffa5a5" })
                     </span>
 
                     <label><span> <= Humidity <= </span></label>
 
-                    @Html.TextBox("HumidityTextBoxMaxValue", "", new { id = "HumidityMaxValueTextBox", style = "width:70px; background:#ff9191" })
+                    @Html.TextBox("HumidityTextBoxMaxValue", "", new { id = "HumidityMaxValueTextBox", style = "width:70px; background:#ffa5a5" })
 
                     <span>
-                        @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
+                        @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#ffa5a5", @type = "date" })
                     </span>
 
                     <label><span> <= Date <= </span></label>
 
-                    @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#ff9191", @type = "date" })
+                    @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#ffa5a5", @type = "date" })
 
                     <button type="button" class="button button3" id="filterButton" onclick="filterData()">Filter</button>
                 </td>
@@ -307,7 +307,7 @@ th {
                     $('#deleteFilteredData').css("visibility", "hidden");
 
                     var tdEndTdStart = '</td><td>';
-                    var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> InternalTime </th> <th> Temperature </th> <th> Humidity </th> <th> Action </th> </tr> ';
+                    var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> Date </th> <th> Temperature </th> <th> Humidity </th> <th> Action </th> </tr> ';
                     for (var i = 0; i < data.length; i++) {
 
                         tdEndTdStart = '</td><td>';
@@ -352,7 +352,6 @@ th {
            });
         }
 
-
         $(window).bind("load", function () {
             intervalReadings = setTimeout("getAllRows()", 10000);
             $('#deleteFilteredData').css("visibility", "hidden");
@@ -378,7 +377,7 @@ th {
                 dataType: "json",
                 success: function (response) {
                     var tdEndTdStart = '</td><td>';
-                    var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> InternalTime </th> <th> Temperature </th> <th> Humidity </th> <th> Action </th> </tr> ';
+                    var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> Date </th> <th> Temperature </th> <th> Humidity </th> <th> Action </th> </tr> ';
                     for (var i = 0; i < response.length; i++) {
 
                         tdEndTdStart = '</td><td>';
@@ -425,7 +424,7 @@ th {
                         success: function (data) {
 
                             var tdEndTdStart = '</td><td>';
-                            var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> InternalTime </th> <th> Temperature </th> <th> Humidity </th> <th> Action </th> </tr> ';
+                            var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> Date </th> <th> Temperature </th> <th> Humidity </th> <th> Action </th> </tr> ';
                             for (var i = 0; i < data.length; i++) {
 
                                 tdEndTdStart = '</td><td>';
@@ -496,7 +495,7 @@ th {
                         dataType: 'json',
                         success: function (response) {
                             var tdEndTdStart = '</td><td>';
-                            var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> InternalTime </th> <th> Temperature </th> <th> Humidity </th> <th> Action </th> </tr> ';
+                            var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> Date </th> <th> Temperature </th> <th> Humidity </th> <th> Action </th> </tr> ';
                             for (var i = 0; i < response.length; i++) {
 
                                 tdEndTdStart = '</td><td>';

@@ -159,7 +159,7 @@
     }
 
     .highlight {
-        background-color: #4ba394;
+        background-color: #96ccc2;
     }
 </style>
 <body>
@@ -171,17 +171,17 @@
 
                     <button type="button" class="button button3" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
 
-                    <button type="button" class="button button3" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
+                    <button type="button" class="button button3" style="visibility: hidden;" id="deleteFilteredData" onclick="deleteFilteredData()">Delete filtered records</button>
                 </td>
 
                 <td style="float: right;">
                 <span>
-                        @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#4ba394", @type = "date" })
+                        @Html.TextBox("DateTextBoxMinValue", "", new { id = "DateMinValueTextBox", style = "width:150px; background:#96ccc2", @type = "date" })
                 </span>
 
                 <label><span> <= Date <= </span></label>
 
-                @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#4ba394", @type = "date" })
+                @Html.TextBox("DateTextBoxMaxValue", "", new { id = "DateMaxValueTextBox", style = "width:150px; background:#96ccc2", @type = "date" })
 
                 <input type="checkbox" id="ChkSoundDetectionEmailSent">Email sent
 
