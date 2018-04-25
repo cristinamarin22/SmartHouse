@@ -488,9 +488,11 @@ namespace SmartHouse.Controllers
 
                 #region Gas Detection
                 smartHouseEntities.Settings.FirstOrDefault().GasDetectionOn = settings.GasDetectionOn;
-                smartHouseEntities.Settings.FirstOrDefault().CriticalGasAlertYN = settings.CriticalGasAlertYN;
-                smartHouseEntities.Settings.FirstOrDefault().CriticalGasHistoricalDataOlderThan = settings.CriticalGasHistoricalDataOlderThan;
-                smartHouseEntities.Settings.FirstOrDefault().CriticalGasHistoricalDataOlderThanUnitMeasure = settings.CriticalGasHistoricalDataOlderThanUnitMeasure;
+                smartHouseEntities.Settings.FirstOrDefault().GasDetectionAlertYN = settings.GasDetectionAlertYN;
+                smartHouseEntities.Settings.FirstOrDefault().SendGasDetectionEmailAlertInterval = settings.SendGasDetectionEmailAlertInterval;
+                smartHouseEntities.Settings.FirstOrDefault().SendGasDetectionEmailAlertIntervalUnitMeasure = settings.SendGasDetectionEmailAlertIntervalUnitMeasure;
+                smartHouseEntities.Settings.FirstOrDefault().DeleteGasDetectionHistoricalDataOlderThan = settings.DeleteGasDetectionHistoricalDataOlderThan;
+                smartHouseEntities.Settings.FirstOrDefault().DeleteGasDetectionHistoricalDataOlderThanUnitMeasure = settings.DeleteGasDetectionHistoricalDataOlderThanUnitMeasure;
                 #endregion
 
                 #region General
@@ -789,6 +791,56 @@ namespace SmartHouse.Controllers
             };
 
             return Content(JsonConvert.SerializeObject(temperaturePoints, _jsonSetting), "application/json");
+        }
+
+        public ContentResult JSONHumidityChartToday()
+        {
+            List<DataPoint> humidityPoints = new List<DataPoint>();
+
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            if (smartHouseEntities.Database.Exists())
+            {
+                foreach (TemperatureHumidityData humidityData in smartHouseEntities.TemperatureHumidityDatas)
+                {
+                    if (humidityData.InternalTime.Date == DateTime.Now.Date)
+                    {
+                        DataPoint humidityPoint = new DataPoint(humidityData.InternalTime, Math.Round(Convert.ToDouble(humidityData.Humidity), 2));
+                        humidityPoints.Add(humidityPoint);
+                    }
+                }
+            }
+
+            JsonSerializerSettings _jsonSetting = new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            };
+
+            return Content(JsonConvert.SerializeObject(humidityPoints, _jsonSetting), "application/json");
+        }
+
+        public ContentResult JSONHumidityChartAnotherDay(FilterTemperatureHumidityClass filter)
+        {
+            List<DataPoint> humidityPoints = new List<DataPoint>();
+
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            if (smartHouseEntities.Database.Exists())
+            {
+                foreach (TemperatureHumidityData humidityData in smartHouseEntities.TemperatureHumidityDatas)
+                {
+                    if (filter.DateMinValue.HasValue && humidityData.InternalTime.Date == filter.DateMinValue.Value)
+                    {
+                        DataPoint humidityPoint = new DataPoint(humidityData.InternalTime, Math.Round(Convert.ToDouble(humidityData.Humidity), 2));
+                        humidityPoints.Add(humidityPoint);
+                    }
+                }
+            }
+
+            JsonSerializerSettings _jsonSetting = new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            };
+
+            return Content(JsonConvert.SerializeObject(humidityPoints, _jsonSetting), "application/json");
         }
 
         public ContentResult JSONMotionDetection()

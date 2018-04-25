@@ -26,6 +26,13 @@
             var dateChanged = false;
             var chartTitle = "Temperature evolution today";
 
+            var dataPointsHumidity = [];
+            var xValueHumidity = 0;
+            var yValueHumidity = 10;
+            var newDataCountHumidity = 6;
+            var dateChangedHumidity = false;
+            var chartTitleHumidity = "Humidity evolution today";
+
             var dataPointsMotionDetection = [];
             var dataPointsSoundDetection = [];
             var dataPointsGasDetection = [];
@@ -148,7 +155,128 @@
                         dataPoints: dataPoints
                     }]
                 });
-            });    
+            });
+
+
+            var chartHumidityByDay = new CanvasJS.Chart("chartHumidityEvolutionToday", {
+                theme: "light2",
+                zoomEnabled: true,
+                zoomType: "xy",
+                animationEnabled: true,
+                title: {
+                    text: chartTitleHumidity
+                },
+                toolTip: {
+                    enabled: true,
+                    contentFormatter: function (e) {
+                        return "Humidity: " + e.entries[0].dataPoint.y + "% <br>Hour: " + e.entries[0].dataPoint.x.toLocaleTimeString('en-GB') + "<br>Date: " + e.entries[0].dataPoint.x.toLocaleDateString('en-GB');
+                    }
+                },
+                axisX: {
+                    title: "Time",
+                    intervalType: "minute",
+                    interval: 30,
+                    valueFormatString: "H:mm"
+                },
+                axisY: {
+                    title: "Humidity (%)"
+                },
+                data: [{
+                    type: "spline",
+                    dataPoints: dataPointsHumidity
+                }]
+            });
+            updateDataHumidity();
+
+            function addDataHumidity(data) {
+                $.each(data, function (key, value) {
+                    if (key == xValueHumidity) {
+                        dataPointsHumidity.push({ x: new Date(new Date(value.x).getFullYear(), new Date(value.x).getMonth(), new Date(value.x).getDate(), new Date(value.x).getHours(), new Date(value.x).getMinutes(), new Date(value.x).getSeconds()), y: value.y });
+                        xValueHumidity++;
+                        yValueHumidity = parseInt(value[1]);
+                    }
+                });
+
+                chartHumidityByDay.render();
+            }
+
+            function updateDataHumidity() {
+
+                if (dateChangedHumidity) {
+
+                    clearTimeout();
+
+                    var filter = {
+                        "DateMinValue": $('#HumidityEvolutionDateTextBox').val()
+                    };
+
+                    $.ajax({
+                        url: '@Url.Action("JSONHumidityChartAnotherDay", "Home")',
+                        method: 'GET',
+                        data: filter,
+                        dataType: 'json',
+                        success: function (response) {
+                            addDataHumidity(response);
+                        }
+                    });
+                }
+                else {
+                    setTimeout(updateDataHumidity, 1500);
+
+                    $.get("/home/JSONHumidityChartToday", function (data) {
+                        addDataHumidity(data);
+                    });
+                }
+            }
+
+            $('#HumidityEvolutionDateTextBox').change(function () {
+                // Initial Values
+                xValueHumidity = 0;
+                yValueHumidity = 10;
+                newDataCountHumidity = 6;
+                dataPointsHumidity = [];
+                setTimeout(updateDataHumidity, 1500);
+
+                var date = $('#HumidityEvolutionDateTextBox').val();
+
+                if (date == '') {
+                    dateChangedHumidity = false;
+                    chartTitleHumidity = "Humidity evolution today";
+                }
+                else {
+                    dateChangedHumidity = true;
+                    chartTitleHumidity = "Humidity evolution on " + new Date(date).toLocaleDateString('en-GB');
+                }
+
+                chartHumidityByDay = new CanvasJS.Chart("chartHumidityEvolutionToday", {
+                    theme: "light2",
+                    zoomEnabled: true,
+                    zoomType: "xy",
+                    animationEnabled: true,
+                    title: {
+                        text: chartTitleHumidity
+                    },
+                    toolTip: {
+                        enabled: true,
+                        contentFormatter: function (e) {
+                            return "Humidity: " + e.entries[0].dataPoint.y + "% <br>Hour: " + e.entries[0].dataPoint.x.toLocaleTimeString('en-GB') + "<br>Date: " + e.entries[0].dataPoint.x.toLocaleDateString('en-GB');
+                        }
+                    },
+                    axisX: {
+                        title: "Time",
+                        intervalType: "minute",
+                        interval: 30,
+                        valueFormatString: "H:mm"
+                    },
+                    axisY: {
+                        title: "Humidity (%)"
+                    },
+                    data: [{
+                        type: "spline",
+                        dataPoints: dataPointsHumidity
+                    }]
+                });
+            });
 
 
             var chartMotionDetection = new CanvasJS.Chart("chartMotionDetection", {
@@ -159,6 +287,9 @@
                 },
                 axisY: {
                     title: "Number of times"
+                },
+                axisX: {
+                    title: "Month"
                 },
                 data: [{
                     type: "column",
@@ -193,6 +324,9 @@
                 axisY: {
                     title: "Number of times"
                 },
+                axisX: {
+                    title: "Month"
+                },
                 data: [{
                     type: "column",
                     dataPoints: dataPointsSoundDetection
@@ -224,6 +358,9 @@
                 },
                 axisY: {
                     title: "Number of times"
+                },
+                axisX: {
+                    title: "Month"
                 },
                 data: [{
                     type: "column",
@@ -257,6 +394,14 @@
         @Html.TextBox("TemperatureEvolutionDate", "", new { id = "TemperatureEvolutionDateTextBox", style = "width:150px; background:#7f9be7", @type = "date" })
 
         <div id="chartTemperatureEvolutionToday" style="height: 370px; width: 100%;"></div>
+    </div>
+    <br />
+    <div class="w3-row-padding w3-margin-bottom">
+        <label><span>Date </span></label>
+
+        @Html.TextBox("HumidityEvolutionDate", "", new { id = "HumidityEvolutionDateTextBox", style = "width:150px; background:#7f9be7", @type = "date" })
+
+        <div id="chartHumidityEvolutionToday" style="height: 370px; width: 100%;"></div>
     </div>
     <br />
     <div class="w3-row-padding w3-margin-bottom">

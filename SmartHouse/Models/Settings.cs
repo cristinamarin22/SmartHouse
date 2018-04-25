@@ -34,9 +34,6 @@ namespace SmartHouse.Models
         [Display(Name = "Alert sound detection")]
         public bool SoundDetectionAlertYN { get; set; }
 
-        [Display(Name = "Alert gas detection")]
-        public bool CriticalGasAlertYN { get; set; }
-
         [Display(Name = "Last updated")]
         public System.DateTime InternalTime { get; set; }
 
@@ -51,10 +48,6 @@ namespace SmartHouse.Models
         [Display(Name = "Delete sound detection historical data older than ")]
         public int DeleteSoundDetectionHistoricalDataOlderThan { get; set; }
         public int DeleteSoundDetectionHistoricalDataOlderThanUnitMeasure { get; set; }
-
-        [Display(Name = "Delete gas detection historical data older than ")]
-        public int CriticalGasHistoricalDataOlderThan { get; set; }
-        public int CriticalGasHistoricalDataOlderThanUnitMeasure { get; set; }
 
         [Display(Name = "Email address for alerts")]
         public string AlertsToEmail { get; set; }
@@ -94,5 +87,16 @@ namespace SmartHouse.Models
 
         [Display(Name = "Gas detection sensor ON/OFF")]
         public bool GasDetectionOn { get; set; }
+
+        [Display(Name = "Delete gas detection historical data older than ")]
+        public int DeleteGasDetectionHistoricalDataOlderThan { get; set; }
+        public int DeleteGasDetectionHistoricalDataOlderThanUnitMeasure { get; set; }
+
+        [Display(Name = "Gas detection email alert interval")]
+        public int SendGasDetectionEmailAlertInterval { get; set; }
+        public int SendGasDetectionEmailAlertIntervalUnitMeasure { get; set; }
+
+        [Display(Name = "Alert gas detection")]
+        public bool GasDetectionAlertYN { get; set; }
     }
 }
