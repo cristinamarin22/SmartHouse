@@ -161,10 +161,40 @@
 
                     <th>
                         <dd4>
-                            <h2 class="w3-large">@Html.TextBoxFor(model => model.WantedTemperature, new { id = "airCoditioningWantedTemperatureTextBox" })</h2>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.WantedTemperature, new { id = "WantedTemperatureTextBox" })</h2>
                         </dd4>
                     </th>
+                    <th>
+                        <h1 class="w3-large">Celsius degrees</h1>
+                    </th>
 
+                </tr>
+
+                <tr id="airConditioningLastDetectedTemperature" hidden="true">
+                    <th>
+                        <h1 class="w3-large">Last detected temperature</h1>
+                    </th>
+
+                    <th>
+                        <dd4>
+                            <h2 class="w3-large"> @Html.TextBox("LastDetectedTemperature", "", new { id = "LastDetectedTemperatureTextBox", @readonly = "readonly" })</h2>
+                        </dd4>
+                    </th>
+                    <th>
+                        <h1 class="w3-large">Celsius degrees</h1>
+                    </th>
+                </tr>
+
+                <tr id="airConditioningLastDetectedTemperatureDateTime" hidden="true">
+                    <th>
+                        <h1 class="w3-large">Last detected temperature date</h1>
+                    </th>
+
+                    <th>
+                        <dd4>
+                            <h2 class="w3-large"> @Html.TextBox("LastDetectedTemperatureDateTime", "", new { id = "LastDetectedTemperatureDateTimeTextBox", @readonly = "readonly" })</h2>
+                        </dd4>
+                    </th>
                 </tr>
 
                 <tr id="airConditioningMode" hidden="true">
@@ -177,7 +207,7 @@
                             <h2>
                                 <button type="buttonAirConditioningOnOff" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="buttonAirConditioningModeAuto" onclick="turnOnAirConditioningModeAuto()">AUTO</button>
                                 <button type="buttonAirConditioningOnOff" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="buttonAirConditioningModeCool" onclick="turnOnAirConditioningModeCool()">COOL</button>
-                                <button type="buttonAirConditioningOnOff" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="buttonAirConditioningModeDry" onclick="turnOnAirConditioningModeDry()">DRY</button>
+                                <button type="buttonAirConditioningOnOff" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="buttonAirConditioningModeHeat" onclick="turnOnAirConditioningModeHeat()">HEAT</button>
                             </h2>
                         </dd4>
                     </th>
@@ -248,15 +278,19 @@
             if (airConditioningSettings.AirConditioningMode == 2)
                 $('#buttonAirConditioningModeCool').addClass('active');
             if (airConditioningSettings.AirConditioningMode == 3)
-                $('#buttonAirConditioningModeDry').addClass('active');
+                $('#buttonAirConditioningModeHeat').addClass('active');
 
             $('#airConditioningWantedTemperature').show();
+            $('#airConditioningLastDetectedTemperature').show();
+            $('#airConditioningLastDetectedTemperatureDateTime').show();
             $('#airConditioningMode').show();
+
+            getCurrentTemperature();
         }
         else {
-            $('#buttonAirConditioningOn').removeClass('active')
-            $('#buttonAirConditioningOff').addClass('active')
-
+            $('#buttonAirConditioningOn').removeClass('active');
+            $('#buttonAirConditioningOff').addClass('active');
+            intervalReadings = clearTimeout(intervalReadings);
         }
     });
 
@@ -277,6 +311,21 @@
         }
     }
 
+    function getCurrentTemperature() {
+
+         $.ajax({
+            type: "GET",
+            url: '@Url.Action("GetLastTemperatureDetected", "Home")',
+            dataType: "json",
+            success: function (response) {
+                $('#LastDetectedTemperatureTextBox').val(response.Temperature);
+                $('#LastDetectedTemperatureDateTimeTextBox').val(new Date(response.InternalTime.match(/\d+/).map(Number)[0]).toLocaleString());
+            }
+        });
+
+         intervalReadings = setTimeout("getCurrentTemperature()", 10000);
+    }
+
     function turnOnAirConditioning() {
 
         if (!$('#buttonAirConditioningOn').hasClass('active')) {
@@ -285,6 +334,7 @@
 
             $('#airConditioningWantedTemperature').show();
             $('#airConditioningMode').show();
+            intervalReadings = setTimeout("getCurrentTemperature()", 10000);
         }
     }
 
@@ -296,6 +346,7 @@
 
             $('#airConditioningWantedTemperature').hide();
             $('#airConditioningMode').hide();
+            intervalReadings = clearTimeout(intervalReadings);
         }
     }
 
@@ -306,14 +357,19 @@
         var validationError = false;
 
         if ($('#buttonAirConditioningOn').hasClass('active')) {
-            if ($('#airCoditioningWantedTemperatureTextBox').val() == '') {
+            if ($('#WantedTemperatureTextBox').val() == '') {
                 validationMessage += '<p>Wanted temperature is mandatory</p>';
                 validationError = true;
             }
 
             if ($('#buttonAirConditioningOn').hasClass('active')) {
-                if ($('#airCoditioningWantedTemperatureTextBox').val() < 16) {
+                if ($('#WantedTemperatureTextBox').val() < 16) {
                     validationMessage += '<p>Wanted temperature should be greater or equal to 16 degrees Celsius</p>';
+                    validationError = true;
+                }
+
+                if ($('#WantedTemperatureTextBox').val() > 32) {
+                    validationMessage += '<p>Wanted temperature should be less or equal to 32 degrees Celsius</p>';
                     validationError = true;
                 }
             }
@@ -342,7 +398,7 @@
         var airConditioningSettings = {
 
             "AirConditioningOn": $('#buttonAirConditioningOn').hasClass('active'),
-            "WantedTemperature": $('#airCoditioningWantedTemperatureTextBox').val(),
+            "WantedTemperature": $('#WantedTemperatureTextBox').val(),
             "AirConditioningMode": airConditioningMode
         };
 
@@ -358,6 +414,11 @@
                 alert(textStatus + " " + errorThrown);
             }
         });
+
+
+        if ($('#buttonAirConditioningOn').hasClass('active')) {
+            intervalReadings = setTimeout("getCurrentTemperature()", 10000);
+        }
     }
 
 
@@ -366,7 +427,7 @@
         if (!$('#buttonAirConditioningModeAuto').hasClass('active')) {
             $('#buttonAirConditioningModeAuto').addClass('active')
             $('#buttonAirConditioningModeCool').removeClass('active')
-            $('#buttonAirConditioningModeDry').removeClass('active')
+            $('#buttonAirConditioningModeHeat').removeClass('active')
         }
     }
 
@@ -375,14 +436,14 @@
         if (!$('#buttonAirConditioningModeCool').hasClass('active')) {
             $('#buttonAirConditioningModeCool').addClass('active')
             $('#buttonAirConditioningModeAuto').removeClass('active')
-            $('#buttonAirConditioningModeDry').removeClass('active')
+            $('#buttonAirConditioningModeHeat').removeClass('active')
         }
     }
 
-    function turnOnAirConditioningModeDry() {
+    function turnOnAirConditioningModeHeat() {
 
-        if (!$('#buttonAirConditioningModeDry').hasClass('active')) {
-            $('#buttonAirConditioningModeDry').addClass('active')
+        if (!$('#buttonAirConditioningModeHeat').hasClass('active')) {
+            $('#buttonAirConditioningModeHeat').addClass('active')
             $('#buttonAirConditioningModeAuto').removeClass('active')
             $('#buttonAirConditioningModeCool').removeClass('active')
         }

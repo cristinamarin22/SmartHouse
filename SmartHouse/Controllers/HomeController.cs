@@ -3,6 +3,7 @@ using SmartHouse.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.Data.EntityClient;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -1049,6 +1050,25 @@ namespace SmartHouse.Controllers
 
             return Content(JsonConvert.SerializeObject(gasDetectionPoints, _jsonSetting), "application/json");
         }
-    }
     #endregion
+
+        #region Air Conditioning
+        public JsonResult GetLastTemperatureDetected()
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+
+            if (smartHouseEntities.Database.Exists())
+            {
+                var lastDetectedTemperature = smartHouseEntities.TemperatureHumidityDatas.ToList().OrderByDescending(x => x.InternalTime).FirstOrDefault();
+
+                if (lastDetectedTemperature != null)
+                    return Json(lastDetectedTemperature, JsonRequestBehavior.AllowGet);
+
+                return Json(new TemperatureHumidityData(), JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Json(new TemperatureHumidityData(), JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+    }
 }

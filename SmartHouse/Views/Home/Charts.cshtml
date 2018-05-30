@@ -102,8 +102,14 @@
                 else {
                     setTimeout(updateData, 1500);
 
-                    $.get("/home/JSONTemperatureChartToday", function (data) {
-                        addData(data);
+                    $.ajax({
+                        url: '@Url.Action("JSONTemperatureChartToday", "Home")',
+                        method: 'GET',
+                        data: filter,
+                        dataType: 'json',
+                        success: function (response) {
+                            addData(response);
+                        }
                     });
                 }
             }
