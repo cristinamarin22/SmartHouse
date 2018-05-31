@@ -443,7 +443,7 @@ namespace SmartHouse.Controllers
             }
             else
             {
-                return View(new List<Settings>().FirstOrDefault());
+                return View(new Settings());
             }
         }
 
