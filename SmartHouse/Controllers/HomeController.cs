@@ -549,11 +549,21 @@ namespace SmartHouse.Controllers
             {
                 smartHouseEntities.AirConditioningSettings.FirstOrDefault().AirConditioningOn = airConditioningSettings.AirConditioningOn;
                 smartHouseEntities.AirConditioningSettings.FirstOrDefault().WantedTemperature = airConditioningSettings.WantedTemperature;
-                smartHouseEntities.AirConditioningSettings.FirstOrDefault().AirConditioningMode = airConditioningSettings.AirConditioningMode;
-
                 smartHouseEntities.SaveChanges();
 
-                RedirectToAction("AirConditioning");
+                if (smartHouseEntities.TemperatureHumidityDatas.Count() > 0 && (DateTime.Now - smartHouseEntities.TemperatureHumidityDatas.ToList().LastOrDefault().InternalTime).TotalMinutes <= 20)
+                {
+                    if (airConditioningSettings.WantedTemperature - 0.5 <= smartHouseEntities.TemperatureHumidityDatas.ToList().LastOrDefault().Temperature
+                            && smartHouseEntities.TemperatureHumidityDatas.ToList().LastOrDefault().Temperature <= airConditioningSettings.WantedTemperature + 0.5)
+                        smartHouseEntities.AirConditioningSettings.FirstOrDefault().AirConditioningMode = DictionaryAirConditioningMode.AutoMode;
+                    else if (airConditioningSettings.WantedTemperature > smartHouseEntities.TemperatureHumidityDatas.ToList().LastOrDefault().Temperature + 0.5)
+                        smartHouseEntities.AirConditioningSettings.FirstOrDefault().AirConditioningMode = DictionaryAirConditioningMode.HeatMode;
+                    else if (airConditioningSettings.WantedTemperature < smartHouseEntities.TemperatureHumidityDatas.ToList().LastOrDefault().Temperature - 0.5)
+                        smartHouseEntities.AirConditioningSettings.FirstOrDefault().AirConditioningMode = DictionaryAirConditioningMode.CoolMode;
+
+                    smartHouseEntities.SaveChanges();
+                    return Json(smartHouseEntities.AirConditioningSettings.ToList().FirstOrDefault(), JsonRequestBehavior.AllowGet);
+                }
             }
 
             return Json(new object[] { new object() }, JsonRequestBehavior.AllowGet);
@@ -1059,7 +1069,7 @@ namespace SmartHouse.Controllers
 
             if (smartHouseEntities.Database.Exists())
             {
-                var lastDetectedTemperature = smartHouseEntities.TemperatureHumidityDatas.ToList().OrderByDescending(x => x.InternalTime).FirstOrDefault();
+                var lastDetectedTemperature = smartHouseEntities.TemperatureHumidityDatas.ToList().Where(x => (DateTime.Now - x.InternalTime).TotalMinutes <= 20).OrderByDescending(x => x.InternalTime).FirstOrDefault();
 
                 if (lastDetectedTemperature != null)
                     return Json(lastDetectedTemperature, JsonRequestBehavior.AllowGet);

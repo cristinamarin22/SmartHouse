@@ -163,6 +163,7 @@
     <Compile Include="Models\AirConditioningSettings.cs">
       <DependentUpon>SmartHouse.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Dictionaries.cs" />
     <Compile Include="Models\DataPoint.cs" />
     <Compile Include="Models\DictionaryTime.cs">
       <DependentUpon>SmartHouse.tt</DependentUpon>

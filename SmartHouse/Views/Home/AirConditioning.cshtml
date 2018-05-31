@@ -210,9 +210,9 @@
                     <th>
                         <dd4>
                             <h2>
-                                <button type="buttonAirConditioningOnOff" disabled="disabled" class="buttonAirConditioningOnOff buttonAirConditioningMode" id="buttonAirConditioningModeAuto" onclick="turnOnAirConditioningModeAuto()">AUTO</button>
-                                <button type="buttonAirConditioningOnOff" disabled="disabled" class="buttonAirConditioningOnOff buttonAirConditioningMode" id="buttonAirConditioningModeCool" onclick="turnOnAirConditioningModeCool()">COOL</button>
-                                <button type="buttonAirConditioningOnOff" disabled="disabled" class="buttonAirConditioningOnOff buttonAirConditioningMode" id="buttonAirConditioningModeHeat" onclick="turnOnAirConditioningModeHeat()">HEAT</button>
+                                <button type="buttonAirConditioningOnOff" disabled="disabled" class="buttonAirConditioningOnOff buttonAirConditioningMode" id="buttonAirConditioningModeAuto">AUTO</button>
+                                <button type="buttonAirConditioningOnOff" disabled="disabled" class="buttonAirConditioningOnOff buttonAirConditioningMode" id="buttonAirConditioningModeCool">COOL</button>
+                                <button type="buttonAirConditioningOnOff" disabled="disabled" class="buttonAirConditioningOnOff buttonAirConditioningMode" id="buttonAirConditioningModeHeat">HEAT</button>
                             </h2>
                         </dd4>
                     </th>
@@ -223,8 +223,10 @@
         <button type="button" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="saveAirConditioningSettingsButton" onclick="saveAirConditioningSettings()">Save settings</button>
 
 
+        <div>
+            <iframe src="https://www.tplinkcloud.com/" height="800" width="1600"></iframe>
+        </div>
 
-        <iframe src="https://www.tplinkcloud.com/" height="800" width="1600"></iframe>
 
 
         <!-- Popup for success -->
@@ -328,8 +330,15 @@
             url: '@Url.Action("GetLastTemperatureDetected", "Home")',
             dataType: "json",
             success: function (response) {
-                $('#LastDetectedTemperatureTextBox').val(response.Temperature);
-                $('#LastDetectedTemperatureDateTimeTextBox').val(new Date(response.InternalTime.match(/\d+/).map(Number)[0]).toLocaleString());
+
+                if (response.Id == 0) {
+                    $('#LastDetectedTemperatureTextBox').val('NO RECORDS IN THE LAST 20 MIN');
+                    $('#LastDetectedTemperatureDateTimeTextBox').val('NO RECORDS IN THE LAST 20 MIN');
+                }
+                else {
+                    $('#LastDetectedTemperatureTextBox').val(response.Temperature);
+                    $('#LastDetectedTemperatureDateTimeTextBox').val(new Date(response.InternalTime.match(/\d+/).map(Number)[0]).toLocaleString());
+                }
             }
         });
 
@@ -389,6 +398,12 @@
             }
         }
 
+        if ($('#LastDetectedTemperatureTextBox').val() == 'NO RECORDS IN THE LAST 20 MIN') {
+            validationMessage += '<p>Turn on temperature sensor. No temperature detected in the last 20 minutes</p>';
+            validationError = true;
+        }
+
+
         validationMessage += '</p>';
 
         if (validationError) {
@@ -401,19 +416,10 @@
             modal.style.display = "block";
         }
 
-        var airConditioningMode = null;
-        if ($('#buttonAirConditioningModeAuto').hasClass('active'))
-            airConditioningMode = 1;
-        else if ($('#buttonAirConditioningModeCool').hasClass('active'))
-            airConditioningMode = 2;
-        else
-            airConditioningMode = 3;
-
         var airConditioningSettings = {
 
             "AirConditioningOn": $('#buttonAirConditioningOn').hasClass('active'),
-            "WantedTemperature": $('#WantedTemperatureTextBox').val(),
-            "AirConditioningMode": airConditioningMode
+            "WantedTemperature": $('#WantedTemperatureTextBox').val()
         };
 
         $.ajax({
@@ -422,6 +428,22 @@
             data: airConditioningSettings,
             dataType: "json",
             success: function (response) {
+
+                if (response.AirConditioningMode == 1) {
+                    $('#buttonAirConditioningModeAuto').addClass('active')
+                    $('#buttonAirConditioningModeCool').removeClass('active')
+                    $('#buttonAirConditioningModeHeat').removeClass('active')
+                }
+                else if (response.AirConditioningMode == 2) {
+                    $('#buttonAirConditioningModeAuto').removeClass('active')
+                    $('#buttonAirConditioningModeCool').addClass('active')
+                    $('#buttonAirConditioningModeHeat').removeClass('active')
+                }
+                else if (response.AirConditioningMode = 3) {
+                    $('#buttonAirConditioningModeAuto').removeClass('active')
+                    $('#buttonAirConditioningModeCool').removeClass('active')
+                    $('#buttonAirConditioningModeHeat').addClass('active')
+                }
 
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -432,34 +454,6 @@
 
         if ($('#buttonAirConditioningOn').hasClass('active')) {
             intervalReadings = setTimeout("getCurrentTemperature()", 10000);
-        }
-    }
-
-
-    function turnOnAirConditioningModeAuto() {
-
-        if (!$('#buttonAirConditioningModeAuto').hasClass('active')) {
-            $('#buttonAirConditioningModeAuto').addClass('active')
-            $('#buttonAirConditioningModeCool').removeClass('active')
-            $('#buttonAirConditioningModeHeat').removeClass('active')
-        }
-    }
-
-    function turnOnAirConditioningModeCool() {
-
-        if (!$('#buttonAirConditioningModeCool').hasClass('active')) {
-            $('#buttonAirConditioningModeCool').addClass('active')
-            $('#buttonAirConditioningModeAuto').removeClass('active')
-            $('#buttonAirConditioningModeHeat').removeClass('active')
-        }
-    }
-
-    function turnOnAirConditioningModeHeat() {
-
-        if (!$('#buttonAirConditioningModeHeat').hasClass('active')) {
-            $('#buttonAirConditioningModeHeat').addClass('active')
-            $('#buttonAirConditioningModeAuto').removeClass('active')
-            $('#buttonAirConditioningModeCool').removeClass('active')
         }
     }
 
