@@ -28,16 +28,28 @@
         border: 2px solid #8f54bb;
     }
 
-        .buttonAirConditioningOnOff3:hover {
-            background-color: #8f54bb;
-            color: white;
-        }
+    .buttonAirConditioningOnOff3:hover {
+        background-color: #8f54bb;
+        color: white;
+    }
 
 
 
-        .buttonAirConditioningOnOff3.active {
-            background: #8f54bb;
-        }
+    .buttonAirConditioningOnOff3.active {
+        background: #8f54bb;
+    }
+
+
+    .buttonAirConditioningMode {
+        background-color: white;
+        color: black;
+        border: 2px solid #8f54bb;
+    }
+
+
+    .buttonAirConditioningMode.active {
+        background: #8f54bb;
+    }
 
 
     /* The Modal (background) */
@@ -164,24 +176,17 @@
                             <h2 class="w3-large">@Html.TextBoxFor(model => model.WantedTemperature, new { id = "WantedTemperatureTextBox" })</h2>
                         </dd4>
                     </th>
-                    <th>
-                        <h1 class="w3-large">Celsius degrees</h1>
-                    </th>
-
                 </tr>
 
                 <tr id="airConditioningLastDetectedTemperature" hidden="true">
                     <th>
-                        <h1 class="w3-large">Last detected temperature</h1>
+                        <h1 class="w3-large">Last detected temperature (Celsius degrees)</h1>
                     </th>
 
                     <th>
                         <dd4>
                             <h2 class="w3-large"> @Html.TextBox("LastDetectedTemperature", "", new { id = "LastDetectedTemperatureTextBox", @readonly = "readonly" })</h2>
                         </dd4>
-                    </th>
-                    <th>
-                        <h1 class="w3-large">Celsius degrees</h1>
                     </th>
                 </tr>
 
@@ -205,9 +210,9 @@
                     <th>
                         <dd4>
                             <h2>
-                                <button type="buttonAirConditioningOnOff" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="buttonAirConditioningModeAuto" onclick="turnOnAirConditioningModeAuto()">AUTO</button>
-                                <button type="buttonAirConditioningOnOff" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="buttonAirConditioningModeCool" onclick="turnOnAirConditioningModeCool()">COOL</button>
-                                <button type="buttonAirConditioningOnOff" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="buttonAirConditioningModeHeat" onclick="turnOnAirConditioningModeHeat()">HEAT</button>
+                                <button type="buttonAirConditioningOnOff" disabled="disabled" class="buttonAirConditioningOnOff buttonAirConditioningMode" id="buttonAirConditioningModeAuto" onclick="turnOnAirConditioningModeAuto()">AUTO</button>
+                                <button type="buttonAirConditioningOnOff" disabled="disabled" class="buttonAirConditioningOnOff buttonAirConditioningMode" id="buttonAirConditioningModeCool" onclick="turnOnAirConditioningModeCool()">COOL</button>
+                                <button type="buttonAirConditioningOnOff" disabled="disabled" class="buttonAirConditioningOnOff buttonAirConditioningMode" id="buttonAirConditioningModeHeat" onclick="turnOnAirConditioningModeHeat()">HEAT</button>
                             </h2>
                         </dd4>
                     </th>
@@ -216,6 +221,11 @@
         </div>
 
         <button type="button" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="saveAirConditioningSettingsButton" onclick="saveAirConditioningSettings()">Save settings</button>
+
+
+
+        <iframe src="https://www.tplinkcloud.com/" height="800" width="1600"></iframe>
+
 
         <!-- Popup for success -->
         <div id="popup" class="modal">
@@ -333,6 +343,8 @@
             $('#buttonAirConditioningOff').removeClass('active')
 
             $('#airConditioningWantedTemperature').show();
+            $('#airConditioningLastDetectedTemperature').show();
+            $('#airConditioningLastDetectedTemperatureDateTime').show();
             $('#airConditioningMode').show();
             intervalReadings = setTimeout("getCurrentTemperature()", 10000);
         }
@@ -345,6 +357,8 @@
             $('#buttonAirConditioningOn').removeClass('active')
 
             $('#airConditioningWantedTemperature').hide();
+            $('#airConditioningLastDetectedTemperature').hide();
+            $('#airConditioningLastDetectedTemperatureDateTime').hide();
             $('#airConditioningMode').hide();
             intervalReadings = clearTimeout(intervalReadings);
         }

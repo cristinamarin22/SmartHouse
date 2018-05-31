@@ -20,7 +20,7 @@ namespace SmartHouse.Models
         [DisplayName("Air conditioning ON/OFF")]
         public bool AirConditioningOn { get; set; }
 
-        [DisplayName("Wanted temperature")]
+        [DisplayName("Wanted temperature (Celsius degrees)")]
         public float WantedTemperature { get; set; }
 
         [DisplayName("Mode")]
