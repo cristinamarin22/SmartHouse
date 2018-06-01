@@ -173,7 +173,7 @@
 
                     <th>
                         <dd4>
-                            <h2 class="w3-large">@Html.TextBoxFor(model => model.WantedTemperature, new { id = "WantedTemperatureTextBox" })</h2>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.WantedTemperature, new { id = "WantedTemperatureTextBox", style = "width:400px;" })</h2>
                         </dd4>
                     </th>
                 </tr>
@@ -185,7 +185,7 @@
 
                     <th>
                         <dd4>
-                            <h2 class="w3-large"> @Html.TextBox("LastDetectedTemperature", "", new { id = "LastDetectedTemperatureTextBox", @readonly = "readonly" })</h2>
+                            <h2 class="w3-large"> @Html.TextBox("LastDetectedTemperature", "", new { id = "LastDetectedTemperatureTextBox", @readonly = "readonly", style = "width:370px;" })</h2>
                         </dd4>
                     </th>
                 </tr>
@@ -197,7 +197,7 @@
 
                     <th>
                         <dd4>
-                            <h2 class="w3-large"> @Html.TextBox("LastDetectedTemperatureDateTime", "", new { id = "LastDetectedTemperatureDateTimeTextBox", @readonly = "readonly" })</h2>
+                            <h2 class="w3-large"> @Html.TextBox("LastDetectedTemperatureDateTime", "", new { id = "LastDetectedTemperatureDateTimeTextBox", @readonly = "readonly", style = "width:370px;" })</h2>
                         </dd4>
                     </th>
                 </tr>
@@ -396,13 +396,12 @@
                     validationError = true;
                 }
             }
-        }
 
-        if ($('#LastDetectedTemperatureTextBox').val() == 'NO RECORDS IN THE LAST 20 MIN') {
-            validationMessage += '<p>Turn on temperature sensor. No temperature detected in the last 20 minutes</p>';
-            validationError = true;
+            if ($('#LastDetectedTemperatureTextBox').val() == 'NO RECORDS IN THE LAST 20 MIN') {
+                validationMessage += '<p>Turn on temperature sensor. No temperature detected in the last 20 minutes</p>';
+                validationError = true;
+            }
         }
-
 
         validationMessage += '</p>';
 

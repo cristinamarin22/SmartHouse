@@ -352,6 +352,7 @@
                 dataType: "json",
                 success: function (response) {
 
+                    $('#deleteFilteredData').css("visibility", "visible");
                     var tdEndTdStart = '</td><td>';
                     var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> Date </th> <th> Email alert sent </th> <th> Action </th>  </tr> ';
 
