@@ -6,6 +6,9 @@
 }
 
 <style>
+    .wide {
+        width: 295px;
+    }
 
     .buttonAirConditioningOnOff {
         background-color: #4CAF50; /* Green */
@@ -173,7 +176,7 @@
 
                     <th>
                         <dd4>
-                            <h2 class="w3-large">@Html.TextBoxFor(model => model.WantedTemperature, new { id = "WantedTemperatureTextBox", style = "width:400px;" })</h2>
+                            <h2 class="w3-large">@Html.TextBoxFor(model => model.WantedTemperature, new { id = "WantedTemperatureTextBox", @class = "wide" })</h2>
                         </dd4>
                     </th>
                 </tr>
@@ -185,7 +188,7 @@
 
                     <th>
                         <dd4>
-                            <h2 class="w3-large"> @Html.TextBox("LastDetectedTemperature", "", new { id = "LastDetectedTemperatureTextBox", @readonly = "readonly", style = "width:370px;" })</h2>
+                            <h2 class="w3-large"> @Html.TextBox("LastDetectedTemperature", "", new { id = "LastDetectedTemperatureTextBox", @readonly = "readonly", @class = "wide" })</h2>
                         </dd4>
                     </th>
                 </tr>
@@ -197,7 +200,7 @@
 
                     <th>
                         <dd4>
-                            <h2 class="w3-large"> @Html.TextBox("LastDetectedTemperatureDateTime", "", new { id = "LastDetectedTemperatureDateTimeTextBox", @readonly = "readonly", style = "width:370px;" })</h2>
+                            <h2 class="w3-large"> @Html.TextBox("LastDetectedTemperatureDateTime", "", new { id = "LastDetectedTemperatureDateTimeTextBox", @readonly = "readonly", @class = "wide" })</h2>
                         </dd4>
                     </th>
                 </tr>
