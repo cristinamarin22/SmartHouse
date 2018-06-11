@@ -247,3 +247,5 @@ ModelManifest.xml
 /SmartHouse/info_ajutatoare.txt
 /SmartHouse/Resources/Models
 /SmartHouse/Models/FilterTemperatureHumidityClass.cs
+/SmartHouse/Models/UserLoginData.cs
+/SmartHouse/Views/Home/UserLogin.cshtml

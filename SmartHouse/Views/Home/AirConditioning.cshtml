@@ -10,6 +10,18 @@
         width: 295px;
     }
 
+    .column {
+        float: left;
+        width: 50%;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
     .buttonAirConditioningOnOff {
         background-color: #4CAF50; /* Green */
         border: none;
@@ -31,16 +43,16 @@
         border: 2px solid #8f54bb;
     }
 
-    .buttonAirConditioningOnOff3:hover {
-        background-color: #8f54bb;
-        color: white;
-    }
+        .buttonAirConditioningOnOff3:hover {
+            background-color: #8f54bb;
+            color: white;
+        }
 
 
 
-    .buttonAirConditioningOnOff3.active {
-        background: #8f54bb;
-    }
+        .buttonAirConditioningOnOff3.active {
+            background: #8f54bb;
+        }
 
 
     .buttonAirConditioningMode {
@@ -50,9 +62,9 @@
     }
 
 
-    .buttonAirConditioningMode.active {
-        background: #8f54bb;
-    }
+        .buttonAirConditioningMode.active {
+            background: #8f54bb;
+        }
 
 
     /* The Modal (background) */
@@ -148,88 +160,91 @@
     }
 </style>
 
-<div class="w3-row-padding w3-margin-bottom">
-    <hr />
-    <dl class="dl-horizontal">
+<div class="row">
+        <div class="column">
+        <div class="w3-row-padding w3-margin-bottom">
+            <hr />
+            <dl class="dl-horizontal">
 
-        <div class="w3-container divred">
-            <table>
-                <tr>
-                    <th>
-                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.AirConditioningOn)</h1>
-                    </th>
+                <div class="w3-container divred">
+                    <table>
+                        <tr>
+                            <th>
+                                <h1 class="w3-large">@Html.DisplayNameFor(model => model.AirConditioningOn)</h1>
+                            </th>
 
-                    <th>
-                        <dd4>
-                            <h2>
-                                <button type="buttonAirConditioningOnOff" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="buttonAirConditioningOn" onclick="turnOnAirConditioning()">ON</button>
-                                <button type="buttonAirConditioningOnOff" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="buttonAirConditioningOff" onclick="turnOffAirConditioning()">OFF</button>
-                            </h2>
-                        </dd4>
-                    </th>
-                </tr>
+                            <th>
+                                <dd4>
+                                    <h2>
+                                        <button type="buttonAirConditioningOnOff" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="buttonAirConditioningOn" onclick="turnOnAirConditioning()">ON</button>
+                                        <button type="buttonAirConditioningOnOff" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="buttonAirConditioningOff" onclick="turnOffAirConditioning()">OFF</button>
+                                    </h2>
+                                </dd4>
+                            </th>
+                        </tr>
 
-                <tr id="airConditioningWantedTemperature" hidden="true">
-                    <th>
-                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.WantedTemperature)</h1>
-                    </th>
+                        <tr id="airConditioningWantedTemperature" hidden="true">
+                            <th>
+                                <h1 class="w3-large">@Html.DisplayNameFor(model => model.WantedTemperature)</h1>
+                            </th>
 
-                    <th>
-                        <dd4>
-                            <h2 class="w3-large">@Html.TextBoxFor(model => model.WantedTemperature, new { id = "WantedTemperatureTextBox", @class = "wide" })</h2>
-                        </dd4>
-                    </th>
-                </tr>
+                            <th>
+                                <dd4>
+                                    <h2 class="w3-large">@Html.TextBoxFor(model => model.WantedTemperature, new { id = "WantedTemperatureTextBox", @class = "wide" })</h2>
+                                </dd4>
+                            </th>
+                        </tr>
 
-                <tr id="airConditioningLastDetectedTemperature" hidden="true">
-                    <th>
-                        <h1 class="w3-large">Last detected temperature (Celsius degrees)</h1>
-                    </th>
+                        <tr id="airConditioningLastDetectedTemperature" hidden="true">
+                            <th>
+                                <h1 class="w3-large">Last detected temperature (Celsius degrees)</h1>
+                            </th>
 
-                    <th>
-                        <dd4>
-                            <h2 class="w3-large"> @Html.TextBox("LastDetectedTemperature", "", new { id = "LastDetectedTemperatureTextBox", @readonly = "readonly", @class = "wide" })</h2>
-                        </dd4>
-                    </th>
-                </tr>
+                            <th>
+                                <dd4>
+                                    <h2 class="w3-large"> @Html.TextBox("LastDetectedTemperature", "", new { id = "LastDetectedTemperatureTextBox", @readonly = "readonly", @class = "wide" })</h2>
+                                </dd4>
+                            </th>
+                        </tr>
 
-                <tr id="airConditioningLastDetectedTemperatureDateTime" hidden="true">
-                    <th>
-                        <h1 class="w3-large">Last detected temperature date</h1>
-                    </th>
+                        <tr id="airConditioningLastDetectedTemperatureDateTime" hidden="true">
+                            <th>
+                                <h1 class="w3-large">Last detected temperature date</h1>
+                            </th>
 
-                    <th>
-                        <dd4>
-                            <h2 class="w3-large"> @Html.TextBox("LastDetectedTemperatureDateTime", "", new { id = "LastDetectedTemperatureDateTimeTextBox", @readonly = "readonly", @class = "wide" })</h2>
-                        </dd4>
-                    </th>
-                </tr>
+                            <th>
+                                <dd4>
+                                    <h2 class="w3-large"> @Html.TextBox("LastDetectedTemperatureDateTime", "", new { id = "LastDetectedTemperatureDateTimeTextBox", @readonly = "readonly", @class = "wide" })</h2>
+                                </dd4>
+                            </th>
+                        </tr>
 
-                <tr id="airConditioningMode" hidden="true">
-                    <th>
-                        <h1 class="w3-large">@Html.DisplayNameFor(model => model.AirConditioningMode)</h1>
-                    </th>
+                        <tr id="airConditioningMode" hidden="true">
+                            <th>
+                                <h1 class="w3-large">@Html.DisplayNameFor(model => model.AirConditioningMode)</h1>
+                            </th>
 
-                    <th>
-                        <dd4>
-                            <h2>
-                                <button type="buttonAirConditioningOnOff" disabled="disabled" class="buttonAirConditioningOnOff buttonAirConditioningMode" id="buttonAirConditioningModeAuto">AUTO</button>
-                                <button type="buttonAirConditioningOnOff" disabled="disabled" class="buttonAirConditioningOnOff buttonAirConditioningMode" id="buttonAirConditioningModeCool">COOL</button>
-                                <button type="buttonAirConditioningOnOff" disabled="disabled" class="buttonAirConditioningOnOff buttonAirConditioningMode" id="buttonAirConditioningModeHeat">HEAT</button>
-                            </h2>
-                        </dd4>
-                    </th>
-                </tr>
-            </table>
+                            <th>
+                                <dd4>
+                                    <h2>
+                                        <button type="buttonAirConditioningOnOff" disabled="disabled" class="buttonAirConditioningOnOff buttonAirConditioningMode" id="buttonAirConditioningModeAuto">AUTO</button>
+                                        <button type="buttonAirConditioningOnOff" disabled="disabled" class="buttonAirConditioningOnOff buttonAirConditioningMode" id="buttonAirConditioningModeCool">COOL</button>
+                                        <button type="buttonAirConditioningOnOff" disabled="disabled" class="buttonAirConditioningOnOff buttonAirConditioningMode" id="buttonAirConditioningModeHeat">HEAT</button>
+                                    </h2>
+                                </dd4>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+
+                <button type="button" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="saveAirConditioningSettingsButton" onclick="saveAirConditioningSettings()">Save settings</button>
         </div>
+    </div>
 
-        <button type="button" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="saveAirConditioningSettingsButton" onclick="saveAirConditioningSettings()">Save settings</button>
-
-
-        <div>
-            <iframe src="https://www.tplinkcloud.com/" height="800" width="1600"></iframe>
+        <div class="column">
+            <iframe src="https://www.tplinkcloud.com/" height="550" width="830"></iframe>
         </div>
-
+</div>
 
 
         <!-- Popup for success -->
@@ -268,13 +283,13 @@
             </div>
 
         </div>
-    </dl>
-</div>
+        </dl>
+    </div>
 
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" width="200" height="200"></script>
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
     var span = document.getElementsByClassName("close")[0];
     var modal = document.getElementById('popup');
@@ -459,6 +474,6 @@
         }
     }
 
-</script>
+    </script>
 
 
