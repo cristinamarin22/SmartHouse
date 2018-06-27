@@ -158,9 +158,15 @@
         padding: 2px 20px;
         font-size: 16px;
     }
+
+    .div2 {
+
+        margin-left: 10px;
+    }
 </style>
 
-<div class="row">
+
+<div class="row div2">
         <div class="column">
         <div class="w3-row-padding w3-margin-bottom">
             <hr />
@@ -237,8 +243,9 @@
                     </table>
                 </div>
 
-                <button type="button" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="saveAirConditioningSettingsButton" onclick="saveAirConditioningSettings()">Save settings</button>
-        </div>
+                    <button type="button" class="buttonAirConditioningOnOff buttonAirConditioningOnOff3" id="saveAirConditioningSettingsButton" onclick="saveAirConditioningSettings()">Save settings</button>
+
+                    </div>
     </div>
 
         <div class="column">
@@ -247,44 +254,44 @@
 </div>
 
 
-        <!-- Popup for success -->
-        <div id="popup" class="modal">
+    <!-- Popup for success -->
+    <div id="popup" class="modal">
 
-            <!-- Modal content -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <h2>Success!</h2>
-                </div>
-                <div class="modal-body">
-                    <p>Settings were successfully saved!</p>
-                </div>
-                <div class="modal-footer">
-                    <h3></h3>
-                </div>
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Success!</h2>
             </div>
-
+            <div class="modal-body">
+                <p>Settings were successfully saved!</p>
+            </div>
+            <div class="modal-footer">
+                <h3></h3>
+            </div>
         </div>
 
-        <!-- Popup for validation -->
-        <div id="popupValidation" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <h2>Error!</h2>
-                </div>
-                <div id="validationBody" class="modal-body">
-                </div>
-                <div class="modal-footer">
-                    <h3></h3>
-                </div>
-            </div>
-
-        </div>
-        </dl>
     </div>
+
+    <!-- Popup for validation -->
+    <div id="popupValidation" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Error!</h2>
+            </div>
+            <div id="validationBody" class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <h3></h3>
+            </div>
+        </div>
+
+    </div>
+    </dl>
+</div>
 
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" width="200" height="200"></script>
@@ -356,6 +363,22 @@
                 else {
                     $('#LastDetectedTemperatureTextBox').val(response.Temperature);
                     $('#LastDetectedTemperatureDateTimeTextBox').val(new Date(response.InternalTime.match(/\d+/).map(Number)[0]).toLocaleString());
+
+                    if (response.Humidity.toFixed(0) == 1) {
+                        $('#buttonAirConditioningModeAuto').addClass('active')
+                        $('#buttonAirConditioningModeCool').removeClass('active')
+                        $('#buttonAirConditioningModeHeat').removeClass('active')
+                    }
+                    else if (response.Humidity.toFixed(0) == 2) {
+                        $('#buttonAirConditioningModeAuto').removeClass('active')
+                        $('#buttonAirConditioningModeCool').addClass('active')
+                        $('#buttonAirConditioningModeHeat').removeClass('active')
+                    }
+                    else if (response.Humidity.toFixed(0) = 3) {
+                        $('#buttonAirConditioningModeAuto').removeClass('active')
+                        $('#buttonAirConditioningModeCool').removeClass('active')
+                        $('#buttonAirConditioningModeHeat').addClass('active')
+                    }
                 }
             }
         });

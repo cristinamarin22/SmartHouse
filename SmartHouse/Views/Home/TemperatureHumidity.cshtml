@@ -17,146 +17,146 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-html, body, h1, h2, h3, h4, h5 {
-    font-family: "Raleway", sans-serif;
-}
+    html, body, h1, h2, h3, h4, h5 {
+        font-family: "Raleway", sans-serif;
+    }
 
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
 
-th, td {
-    text-align: left;
-    padding: 8px;
-}
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2
-}
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
 
-th {
-    background-color: #ed4334;
-    color: white;
-}
+    th {
+        background-color: #ed4334;
+        color: white;
+    }
 
-.button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    cursor: pointer;
-}
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
 
-.button3 {
-    background-color: white;
-    color: black;
-    border: 2px solid #f44336;
-}
+    .button3 {
+        background-color: white;
+        color: black;
+        border: 2px solid #f44336;
+    }
 
-    .button3:hover {
+        .button3:hover {
+            background-color: #f44336;
+            color: white;
+        }
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        -webkit-animation-name: fadeIn; /* Fade in the background */
+        -webkit-animation-duration: 0.4s;
+        animation-name: fadeIn;
+        animation-duration: 0.4s
+    }
+
+    /* Modal Content */
+    .modal-content {
+        position: fixed;
+        bottom: 0;
+        background-color: #fefefe;
+        width: 100%;
+        -webkit-animation-name: slideIn;
+        -webkit-animation-duration: 0.4s;
+        animation-name: slideIn;
+        animation-duration: 0.4s
+    }
+
+    .modal-header {
+        padding: 2px 16px;
         background-color: #f44336;
         color: white;
     }
 
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    -webkit-animation-name: fadeIn; /* Fade in the background */
-    -webkit-animation-duration: 0.4s;
-    animation-name: fadeIn;
-    animation-duration: 0.4s
-}
-
-/* Modal Content */
-.modal-content {
-    position: fixed;
-    bottom: 0;
-    background-color: #fefefe;
-    width: 100%;
-    -webkit-animation-name: slideIn;
-    -webkit-animation-duration: 0.4s;
-    animation-name: slideIn;
-    animation-duration: 0.4s
-}
-
-.modal-header {
-    padding: 2px 16px;
-    background-color: #f44336;
-    color: white;
-}
-
-.modal-footer {
-    padding: 2px 16px;
-    background-color: white;
-    color: white;
-}
-
-/* Add Animation */
-@@-webkit-keyframes slideIn {
-    from {
-        bottom: -300px;
-        opacity: 0
+    .modal-footer {
+        padding: 2px 16px;
+        background-color: white;
+        color: white;
     }
 
-    to {
-        bottom: 0;
-        opacity: 1
-    }
-}
+    /* Add Animation */
+    @@-webkit-keyframes slideIn {
+        from {
+            bottom: -300px;
+            opacity: 0
+        }
 
-@@keyframes slideIn {
-    from {
-        bottom: -300px;
-        opacity: 0
-    }
-
-    to {
-        bottom: 0;
-        opacity: 1
-    }
-}
-
-@@-webkit-keyframes fadeIn {
-    from {
-        opacity: 0
+        to {
+            bottom: 0;
+            opacity: 1
+        }
     }
 
-    to {
-        opacity: 1
-    }
-}
+    @@keyframes slideIn {
+        from {
+            bottom: -300px;
+            opacity: 0
+        }
 
-@@keyframes fadeIn {
-    from {
-        opacity: 0
+        to {
+            bottom: 0;
+            opacity: 1
+        }
     }
 
-    to {
-        opacity: 1
-    }
-}
+    @@-webkit-keyframes fadeIn {
+        from {
+            opacity: 0
+        }
 
-.modal-body {
-    padding: 2px 20px;
-    font-size: 16px;
-}
+        to {
+            opacity: 1
+        }
+    }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    .modal-body {
+        padding: 2px 20px;
+        font-size: 16px;
+    }
 
     .highlight {
         background-color: #fcb5b5;
@@ -224,25 +224,25 @@ th {
             </tr>
 
             @foreach (var item in Model)
-        {
-            <tr>
-                <td style="display:none;">
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InternalTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Temperature)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Humidity)
-                </td>
-                <td>
-                    @Html.ActionLink("Delete", "DeleteTemperatureHumidityData", "Home", new { id = item.Id }, null)
-                </td>
-            </tr>
-    }
+            {
+                <tr>
+                    <td style="display:none;">
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InternalTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Temperature)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Humidity)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteTemperatureHumidityData", "Home", new { id = item.Id }, null)
+                    </td>
+                </tr>
+            }
 
         </table><br>
     </div>
@@ -280,6 +280,25 @@ th {
 
     </div>
 
+    <!-- Popup for waiting -->
+    <div id="popupWaiting" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Waiting</h2>
+            </div>
+            <div class="modal-body">
+                <p>Waiting</p>
+            </div>
+            <div class="modal-footer">
+                <h3></h3>
+            </div>
+        </div>
+
+    </div>
+
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" charset="utf8" src="/js/jquery.dataTables.js"></script>
@@ -292,73 +311,15 @@ th {
         var span = document.getElementsByClassName("close")[0];
         var modal = document.getElementById('deleteAllPopup');
         var modalFiltered = document.getElementById('deleteFilteredDataPopup');
+        var modalWaiting = document.getElementById('popupWaiting');
 
         var selectedRow = null;
         var selectedRowYN = null;
         var selectedRowIndex = null;
 
-        function getAllRows() {
-            $.ajax({
-                url: '@Url.Action("GetTemperatureHumidityHistoryData", "Home")',
-                method: 'GET',
-                dataType: 'json',
-                success: function (data) {
-
-                    $('#deleteFilteredData').css("visibility", "hidden");
-
-                    var tdEndTdStart = '</td><td>';
-                    var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> Date </th> <th> Temperature </th> <th> Humidity </th> <th> Action </th> </tr> ';
-                    for (var i = 0; i < data.length; i++) {
-
-                        tdEndTdStart = '</td><td>';
-
-                        if (selectedRow != null && data[i].Id == selectedRowIndex) {
-                            html += '<tr><td style="display:none;" class="highlight">' + data[i].Id + '</td><td class="highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
-                            tdEndTdStart = '</td><td class="highlight">'
-                        }
-                        else {
-                            html += '<tr><td style="display:none;">' + data[i].Id + '</td><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
-                        }
-
-                        html += tdEndTdStart + data[i].Temperature + tdEndTdStart + data[i].Humidity + tdEndTdStart;
-
-                        html += '<a href="/Home/DeleteTemperatureHumidityData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
-                    }
-
-                    html += ' </tbody>';
-
-                    $('#tableTemperatureHumidity').empty();
-                    $("#tableTemperatureHumidity").append($(html));
-
-                    intervalReadings = setTimeout("getAllRows()", 10000);                
-
-                    //keep scroll position
-                    if (sessionStorage.scrollTop != "undefined") 
-                        $(window).scrollTop(sessionStorage.scrollTop);
-
-                    $('#refreshButton').text('Refresh');
-
-                    if (dataIsFiltered) {
-                        $('#TemperatureMinValueTextBox').val("");
-                        $('#TemperatureMaxValueTextBox').val("");
-                        $('#HumidityMinValueTextBox').val("");
-                        $('#HumidityMaxValueTextBox').val("");
-                        $('#DateMinValueTextBox').val("");
-                        $('#DateMaxValueTextBox').val("");
-
-                        dataIsFiltered = false;
-                    }
-              }
-           });
-        }
-
-        $(window).bind("load", function () {
-            intervalReadings = setTimeout("getAllRows()", 10000);
-            $('#deleteFilteredData').css("visibility", "hidden");
-        });
-
-
         function filterData() {
+
+            modalWaiting.style.display = "block";
 
             var filter = {
 
@@ -406,17 +367,91 @@ th {
 
                     dataIsFiltered = true;
                     $('#deleteFilteredData').css("visibility", "visible");
+                    modalWaiting.style.display = "none";
+                },
+                error: function (data) {
+                    modalWaiting.style.display = "none";
                 }
             });
         }
 
+        function getAllRows() {
+            modalWaiting.style.display = "block";
+
+            $.ajax({
+                url: '@Url.Action("GetTemperatureHumidityHistoryData", "Home")',
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+
+                    $('#deleteFilteredData').css("visibility", "hidden");
+
+                    var tdEndTdStart = '</td><td>';
+                    var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> Date </th> <th> Temperature </th> <th> Humidity </th> <th> Action </th> </tr> ';
+                    for (var i = 0; i < data.length; i++) {
+
+                        tdEndTdStart = '</td><td>';
+
+                        if (selectedRow != null && data[i].Id == selectedRowIndex) {
+                            html += '<tr><td style="display:none;" class="highlight">' + data[i].Id + '</td><td class="highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                            tdEndTdStart = '</td><td class="highlight">'
+                        }
+                        else {
+                            html += '<tr><td style="display:none;">' + data[i].Id + '</td><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                        }
+
+                        html += tdEndTdStart + data[i].Temperature + tdEndTdStart + data[i].Humidity + tdEndTdStart;
+
+                        html += '<a href="/Home/DeleteTemperatureHumidityData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                    }
+
+                    html += ' </tbody>';
+
+                    $('#tableTemperatureHumidity').empty();
+                    $("#tableTemperatureHumidity").append($(html));
+
+                    intervalReadings = setTimeout("getAllRows()", 10000);
+
+                    //keep scroll position
+                    if (sessionStorage.scrollTop != "undefined")
+                        $(window).scrollTop(sessionStorage.scrollTop);
+
+                    $('#refreshButton').text('Refresh');
+
+                    if (dataIsFiltered) {
+                        $('#TemperatureMinValueTextBox').val("");
+                        $('#TemperatureMaxValueTextBox').val("");
+                        $('#HumidityMinValueTextBox').val("");
+                        $('#HumidityMaxValueTextBox').val("");
+                        $('#DateMinValueTextBox').val("");
+                        $('#DateMaxValueTextBox').val("");
+
+                        dataIsFiltered = false;
+                    }
+
+                    modalWaiting.style.display = "none";
+                },
+                error: function (data) {
+                    modalWaiting.style.display = "none";
+                }
+           });
+        }
+
+        $(window).bind("load", function () {
+            intervalReadings = setTimeout("getAllRows()", 10000);
+            $('#deleteFilteredData').css("visibility", "hidden");
+        });
+
+
         function deleteAllRecords() {
 
             modal.style.display = "block";
+            modalWaiting.style.display = "block";
 
             confirmDeleteRows(function (confirmed) {
                 if (confirmed) {
                     // Whatever you need to do if they clicked confirm
+
                     $.ajax({
                         url: '@Url.Action("DeleteAllRecordsTemperatureHumidityData", "Home")',
                         method: 'GET',
@@ -450,6 +485,11 @@ th {
                             intervalReadings = setTimeout("getAllRows()", 10000);
 
                             $('#deleteFilteredData').css("visibility", "hidden");
+
+                            modalWaiting.style.display = "none";
+                        },
+                        error: function (data) {
+                            modalWaiting.style.display = "none";
                         }
                     });
                 }
@@ -465,7 +505,7 @@ th {
                 dataType: 'json',
                 success: function (data) {
                     var html = '';
-                    
+
                     }
             });
         }
@@ -473,6 +513,7 @@ th {
         function deleteFilteredData() {
 
             modalFiltered.style.display = "block";
+            modalWaiting.style.display = "block";
 
             confirmDeleteFilteredRows(function (confirmed) {
                 if (confirmed) {
@@ -519,11 +560,17 @@ th {
                             $("#tableTemperatureHumidity").append($(html));
 
                             intervalReadings = clearTimeout(intervalReadings);
+
+                            modalFiltered.style.display = "none";
+                        },
+                        error: function (data) {
+                            modalWaiting.style.display = "none";
                         }
                     });
                 }
 
-                modalFiltered.style.display = "none";
+                modalWaiting.style.display = "none";
+
             });
         }
 
@@ -557,7 +604,7 @@ th {
             }
         }
 
-        //color with red selected line 
+        //color with red selected line
         $("#tableTemperatureHumidity").on("click", "tr", function () {
             selectedRow = $(this);
             selectedRowIndex = parseInt($(this)[0].cells[0].innerHTML);

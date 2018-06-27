@@ -1071,6 +1071,8 @@ namespace SmartHouse.Controllers
             {
                 var lastDetectedTemperature = smartHouseEntities.TemperatureHumidityDatas.ToList().Where(x => (DateTime.Now - x.InternalTime).TotalMinutes <= 20).OrderByDescending(x => x.InternalTime).FirstOrDefault();
 
+                lastDetectedTemperature.Humidity = smartHouseEntities.AirConditioningSettings.FirstOrDefault().AirConditioningMode;
+
                 if (lastDetectedTemperature != null)
                     return Json(lastDetectedTemperature, JsonRequestBehavior.AllowGet);
 
