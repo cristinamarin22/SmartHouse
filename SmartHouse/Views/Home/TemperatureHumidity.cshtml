@@ -167,7 +167,7 @@
         <table>
             <tr>
                 <td style="float: left;">
-                    <button type="button" class="button button3 header" id="refreshButton" onclick="getAllRows()">Refresh</button>
+                    <button type="button" class="button button3 header" id="refreshButton" onclick="getAllRows()">Get all</button>
 
                     <button type="button" class="button button3 header" id="deleteAllRecordsButton" onclick="deleteAllRecords()">Delete all</button>
 
@@ -375,11 +375,10 @@
             });
         }
 
-        function getAllRows() {
-            modalWaiting.style.display = "block";
+        function getLast200Rows() {
 
             $.ajax({
-                url: '@Url.Action("GetTemperatureHumidityHistoryData", "Home")',
+                url: '@Url.Action("GetTemperatureHumidityData", "Home")',
                 method: 'GET',
                 dataType: 'json',
                 success: function (data) {
@@ -410,7 +409,7 @@
                     $('#tableTemperatureHumidity').empty();
                     $("#tableTemperatureHumidity").append($(html));
 
-                    intervalReadings = setTimeout("getAllRows()", 10000);
+                    intervalReadings = setTimeout("getLast200Rows()", 10000);
 
                     //keep scroll position
                     if (sessionStorage.scrollTop != "undefined")
@@ -430,15 +429,12 @@
                     }
 
                     modalWaiting.style.display = "none";
-                },
-                error: function (data) {
-                    modalWaiting.style.display = "none";
                 }
            });
         }
 
         $(window).bind("load", function () {
-            intervalReadings = setTimeout("getAllRows()", 10000);
+            intervalReadings = setTimeout("getLast200Rows()", 10000);
             $('#deleteFilteredData').css("visibility", "hidden");
         });
 
@@ -482,7 +478,7 @@
                             $('#tableTemperatureHumidity').empty();
                             $("#tableTemperatureHumidity").append($(html));
 
-                            intervalReadings = setTimeout("getAllRows()", 10000);
+                            intervalReadings = setTimeout("getLast200Rows()", 10000);
 
                             $('#deleteFilteredData').css("visibility", "hidden");
 
@@ -573,6 +569,69 @@
 
             });
         }
+
+        function getAllRows() {
+            modalWaiting.style.display = "block";
+
+            $.ajax({
+                url: '@Url.Action("GetTemperatureHumidityHistoryData", "Home")',
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+
+                    $('#deleteFilteredData').css("visibility", "hidden");
+
+                    var tdEndTdStart = '</td><td>';
+                    var html = '<tbody> <tr> <th style = "display:none;" > Id </th> <th> Date </th> <th> Temperature </th> <th> Humidity </th> <th> Action </th> </tr> ';
+                    for (var i = 0; i < data.length; i++) {
+
+                        tdEndTdStart = '</td><td>';
+
+                        if (selectedRow != null && data[i].Id == selectedRowIndex) {
+                            html += '<tr><td style="display:none;" class="highlight">' + data[i].Id + '</td><td class="highlight">' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                            tdEndTdStart = '</td><td class="highlight">'
+                        }
+                        else {
+                            html += '<tr><td style="display:none;">' + data[i].Id + '</td><td>' + new Date(data[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
+                        }
+
+                        html += tdEndTdStart + data[i].Temperature + tdEndTdStart + data[i].Humidity + tdEndTdStart;
+
+                        html += '<a href="/Home/DeleteTemperatureHumidityData/' + data[i].Id + '">Delete</a>' + '</td></tr>';
+                    }
+
+                    html += ' </tbody>';
+
+                    $('#tableTemperatureHumidity').empty();
+                    $("#tableTemperatureHumidity").append($(html));
+
+                    intervalReadings = clearTimeout(intervalReadings);
+
+                    //keep scroll position
+                    if (sessionStorage.scrollTop != "undefined")
+                        $(window).scrollTop(sessionStorage.scrollTop);
+
+                    $('#refreshButton').text('Refresh');
+
+                    if (dataIsFiltered) {
+                        $('#TemperatureMinValueTextBox').val("");
+                        $('#TemperatureMaxValueTextBox').val("");
+                        $('#HumidityMinValueTextBox').val("");
+                        $('#HumidityMaxValueTextBox').val("");
+                        $('#DateMinValueTextBox').val("");
+                        $('#DateMaxValueTextBox').val("");
+
+                        dataIsFiltered = false;
+                    }
+
+                    modalWaiting.style.display = "none";
+                },
+                error: function (data) {
+                    modalWaiting.style.display = "none";
+                }
+           });
+        }
+
 
         function confirmDeleteRows(callback) {
 

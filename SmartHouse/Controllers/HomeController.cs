@@ -338,7 +338,7 @@ namespace SmartHouse.Controllers
         {
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
             if (smartHouseEntities.Database.Exists())
-                return View(smartHouseEntities.TemperatureHumidityDatas.ToList().OrderByDescending(x => x.InternalTime));
+                return View(smartHouseEntities.TemperatureHumidityDatas.ToList().OrderByDescending(x => x.InternalTime).Take(500));
             else
                 return View(new List<TemperatureHumidityData>());
         }
@@ -348,6 +348,15 @@ namespace SmartHouse.Controllers
             SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
             if (smartHouseEntities.Database.Exists())
                 return Json(smartHouseEntities.TemperatureHumidityDatas.ToList().OrderByDescending(x => x.InternalTime), JsonRequestBehavior.AllowGet);
+            else
+                return Json(new List<TemperatureHumidityData>(), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetTemperatureHumidityData()
+        {
+            SmartHouseEntities smartHouseEntities = new SmartHouseEntities();
+            if (smartHouseEntities.Database.Exists())
+                return Json(smartHouseEntities.TemperatureHumidityDatas.ToList().OrderByDescending(x => x.InternalTime).Take(500), JsonRequestBehavior.AllowGet);
             else
                 return Json(new List<TemperatureHumidityData>(), JsonRequestBehavior.AllowGet);
         }
