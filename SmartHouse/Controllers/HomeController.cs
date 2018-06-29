@@ -571,6 +571,12 @@ namespace SmartHouse.Controllers
                         smartHouseEntities.AirConditioningSettings.FirstOrDefault().AirConditioningMode = DictionaryAirConditioningMode.CoolMode;
 
                     smartHouseEntities.SaveChanges();
+
+                    if (!airConditioningSettings.AirConditioningOn)
+                    {
+                        smartHouseEntities.Database.ExecuteSqlCommand("UPDATE AirConditioningSettings SET WantedTemperature = NULL, AirConditioningMode = NULL");
+                    }
+
                     return Json(smartHouseEntities.AirConditioningSettings.ToList().FirstOrDefault(), JsonRequestBehavior.AllowGet);
                 }
             }

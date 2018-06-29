@@ -480,7 +480,7 @@ th {
 
                         tdEndTdStart = '</td><td>';
 
-                        if (selectedRow != null && data[i].Id == selectedRowIndex) {
+                        if (selectedRow != null && response[i].Id == selectedRowIndex) {
                             html += '<tr><td style="display:none;" class = "highlight">' + response[i].Id + '</td><td class = "highlight">' + new Date(response[i].InternalTime.match(/\d+/).map(Number)[0]).toLocaleString();
                             tdEndTdStart = '</td><td class = "highlight">'
                         }

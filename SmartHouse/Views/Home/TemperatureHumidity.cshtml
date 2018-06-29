@@ -363,8 +363,6 @@
 
                     intervalReadings = clearTimeout(intervalReadings);
 
-                    $('#refreshButton').text('Get all');
-
                     dataIsFiltered = true;
                     $('#deleteFilteredData').css("visibility", "visible");
                     modalWaiting.style.display = "none";
@@ -415,8 +413,6 @@
                     if (sessionStorage.scrollTop != "undefined")
                         $(window).scrollTop(sessionStorage.scrollTop);
 
-                    $('#refreshButton').text('Refresh');
-
                     if (dataIsFiltered) {
                         $('#TemperatureMinValueTextBox').val("");
                         $('#TemperatureMaxValueTextBox').val("");
@@ -442,11 +438,12 @@
         function deleteAllRecords() {
 
             modal.style.display = "block";
-            modalWaiting.style.display = "block";
 
             confirmDeleteRows(function (confirmed) {
                 if (confirmed) {
                     // Whatever you need to do if they clicked confirm
+                    modal.style.display = "none";
+                    modalWaiting.style.display = "block";
 
                     $.ajax({
                         url: '@Url.Action("DeleteAllRecordsTemperatureHumidityData", "Home")',
@@ -489,8 +486,6 @@
                         }
                     });
                 }
-
-                modal.style.display = "none";
             });
         }
 
@@ -509,10 +504,13 @@
         function deleteFilteredData() {
 
             modalFiltered.style.display = "block";
-            modalWaiting.style.display = "block";
+
 
             confirmDeleteFilteredRows(function (confirmed) {
                 if (confirmed) {
+
+                    modalFiltered.style.display = "none";
+                    modalWaiting.style.display = "block";
 
                     var filter = {
 
@@ -557,15 +555,13 @@
 
                             intervalReadings = clearTimeout(intervalReadings);
 
-                            modalFiltered.style.display = "none";
+                            modalWaiting.style.display = "none";
                         },
                         error: function (data) {
                             modalWaiting.style.display = "none";
                         }
                     });
                 }
-
-                modalWaiting.style.display = "none";
 
             });
         }
@@ -610,8 +606,6 @@
                     //keep scroll position
                     if (sessionStorage.scrollTop != "undefined")
                         $(window).scrollTop(sessionStorage.scrollTop);
-
-                    $('#refreshButton').text('Refresh');
 
                     if (dataIsFiltered) {
                         $('#TemperatureMinValueTextBox').val("");
